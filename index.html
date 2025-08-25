@@ -24,7 +24,7 @@
 
     .container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
       max-width: 900px;
       margin: auto;
@@ -32,14 +32,19 @@
 
     .card {
       background: #fff;
-      padding: 30px 20px;
-      border-radius: 15px;
+      border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       transition: all 0.3s ease;
       text-decoration: none;
       color: #333;
       font-weight: bold;
-      font-size: 18px;
+      font-size: 20px;
+
+      /* Faz virar quadrado */
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .card:hover {
@@ -57,7 +62,7 @@
     <a class="card" href="https://seulinkdopowerbi.com" target="_blank">🔹 Power BI</a>
     <a class="card" href="https://github.com/seuuser/projeto-python" target="_blank">🐍 Python</a>
     <a class="card" href="https://github.com/seuuser/projeto-sql" target="_blank">🗃️ SQL</a>
-    <a class="card" href="https://github.com/seuuser/projeto-r" target="_blank">📈 R / RStudio</a>
+    <a class="card" href="https://github.com/seuuser/projeto-r" target="_blank">📈 R</a>
   </div>
 </body>
 </html>
