@@ -1,68 +1,634 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Portfólio de Dados - Wenderson Soares Werneck</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 40px;
-      text-align: center;
-      color: #333;
-    }
-
-    h1 {
-      margin-bottom: 10px;
-    }
-
-    p {
-      margin-bottom: 40px;
-      color: #555;
-    }
-
-    .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 20px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .card {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      font-size: 20px;
-
-      /* Faz virar quadrado */
-      aspect-ratio: 1 / 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-      background: #f0f8ff;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wenderson Werneck | Analista de Dados</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --text-light: #777;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--text);
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin-bottom: 1rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .title {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        nav {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+        }
+        
+        nav li {
+            padding: 1rem;
+        }
+        
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        section {
+            padding: 4rem 0;
+        }
+        
+        section:nth-child(even) {
+            background-color: white;
+        }
+        
+        h2 {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            color: var(--primary);
+            position: relative;
+        }
+        
+        h2:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-category {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill-category h3 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            justify-content: center;
+        }
+        
+        .skill {
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+        
+        .project-content p {
+            color: var(--text-light);
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+        
+        .tech-tag {
+            background: var(--light);
+            color: var(--secondary);
+            padding: 0.3rem 0.7rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .project-link:hover {
+            text-decoration: underline;
+        }
+        
+        .education-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .education-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .education-meta {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feedback-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: var(--primary);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .skills-container,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .education-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>📊 Portfólio de Dados</h1>
-  <p>Clique em um dos projetos abaixo para explorar:</p>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container">
+            <img src="https://ui-avatars.com/api/?name=Wenderson+Werneck&size=200&background=3498db&color=fff&bold=true" alt="Wenderson Werneck" class="profile-img">
+            <h1>Wenderson Werneck</h1>
+            <p class="title">Analista de Dados & BI</p>
+            <div class="contact-info">
+                <a href="tel:+5527996185461"><i class="fas fa-phone"></i> +55 (27) 99618-5461</a>
+                <a href="mailto:cfpromlk@gmail.com"><i class="fas fa-envelope"></i> cfpromlk@gmail.com</a>
+                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i> linkedin.com/in/wendersonwerneck</a>
+            </div>
+        </div>
+    </header>
 
-  <div class="container">
-    <a class="card" href="https://seulinkdopowerbi.com" target="_blank">Power BI</a>
-    <a class="card" href="https://github.com/seuuser/projeto-python" target="_blank">Python</a>
-    <a class="card" href="https://github.com/seuuser/projeto-sql" target="_blank">🗃SQL</a>
-    <a class="card" href="https://github.com/seuuser/projeto-r" target="_blank">R / RStudio</a>
-  </div>
+    <!-- Navegação -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#projetos">Projetos</a></li>
+                <li><a href="#formacao">Formação</a></li>
+                <li><a href="#contato">Feedback</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Seção Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <h2>Sobre Mim</h2>
+            <div class="about-content">
+                <p>Profissional em transição para a área de Dados, trazendo uma mentalidade analítica e investigativa desenvolvida na resolução de problemas operacionais. Minha experiência prática em diagnóstico me permite não apenas extrair dados, mas compreendê-los para traduzir desafios de negócio em soluções funcionais.</p>
+                <p>Comprovo essa capacidade em projetos que cobrem o ciclo de vida completo do dado — da coleta, estruturação e limpeza à análise e apresentação de resultados —, focando em transformar informações em valor real para o negócio.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Habilidades -->
+    <section id="habilidades">
+        <div class="container">
+            <h2>Habilidades Técnicas</h2>
+            <div class="skills-container">
+                <div class="skill-category">
+                    <h3>Análise & Visualização</h3>
+                    <div class="skills-list">
+                        <span class="skill"><i class="fas fa-chart-bar"></i> Power BI</span>
+                        <span class="skill"><i class="fas fa-table"></i> Excel Avançado</span>
+                        <span class="skill"><i class="fas fa-chart-pie"></i> Google Sheets</span>
+                        <span class="skill"><i class="fas fa-chart-line"></i> Tableau</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Linguagens & Bancos de Dados</h3>
+                    <div class="skills-list">
+                        <span class="skill"><i class="fas fa-database"></i> SQL (PostgreSQL)</span>
+                        <span class="skill"><i class="fab fa-python"></i> Python</span>
+                        <span class="skill"><i class="fas fa-code"></i> R</span>
+                        <span class="skill"><i class="fas fa-server"></i> AWS</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3>Metodologias & Conceitos</h3>
+                    <div class="skills-list">
+                        <span class="skill"><i class="fas fa-sync-alt"></i> ETL</span>
+                        <span class="skill"><i class="fas fa-cube"></i> Modelagem de Dados</span>
+                        <span class="skill"><i class="fas fa-brain"></i> IA Aplicada</span>
+                        <span class="skill"><i class="fas fa-chart-area"></i> Análise Descritiva/Inferencial</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Projetos -->
+    <section id="projetos">
+        <div class="container">
+            <h2>Projetos em Destaque</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Estruturação de Banco de Dados em Nuvem</h3>
+                        <p>Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech), garantindo escalabilidade e performance para consultas analíticas.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PostgreSQL</span>
+                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Cloud</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Automação de Relatórios com Google Apps Script</h3>
+                        <p>Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets, reduzindo o trabalho manual e otimizando processos.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Google Apps Script</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Google Sheets</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Ver Código</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-img">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3>Dashboard Analítico de Vendas</h3>
+                        <p>Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas, com KPIs, tendências e segmentação por regiões e produtos.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Power BI</span>
+                            <span class="tech-tag">DAX</span>
+                            <span class="tech-tag">SQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link"><i class="fab fa-github"></i> Ver Projeto</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Formação -->
+    <section id="formacao">
+        <div class="container">
+            <h2>Formação & Certificações</h2>
+            <div class="education-item">
+                <h3>Bacharelado em Ciência de Dados e Inteligência Artificial</h3>
+                <div class="education-meta">
+                    <span>UniDom Bosco</span>
+                    <span>2025 - Em andamento</span>
+                </div>
+            </div>
+            <div class="education-item">
+                <h3>Google Data Analytics Professional Certificate</h3>
+                <div class="education-meta">
+                    <span>Coursera / Google</span>
+                    <span>Em andamento</span>
+                </div>
+            </div>
+            <div class="education-item">
+                <h3>Análise de Dados e Inteligência de Negócios</h3>
+                <div class="education-meta">
+                    <span>UniGran</span>
+                    <span>Concluído</span>
+                </div>
+            </div>
+            <div class="education-item">
+                <h3>Harvard Business for All</h3>
+                <div class="education-meta">
+                    <span>Harvard Business School (Patrocinado pelo Santander)</span>
+                    <span>Concluído</span>
+                </div>
+            </div>
+            <div class="education-item">
+                <h3>Power BI Completo</h3>
+                <div class="education-meta">
+                    <span>FM2S</span>
+                    <span>Concluído</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Feedback -->
+    <section id="contato">
+        <div class="container">
+            <h2>Deixe seu Feedback</h2>
+            <div class="feedback-form">
+                <p>Ajude-me a melhorar meu portfólio! Deixe suas sugestões, críticas ou perguntas.</p>
+                <form id="suggestion-form">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" placeholder="Seu nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email (opcional)</label>
+                        <input type="email" id="email" placeholder="Seu email">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Sugestão ou Feedback</label>
+                        <textarea id="message" placeholder="O que você achou do meu portfólio? Como posso melhorar?"></textarea>
+                    </div>
+                    <button type="submit">Enviar Feedback</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:cfpromlk@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+                <p>© 2023 Wenderson Werneck. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        document.getElementById('suggestion-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !message) {
+                alert('Por favor, preencha pelo menos o nome e a mensagem.');
+                return;
+            }
+            
+            alert('Obrigado pelo seu feedback! Suas sugestões são muito valiosas para mim.');
+            document.getElementById('suggestion-form').reset();
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
