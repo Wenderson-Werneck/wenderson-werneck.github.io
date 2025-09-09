@@ -7,16 +7,49 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --text: #333;
-            --text-light: #777;
-            --neon-blue: #00c6ff;
-            --neon-purple: #7700ff;
-            --neon-pink: #ff00aa;
+            --primary-light: #3498db;
+            --secondary-light: #2980b9;
+            --accent-light: #1abc9c;
+            --background-light: #f8f9fa;
+            --card-light: #ffffff;
+            --text-light: #2c3e50;
+            --text-secondary-light: #7f8c8d;
+            --filter-light: #ecf0f1;
+            
+            --primary-dark: #1a252f;
+            --secondary-dark: #2c3e50;
+            --accent-dark: #16a085;
+            --background-dark: #0d1117;
+            --card-dark: #161b22;
+            --text-dark: #ecf0f1;
+            --text-secondary-dark: #bdc3c7;
+            --filter-dark: #2c3e50;
+        }
+
+        .light-mode {
+            --primary: var(--primary-light);
+            --secondary: var(--secondary-light);
+            --accent: var(--accent-light);
+            --background: var(--background-light);
+            --card: var(--card-light);
+            --text: var(--text-light);
+            --text-secondary: var(--text-secondary-light);
+            --filter: var(--filter-light);
+            --header-bg: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary-light) 100%);
+            --shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode {
+            --primary: var(--primary-dark);
+            --secondary: var(--secondary-dark);
+            --accent: var(--accent-dark);
+            --background: var(--background-dark);
+            --card: var(--card-dark);
+            --text: var(--text-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --filter: var(--filter-dark);
+            --header-bg: linear-gradient(135deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+            --shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
         }
         
         * {
@@ -24,13 +57,13 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
         }
         
         body {
             color: var(--text);
             line-height: 1.6;
-            background-color: #f9f9f9;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background-color: var(--background);
             overflow-x: hidden;
         }
         
@@ -41,35 +74,37 @@
             padding: 0 15px;
         }
         
-        /* Efeito de partículas no fundo */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        
         header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: var(--header-bg);
             color: white;
             padding: 3rem 0;
             text-align: center;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: var(--shadow);
             position: relative;
             overflow: hidden;
         }
         
-        header::before {
-            content: '';
+        .theme-toggle {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
-            opacity: 0.3;
-            z-index: 1;
-            mix-blend-mode: overlay;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(30deg);
         }
         
         .profile-img {
@@ -79,7 +114,7 @@
             object-fit: cover;
             border: 5px solid rgba(255, 255, 255, 0.3);
             margin-bottom: 1.5rem;
-            box-shadow: 0 0 20px rgba(0, 198, 255, 0.5);
+            box-shadow: 0 0 20px rgba(52, 152, 219, 0.5);
             transition: all 0.5s ease;
             position: relative;
             z-index: 2;
@@ -87,7 +122,7 @@
         
         .profile-img:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(0, 198, 255, 0.8);
+            box-shadow: 0 0 30px rgba(52, 152, 219, 0.8);
         }
         
         h1 {
@@ -131,32 +166,32 @@
         }
         
         .contact-info a:hover {
-            color: var(--neon-blue);
+            color: var(--accent);
             transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 198, 255, 0.4);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
             background: rgba(255, 255, 255, 0.2);
         }
         
-        nav {
-            background-color: white;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        .nav-section {
+            background-color: var(--card);
+            box-shadow: var(--shadow);
+            padding: 1rem 0;
+            margin-bottom: 2rem;
         }
         
-        nav ul {
+        .nav-menu {
             display: flex;
             justify-content: center;
             list-style: none;
+            flex-wrap: wrap;
         }
         
-        nav li {
-            padding: 1.2rem;
+        .nav-menu li {
+            padding: 0.8rem 1.2rem;
         }
         
-        nav a {
-            color: var(--dark);
+        .nav-menu a {
+            color: var(--text);
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
@@ -164,39 +199,39 @@
             padding: 5px 0;
         }
         
-        nav a::after {
+        .nav-menu a::after {
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             transition: width 0.3s ease;
         }
         
-        nav a:hover {
-            color: var(--secondary);
+        .nav-menu a:hover {
+            color: var(--primary);
         }
         
-        nav a:hover::after {
+        .nav-menu a:hover::after {
             width: 100%;
         }
         
         section {
-            padding: 5rem 0;
+            padding: 4rem 0;
             position: relative;
         }
         
         section:nth-child(even) {
-            background-color: white;
+            background-color: var(--card);
             box-shadow: 0 0 30px rgba(0, 0, 0, 0.05) inset;
         }
         
         h2 {
             text-align: center;
             margin-bottom: 3rem;
-            color: var(--primary);
+            color: var(--text);
             position: relative;
             font-size: 2.2rem;
         }
@@ -206,31 +241,40 @@
             display: block;
             width: 80px;
             height: 4px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(90deg, var(--primary), var(--accent));
             margin: 1rem auto;
             border-radius: 2px;
         }
         
-        .about-content {
+        .tech-filters {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            padding: 2.5rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2.5rem;
+            padding: 1.2rem;
+            background-color: var(--filter);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
         }
         
-        .about-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        .tech-filter {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: var(--card);
+            color: var(--text);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tech-filter:hover, .tech-filter.active {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            color: white;
         }
         
         .skills-container {
@@ -241,10 +285,10 @@
         }
         
         .skill-category {
-            background: white;
+            background: var(--card);
             padding: 2rem;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -257,7 +301,7 @@
             left: 0;
             width: 5px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
         }
         
         .skill-category:hover {
@@ -266,7 +310,7 @@
         }
         
         .skill-category h3 {
-            color: var(--secondary);
+            color: var(--primary);
             margin-bottom: 1.5rem;
             text-align: center;
             font-size: 1.4rem;
@@ -280,7 +324,7 @@
         }
         
         .skill {
-            background: var(--light);
+            background: var(--filter);
             padding: 0.8rem 1.5rem;
             border-radius: 30px;
             font-size: 0.95rem;
@@ -289,13 +333,14 @@
             gap: 0.5rem;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            color: var(--text);
         }
         
         .skill:hover {
-            background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(119, 0, 255, 0.3);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
         }
         
         .projects-grid {
@@ -305,10 +350,10 @@
         }
         
         .project-card {
-            background: white;
+            background: var(--card);
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
         }
@@ -322,7 +367,7 @@
             width: 100%;
             height: 200px;
             object-fit: cover;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -339,7 +384,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, rgba(0, 198, 255, 0.3) 0%, rgba(119, 0, 255, 0.3) 100%);
+            background: linear-gradient(45deg, rgba(26, 188, 156, 0.3) 0%, rgba(52, 152, 219, 0.3) 100%);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -353,13 +398,13 @@
         }
         
         .project-content h3 {
-            color: var(--primary);
+            color: var(--text);
             margin-bottom: 1rem;
             font-size: 1.4rem;
         }
         
         .project-content p {
-            color: var(--text-light);
+            color: var(--text-secondary);
             margin-bottom: 1.5rem;
             font-size: 1rem;
             line-height: 1.6;
@@ -373,17 +418,18 @@
         }
         
         .tech-tag {
-            background: var(--light);
-            color: var(--secondary);
+            background: var(--filter);
+            color: var(--primary);
             padding: 0.5rem 1rem;
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 500;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
         
         .tech-tag:hover {
-            background: var(--secondary);
+            background: var(--primary);
             color: white;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
@@ -398,29 +444,29 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--secondary);
+            color: var(--primary);
             text-decoration: none;
             font-weight: 500;
             font-size: 0.95rem;
             transition: all 0.3s ease;
             padding: 0.5rem 1.2rem;
             border-radius: 30px;
-            background: var(--light);
+            background: var(--filter);
         }
         
         .project-link:hover {
-            background: var(--secondary);
+            background: var(--primary);
             color: white;
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
         }
         
         .education-item {
-            background: white;
+            background: var(--card);
             padding: 2rem;
             border-radius: 15px;
             margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -433,7 +479,7 @@
             left: 0;
             width: 5px;
             height: 100%;
-            background: linear-gradient(to bottom, var(--neon-blue), var(--neon-purple));
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
         }
         
         .education-item:hover {
@@ -442,7 +488,7 @@
         }
         
         .education-item h3 {
-            color: var(--primary);
+            color: var(--text);
             margin-bottom: 0.8rem;
             font-size: 1.3rem;
         }
@@ -450,7 +496,7 @@
         .education-meta {
             display: flex;
             justify-content: space-between;
-            color: var(--text-light);
+            color: var(--text-secondary);
             font-size: 0.95rem;
             margin-bottom: 1rem;
             flex-wrap: wrap;
@@ -460,10 +506,10 @@
         .feedback-form {
             max-width: 700px;
             margin: 0 auto;
-            background: white;
+            background: var(--card);
             padding: 3rem;
             border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
         }
         
         .form-group {
@@ -474,7 +520,7 @@
             display: block;
             margin-bottom: 0.8rem;
             font-weight: 500;
-            color: var(--primary);
+            color: var(--text);
         }
         
         .form-group input,
@@ -485,12 +531,14 @@
             border-radius: 8px;
             font-size: 1rem;
             transition: all 0.3s ease;
+            background-color: var(--filter);
+            color: var(--text);
         }
         
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--secondary);
+            border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
         
@@ -500,7 +548,7 @@
         }
         
         button {
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             border: none;
             padding: 1.2rem 2.5rem;
@@ -517,7 +565,7 @@
         button:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 25px rgba(52, 152, 219, 0.4);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
         }
         
         button:active {
@@ -525,25 +573,12 @@
         }
         
         footer {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             color: white;
             text-align: center;
             padding: 3rem 0;
             position: relative;
             overflow: hidden;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
-            opacity: 0.1;
-            z-index: 1;
-            mix-blend-mode: overlay;
         }
         
         .footer-content {
@@ -575,26 +610,10 @@
         }
         
         .social-links a:hover {
-            color: var(--neon-blue);
+            color: var(--accent);
             transform: translateY(-5px) rotate(10deg);
             box-shadow: 0 10px 20px rgba(0, 198, 255, 0.3);
             background: rgba(255, 255, 255, 0.2);
-        }
-        
-        /* Efeitos de neon para elementos específicos */
-        .neon-text {
-            text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 15px var(--neon-blue), 0 0 20px var(--neon-purple), 0 0 35px var(--neon-purple), 0 0 40px var(--neon-purple);
-            color: white;
-            animation: pulsate 2s infinite alternate;
-        }
-        
-        @keyframes pulsate {
-            100% {
-                text-shadow: 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 15px var(--neon-blue), 0 0 20px var(--neon-purple), 0 0 35px var(--neon-purple), 0 0 40px var(--neon-purple), 0 0 50px var(--neon-purple);
-            }
-            0% {
-                text-shadow: 0 0 2px var(--neon-blue), 0 0 5px var(--neon-blue), 0 0 10px var(--neon-blue), 0 0 15px var(--neon-purple), 0 0 25px var(--neon-purple), 0 0 30px var(--neon-purple);
-            }
         }
         
         /* Responsividade */
@@ -607,13 +626,13 @@
                 font-size: 1.8rem;
             }
             
-            nav ul {
+            .nav-menu {
                 flex-direction: column;
                 align-items: center;
             }
             
-            nav li {
-                padding: 0.8rem;
+            .nav-menu li {
+                padding: 0.5rem;
             }
             
             .contact-info {
@@ -639,15 +658,24 @@
             .feedback-form {
                 padding: 2rem;
             }
+            
+            .tech-filters {
+                gap: 0.5rem;
+            }
+            
+            .tech-filter {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- Efeito de partículas no fundo -->
-    <div id="particles-js"></div>
-
+<body class="light-mode">
     <!-- Cabeçalho -->
     <header>
+        <button class="theme-toggle" id="themeToggle">
+            <i class="fas fa-moon"></i>
+        </button>
         <div class="container">
             <div class="profile-img">
                 <i class="fas fa-user" style="font-size: 80px; line-height: 140px;"></i>
@@ -663,28 +691,16 @@
     </header>
 
     <!-- Navegação -->
-    <nav>
+    <nav class="nav-section">
         <div class="container">
-            <ul>
-                <li><a href="#sobre">Sobre</a></li>
+            <ul class="nav-menu">
                 <li><a href="#habilidades">Habilidades</a></li>
                 <li><a href="#projetos">Projetos</a></li>
                 <li><a href="#formacao">Formação</a></li>
-                <li><a href="#contato">Feedback</a></li>
+                <li><a href="#contato">Contato</a></li>
             </ul>
         </div>
     </nav>
-
-    <!-- Seção Sobre -->
-    <section id="sobre">
-        <div class="container">
-            <h2>Sobre Mim</h2>
-            <div class="about-content">
-                <p>Profissional em transição para a área de Dados, trazendo uma mentalidade analítica e investigativa desenvolvida na resolução de problemas operacionais. Minha experiência prática em diagnóstico me permite não apenas extrair dados, mas compreendê-los para traduzir desafios de negócio em soluções funcionais.</p>
-                <p>Comprovo essa capacidade em projetos que cobrem o ciclo de vida completo do dado — da coleta, estruturação e limpeza à análise e apresentação de resultados —, focando em transformar informações em valor real para o negócio.</p>
-            </div>
-        </div>
-    </section>
 
     <!-- Seção Habilidades -->
     <section id="habilidades">
@@ -726,58 +742,84 @@
     <section id="projetos">
         <div class="container">
             <h2>Projetos em Destaque</h2>
+            
+            <!-- Filtros de Tecnologia -->
+            <div class="tech-filters">
+                <button class="tech-filter active" data-tech="all">Todos</button>
+                <button class="tech-filter" data-tech="python">Python</button>
+                <button class="tech-filter" data-tech="sql">SQL</button>
+                <button class="tech-filter" data-tech="powerbi">Power BI</button>
+                <button class="tech-filter" data-tech="aws">AWS</button>
+                <button class="tech-filter" data-tech="js">JavaScript</button>
+            </div>
+            
             <div class="projects-grid">
-                <div class="project-card">
+                <!-- Projeto Livraria DEV -->
+                <div class="project-card" data-tech="python sql aws">
                     <div class="project-img">
-                        <i class="fas fa-database"></i>
+                        <i class="fas fa-book"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Estruturação de Banco de Dados em Nuvem</h3>
-                        <p>Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech), garantindo escalabilidade e performance para consultas analíticas.</p>
+                        <h3>Livraria DEV - Database</h3>
+                        <p>Desenvolvimento completo do banco de dados para uma livraria fictícia, desde a modelagem conceitual até a implementação em PostgreSQL na AWS.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">AWS</span>
-                            <span class="tech-tag">Cloud</span>
+                            <span class="tech-tag" data-tech="python">Python</span>
+                            <span class="tech-tag" data-tech="sql">SQL</span>
+                            <span class="tech-tag" data-tech="aws">AWS</span>
+                            <span class="tech-tag" data-tech="sql">PostgreSQL</span>
+                            <span class="tech-tag" data-tech="sql">Modelagem</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> Ver Código</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
+                            <a href="projeto-livraria-dev.html" class="project-link">
+                                <i class="fas fa-info-circle"></i> Detalhes
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Código
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                
+                <div class="project-card" data-tech="js sql">
                     <div class="project-img">
                         <i class="fas fa-cogs"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Automação de Relatórios com Google Apps Script</h3>
+                        <h3>Automação de Relatórios</h3>
                         <p>Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets, reduzindo o trabalho manual e otimizando processos.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">Google Apps Script</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Google Sheets</span>
+                            <span class="tech-tag" data-tech="js">JavaScript</span>
+                            <span class="tech-tag" data-tech="sql">SQL</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> Ver Código</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Código
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card">
+                
+                <div class="project-card" data-tech="powerbi sql">
                     <div class="project-img">
                         <i class="fas fa-chart-bar"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Dashboard Analítico de Vendas</h3>
+                        <h3>Dashboard de Vendas</h3>
                         <p>Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas, com KPIs, tendências e segmentação por regiões e produtos.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">Power BI</span>
-                            <span class="tech-tag">DAX</span>
-                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag" data-tech="powerbi">Power BI</span>
+                            <span class="tech-tag" data-tech="sql">SQL</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link"><i class="fab fa-github"></i> Ver Código</a>
-                            <a href="#" class="project-link"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
+                            <a href="#" class="project-link">
+                                <i class="fab fa-github"></i> Código
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i> Demo
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -827,27 +869,17 @@
         </div>
     </section>
 
-    <!-- Seção Feedback -->
+    <!-- Seção Contato -->
     <section id="contato">
         <div class="container">
-            <h2>Deixe seu Feedback</h2>
+            <h2>Entre em Contato</h2>
             <div class="feedback-form">
-                <p>Ajude-me a melhorar meu portfólio! Deixe suas sugestões, críticas ou perguntas.</p>
-                <form id="suggestion-form">
-                    <div class="form-group">
-                        <label for="name">Nome</label>
-                        <input type="text" id="name" placeholder="Seu nome">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email (opcional)</label>
-                        <input type="email" id="email" placeholder="Seu email">
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Sugestão ou Feedback</label>
-                        <textarea id="message" placeholder="O que você achou do meu portfólio? Como posso melhorar?"></textarea>
-                    </div>
-                    <button type="submit">Enviar Feedback</button>
-                </form>
+                <p>Interessado em colaborar ou tem alguma pergunta? Entre em contato comigo através dos canais abaixo.</p>
+                <div class="contact-info" style="justify-content: center; margin-top: 2rem;">
+                    <a href="mailto:cfpromlk@gmail.com"><i class="fas fa-envelope"></i> E-mail</a>
+                    <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                </div>
             </div>
         </div>
     </section>
@@ -856,116 +888,94 @@
     <footer>
         <div class="container">
             <div class="footer-content">
+                <p>© 2023 Wenderson Werneck. Todos os direitos reservados.</p>
                 <div class="social-links">
                     <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
                     <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="mailto:cfpromlk@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
-                <p>© 2023 Wenderson Werneck. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts para efeitos especiais -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Scripts para funcionalidades -->
     <script>
-        // Inicialização do particles.js
         document.addEventListener('DOMContentLoaded', function() {
-            if(typeof particlesJS !== 'undefined') {
-                particlesJS('particles-js', {
-                    particles: {
-                        number: { value: 80, density: { enable: true, value_area: 800 } },
-                        color: { value: "#3498db" },
-                        shape: { type: "circle" },
-                        opacity: { value: 0.5, random: true },
-                        size: { value: 3, random: true },
-                        line_linked: {
-                            enable: true,
-                            distance: 150,
-                            color: "#3498db",
-                            opacity: 0.4,
-                            width: 1
-                        },
-                        move: {
-                            enable: true,
-                            speed: 2,
-                            direction: "none",
-                            random: true,
-                            straight: false,
-                            out_mode: "out",
-                            bounce: false
-                        }
-                    },
-                    interactivity: {
-                        detect_on: "canvas",
-                        events: {
-                            onhover: { enable: true, mode: "grab" },
-                            onclick: { enable: true, mode: "push" },
-                            resize: true
-                        }
-                    },
-                    retina_detect: true
-                });
+            // Alternar entre modo claro e escuro
+            const themeToggle = document.getElementById('themeToggle');
+            const icon = themeToggle.querySelector('i');
+            
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-mode');
+                document.body.classList.toggle('dark-mode');
+                
+                if (document.body.classList.contains('dark-mode')) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                } else {
+                    icon.classList.remove('fa-sun');
+                    icon.classList.add('fa-moon');
+                }
+                
+                // Salvar preferência no localStorage
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                localStorage.setItem('darkMode', isDarkMode);
+            });
+            
+            // Verificar preferência salva
+            if (localStorage.getItem('darkMode') === 'true') {
+                document.body.classList.remove('light-mode');
+                document.body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
             }
             
-            // Efeito de digitação no título
-            const title = document.querySelector('h1');
-            const originalText = title.textContent;
-            title.textContent = '';
+            // Filtro de tecnologias
+            const techFilters = document.querySelectorAll('.tech-filter');
+            const projectCards = document.querySelectorAll('.project-card');
+            const techTags = document.querySelectorAll('.tech-tag');
             
-            let i = 0;
-            const typeWriter = () => {
-                if (i < originalText.length) {
-                    title.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
-                }
-            };
-            
-            setTimeout(typeWriter, 1000);
-            
-            // Animação de elementos ao rolar
-            const animateOnScroll = () => {
-                const elements = document.querySelectorAll('.skill-category, .project-card, .education-item');
-                
-                elements.forEach(element => {
-                    const position = element.getBoundingClientRect();
+            techFilters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    // Remove a classe active de todos os filtros
+                    techFilters.forEach(f => f.classList.remove('active'));
+                    // Adiciona a classe active ao filtro clicado
+                    filter.classList.add('active');
                     
-                    if(position.top < window.innerHeight - 100) {
-                        element.style.opacity = 1;
-                        element.style.transform = 'translateY(0)';
-                    }
+                    const tech = filter.getAttribute('data-tech');
+                    
+                    // Filtra os projetos
+                    projectCards.forEach(card => {
+                        if (tech === 'all') {
+                            card.style.display = 'block';
+                        } else {
+                            const cardTechs = card.getAttribute('data-tech').split(' ');
+                            if (cardTechs.includes(tech)) {
+                                card.style.display = 'block';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
                 });
-            };
-            
-            // Inicializa opacidade e posição dos elementos
-            document.querySelectorAll('.skill-category, .project-card, .education-item').forEach(element => {
-                element.style.opacity = 0;
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             });
             
-            window.addEventListener('scroll', animateOnScroll);
-            animateOnScroll(); // Executa uma vez ao carregar a página
-            
-            // Form submission handling
-            document.getElementById('suggestion-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const name = document.getElementById('name').value;
-                const message = document.getElementById('message').value;
-                
-                if (!name || !message) {
-                    alert('Por favor, preencha pelo menos o nome e a mensagem.');
-                    return;
-                }
-                
-                alert('Obrigado pelo seu feedback! Suas sugestões são muito valiosas para mim.');
-                document.getElementById('suggestion-form').reset();
+            // Filtro também pelas tags de tecnologia
+            techTags.forEach(tag => {
+                tag.addEventListener('click', () => {
+                    const tech = tag.getAttribute('data-tech');
+                    
+                    // Encontra o botão correspondente e clica nele
+                    techFilters.forEach(filter => {
+                        if (filter.getAttribute('data-tech') === tech) {
+                            filter.click();
+                        }
+                    });
+                });
             });
             
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('nav a').forEach(anchor => {
+            // Smooth scrolling para links de navegação
+            document.querySelectorAll('.nav-menu a').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
                     e.preventDefault();
                     
@@ -973,7 +983,7 @@
                     const targetElement = document.querySelector(targetId);
                     
                     window.scrollTo({
-                        top: targetElement.offsetTop - 20,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                 });
