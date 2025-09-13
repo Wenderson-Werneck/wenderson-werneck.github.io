@@ -1221,5 +1221,219 @@
             }
         });
     </script>
+// ==============================================
+// MÓDULO DE TRADUÇÃO - WENDERSON WERNECK
+// ==============================================
+const TranslationModule = (() => {
+    // Dicionário de traduções
+    const translations = {
+        'pt': {
+            // Menu
+            'Habilidades': 'Habilidades',
+            'Projetos': 'Projetos',
+            'Formação': 'Formação',
+            'Contato': 'Contato',
+            
+            // Hero
+            'Analista de Dados & BI': 'Analista de Dados & BI',
+            'heroDescription': 'Profissional em transição para a área de Dados, com mentalidade analítica e experiência em transformar desafios de negócio em soluções funcionais através de dados.',
+            'Entrar em Contato': 'Entrar em Contato',
+            'Ver Projetos': 'Ver Projetos',
+            
+            // Skills
+            'Habilidades Técnicas': 'Habilidades Técnicas',
+            'Análise & Visualização': 'Análise & Visualização',
+            'Linguagens & Bancos': 'Linguagens & Bancos',
+            'Metodologias': 'Metodologias',
+            
+            // Projects
+            'Projetos em Destaque': 'Projetos em Destaque',
+            'Todos': 'Todos',
+            'SQL': 'SQL',
+            'Python': 'Python',
+            'Power BI': 'Power BI',
+            'Automação': 'Automação',
+            'Banco de Dados em Nuvem': 'Banco de Dados em Nuvem',
+            'project1Desc': 'Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).',
+            'Automação de Relatórios': 'Automação de Relatórios',
+            'project2Desc': 'Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets.',
+            'Dashboard Analítico': 'Dashboard Analítico',
+            'project3Desc': 'Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas.',
+            'Análise de Dados com Python': 'Análise de Dados com Python',
+            'project4Desc': 'Scripts em Python para análise exploratória de dados e criação de visualizações.',
+            'Ver Projeto': 'Ver Projeto',
+            
+            // Education
+            'Formação & Certificações': 'Formação & Certificações',
+            'education1': 'Bacharelado em Ciência de Dados e Inteligência Artificial',
+            'education2': 'Google Data Analytics Professional Certificate',
+            'education3': 'Análise de Dados e Inteligência de Negócios',
+            'education4': 'Harvard Business for All',
+            'education5': 'Power BI Completo',
+            'Em andamento': 'Em andamento',
+            'Concluído': 'Concluído',
+            
+            // Contact
+            'Contato': 'Contato',
+            'Telefone': 'Telefone',
+            'Email': 'Email',
+            'LinkedIn': 'LinkedIn',
+            'GitHub': 'GitHub',
+            'Envie uma mensagem': 'Envie uma mensagem',
+            'Nome': 'Nome',
+            'Mensagem': 'Mensagem',
+            'Enviar Mensagem': 'Enviar Mensagem',
+            'placeholderName': 'Seu nome',
+            'placeholderEmail': 'Seu email',
+            'placeholderMessage': 'Sua mensagem',
+            
+            // Footer
+            'footerText': '© 2023 Wenderson Soares Werneck. Todos os direitos reservados.'
+        },
+        'en': {
+            // Menu
+            'Habilidades': 'Skills',
+            'Projetos': 'Projects',
+            'Formação': 'Education',
+            'Contato': 'Contact',
+            
+            // Hero
+            'Analista de Dados & BI': 'Data Analyst & BI',
+            'heroDescription': 'Professional transitioning to the Data field, with an analytical mindset and experience in transforming business challenges into functional solutions through data.',
+            'Entrar em Contato': 'Get in Touch',
+            'Ver Projetos': 'View Projects',
+            
+            // Skills
+            'Habilidades Técnicas': 'Technical Skills',
+            'Análise & Visualização': 'Analysis & Visualization',
+            'Linguagens & Bancos': 'Languages & Databases',
+            'Metodologias': 'Methodologies',
+            
+            // Projects
+            'Projetos em Destaque': 'Featured Projects',
+            'Todos': 'All',
+            'SQL': 'SQL',
+            'Python': 'Python',
+            'Power BI': 'Power BI',
+            'Automação': 'Automation',
+            'Banco de Dados em Nuvem': 'Cloud Database',
+            'project1Desc': 'Development and implementation of a relational database in PostgreSQL hosted on AWS (via Neon Tech).',
+            'Automação de Relatórios': 'Reports Automation',
+            'project2Desc': 'Creation of scripts to automate the collection, cleaning and visualization of operational data in Google Sheets.',
+            'Dashboard Analítico': 'Analytical Dashboard',
+            'project3Desc': 'Development of an interactive dashboard in Power BI for sales performance analysis.',
+            'Análise de Dados com Python': 'Data Analysis with Python',
+            'project4Desc': 'Python scripts for exploratory data analysis and visualization creation.',
+            'Ver Projeto': 'View Project',
+            
+            // Education
+            'Formação & Certificações': 'Education & Certifications',
+            'education1': 'Bachelor in Data Science and Artificial Intelligence',
+            'education2': 'Google Data Analytics Professional Certificate',
+            'education3': 'Data Analysis and Business Intelligence',
+            'education4': 'Harvard Business for All',
+            'education5': 'Complete Power BI',
+            'Em andamento': 'In progress',
+            'Concluído': 'Completed',
+            
+            // Contact
+            'Contato': 'Contact',
+            'Telefone': 'Phone',
+            'Email': 'Email',
+            'LinkedIn': 'LinkedIn',
+            'GitHub': 'GitHub',
+            'Envie uma mensagem': 'Send a message',
+            'Nome': 'Name',
+            'Mensagem': 'Message',
+            'Enviar Mensagem': 'Send Message',
+            'placeholderName': 'Your name',
+            'placeholderEmail': 'Your email',
+            'placeholderMessage': 'Your message',
+            
+            // Footer
+            'footerText': '© 2023 Wenderson Soares Werneck. All rights reserved.'
+        }
+    };
+
+    // Estado atual do idioma
+    let currentLang = 'pt';
+
+    // Função para aplicar traduções
+    function applyTranslations(lang) {
+        currentLang = lang;
+        
+        // Atualizar todos os elementos com atributo data-translate
+        document.querySelectorAll('[data-translate]').forEach(element => {
+            const key = element.getAttribute('data-translate');
+            if (translations[lang][key]) {
+                // Verificar se é um elemento de input/textarea (placeholder)
+                if (element.placeholder !== undefined) {
+                    element.placeholder = translations[lang][key];
+                } else {
+                    element.textContent = translations[lang][key];
+                }
+            }
+        });
+        
+        // Elementos especiais que não usam data-translate
+        const specialElements = {
+            'heroDescription': '.hero-description',
+            'footerText': 'footer p'
+        };
+        
+        for (const [key, selector] of Object.entries(specialElements)) {
+            const element = document.querySelector(selector);
+            if (element && translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        }
+        
+        // Atualizar o título da página
+        document.title = lang === 'en' 
+            ? 'Wenderson Werneck' 
+            : 'Wenderson Werneck';
+            
+        console.log(`Idioma alterado para: ${lang}`);
+    }
+
+    // Inicializar o módulo
+    function init() {
+        // Adicionar evento de clique ao botão de idioma
+        const languageToggle = document.getElementById('languageToggle');
+        if (languageToggle) {
+            languageToggle.addEventListener('click', () => {
+                const newLang = currentLang === 'pt' ? 'en' : 'pt';
+                applyTranslations(newLang);
+            });
+        }
+        
+        // Verificar se há um idioma salvo no localStorage
+        const savedLang = localStorage.getItem('portfolioLanguage');
+        if (savedLang) {
+            applyTranslations(savedLang);
+        }
+        
+        console.log('Módulo de tradução carregado com sucesso!');
+    }
+
+    // Retornar métodos públicos
+    return {
+        init: init,
+        changeLanguage: applyTranslations,
+        getCurrentLanguage: () => currentLang
+    };
+})();
+
+// Inicializar o módulo quando o DOM estiver pronto
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', TranslationModule.init);
+} else {
+    TranslationModule.init();
+}
+// ==============================================
+// FIM DO MÓDULO DE TRADUÇÃO
+// ==============================================
+
+
 </body>
 </html>
