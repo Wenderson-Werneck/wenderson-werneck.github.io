@@ -303,7 +303,7 @@
         }
         
         .skill-category {
-            background-color: var(--surface);
+            background: var(--surface);
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -329,7 +329,7 @@
         }
         
         .skill {
-            background-color: var(--background);
+            background: var(--background);
             color: var(--text);
             padding: 0.6rem 1.2rem;
             border-radius: 50px;
@@ -340,7 +340,7 @@
         }
         
         .skill:hover {
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
             transform: translateY(-2px);
         }
@@ -356,7 +356,7 @@
         
         .filter-btn {
             padding: 0.6rem 1.2rem;
-            background-color: var(--surface);
+            background: var(--surface);
             color: var(--text);
             border: 1px solid var(--border);
             border-radius: 50px;
@@ -366,7 +366,7 @@
         }
         
         .filter-btn.active, .filter-btn:hover {
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
             border-color: var(--primary);
         }
@@ -378,7 +378,7 @@
         }
         
         .project-card {
-            background-color: var(--surface);
+            background: var(--surface);
             border-radius: 12px;
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -433,7 +433,7 @@
         }
         
         .tech-tag {
-            background-color: var(--background);
+            background: var(--background);
             color: var(--primary);
             padding: 0.4rem 0.8rem;
             border-radius: 50px;
@@ -444,7 +444,7 @@
         }
         
         .tech-tag:hover {
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
             transform: translateY(-2px);
         }
@@ -479,7 +479,7 @@
         }
         
         .education-item {
-            background-color: var(--surface);
+            background: var(--surface);
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -527,7 +527,7 @@
             align-items: center;
             gap: 1rem;
             padding: 1rem;
-            background-color: var(--surface);
+            background: var(--surface);
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: all 0.3s;
@@ -538,12 +538,12 @@
         .contact-item:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
         }
         
         .contact-item:hover .contact-icon {
-            background-color: white;
+            background: white;
             color: var(--primary);
         }
         
@@ -551,7 +551,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background-color: var(--primary);
+            background: var(--primary);
             color: white;
             display: flex;
             align-items: center;
@@ -576,7 +576,7 @@
         }
         
         .feedback-form {
-            background-color: var(--surface);
+            background: var(--surface);
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
@@ -600,7 +600,7 @@
             border: 1px solid var(--border);
             border-radius: 8px;
             font-size: 1rem;
-            background-color: var(--background);
+            background: var(--background);
             color: var(--text);
             transition: all 0.3s;
         }
@@ -619,7 +619,7 @@
         
         /* Footer */
         footer {
-            background-color: var(--surface);
+            background: var(--surface);
             padding: 3rem 0;
             text-align: center;
             margin-top: 4rem;
@@ -641,11 +641,19 @@
             color: var(--text);
             font-size: 1.5rem;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--background);
         }
         
         .social-links a:hover {
             color: var(--primary);
             transform: translateY(-3px);
+            background: var(--primary-light);
         }
         
         /* Responsividade */
@@ -660,7 +668,7 @@
                 top: 80px;
                 left: -100%;
                 flex-direction: column;
-                background-color: var(--surface);
+                background: var(--surface);
                 width: 100%;
                 text-align: center;
                 transition: 0.3s;
@@ -721,10 +729,10 @@
                 </button>
                 
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="#skills">Habilidades</a></li>
-                    <li><a href="#projects">Projetos</a></li>
-                    <li><a href="#education">Formação</a></li>
-                    <li><a href="#contact">Contato</a></li>
+                    <li><a href="#skills" data-translate="Habilidades">Habilidades</a></li>
+                    <li><a href="#projects" data-translate="Projetos">Projetos</a></li>
+                    <li><a href="#education" data-translate="Formação">Formação</a></li>
+                    <li><a href="#contact" data-translate="Contato">Contato</a></li>
                 </ul>
                 
                 <div class="header-actions">
@@ -757,17 +765,17 @@
                 </div>
                 <h1 class="hero-title">Wenderson Soares Werneck</h1>
                 <p class="hero-subtitle">
-                    <span class="typewriter" id="typewriter">Analista de Dados & BI</span>
+                    <span class="typewriter" id="typewriter" data-translate="Analista de Dados & BI">Analista de Dados & BI</span>
                 </p>
-                <p class="hero-description">
+                <p class="hero-description" data-translate="heroDescription">
                     Profissional em transição para a área de Dados, com mentalidade analítica e experiência 
                     em transformar desafios de negócio em soluções funcionais através de dados.
                 </p>
                 <div class="hero-actions">
-                    <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" class="btn btn-primary" target="_blank">
+                    <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" class="btn btn-primary" target="_blank" data-translate="Entrar em Contato">
                         <i class="fab fa-whatsapp"></i> Entrar em Contato
                     </a>
-                    <a href="#projects" class="btn btn-secondary">
+                    <a href="#projects" class="btn btn-secondary" data-translate="Ver Projetos">
                         <i class="fas fa-code"></i> Ver Projetos
                     </a>
                 </div>
@@ -778,10 +786,10 @@
     <!-- Skills Section -->
     <section id="skills">
         <div class="container">
-            <h2 class="section-title">Habilidades Técnicas</h2>
+            <h2 class="section-title" data-translate="Habilidades Técnicas">Habilidades Técnicas</h2>
             <div class="skills-container">
                 <div class="skill-category">
-                    <h3>Análise & Visualização</h3>
+                    <h3 data-translate="Análise & Visualização">Análise & Visualização</h3>
                     <div class="skills-list">
                         <span class="skill">Power BI</span>
                         <span class="skill">Excel Avançado</span>
@@ -790,7 +798,7 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Linguagens & Bancos</h3>
+                    <h3 data-translate="Linguagens & Bancos">Linguagens & Bancos</h3>
                     <div class="skills-list">
                         <span class="skill">SQL (PostgreSQL)</span>
                         <span class="skill">Python</span>
@@ -799,7 +807,7 @@
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3>Metodologias</h3>
+                    <h3 data-translate="Metodologias">Metodologias</h3>
                     <div class="skills-list">
                         <span class="skill">ETL</span>
                         <span class="skill">Modelagem de Dados</span>
@@ -814,14 +822,14 @@
     <!-- Projects Section -->
     <section id="projects">
         <div class="container">
-            <h2 class="section-title">Projetos em Destaque</h2>
+            <h2 class="section-title" data-translate="Projetos em Destaque">Projetos em Destaque</h2>
             
             <div class="projects-filter">
-                <button class="filter-btn active" data-filter="all">Todos</button>
-                <button class="filter-btn" data-filter="sql">SQL</button>
-                <button class="filter-btn" data-filter="python">Python</button>
-                <button class="filter-btn" data-filter="powerbi">Power BI</button>
-                <button class="filter-btn" data-filter="automation">Automação</button>
+                <button class="filter-btn active" data-filter="all" data-translate="Todos">Todos</button>
+                <button class="filter-btn" data-filter="sql" data-translate="SQL">SQL</button>
+                <button class="filter-btn" data-filter="python" data-translate="Python">Python</button>
+                <button class="filter-btn" data-filter="powerbi" data-translate="Power BI">Power BI</button>
+                <button class="filter-btn" data-filter="automation" data-translate="Automação">Automação</button>
             </div>
             
             <div class="projects-grid">
@@ -830,15 +838,15 @@
                         <i class="fas fa-database"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Banco de Dados em Nuvem</h3>
-                        <p>Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).</p>
+                        <h3 data-translate="Banco de Dados em Nuvem">Banco de Dados em Nuvem</h3>
+                        <p data-translate="project1Desc">Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).</p>
                         <div class="project-tech">
                             <span class="tech-tag" data-filter="sql">PostgreSQL</span>
                             <span class="tech-tag" data-filter="sql">AWS</span>
                             <span class="tech-tag" data-filter="sql">Cloud</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" data-translate="Ver Projeto">
                                 <i class="fas fa-external-link-alt"></i> Ver Projeto
                             </a>
                         </div>
@@ -849,15 +857,15 @@
                         <i class="fas fa-cogs"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Automação de Relatórios</h3>
-                        <p>Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets.</p>
+                        <h3 data-translate="Automação de Relatórios">Automação de Relatórios</h3>
+                        <p data-translate="project2Desc">Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets.</p>
                         <div class="project-tech">
                             <span class="tech-tag" data-filter="automation">Google Apps Script</span>
                             <span class="tech-tag" data-filter="automation">JavaScript</span>
                             <span class="tech-tag" data-filter="automation">Google Sheets</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" data-translate="Ver Projeto">
                                 <i class="fas fa-external-link-alt"></i> Ver Projeto
                             </a>
                         </div>
@@ -868,15 +876,15 @@
                         <i class="fas fa-chart-bar"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Dashboard Analítico</h3>
-                        <p>Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas.</p>
+                        <h3 data-translate="Dashboard Analítico">Dashboard Analítico</h3>
+                        <p data-translate="project3Desc">Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas.</p>
                         <div class="project-tech">
                             <span class="tech-tag" data-filter="powerbi">Power BI</span>
                             <span class="tech-tag" data-filter="powerbi">DAX</span>
                             <span class="tech-tag" data-filter="sql">SQL</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" data-translate="Ver Projeto">
                                 <i class="fas fa-external-link-alt"></i> Ver Projeto
                             </a>
                         </div>
@@ -887,15 +895,15 @@
                         <i class="fab fa-python"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Análise de Dados com Python</h3>
-                        <p>Scripts em Python para análise exploratória de dados e criação de visualizações.</p>
+                        <h3 data-translate="Análise de Dados com Python">Análise de Dados com Python</h3>
+                        <p data-translate="project4Desc">Scripts em Python para análise exploratória de dados e criação de visualizações.</p>
                         <div class="project-tech">
                             <span class="tech-tag" data-filter="python">Python</span>
                             <span class="tech-tag" data-filter="python">Pandas</span>
                             <span class="tech-tag" data-filter="python">Matplotlib</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">
+                            <a href="#" class="project-link" data-translate="Ver Projeto">
                                 <i class="fas fa-external-link-alt"></i> Ver Projeto
                             </a>
                         </div>
@@ -908,41 +916,41 @@
     <!-- Education Section -->
     <section id="education">
         <div class="container">
-            <h2 class="section-title">Formação & Certificações</h2>
+            <h2 class="section-title" data-translate="Formação & Certificações">Formação & Certificações</h2>
             <div class="education-list">
                 <div class="education-item">
-                    <h3>Bacharelado em Ciência de Dados e Inteligência Artificial</h3>
+                    <h3 data-translate="education1">Bacharelado em Ciência de Dados e Inteligência Artificial</h3>
                     <div class="education-meta">
                         <span>UniDomBosco</span>
-                        <span>2025 - Em andamento</span>
+                        <span data-translate="Em andamento">2025 - Em andamento</span>
                     </div>
                 </div>
                 <div class="education-item">
-                    <h3>Google Data Analytics Professional Certificate</h3>
+                    <h3 data-translate="education2">Google Data Analytics Professional Certificate</h3>
                     <div class="education-meta">
                         <span>Coursera / Google</span>
-                        <span>Em andamento</span>
+                        <span data-translate="Em andamento">Em andamento</span>
                     </div>
                 </div>
                 <div class="education-item">
-                    <h3>Análise de Dados e Inteligência de Negócios</h3>
+                    <h3 data-translate="education3">Análise de Dados e Inteligência de Negócios</h3>
                     <div class="education-meta">
                         <span>UniGran</span>
-                        <span>Concluído</span>
+                        <span data-translate="Concluído">Concluído</span>
                     </div>
                 </div>
                 <div class="education-item">
-                    <h3>Harvard Business for All</h3>
+                    <h3 data-translate="education4">Harvard Business for All</h3>
                     <div class="education-meta">
                         <span>Harvard Business School</span>
-                        <span>Em andamento</span>
+                        <span data-translate="Em andamento">Em andamento</span>
                     </div>
                 </div>
                 <div class="education-item">
-                    <h3>Power BI Completo</h3>
+                    <h3 data-translate="education5">Power BI Completo</h3>
                     <div class="education-meta">
                         <span>FM2S</span>
-                        <span>Concluído</span>
+                        <span data-translate="Concluído">Concluído</span>
                     </div>
                 </div>
             </div>
@@ -952,7 +960,7 @@
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
-            <h2 class="section-title">Contato</h2>
+            <h2 class="section-title" data-translate="Contato">Contato</h2>
             <div class="contact-container">
                 <div class="contact-info">
                     <a href="tel:+5527996185461" class="contact-item">
@@ -960,7 +968,7 @@
                             <i class="fas fa-phone"></i>
                         </div>
                         <div class="contact-details">
-                            <span>Telefone</span>
+                            <span data-translate="Telefone">Telefone</span>
                             <span>+55 (27) 99618-5461</span>
                         </div>
                     </a>
@@ -969,7 +977,7 @@
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div class="contact-details">
-                            <span>Email</span>
+                            <span data-translate="Email">Email</span>
                             <span>cfpromlk@gmail.com</span>
                         </div>
                     </a>
@@ -978,7 +986,7 @@
                             <i class="fab fa-linkedin"></i>
                         </div>
                         <div class="contact-details">
-                            <span>LinkedIn</span>
+                            <span data-translate="LinkedIn">LinkedIn</span>
                             <span>linkedin.com/in/wendersonwerneck</span>
                         </div>
                     </a>
@@ -987,28 +995,28 @@
                             <i class="fab fa-github"></i>
                         </div>
                         <div class="contact-details">
-                            <span>GitHub</span>
+                            <span data-translate="GitHub">GitHub</span>
                             <span>github.com/wenderson-werneck</span>
                         </div>
                     </a>
                 </div>
                 
                 <div class="feedback-form">
-                    <h3>Envie uma mensagem</h3>
+                    <h3 data-translate="Envie uma mensagem">Envie uma mensagem</h3>
                     <form id="suggestion-form">
                         <div class="form-group">
-                            <label for="name">Nome</label>
-                            <input type="text" id="name" placeholder="Seu nome">
+                            <label for="name" data-translate="Nome">Nome</label>
+                            <input type="text" id="name" placeholder="Seu nome" data-translate="placeholderName">
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Seu email">
+                            <label for="email" data-translate="Email">Email</label>
+                            <input type="email" id="email" placeholder="Seu email" data-translate="placeholderEmail">
                         </div>
                         <div class="form-group">
-                            <label for="message">Mensagem</label>
-                            <textarea id="message" placeholder="Sua mensagem"></textarea>
+                            <label for="message" data-translate="Mensagem">Mensagem</label>
+                            <textarea id="message" placeholder="Sua mensagem" data-translate="placeholderMessage"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                        <button type="submit" class="btn btn-primary" data-translate="Enviar Mensagem">Enviar Mensagem</button>
                     </form>
                 </div>
             </div>
@@ -1030,12 +1038,209 @@
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
-                <p>© 2025 Wenderson Soares Werneck. Todos os direitos reservados.</p>
+                <p data-translate="footerText">© 2025 Wenderson Soares Werneck. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // ==============================================
+        // MÓDULO DE TRADUÇÃO - WENDERSON WERNECK
+        // ==============================================
+        const TranslationModule = (() => {
+            // Dicionário de traduções
+            const translations = {
+                'pt': {
+                    // Menu
+                    'Habilidades': 'Habilidades',
+                    'Projetos': 'Projetos',
+                    'Formação': 'Formação',
+                    'Contato': 'Contato',
+                    
+                    // Hero
+                    'Analista de Dados & BI': 'Analista de Dados & BI',
+                    'heroDescription': 'Profissional em transição para a área de Dados, com mentalidade analítica e experiência em transformar desafios de negócio em soluções funcionais através de dados.',
+                    'Entrar em Contato': 'Entrar em Contato',
+                    'Ver Projetos': 'Ver Projetos',
+                    
+                    // Skills
+                    'Habilidades Técnicas': 'Habilidades Técnicas',
+                    'Análise & Visualização': 'Análise & Visualização',
+                    'Linguagens & Bancos': 'Linguagens & Bancos',
+                    'Metodologias': 'Metodologias',
+                    
+                    // Projects
+                    'Projetos em Destaque': 'Projetos em Destaque',
+                    'Todos': 'Todos',
+                    'SQL': 'SQL',
+                    'Python': 'Python',
+                    'Power BI': 'Power BI',
+                    'Automação': 'Automação',
+                    'Banco de Dados em Nuvem': 'Banco de Dados em Nuvem',
+                    'project1Desc': 'Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).',
+                    'Automação de Relatórios': 'Automação de Relatórios',
+                    'project2Desc': 'Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets.',
+                    'Dashboard Analítico': 'Dashboard Analítico',
+                    'project3Desc': 'Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas.',
+                    'Análise de Dados com Python': 'Análise de Dados com Python',
+                    'project4Desc': 'Scripts em Python para análise exploratória de dados e criação de visualizações.',
+                    'Ver Projeto': 'Ver Projeto',
+                    
+                    // Education
+                    'Formação & Certificações': 'Formação & Certificações',
+                    'education1': 'Bacharelado em Ciência de Dados e Inteligência Artificial',
+                    'education2': 'Google Data Analytics Professional Certificate',
+                    'education3': 'Análise de Dados e Inteligência de Negócios',
+                    'education4': 'Harvard Business for All',
+                    'education5': 'Power BI Completo',
+                    'Em andamento': 'Em andamento',
+                    'Concluído': 'Concluído',
+                    
+                    // Contact
+                    'Contato': 'Contato',
+                    'Telefone': 'Telefone',
+                    'Email': 'Email',
+                    'LinkedIn': 'LinkedIn',
+                    'GitHub': 'GitHub',
+                    'Envie uma mensagem': 'Envie uma mensagem',
+                    'Nome': 'Nome',
+                    'Mensagem': 'Mensagem',
+                    'Enviar Mensagem': 'Enviar Mensagem',
+                    'placeholderName': 'Seu nome',
+                    'placeholderEmail': 'Seu email',
+                    'placeholderMessage': 'Sua mensagem',
+                    
+                    // Footer
+                    'footerText': '© 2025 Wenderson Soares Werneck. Todos os direitos reservados.'
+                },
+                'en': {
+                    // Menu
+                    'Habilidades': 'Skills',
+                    'Projetos': 'Projects',
+                    'Formação': 'Education',
+                    'Contato': 'Contact',
+                    
+                    // Hero
+                    'Analista de Dados & BI': 'Data Analyst & BI',
+                    'heroDescription': 'Professional transitioning to the Data field, with an analytical mindset and experience in transforming business challenges into functional solutions through data.',
+                    'Entrar em Contato': 'Get in Touch',
+                    'Ver Projetos': 'View Projects',
+                    
+                    // Skills
+                    'Habilidades Técnicas': 'Technical Skills',
+                    'Análise & Visualização': 'Analysis & Visualization',
+                    'Linguagens & Bancos': 'Languages & Databases',
+                    'Metodologias': 'Methodologies',
+                    
+                    // Projects
+                    'Projetos em Destaque': 'Featured Projects',
+                    'Todos': 'All',
+                    'SQL': 'SQL',
+                    'Python': 'Python',
+                    'Power BI': 'Power BI',
+                    'Automação': 'Automation',
+                    'Banco de Dados em Nuvem': 'Cloud Database',
+                    'project1Desc': 'Development and implementation of a relational database in PostgreSQL hosted on AWS (via Neon Tech).',
+                    'Automação de Relatórios': 'Reports Automation',
+                    'project2Desc': 'Creation of scripts to automate the collection, cleaning and visualization of operational data in Google Sheets.',
+                    'Dashboard Analítico': 'Analytical Dashboard',
+                    'project3Desc': 'Development of an interactive dashboard in Power BI for sales performance analysis.',
+                    'Análise de Dados com Python': 'Data Analysis with Python',
+                    'project4Desc': 'Python scripts for exploratory data analysis and visualization creation.',
+                    'Ver Projeto': 'View Project',
+                    
+                    // Education
+                    'Formação & Certificações': 'Education & Certifications',
+                    'education1': 'Bachelor in Data Science and Artificial Intelligence',
+                    'education2': 'Google Data Analytics Professional Certificate',
+                    'education3': 'Data Analysis and Business Intelligence',
+                    'education4': 'Harvard Business for All',
+                    'education5': 'Complete Power BI',
+                    'Em andamento': 'In progress',
+                    'Concluído': 'Completed',
+                    
+                    // Contact
+                    'Contato': 'Contact',
+                    'Telefone': 'Phone',
+                    'Email': 'Email',
+                    'LinkedIn': 'LinkedIn',
+                    'GitHub': 'GitHub',
+                    'Envie uma mensagem': 'Send a message',
+                    'Nome': 'Name',
+                    'Mensagem': 'Message',
+                    'Enviar Mensagem': 'Send Message',
+                    'placeholderName': 'Your name',
+                    'placeholderEmail': 'Your email',
+                    'placeholderMessage': 'Your message',
+                    
+                    // Footer
+                    'footerText': '© 2025 Wenderson Soares Werneck. All rights reserved.'
+                }
+            };
+
+            // Estado atual do idioma
+            let currentLang = 'pt';
+
+            // Função para aplicar traduções
+            function applyTranslations(lang) {
+                currentLang = lang;
+                
+                // Atualizar todos os elementos com atributo data-translate
+                document.querySelectorAll('[data-translate]').forEach(element => {
+                    const key = element.getAttribute('data-translate');
+                    if (translations[lang][key]) {
+                        // Verificar se é um elemento de input/textarea (placeholder)
+                        if (element.placeholder !== undefined) {
+                            element.placeholder = translations[lang][key];
+                        } else {
+                            element.textContent = translations[lang][key];
+                        }
+                    }
+                });
+                
+                // Atualizar o título da página
+                document.title = lang === 'en' 
+                    ? 'Wenderson Werneck | Data Analyst' 
+                    : 'Wenderson Werneck | Analista de Dados';
+                    
+                // Salvar preferência no localStorage
+                localStorage.setItem('portfolioLanguage', lang);
+                
+                console.log(`Idioma alterado para: ${lang}`);
+            }
+
+            // Inicializar o módulo
+            function init() {
+                // Adicionar evento de clique ao botão de idioma
+                const languageToggle = document.getElementById('languageToggle');
+                if (languageToggle) {
+                    languageToggle.addEventListener('click', () => {
+                        const newLang = currentLang === 'pt' ? 'en' : 'pt';
+                        applyTranslations(newLang);
+                    });
+                }
+                
+                // Verificar se há um idioma salvo no localStorage
+                const savedLang = localStorage.getItem('portfolioLanguage');
+                if (savedLang) {
+                    applyTranslations(savedLang);
+                }
+                
+                console.log('Módulo de tradução carregado com sucesso!');
+            }
+
+            // Retornar métodos públicos
+            return {
+                init: init,
+                changeLanguage: applyTranslations,
+                getCurrentLanguage: () => currentLang
+            };
+        })();
+
+        // ==============================================
+        // OUTRAS FUNCIONALIDADES DO SITE
+        // ==============================================
+        
         // Menu mobile
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navMenu = document.getElementById('navMenu');
@@ -1198,245 +1403,11 @@
             });
         });
         
-        // Sistema de tradução (simplificado para demonstração)
-        const languageToggle = document.getElementById('languageToggle');
-        let isEnglish = false;
-        
-        languageToggle.addEventListener('click', () => {
-            isEnglish = !isEnglish;
-            
-            // Altera apenas alguns textos para demonstração
-            if (isEnglish) {
-                document.querySelector('.hero-description').textContent = 
-                    'Professional transitioning to the Data field, with an analytical mindset and experience in transforming business challenges into functional solutions through data.';
-                document.querySelector('.btn-primary').innerHTML = '<i class="fab fa-whatsapp"></i> Get in Touch';
-                document.querySelector('.btn-secondary').innerHTML = '<i class="fas fa-code"></i> View Projects';
-                document.querySelector('.section-title').textContent = 'Technical Skills';
-            } else {
-                document.querySelector('.hero-description').textContent = 
-                    'Profissional em transição para a área de Dados, com mentalidade analítica e experiência em transformar desafios de negócio em soluções funcionais através de dados.';
-                document.querySelector('.btn-primary').innerHTML = '<i class="fab fa-whatsapp"></i> Entrar em Contato';
-                document.querySelector('.btn-secondary').innerHTML = '<i class="fas fa-code"></i> Ver Projetos';
-                document.querySelector('.section-title').textContent = 'Habilidades Técnicas';
-            }
+        // Inicializar o módulo de tradução quando o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', function() {
+            TranslationModule.init();
+            checkScroll(); // Verificar seções visíveis ao carregar
         });
-    
-    // ==============================================
-// MÓDULO DE TRADUÇÃO - WENDERSON WERNECK
-// ==============================================
-const TranslationModule = (() => {
-    // Dicionário de traduções
-    const translations = {
-        'pt': {
-            // Menu
-            'Habilidades': 'Habilidades',
-            'Projetos': 'Projetos',
-            'Formação': 'Formação',
-            'Contato': 'Contato',
-            
-            // Hero
-            'Analista de Dados & BI': 'Analista de Dados & BI',
-            'heroDescription': 'Profissional em transição para a área de Dados, com mentalidade analítica e experiência em transformar desafios de negócio em soluções funcionais através de dados.',
-            'Entrar em Contato': 'Entrar em Contato',
-            'Ver Projetos': 'Ver Projetos',
-            
-            // Skills
-            'Habilidades Técnicas': 'Habilidades Técnicas',
-            'Análise & Visualização': 'Análise & Visualização',
-            'Linguagens & Bancos': 'Linguagens & Bancos',
-            'Metodologias': 'Metodologias',
-            
-            // Projects
-            'Projetos em Destaque': 'Projetos em Destaque',
-            'Todos': 'Todos',
-            'SQL': 'SQL',
-            'Python': 'Python',
-            'Power BI': 'Power BI',
-            'Automação': 'Automação',
-            'Banco de Dados em Nuvem': 'Banco de Dados em Nuvem',
-            'project1Desc': 'Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).',
-            'Automação de Relatórios': 'Automação de Relatórios',
-            'project2Desc': 'Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets.',
-            'Dashboard Analítico': 'Dashboard Analítico',
-            'project3Desc': 'Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas.',
-            'Análise de Dados com Python': 'Análise de Dados com Python',
-            'project4Desc': 'Scripts em Python para análise exploratória de dados e criação de visualizações.',
-            'Ver Projeto': 'Ver Projeto',
-            
-            // Education
-            'Formação & Certificações': 'Formação & Certificações',
-            'education1': 'Bacharelado em Ciência de Dados e Inteligência Artificial',
-            'education2': 'Google Data Analytics Professional Certificate',
-            'education3': 'Análise de Dados e Inteligência de Negócios',
-            'education4': 'Harvard Business for All',
-            'education5': 'Power BI Completo',
-            'Em andamento': 'Em andamento',
-            'Concluído': 'Concluído',
-            
-            // Contact
-            'Contato': 'Contato',
-            'Telefone': 'Telefone',
-            'Email': 'Email',
-            'LinkedIn': 'LinkedIn',
-            'GitHub': 'GitHub',
-            'Envie uma mensagem': 'Envie uma mensagem',
-            'Nome': 'Nome',
-            'Mensagem': 'Mensagem',
-            'Enviar Mensagem': 'Enviar Mensagem',
-            'placeholderName': 'Seu nome',
-            'placeholderEmail': 'Seu email',
-            'placeholderMessage': 'Sua mensagem',
-            
-            // Footer
-            'footerText': '© 2023 Wenderson Soares Werneck. Todos os direitos reservados.'
-        },
-        'en': {
-            // Menu
-            'Habilidades': 'Skills',
-            'Projetos': 'Projects',
-            'Formação': 'Education',
-            'Contato': 'Contact',
-            
-            // Hero
-            'Analista de Dados & BI': 'Data Analyst & BI',
-            'heroDescription': 'Professional transitioning to the Data field, with an analytical mindset and experience in transforming business challenges into functional solutions through data.',
-            'Entrar em Contato': 'Get in Touch',
-            'Ver Projetos': 'View Projects',
-            
-            // Skills
-            'Habilidades Técnicas': 'Technical Skills',
-            'Análise & Visualização': 'Analysis & Visualization',
-            'Linguagens & Bancos': 'Languages & Databases',
-            'Metodologias': 'Methodologies',
-            
-            // Projects
-            'Projetos em Destaque': 'Featured Projects',
-            'Todos': 'All',
-            'SQL': 'SQL',
-            'Python': 'Python',
-            'Power BI': 'Power BI',
-            'Automação': 'Automation',
-            'Banco de Dados em Nuvem': 'Cloud Database',
-            'project1Desc': 'Development and implementation of a relational database in PostgreSQL hosted on AWS (via Neon Tech).',
-            'Automação de Relatórios': 'Reports Automation',
-            'project2Desc': 'Creation of scripts to automate the collection, cleaning and visualization of operational data in Google Sheets.',
-            'Dashboard Analítico': 'Analytical Dashboard',
-            'project3Desc': 'Development of an interactive dashboard in Power BI for sales performance analysis.',
-            'Análise de Dados com Python': 'Data Analysis with Python',
-            'project4Desc': 'Python scripts for exploratory data analysis and visualization creation.',
-            'Ver Projeto': 'View Project',
-            
-            // Education
-            'Formação & Certificações': 'Education & Certifications',
-            'education1': 'Bachelor in Data Science and Artificial Intelligence',
-            'education2': 'Google Data Analytics Professional Certificate',
-            'education3': 'Data Analysis and Business Intelligence',
-            'education4': 'Harvard Business for All',
-            'education5': 'Complete Power BI',
-            'Em andamento': 'In progress',
-            'Concluído': 'Completed',
-            
-            // Contact
-            'Contato': 'Contact',
-            'Telefone': 'Phone',
-            'Email': 'Email',
-            'LinkedIn': 'LinkedIn',
-            'GitHub': 'GitHub',
-            'Envie uma mensagem': 'Send a message',
-            'Nome': 'Name',
-            'Mensagem': 'Message',
-            'Enviar Mensagem': 'Send Message',
-            'placeholderName': 'Your name',
-            'placeholderEmail': 'Your email',
-            'placeholderMessage': 'Your message',
-            
-            // Footer
-            'footerText': '© 2023 Wenderson Soares Werneck. All rights reserved.'
-        }
-    };
-
-    // Estado atual do idioma
-    let currentLang = 'pt';
-
-    // Função para aplicar traduções
-    function applyTranslations(lang) {
-        currentLang = lang;
-        
-        // Atualizar todos os elementos com atributo data-translate
-        document.querySelectorAll('[data-translate]').forEach(element => {
-            const key = element.getAttribute('data-translate');
-            if (translations[lang][key]) {
-                // Verificar se é um elemento de input/textarea (placeholder)
-                if (element.placeholder !== undefined) {
-                    element.placeholder = translations[lang][key];
-                } else {
-                    element.textContent = translations[lang][key];
-                }
-            }
-        });
-        
-        // Elementos especiais que não usam data-translate
-        const specialElements = {
-            'heroDescription': '.hero-description',
-            'footerText': 'footer p'
-        };
-        
-        for (const [key, selector] of Object.entries(specialElements)) {
-            const element = document.querySelector(selector);
-            if (element && translations[lang][key]) {
-                element.textContent = translations[lang][key];
-            }
-        }
-        
-        // Atualizar o título da página
-        document.title = lang === 'en' 
-            ? 'Wenderson Werneck' 
-            : 'Wenderson Werneck';
-            
-        console.log(`Idioma alterado para: ${lang}`);
-    }
-
-    // Inicializar o módulo
-    function init() {
-        // Adicionar evento de clique ao botão de idioma
-        const languageToggle = document.getElementById('languageToggle');
-        if (languageToggle) {
-            languageToggle.addEventListener('click', () => {
-                const newLang = currentLang === 'pt' ? 'en' : 'pt';
-                applyTranslations(newLang);
-            });
-        }
-        
-        // Verificar se há um idioma salvo no localStorage
-        const savedLang = localStorage.getItem('portfolioLanguage');
-        if (savedLang) {
-            applyTranslations(savedLang);
-        }
-        
-        console.log('Módulo de tradução carregado com sucesso!');
-    }
-
-    // Retornar métodos públicos
-    return {
-        init: init,
-        changeLanguage: applyTranslations,
-        getCurrentLanguage: () => currentLang
-    };
-})();
-
-// Inicializar o módulo quando o DOM estiver pronto
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', TranslationModule.init);
-} else {
-    TranslationModule.init();
-}
-// ==============================================
-// FIM DO MÓDULO DE TRADUÇÃO
-// ==============================================
-    
     </script>
-
-
-
 </body>
 </html>
