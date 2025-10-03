@@ -7,22 +7,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { /* ... Cores ... */ }
-        .dark-mode { /* ... Cores ... */ }
+        :root {
+            --primary: #722F37; --primary-light: #9A4B53; --primary-dark: #4A1A21; --accent: #D8A28C; --text: #2C2C2C;
+            --text-light: #666666; --background: #F9F5F3; --surface: #FAF7F5; --border: #E5DEDA;
+        }
+        .dark-mode {
+            --primary: #9A4B53; --primary-light: #722F37; --primary-dark: #4A1A21; --accent: #D8A28C; --text: #F0E6E2;
+            --text-light: #C8B9B5; --background: #1A1514; --surface: #2A2322; --border: #463A38;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
         body { color: var(--text); line-height: 1.6; background-color: var(--background); }
         .container { width: 90%; max-width: 960px; margin: 0 auto; padding: 20px 0; }
-        header { padding: 1.5rem 0; background-color: var(--surface); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); text-align: center; }
+        header { padding: 1.5rem 0; background-color: var(--surface); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .header-content { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
         .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .header-actions { display: flex; gap: 0.8rem; }
+        .theme-toggle, .language-toggle { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; border: 1px solid var(--border); color: var(--text); background: var(--surface); cursor: pointer; }
+        .theme-toggle:hover, .language-toggle:hover { background-color: var(--primary); color: white; border-color: var(--primary); }
         .project-case-study { padding: 3rem 0; }
         .project-header { text-align: center; margin-bottom: 3rem; }
         .project-header h1 { font-size: 2.8rem; color: var(--text); margin-bottom: 0.5rem; }
         .project-header p { font-size: 1.2rem; color: var(--primary); max-width: 700px; margin: 0 auto; }
-        .project-section { background: var(--surface); padding: 2.5rem; margin-bottom: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
-        .project-section h2 { font-size: 1.8rem; color: var(--primary-dark); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+        .project-section { background: var(--surface); padding: 2.5rem; margin-bottom: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .project-section h2 { font-size: 1.8rem; color: var(--text); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+        .project-section h3 { font-size: 1.4rem; font-weight: 600; color: var(--primary); margin-top: 2rem; margin-bottom: 1rem; }
         .project-section p, .project-section li { font-size: 1.05rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1rem; }
         .project-section ul { list-style-position: inside; padding-left: 1rem; }
-        .project-section-card h3 { font-size: 1.4rem; font-weight: 600; color: var(--primary); margin-top: 2rem; margin-bottom: 1rem; } /* CORREÇÃO APLICADA AQUI */
         .tech-stack { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
         .tech-tag { background: var(--background); color: var(--primary); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border: 1px solid var(--border); }
         .project-image { width: 100%; border-radius: 8px; margin: 1.5rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -36,23 +46,139 @@
     </style>
 </head>
 <body>
+
     <header>
-        <a href="index.html" class="logo">WW</a>
+        <div class="header-content">
+            <a href="index.html" class="logo">WW</a>
+            <div class="header-actions">
+                <button class="theme-toggle" id="themeToggle" title="Alternar tema"><i class="fas fa-moon"></i></button>
+                <button class="language-toggle" id="languageToggle" title="Alternar idioma"><i class="fas fa-globe"></i></button>
+            </div>
+        </div>
     </header>
+
     <main class="container">
         <article class="project-case-study">
-            <header class="project-header"></header>
-            <section class="project-section"></section>
+            <header class="project-header">
+                <h1 data-translate="caseTitle">Case Study: Modelo Preditivo de Risco de Crédito</h1>
+                <p class="subtitle" data-translate="caseSubtitle">Um mergulho profundo na construção de uma solução de Machine Learning para reduzir perdas e otimizar a concessão de crédito em uma fintech.</p>
+            </header>
+            <section class="project-section">
+                <h2 data-translate="section1Title">1. Definição do Problema de Negócio</h2>
+                <p data-translate="section1P1"> Uma fintech, que chamaremos de "AprovaMais", estava expandindo sua carteira de clientes, mas enfrentava um aumento preocupante na taxa de inadimplência (default). O processo de aprovação de crédito era lento e dependia de regras de negócio que não capturavam a complexidade do perfil dos clientes. </p>
+                <h3 data-translate="section1H3_1">O Desafio Principal:</h3>
+                <p data-translate="section1P2"> Como escalar a operação de crédito de forma segura, aprovando clientes com bom potencial de pagamento e recusando aqueles com alto risco, de maneira rápida, consistente e baseada em evidências? </p>
+                <h3 data-translate="section1H3_2">Objetivos Estratégicos:</h3>
+                <ul>
+                    <li data-translate="section1Li1"><strong>Reduzir a Taxa de Inadimplência:</strong> Minimizar as perdas financeiras com maus pagadores.</li>
+                    <li data-translate="section1Li2"><strong>Aumentar a Eficiência Operacional:</strong> Automatizar a decisão inicial de crédito para liberar a equipe para casos complexos.</li>
+                    <li data-translate="section1Li3"><strong>Melhorar a Experiência do Cliente:</strong> Fornecer respostas de crédito mais rápidas e justas.</li>
+                </ul>
+            </section>
+            <section class="project-section">
+                <h2 data-translate="section2Title">2. Análise Exploratória de Dados (EDA)</h2>
+                <p data-translate="section2P1">Com um conjunto de dados históricos de mais de 10 mil clientes, a primeira etapa foi entender as histórias que os dados contavam. A Análise Exploratória foi crucial para descobrir padrões e guiar a construção do modelo.</p>
+                <h3 data-translate="section2H3_1">Principais Descobertas:</h3>
+                <p data-translate="section2P2">Utilizando histogramas, boxplots e um mapa de calor de correlação, identificamos fatores-chave. O mapa de calor, por exemplo, revelou uma forte correlação negativa entre o <strong>tempo de emprego</strong> e a <strong>inadimplência</strong>, validando a hipótese de que a estabilidade profissional é um forte indicador de baixo risco.</p>
+                <img src="https://placehold.co/900x450/722F37/FFFFFF?text=Mapa+de+Calor+de+Correlação" alt="Mapa de Calor de Correlação" class="project-image">
+                <p class="image-caption" data-translate="section2ImgCap1">O mapa de calor ajudou a visualizar as relações entre todas as variáveis simultaneamente.</p>
+                <p data-translate="section2P3">Gráficos de barras também mostraram que clientes com <strong>imóvel próprio</strong> tinham uma taxa de inadimplência quase 50% menor em comparação com aqueles que moram de aluguel. Esses insights foram fundamentais para a etapa de engenharia de features.</p>
+            </section>
             <div class="project-actions">
                 <a href="index.html" class="btn btn-secondary" data-translate="backToPortfolio"><i class="fas fa-arrow-left"></i> Voltar ao Portfólio</a>
                 <a href="URL_DO_SEU_COLAB_AQUI" target="_blank" class="btn btn-primary" data-translate="viewCompleteProject"><i class="fab fa-google-drive"></i> Ver Projeto Completo (Colab)</a>
             </div>
         </article>
     </main>
+
     <script>
-        // Adicione a nova chave de tradução no seu script
-        // 'viewCompleteProject': 'View Complete Project (Colab)' para inglês
-        // 'viewCompleteProject': 'Ver Projeto Completo (Colab)' para português
+        document.addEventListener('DOMContentLoaded', function() {
+            const TranslationModule = (() => {
+                const translations = {
+                    'pt': {
+                        'caseTitle': 'Case Study: Modelo Preditivo de Risco de Crédito',
+                        'caseSubtitle': 'Um mergulho profundo na construção de uma solução de Machine Learning para reduzir perdas e otimizar a concessão de crédito em uma fintech.',
+                        'section1Title': '1. Definição do Problema de Negócio',
+                        'section1P1': 'Uma fintech, que chamaremos de "AprovaMais", estava expandindo sua carteira de clientes, mas enfrentava um aumento preocupante na taxa de inadimplência (default). O processo de aprovação de crédito era lento e dependia de regras de negócio que não capturavam a complexidade do perfil dos clientes.',
+                        'section1H3_1': 'O Desafio Principal:',
+                        'section1P2': 'Como escalar a operação de crédito de forma segura, aprovando clientes com bom potencial de pagamento e recusando aqueles com alto risco, de maneira rápida, consistente e baseada em evidências?',
+                        'section1H3_2': 'Objetivos Estratégicos:',
+                        'section1Li1': '<strong>Reduzir a Taxa de Inadimplência:</strong> Minimizar as perdas financeiras com maus pagadores.',
+                        'section1Li2': '<strong>Aumentar a Eficiência Operacional:</strong> Automatizar a decisão inicial de crédito para liberar a equipe para casos complexos.',
+                        'section1Li3': '<strong>Melhorar a Experiência do Cliente:</strong> Fornecer respostas de crédito mais rápidas e justas.',
+                        'section2Title': '2. Análise Exploratória de Dados (EDA)',
+                        'section2P1': 'Com um conjunto de dados históricos de mais de 10 mil clientes, a primeira etapa foi entender as histórias que os dados contavam. A Análise Exploratória foi crucial para descobrir padrões e guiar a construção do modelo.',
+                        'section2H3_1': 'Principais Descobertas:',
+                        'section2P2': 'Utilizando histogramas, boxplots e um mapa de calor de correlação, identificamos fatores-chave. O mapa de calor, por exemplo, revelou uma forte correlação negativa entre o <strong>tempo de emprego</strong> e a <strong>inadimplência</strong>, validando a hipótese de que a estabilidade profissional é um forte indicador de baixo risco.',
+                        'section2ImgCap1': 'O mapa de calor ajudou a visualizar as relações entre todas as variáveis simultaneamente.',
+                        'section2P3': 'Gráficos de barras também mostraram que clientes com <strong>imóvel próprio</strong> tinham uma taxa de inadimplência quase 50% menor em comparação com aqueles que moram de aluguel. Esses insights foram fundamentais para a etapa de engenharia de features.',
+                        'backToPortfolio': ' Voltar ao Portfólio',
+                        'viewCompleteProject': 'Ver Projeto Completo (Colab)'
+                    },
+                    'en': {
+                        'caseTitle': 'Case Study: Predictive Credit Risk Model',
+                        'caseSubtitle': 'A deep dive into building a Machine Learning solution to reduce losses and optimize credit granting in a fintech company.',
+                        'section1Title': '1. Business Problem Definition',
+                        'section1P1': 'A fintech, which we will call "ApproveMore", was expanding its client portfolio but faced a worrying increase in the default rate. The credit approval process was slow and relied on business rules that did not capture the complexity of customer profiles.',
+                        'section1H3_1': 'The Main Challenge:',
+                        'section1P2': 'How to scale the credit operation safely, approving clients with good payment potential and rejecting those with high risk, in a fast, consistent, and evidence-based manner?',
+                        'section1H3_2': 'Strategic Objectives:',
+                        'section1Li1': '<strong>Reduce Default Rate:</strong> Minimize financial losses from bad payers.',
+                        'section1Li2': '<strong>Increase Operational Efficiency:</strong> Automate the initial credit decision to free up the team for complex cases.',
+                        'section1Li3': '<strong>Improve Customer Experience:</strong> Provide faster and fairer credit responses.',
+                        'section2Title': '2. Exploratory Data Analysis (EDA)',
+                        'section2P1': 'With a historical dataset of over 10,000 customers, the first step was to understand the stories the data told. Exploratory Analysis was crucial to uncover patterns and guide model building.',
+                        'section2H3_1': 'Key Findings:',
+                        'section2P2': 'Using histograms, boxplots, and a correlation heatmap, we identified key factors. The heatmap, for example, revealed a strong negative correlation between <strong>employment duration</strong> and <strong>default risk</strong>, validating the hypothesis that professional stability is a strong indicator of low risk.',
+                        'section2ImgCap1': 'The heatmap helped visualize the relationships between all variables simultaneously.',
+                        'section2P3': 'Bar charts also showed that customers with <strong>their own property</strong> had a default rate nearly 50% lower compared to those who rent. These insights were fundamental for the feature engineering stage.',
+                        'backToPortfolio': ' Back to Portfolio',
+                        'viewCompleteProject': 'View Complete Project (Colab)'
+                    }
+                };
+                let currentLang = 'pt';
+                function applyTranslations(lang) {
+                    currentLang = lang;
+                    document.querySelectorAll('[data-translate]').forEach(element => {
+                        const key = element.getAttribute('data-translate');
+                        if (translations[lang] && translations[lang][key]) {
+                            element.innerHTML = translations[lang][key];
+                        }
+                    });
+                    document.documentElement.lang = lang.startsWith('en') ? 'en' : 'pt-BR';
+                    localStorage.setItem('portfolioLanguage', lang);
+                }
+                function init() {
+                    const languageToggle = document.getElementById('languageToggle');
+                    if (languageToggle) {
+                        languageToggle.addEventListener('click', () => {
+                            const newLang = currentLang === 'pt' ? 'en' : 'pt';
+                            applyTranslations(newLang);
+                        });
+                    }
+                    const savedLang = localStorage.getItem('portfolioLanguage') || 'pt';
+                    applyTranslations(savedLang);
+                }
+                return { init };
+            })();
+            TranslationModule.init();
+
+            const themeToggle = document.getElementById('themeToggle');
+            if(themeToggle) {
+                const themeIcon = themeToggle.querySelector('i');
+                themeToggle.addEventListener('click', () => {
+                    document.body.classList.toggle('dark-mode');
+                    const isDarkMode = document.body.classList.contains('dark-mode');
+                    themeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+                    localStorage.setItem('portfolioTheme', isDarkMode ? 'dark' : 'light');
+                });
+                const savedTheme = localStorage.getItem('portfolioTheme');
+                if (savedTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    themeIcon.className = 'fas fa-sun';
+                }
+            }
+        });
     </script>
 </body>
 </html>
