@@ -67,7 +67,7 @@
         .section-title { font-size: 2.2rem; font-weight: 600; margin-bottom: 3rem; text-align: center; color: var(--text); position: relative; }
         .section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--primary); margin: 1rem auto; }
         
-        /* === NOVOS ESTILOS PARA HABILIDADES === */
+        /* === ESTILOS ATUALIZADOS PARA HABILIDADES === */
         .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
         .skill-category { background: var(--surface); padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: all 0.3s; }
         .skill-category:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); }
@@ -76,24 +76,43 @@
         .skill-item { display: flex; align-items: center; gap: 1rem; font-size: 1.05rem; font-weight: 500; }
         .skill-item i { font-size: 1.5rem; color: var(--primary); width: 25px; text-align: center; }
         
-        /* Projetos */
+        /* === ESTILOS ATUALIZADOS PARA PROJETOS === */
         .projects-filter { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
         .filter-btn { padding: 0.6rem 1.2rem; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 50px; cursor: pointer; transition: all 0.3s; font-weight: 500; }
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
-        .project-card { background: var(--surface); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: all 0.3s; }
-        .project-card.hidden { display: none; }
-        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+        .project-card {
+            background: var(--surface);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.4s ease, opacity 0.4s ease, height 0.4s ease, margin 0.4s ease; /* Transição suave */
+            opacity: 1;
+            transform: scale(1);
+        }
+        .project-card.is-hidden { /* Classe para esconder suavemente */
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+            height: 0;
+            margin: 0;
+            padding: 0;
+            border: none;
+            overflow: hidden;
+        }
+        .project-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
         .project-img { width: 100%; height: 200px; background: linear-gradient(45deg, var(--primary-light), var(--primary-dark)); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; }
         .project-content { padding: 1.5rem; }
         .project-content h3 { color: var(--text); margin-bottom: 0.8rem; font-size: 1.3rem; font-weight: 600; }
-        .project-content p { color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6; }
+        .project-content p { color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6; min-height: 50px; }
         .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
         .tech-tag { background: var(--background); color: var(--primary); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.3s; border: 1px solid transparent; }
         .tech-tag.active, .tech-tag:hover { background: var(--primary); color: white; transform: translateY(-2px); border-color: var(--primary-dark); }
         .project-links { display: flex; gap: 1rem; }
         .project-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.3s; }
         .project-link:hover { color: var(--primary-dark); }
+        
+        /* Demais Estilos */
         .education-list { display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; margin: 0 auto; }
         .education-item { background: var(--surface); padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; gap: 0.5rem; transition: all 0.3s; }
         .education-item:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
@@ -226,7 +245,7 @@
             </div>
             
             <div class="projects-grid">
-                <div class="project-card" data-tags="python machine-learning">
+                <div class="project-card" data-tags="python machine-learning scikit-learn">
                     <div class="project-img"><i class="fas fa-brain"></i></div>
                     <div class="project-content">
                         <h3 data-translate="project5Title">Modelo Preditivo de Risco de Crédito</h3>
@@ -242,13 +261,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-tags="sql aws cloud">
+                <div class="project-card" data-tags="sql aws cloud postgresql">
                     <div class="project-img"><i class="fas fa-database"></i></div>
                     <div class="project-content">
                         <h3 data-translate="project1Title">Banco de Dados em Nuvem para E-commerce</h3>
                         <p data-translate="project1Desc">Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).</p>
                         <div class="project-tech">
-                            <span class="tech-tag" data-filter="sql">PostgreSQL</span>
+                            <span class="tech-tag" data-filter="postgresql">PostgreSQL</span>
+                            <span class="tech-tag" data-filter="sql">SQL</span>
                             <span class="tech-tag" data-filter="aws">AWS</span>
                             <span class="tech-tag" data-filter="cloud">Cloud</span>
                         </div>
@@ -257,7 +277,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-tags="automacao javascript">
+                <div class="project-card" data-tags="automacao javascript google-sheets">
                     <div class="project-img"><i class="fas fa-cogs"></i></div>
                     <div class="project-content">
                         <h3 data-translate="project2Title">Automação de Relatórios Operacionais</h3>
@@ -265,13 +285,14 @@
                         <div class="project-tech">
                             <span class="tech-tag" data-filter="automacao">Google Apps Script</span>
                             <span class="tech-tag" data-filter="javascript">JavaScript</span>
+                            <span class="tech-tag" data-filter="google-sheets">Google Sheets</span>
                         </div>
                         <div class="project-links">
                             <a href="#" class="project-link" data-translate="Ver Projeto"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-tags="power-bi sql">
+                <div class="project-card" data-tags="power-bi sql dax">
                     <div class="project-img"><i class="fas fa-chart-bar"></i></div>
                     <div class="project-content">
                         <h3 data-translate="project3Title">Dashboard Analítico de Vendas</h3>
@@ -412,7 +433,7 @@
             TranslationModule.init();
 
             // ==============================================
-            // LÓGICA DO FILTRO MULTI-SELEÇÃO
+            // LÓGICA DO FILTRO MULTI-SELEÇÃO ATUALIZADA
             // ==============================================
             const filterableElements = document.querySelectorAll('.filter-btn, .tech-tag');
             const projectCards = document.querySelectorAll('.project-card');
@@ -421,40 +442,29 @@
             function applyFilters() {
                 projectCards.forEach(card => {
                     const cardTags = card.dataset.tags ? card.dataset.tags.split(' ') : [];
-                    // O card deve ser visível se não houver filtros ativos, ou se TODOS os filtros ativos estiverem presentes nas tags do card.
                     const isVisible = activeFilters.length === 0 || activeFilters.every(filter => cardTags.includes(filter));
-                    card.classList.toggle('hidden', !isVisible);
+                    card.classList.toggle('is-hidden', !isVisible);
                 });
             }
 
             filterableElements.forEach(element => {
                 element.addEventListener('click', () => {
                     const filter = element.dataset.filter;
-
-                    // Lógica para o botão "Todos"
                     if (filter === 'all') {
                         activeFilters = [];
                         filterableElements.forEach(el => el.classList.remove('active'));
                         document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
                     } else {
-                        // Remove a classe 'active' do botão "Todos" se outro filtro for clicado
                         document.querySelector('.filter-btn[data-filter="all"]').classList.remove('active');
-                        
-                        // Alterna o filtro na lista de ativos
                         const filterIndex = activeFilters.indexOf(filter);
                         if (filterIndex > -1) {
-                            activeFilters.splice(filterIndex, 1); // Remove se já existe
+                            activeFilters.splice(filterIndex, 1);
                         } else {
-                            activeFilters.push(filter); // Adiciona se não existe
+                            activeFilters.push(filter);
                         }
-                        
-                        // Alterna a classe 'active' visualmente
-                        // Sincroniza todos os elementos com o mesmo data-filter
                         document.querySelectorAll(`[data-filter="${filter}"]`).forEach(el => {
                            el.classList.toggle('active', filterIndex === -1);
                         });
-
-                        // Se nenhum filtro estiver ativo, ativa o botão "Todos"
                         if (activeFilters.length === 0) {
                             document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
                         }
@@ -489,30 +499,32 @@
             }
 
             const typewriterElement = document.getElementById('typewriter');
-            const professions = ["PostgreSQL", "Python", "Power BI", "Excel", "Rstudio", "Google Sheets"];
-            let professionIndex = 0, charIndex = 0, isDeleting = false;
-            function typeEffect() {
-                const currentProfession = professions[professionIndex];
-                let typeSpeed = 100;
-                if (isDeleting) {
-                    typewriterElement.textContent = currentProfession.substring(0, charIndex - 1);
-                    charIndex--;
-                    typeSpeed = 50;
-                } else {
-                    typewriterElement.textContent = currentProfession.substring(0, charIndex + 1);
-                    charIndex++;
+            if (typewriterElement) {
+                const professions = ["PostgreSQL", "Python", "Power BI", "Excel", "Rstudio", "Google Sheets"];
+                let professionIndex = 0, charIndex = 0, isDeleting = false;
+                function typeEffect() {
+                    const currentProfession = professions[professionIndex];
+                    let typeSpeed = 100;
+                    if (isDeleting) {
+                        typewriterElement.textContent = currentProfession.substring(0, charIndex - 1);
+                        charIndex--;
+                        typeSpeed = 50;
+                    } else {
+                        typewriterElement.textContent = currentProfession.substring(0, charIndex + 1);
+                        charIndex++;
+                    }
+                    if (!isDeleting && charIndex === currentProfession.length) {
+                        isDeleting = true;
+                        typeSpeed = 2000;
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        professionIndex = (professionIndex + 1) % professions.length;
+                        typeSpeed = 500;
+                    }
+                    setTimeout(typeEffect, typeSpeed);
                 }
-                if (!isDeleting && charIndex === currentProfession.length) {
-                    isDeleting = true;
-                    typeSpeed = 2000;
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    professionIndex = (professionIndex + 1) % professions.length;
-                    typeSpeed = 500;
-                }
-                setTimeout(typeEffect, typeSpeed);
+                typeEffect();
             }
-            if (typewriterElement) typeEffect();
 
             const sections = document.querySelectorAll('section');
             const observer = new IntersectionObserver((entries) => {
