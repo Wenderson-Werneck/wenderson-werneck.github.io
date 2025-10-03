@@ -78,8 +78,8 @@
         .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
         
         .projects-grid { 
-            display: flex; 
-            flex-wrap: wrap; 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.5rem;
         }
         .project-card {
@@ -87,9 +87,6 @@
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.4s ease, opacity 0.4s ease;
-            flex: 1 0 350px; 
-            max-width: calc(33.333% - 1.67rem);
-            min-width: 350px;
             opacity: 1;
             transform: scale(1);
         }
@@ -97,10 +94,6 @@
             opacity: 0;
             transform: scale(0.95);
             pointer-events: none;
-            order: 2;
-        }
-        .project-card:not(.is-hidden) {
-            order: 1;
         }
 
         .project-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
@@ -139,7 +132,7 @@
         .social-links { display: flex; gap: 1.5rem; }
         .social-links a { color: var(--text); font-size: 1.5rem; transition: all 0.3s; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--background); }
         .social-links a:hover { color: var(--primary); transform: translateY(-3px); background: var(--primary-light); }
-        @media (max-width: 1150px) { .project-card { max-width: calc(50% - 1.25rem); } }
+        
         @media (max-width: 768px) {
             .header-content { flex-direction: row; justify-content: space-between; }
             .nav-menu { position: fixed; top: 80px; left: -100%; flex-direction: column; background: var(--surface); width: 100%; text-align: center; transition: 0.3s; box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05); padding: 2rem 0; gap: 0; }
@@ -149,9 +142,7 @@
             .hero-title { font-size: 2.2rem; }
             .hero-subtitle { font-size: 1.4rem; }
             .hero-actions { flex-direction: column; align-items: center; }
-            .contact-container { grid-template-columns: 1fr; }
-            .projects-grid { flex-direction: column; }
-            .project-card { max-width: 100%; min-width: unset;}
+            .contact-container, .projects-grid { grid-template-columns: 1fr; }
             .contact-item { flex-direction: column; text-align: center; }
         }
     </style>
@@ -204,7 +195,7 @@
                     <div class="skills-list">
                         <span class="skill-item"><i class="fab fa-python"></i> Python (Pandas, Scikit-learn)</span>
                         <span class="skill-item"><i class="fas fa-database"></i> SQL (PostgreSQL, BigQuery)</span>
-                        <span class="skill-item"><i class="fab fa-r-project"></i> R</span>
+                        <span class="skill-item"><i class="fab fa-r-project"></i> R (RStudio)</span>
                     </div>
                 </div>
                 <div class="skill-category">
@@ -219,8 +210,8 @@
                 <div class="skill-category">
                     <h3 data-translate="skillsCat3">Ciência de Dados e Metodologias</h3>
                     <div class="skills-list">
-                        <span class="skill-item"><i class="fas fa-brain"></i> Machine Learning (Classificação)</span>
-                        <span class="skill-item"><i class="fas fa-cogs"></i> ETL (Extração, Transformação, Carga)</span>
+                        <span class="skill-item"><i class="fas fa-brain"></i> Machine Learning</span>
+                        <span class="skill-item"><i class="fas fa-exchange-alt"></i> ETL / ELT</span>
                         <span class="skill-item"><i class="fas fa-project-diagram"></i> Modelagem de Dados</span>
                     </div>
                 </div>
@@ -330,8 +321,10 @@
             <h2 class="section-title" data-translate="Contato">Contato</h2>
             <div class="contact-container">
                 <div class="contact-info">
-                    <a href="tel:+5527996185461" class="contact-item"> <div class="contact-icon"><i class="fas fa-phone"></i></div> <div class="contact-details"> <span data-translate="Telefone">Telefone</span> <span>+55 (27) 99618-5461</span> </div> </a>
+                    <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" target="_blank" class="contact-item"> <div class="contact-icon"><i class="fab fa-whatsapp"></i></div> <div class="contact-details"> <span data-translate="Telefone">WhatsApp</span> <span>+55 (27) 99618-5461</span> </div> </a>
                     <a href="mailto:cfpromlk@gmail.com" class="contact-item"> <div class="contact-icon"><i class="fas fa-envelope"></i></div> <div class="contact-details"> <span data-translate="Email">Email</span> <span>cfpromlk@gmail.com</span> </div> </a>
+                    <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" class="contact-item"> <div class="contact-icon"><i class="fab fa-linkedin"></i></div> <div class="contact-details"> <span data-translate="LinkedIn">LinkedIn</span> <span>in/wendersonwerneck</span> </div> </a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank" class="contact-item"> <div class="contact-icon"><i class="fab fa-github"></i></div> <div class="contact-details"> <span data-translate="GitHub">GitHub</span> <span>wenderson-werneck</span> </div> </a>
                 </div>
                 <div class="feedback-form">
                     <h3 data-translate="Envie uma mensagem">Envie uma mensagem</h3>
@@ -369,8 +362,7 @@
                         'heroDescription': 'Analista de Dados focado em extrair valor e contar histórias através dos dados. Crio dashboards, desenvolvo modelos preditivos e automatizo processos para gerar resultados de negócio mensuráveis.',
                         'Entrar em Contato': 'Entrar em Contato', 'Ver Projetos': 'Ver Projetos',
                         'Habilidades Técnicas': 'Habilidades Técnicas',
-                        'skillsCat1': 'Linguagens e Bancos de Dados', 'skillsCat2': 'Análise e Visualização de Dados (BI)',
-                        'skillsCat3': 'Ciência de Dados e Metodologias', 'skillsCat4': 'Ferramentas e Cloud',
+                        'skillsCat1': 'Linguagens e Bancos de Dados', 'skillsCat2': 'Análise e Visualização de Dados (BI)', 'skillsCat3': 'Ciência de Dados e Metodologias', 'skillsCat4': 'Ferramentas e Cloud',
                         'Projetos em Destaque': 'Projetos em Destaque', 'Todos': 'Todos', 'Ciência de Dados': 'Ciência de Dados', 'BI': 'BI', 'SQL': 'SQL', 'Python': 'Python', 'Automação': 'Automação',
                         'project1Title': 'Banco de Dados em Nuvem para E-commerce', 'project1Desc': 'Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS para uma aplicação de e-commerce.',
                         'project2Title': 'Automação de Relatórios Operacionais', 'project2Desc': 'Criação de scripts com Google Apps Script para automatizar a coleta e limpeza de dados (ETL) em planilhas.',
@@ -379,7 +371,7 @@
                         'Ver Projeto': 'Ver Projeto',
                         'Formação & Certificações': 'Formação & Certificações', 'education1': 'Bacharelado em Ciência de Dados e Inteligência Artificial', 'education2': 'Google Data Analytics Professional Certificate', 'education3': 'Análise de Dados e Inteligência de Negócios',
                         'Em andamento': 'Em andamento', 'Concluído': 'Concluído',
-                        'Telefone': 'Telefone', 'Email': 'Email', 'Envie uma mensagem': 'Envie uma mensagem', 'Nome': 'Nome', 'Mensagem': 'Mensagem', 'Enviar Mensagem': 'Enviar Mensagem',
+                        'Telefone': 'WhatsApp', 'Email': 'Email', 'LinkedIn': 'LinkedIn', 'GitHub': 'GitHub', 'Envie uma mensagem': 'Envie uma mensagem', 'Nome': 'Nome', 'Mensagem': 'Mensagem', 'Enviar Mensagem': 'Enviar Mensagem',
                         'placeholderName': 'Seu nome', 'placeholderEmail': 'Seu email', 'placeholderMessage': 'Sua mensagem',
                         'footerText': '© 2025 Wenderson Soares Werneck. Todos os direitos reservados.'
                     },
@@ -389,8 +381,7 @@
                         'heroDescription': 'Data Analyst focused on extracting value and telling stories through data. I create dashboards, develop predictive models, and automate processes to generate measurable business results.',
                         'Entrar em Contato': 'Get in Touch', 'Ver Projetos': 'View Projects',
                         'Habilidades Técnicas': 'Technical Skills',
-                        'skillsCat1': 'Languages and Databases', 'skillsCat2': 'Data Analysis and Visualization (BI)',
-                        'skillsCat3': 'Data Science and Methodologies', 'skillsCat4': 'Tools and Cloud',
+                        'skillsCat1': 'Languages and Databases', 'skillsCat2': 'Data Analysis and Visualization (BI)', 'skillsCat3': 'Data Science and Methodologies', 'skillsCat4': 'Tools and Cloud',
                         'Projetos em Destaque': 'Featured Projects', 'Todos': 'All', 'Ciência de Dados': 'Data Science', 'BI': 'BI', 'SQL': 'SQL', 'Python': 'Python', 'Automação': 'Automation',
                         'project1Title': 'Cloud Database for E-commerce', 'project1Desc': 'Development and implementation of a relational PostgreSQL database hosted on AWS for an e-commerce application.',
                         'project2Title': 'Operational Reports Automation', 'project2Desc': 'Creation of scripts with Google Apps Script to automate data collection and cleaning (ETL) in spreadsheets.',
@@ -399,7 +390,7 @@
                         'Ver Projeto': 'View Project',
                         'Formação & Certificações': 'Education & Certifications', 'education1': 'Bachelor in Data Science and Artificial Intelligence', 'education2': 'Google Data Analytics Professional Certificate', 'education3': 'Data Analysis and Business Intelligence',
                         'Em andamento': 'In progress', 'Concluído': 'Completed',
-                        'Telefone': 'Phone', 'Email': 'Email', 'Envie uma mensagem': 'Send a message', 'Nome': 'Name', 'Mensagem': 'Message', 'Enviar Mensagem': 'Send Message',
+                        'Telefone': 'WhatsApp', 'Email': 'Email', 'LinkedIn': 'LinkedIn', 'GitHub': 'GitHub', 'Envie uma mensagem': 'Send a message', 'Nome': 'Name', 'Mensagem': 'Message', 'Enviar Mensagem': 'Send Message',
                         'placeholderName': 'Your name', 'placeholderEmail': 'Your email', 'placeholderMessage': 'Your message',
                         'footerText': '© 2025 Wenderson Soares Werneck. All rights reserved.'
                     }
@@ -434,14 +425,27 @@
 
             const filterableElements = document.querySelectorAll('.filter-btn, .tech-tag');
             const projectCards = document.querySelectorAll('.project-card');
+            const projectsGrid = document.querySelector('.projects-grid');
             let activeFilters = [];
 
             function applyFilters() {
+                // Adiciona uma classe temporária para desativar a transição de grid
+                projectsGrid.style.transition = 'none';
+
                 projectCards.forEach(card => {
                     const cardTags = card.dataset.tags ? card.dataset.tags.split(' ') : [];
                     const isVisible = activeFilters.length === 0 || activeFilters.every(filter => cardTags.includes(filter));
-                    card.classList.toggle('is-hidden', !isVisible);
+                    
+                    if (isVisible) {
+                        card.classList.remove('is-hidden');
+                    } else {
+                        card.classList.add('is-hidden');
+                    }
                 });
+
+                // Força um reflow para garantir que as classes sejam aplicadas antes de reativar a transição
+                void projectsGrid.offsetWidth; 
+                projectsGrid.style.transition = '';
             }
             
             filterableElements.forEach(element => {
