@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: Risco de Crédito - Wenderson Werneck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos copiados do index.html para manter a consistência */
+        :root {
+            --primary: #722F37;
+            --primary-light: #9A4B53;
+            --primary-dark: #4A1A21;
+            --accent: #D8A28C;
+            --text: #2C2C2C;
+            --text-light: #666666;
+            --background: #F9F5F3;
+            --surface: #FAF7F5;
+            --border: #E5DEDA;
+        }
+
+        .dark-mode {
+            --primary: #9A4B53;
+            --primary-light: #722F37;
+            --primary-dark: #4A1A21;
+            --accent: #D8A28C;
+            --text: #F0E6E2;
+            --text-light: #C8B9B5;
+            --background: #1A1514;
+            --surface: #2A2322;
+            --border: #463A38;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        body { color: var(--text); line-height: 1.6; background-color: var(--background); }
+        .container { width: 90%; max-width: 960px; margin: 0 auto; padding: 20px 0; }
+        
+        /* Header Simplificado para a página do projeto */
+        header {
+            padding: 1.5rem 0;
+            background-color: var(--surface);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+
+        /* Estilos do Conteúdo do Projeto */
+        .project-case-study {
+            padding: 3rem 0;
+        }
+        .project-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .project-header h1 {
+            font-size: 2.8rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        .project-header p {
+            font-size: 1.2rem;
+            color: var(--primary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .project-section {
+            background: var(--surface);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        .project-section h2 {
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .project-section p, .project-section li {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+        .project-section ul {
+            list-style-position: inside;
+            padding-left: 1rem;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+        .tech-tag {
+            background: var(--background);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        .project-image {
+            width: 100%;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-top: -1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-actions {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            background-color: var(--primary);
+            color: white;
+            border: 1px solid var(--primary);
+        }
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">WW</a>
+    </header>
+
+    <main class="container">
+        <article class="project-case-study">
+
+            <header class="project-header">
+                <h1>Case Study: Análise Preditiva de Risco de Crédito</h1>
+                <p>Utilizando Machine Learning para otimizar a tomada de decisão e minimizar perdas financeiras para a Fintech "AprovaMais".</p>
+            </header>
+
+            <section class="project-section">
+                <h2>1. Contexto do Negócio</h2>
+                <p>
+                    A "AprovaMais", uma fintech em crescimento, enfrentava um desafio crucial: como aprovar o maior número de empréstimos possível sem aumentar o risco de inadimplência? Decisões de crédito imprecisas estavam resultando em perdas financeiras e na negação de crédito para clientes potencialmente bons. O objetivo era substituir o processo manual e subjetivo por uma solução baseada em dados.
+                </p>
+                <h3>Objetivos do Projeto:</h3>
+                <ul>
+                    <li>Criar um modelo de Machine Learning capaz de classificar novos pedidos de crédito como "Bom", "Ok" ou "Ruim".</li>
+                    <li>Identificar as principais variáveis que influenciam o risco de um cliente.</li>
+                    <li>Desenvolver um dashboard simples para que a equipe de crédito pudesse consultar os resultados do modelo.</li>
+                </ul>
+            </section>
+
+            <section class="project-section">
+                <h2>2. Ferramentas e Tecnologias</h2>
+                <p>Para este projeto, utilizei um conjunto de ferramentas padrão da indústria de Ciência de Dados, focando em eficiência e performance.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag"><i class="fab fa-python"></i> Python</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">NumPy</span>
+                    <span class="tech-tag">Scikit-learn</span>
+                    <span class="tech-tag">Matplotlib</span>
+                    <span class="tech-tag">Seaborn</span>
+                    <span class="tech-tag"><i class="fab fa-google-drive"></i> Google Colab</span>
+                </div>
+            </section>
+
+            <section class="project-section">
+                <h2>3. O Processo: Da Análise à Modelagem</h2>
+                
+                <h3>Análise Exploratória dos Dados (EDA)</h3>
+                <p>
+                    O primeiro passo foi mergulhar nos dados históricos. Investiguei a distribuição de variáveis como idade, renda, tempo de emprego e histórico de crédito. Um dos primeiros insights foi que a distribuição de renda era assimétrica, o que exigiu uma transformação logarítmica para normalizá-la e melhorar o desempenho do modelo.
+                </p>
+                <img src="https://placehold.co/800x400/722F37/FFFFFF?text=Gráfico+de+Distribuição+de+Idade" alt="Gráfico de Distribuição de Idade" class="project-image">
+                <p class="image-caption">Exemplo de gráfico: Distribuição da idade dos clientes, mostrando a concentração de pedidos de crédito.</p>
+
+                <h3>Pré-processamento e Treinamento do Modelo</h3>
+                <p>
+                    Após a análise, os dados foram limpos e preparados: tratei valores ausentes, converti variáveis categóricas (como estado civil) em números e separei os dados em conjuntos de treino e teste. Treinei dois modelos diferentes, Random Forest e KNN, para comparar qual deles conseguia prever o risco com maior precisão.
+                </p>
+                
+                <h3>Avaliação de Performance</h3>
+                <p>
+                    O modelo Random Forest apresentou o melhor resultado, com uma acurácia de 88% nos dados de teste. Isso significa que, de cada 100 previsões, o modelo acertou 88. A matriz de confusão abaixo mostra que ele foi especialmente eficaz em identificar os clientes de "Alto Risco", que é o erro mais caro para o negócio.
+                </p>
+                <img src="https://placehold.co/600x400/9A4B53/FFFFFF?text=Matriz+de+Confusão" alt="Matriz de Confusão" class="project-image" style="max-width: 600px; display: block; margin-left: auto; margin-right:auto;">
+                <p class="image-caption">Matriz de Confusão do modelo, destacando a precisão em cada classe de risco.</p>
+            </section>
+            
+            <section class="project-section">
+                <h2>4. Resultados e Dashboard Final</h2>
+                <p>
+                    O principal resultado foi um modelo funcional que automatiza e melhora a precisão da análise de crédito. Além disso, a análise revelou insights importantes:
+                </p>
+                <ul>
+                    <li><strong>Tempo de Emprego:</strong> É a variável mais forte para prever um bom pagador.</li>
+                    <li><strong>Propriedade de Imóvel:</strong> Clientes com imóvel próprio apresentaram um risco significativamente menor.</li>
+                </ul>
+                <p>
+                    Para tornar esses resultados acessíveis, criei um dashboard interativo (simulado abaixo) onde o analista pode inserir os dados de um novo cliente e receber a classificação de risco instantaneamente, junto com os fatores que mais influenciaram naquela decisão.
+                </p>
+                <img src="https://placehold.co/800x450/4A1A21/FFFFFF?text=Dashboard+Interativo+Final" alt="Dashboard Interativo" class="project-image">
+                <p class="image-caption">Interface do dashboard desenvolvido para consulta rápida da classificação de risco.</p>
+            </section>
+
+            <section class="project-section">
+                <h2>5. Conclusão</h2>
+                <p>
+                    Este projeto demonstrou com sucesso como a Ciência de Dados pode transformar um processo de negócio crítico. A implementação deste modelo tem o potencial de reduzir a taxa de inadimplência em até 15% e aumentar a eficiência da equipe de análise de crédito. Como próximos passos, sugiro a implementação do modelo em um ambiente de produção real (via API) e o retreinamento periódico com novos dados.
+                </p>
+            </section>
+
+            <div class="project-actions">
+                <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Voltar ao Portfólio</a>
+            </div>
+
+        </article>
+    </main>
+
+</body>
+</html>
