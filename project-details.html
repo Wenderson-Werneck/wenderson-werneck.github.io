@@ -7,368 +7,52 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #722F37;
-            --primary-light: #9A4B53;
-            --primary-dark: #4A1A21;
-            --accent: #D8A28C;
-            --text: #2C2C2C;
-            --text-light: #666666;
-            --background: #F9F5F3;
-            --surface: #FAF7F5;
-            --border: #E5DEDA;
-        }
-
-        .dark-mode {
-            --primary: #9A4B53;
-            --primary-light: #722F37;
-            --primary-dark: #4A1A21;
-            --accent: #D8A28C;
-            --text: #F0E6E2;
-            --text-light: #C8B9B5;
-            --background: #1A1514;
-            --surface: #2A2322;
-            --border: #463A38;
-        }
-        
+        :root { /* ... Cores ... */ }
+        .dark-mode { /* ... Cores ... */ }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-        body { color: var(--text); line-height: 1.6; background-color: var(--background); overflow-x: hidden; }
-        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 20px; }
-        header { padding: 1.5rem 0; background-color: var(--surface); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 100; }
-        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        body { color: var(--text); line-height: 1.6; background-color: var(--background); }
+        .container { width: 90%; max-width: 960px; margin: 0 auto; padding: 20px 0; }
+        header { padding: 1.5rem 0; background-color: var(--surface); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); text-align: center; }
         .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-        .nav-menu { display: flex; list-style: none; gap: 2rem; }
-        .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; position: relative; padding: 0.5rem 0; }
-        .nav-menu a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--primary); transition: width 0.3s; }
-        .nav-menu a:hover::after { width: 100%; }
-        .header-actions { display: flex; gap: 0.8rem; align-items: center; }
-        .social-header { display: flex; gap: 0.8rem; }
-        .social-header a, .theme-toggle, .language-toggle { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; border: 1px solid var(--border); color: var(--text); background: var(--surface); text-decoration: none; }
-        .social-header a:hover, .theme-toggle:hover, .language-toggle:hover { background-color: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
-        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
-        .case-study-container { padding: 4rem 0; }
-        .project-title-main { text-align: center; margin-bottom: 1rem; }
-        .project-title-main h1 { font-size: 3rem; font-weight: 700; color: var(--text); }
-        .project-title-main .subtitle { font-size: 1.3rem; color: var(--primary); max-width: 800px; margin: 0.5rem auto 0; line-height: 1.5; }
-        .project-section-card { background: var(--surface); padding: 2rem 2.5rem; margin-top: 2.5rem; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.06); }
-        .section-title { font-size: 2rem; font-weight: 600; margin-bottom: 2rem; color: var(--text); position: relative; }
-        .section-title::after { content: ''; display: block; width: 50px; height: 3px; background-color: var(--primary); margin-top: 0.5rem; }
-        .project-section-card p, .project-section-card li { font-size: 1.1rem; color: var(--text-light); line-height: 1.9; margin-bottom: 1.2rem; }
-        .project-section-card ul { list-style-type: '✓'; padding-left: 2rem; }
-        .project-section-card li { margin-left: 1rem; }
-        .project-section-card h3 { font-size: 1.4rem; font-weight: 600; color: var(--primary); margin-top: 2rem; margin-bottom: 1rem; }
+        .project-case-study { padding: 3rem 0; }
+        .project-header { text-align: center; margin-bottom: 3rem; }
+        .project-header h1 { font-size: 2.8rem; color: var(--text); margin-bottom: 0.5rem; }
+        .project-header p { font-size: 1.2rem; color: var(--primary); max-width: 700px; margin: 0 auto; }
+        .project-section { background: var(--surface); padding: 2.5rem; margin-bottom: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
+        .project-section h2 { font-size: 1.8rem; color: var(--primary-dark); margin-bottom: 1.5rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--border); }
+        .project-section p, .project-section li { font-size: 1.05rem; color: var(--text-light); line-height: 1.8; margin-bottom: 1rem; }
+        .project-section ul { list-style-position: inside; padding-left: 1rem; }
+        .project-section-card h3 { font-size: 1.4rem; font-weight: 600; color: var(--primary); margin-top: 2rem; margin-bottom: 1rem; } /* CORREÇÃO APLICADA AQUI */
         .tech-stack { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
-        .tech-tag { background: var(--background); color: var(--primary); padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border: 1px solid var(--border); transition: all 0.3s; }
-        .tech-tag:hover { background: var(--primary); color: white; transform: translateY(-2px); }
-        .project-image { width: 100%; border-radius: 8px; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid var(--border); }
-        .image-caption { text-align: center; font-style: italic; font-size: 0.9rem; color: var(--text-light); margin-top: -0.8rem; display: block; }
-        .project-actions { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; }
-        .btn { padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; }
-        .btn-primary { background-color: var(--primary); color: white; border: 1px solid var(--primary); }
-        .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(114, 47, 55, 0.2); }
-        footer { background: var(--surface); padding: 3rem 0; text-align: center; margin-top: 4rem; }
-        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
-        .social-links { display: flex; gap: 1.5rem; }
-        .social-links a { color: var(--text); font-size: 1.5rem; transition: all 0.3s; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--background); }
-        .social-links a:hover { color: var(--primary); transform: translateY(-3px); background: var(--primary-light); }
-        @media (max-width: 768px) {
-            .header-content { flex-direction: row; justify-content: space-between; }
-            .nav-menu { position: fixed; top: 80px; left: -100%; flex-direction: column; background: var(--surface); width: 100%; text-align: center; transition: 0.3s; box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05); padding: 2rem 0; gap: 0; }
-            .nav-menu.active { left: 0; }
-            .nav-menu li { margin: 1.5rem 0; }
-            .mobile-menu-btn { display: block; }
-            .project-title-main h1 { font-size: 2.2rem; }
-            .project-title-main .subtitle { font-size: 1.1rem; }
-            .project-section-card { padding: 1.5rem; }
-        }
+        .tech-tag { background: var(--background); color: var(--primary); padding: 0.5rem 1rem; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border: 1px solid var(--border); }
+        .project-image { width: 100%; border-radius: 8px; margin: 1.5rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .image-caption { text-align: center; font-style: italic; font-size: 0.9rem; color: var(--text-light); margin-top: -1rem; margin-bottom: 1rem; }
+        .project-actions { text-align: center; margin-top: 3rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+        .btn { padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; border: 1px solid var(--primary); }
+        .btn-primary { background-color: var(--primary); color: white; }
+        .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        .btn-secondary { background-color: transparent; color: var(--primary); }
+        .btn-secondary:hover { background-color: var(--surface); transform: translateY(-2px); }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="index.html" class="logo">WW</a>
-                <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html#skills" data-translate="navSkills">Habilidades</a></li>
-                    <li><a href="index.html#projects" data-translate="navProjects">Projetos</a></li>
-                    <li><a href="index.html#education" data-translate="navEducation">Formação</a></li>
-                    <li><a href="index.html#contact" data-translate="navContact">Contato</a></li>
-                </ul>
-                <div class="header-actions">
-                    <div class="social-header">
-                        <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/wenderson-werneck" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                    </div>
-                    <button class="theme-toggle" id="themeToggle" title="Alternar tema"><i class="fas fa-moon"></i></button>
-                    <button class="language-toggle" id="languageToggle" title="Alternar idioma"><i class="fas fa-globe"></i></button>
-                </div>
-            </div>
-        </div>
+        <a href="index.html" class="logo">WW</a>
     </header>
-
-    <main class="case-study-container">
-        <div class="container">
-
-            <div class="project-title-main">
-                <h1 data-translate="caseTitle">Case Study: Modelo Preditivo de Risco de Crédito</h1>
-                <p class="subtitle" data-translate="caseSubtitle">Um mergulho profundo na construção de uma solução de Machine Learning para reduzir perdas e otimizar a concessão de crédito em uma fintech.</p>
-            </div>
-
-            <div class="project-section-card">
-                <h2 class="section-title" data-translate="section1Title">1. Definição do Problema de Negócio</h2>
-                <p data-translate="section1P1">
-                    Uma fintech, que chamaremos de "AprovaMais", estava expandindo sua carteira de clientes, mas enfrentava um aumento preocupante na taxa de inadimplência (default). O processo de aprovação de crédito era lento e dependia de regras de negócio que não capturavam a complexidade do perfil dos clientes.
-                </p>
-                <h3 data-translate="section1H3_1">O Desafio Principal:</h3>
-                <p data-translate="section1P2">
-                    Como escalar a operação de crédito de forma segura, aprovando clientes com bom potencial de pagamento e recusando aqueles com alto risco, de maneira rápida, consistente e baseada em evidências?
-                </p>
-                <h3 data-translate="section1H3_2">Objetivos Estratégicos:</h3>
-                <ul>
-                    <li data-translate="section1Li1"><strong>Reduzir a Taxa de Inadimplência:</strong> Minimizar as perdas financeiras com maus pagadores.</li>
-                    <li data-translate="section1Li2"><strong>Aumentar a Eficiência Operacional:</strong> Automatizar a decisão inicial de crédito para liberar a equipe para casos complexos.</li>
-                    <li data-translate="section1Li3"><strong>Melhorar a Experiência do Cliente:</strong> Fornecer respostas de crédito mais rápidas e justas.</li>
-                </ul>
-            </div>
-
-            <div class="project-section-card">
-                <h2 class="section-title" data-translate="section2Title">2. Análise Exploratória de Dados (EDA)</h2>
-                <p data-translate="section2P1">
-                    Com um conjunto de dados históricos de mais de 10 mil clientes, a primeira etapa foi entender as histórias que os dados contavam. A Análise Exploratória foi crucial para descobrir padrões e guiar a construção do modelo.
-                </p>
-                <h3 data-translate="section2H3_1">Principais Descobertas:</h3>
-                <p data-translate="section2P2">
-                    Utilizando histogramas, boxplots e um mapa de calor de correlação, identificamos fatores-chave. O mapa de calor, por exemplo, revelou uma forte correlação negativa entre o <strong>tempo de emprego</strong> e a <strong>inadimplência</strong>, validando a hipótese de que a estabilidade profissional é um forte indicador de baixo risco.
-                </p>
-                <img src="https://placehold.co/900x450/722F37/FFFFFF?text=Mapa+de+Calor+de+Correlação" alt="Mapa de Calor de Correlação" class="project-image">
-                <span class="image-caption" data-translate="section2ImgCap1">O mapa de calor ajudou a visualizar as relações entre todas as variáveis simultaneamente.</span>
-                
-                <p data-translate="section2P3">
-                    Gráficos de barras também mostraram que clientes com <strong>imóvel próprio</strong> tinham uma taxa de inadimplência quase 50% menor em comparação com aqueles que moram de aluguel. Esses insights foram fundamentais para a etapa de engenharia de features.
-                </p>
-            </div>
-
-            <div class="project-section-card">
-                <h2 class="section-title" data-translate="section3Title">3. Pré-processamento e Engenharia de Features</h2>
-                <p data-translate="section3P1">
-                    Dados brutos raramente estão prontos para um modelo de Machine Learning. Esta etapa consistiu em limpar, transformar e enriquecer o dataset.
-                </p>
-                <h3 data-translate="section3H3_1">Técnicas Aplicadas:</h3>
-                <ul>
-                    <li data-translate="section3Li1"><strong>Tratamento de Dados Ausentes:</strong> Valores faltantes em colunas numéricas (como 'renda') foram preenchidos com a mediana, uma medida robusta a outliers.</li>
-                    <li data-translate="section3Li2"><strong>One-Hot Encoding:</strong> Transformei variáveis categóricas (como 'estado_civil' e 'escolaridade') em formato numérico para que o modelo pudesse processá-las.</li>
-                    <li data-translate="section3Li3"><strong>Padronização (StandardScaler):</strong> Ajustei a escala de variáveis numéricas como 'idade' e 'renda' para que tivessem a mesma magnitude, evitando que uma variável dominasse as outras.</li>
-                </ul>
-            </div>
-
-            <div class="project-section-card">
-                <h2 class="section-title" data-translate="section4Title">4. Construção e Avaliação dos Modelos</h2>
-                <p data-translate="section4P1">
-                    Com os dados preparados, o próximo passo foi treinar e testar diferentes algoritmos de classificação para encontrar o mais performático.
-                </p>
-                <h3 data-translate="section4H3_1">Modelos Testados:</h3>
-                <p data-translate="section4P2">
-                    Dois algoritmos foram selecionados: <strong>K-Nearest Neighbors (KNN)</strong>, como um modelo de baseline simples, e <strong>Random Forest</strong>, conhecido por sua alta precisão e robustez. Os dados foram divididos em 80% para treino e 20% para teste.
-                </p>
-                <h3 data-translate="section4H3_2">Resultados da Avaliação:</h3>
-                <p data-translate="section4P3">
-                    O Random Forest superou o KNN, alcançando uma <strong>acurácia geral de 88%</strong>. No entanto, em problemas de risco, a acurácia sozinha pode ser enganosa. A <strong>Matriz de Confusão</strong> foi a ferramenta essencial para uma análise mais profunda.
-                </p>
-                <img src="https://placehold.co/600x450/9A4B53/FFFFFF?text=Matriz+de+Confusão+do+Random+Forest" alt="Matriz de Confusão" class="project-image" style="max-width: 600px; display: block; margin-left: auto; margin-right:auto;">
-                <span class="image-caption" data-translate="section4ImgCap1">A matriz mostrou que o modelo foi particularmente bom em identificar corretamente os clientes de 'alto risco' (Verdadeiros Negativos), o que era o objetivo principal para o negócio.</span>
-            </div>
-            
-            <div class="project-section-card">
-                <h2 class="section-title" data-translate="section5Title">5. Impacto para o Negócio e Próximos Passos</h2>
-                <p data-translate="section5P1">
-                    O resultado final não é apenas um código, mas uma solução estratégica com potencial de gerar valor real para a "AprovaMais".
-                </p>
-                <h3 data-translate="section5H3_1">Impacto Potencial:</h3>
-                <ul>
-                    <li data-translate="section5Li1"><strong>Redução de Perdas:</strong> Ao prever com maior precisão os maus pagadores, o modelo pode levar a uma redução estimada de 15-20% nas perdas por inadimplência.</li>
-                    <li data-translate="section5Li2"><strong>Tomada de Decisão Data-Driven:</strong> Substitui a subjetividade por um score de risco objetivo, garantindo consistência e justiça nas aprovações.</li>
-                    <li data-translate="section5Li3"><strong>Dashboard de Insights:</strong> O projeto culminou na proposta de um dashboard simples onde os resultados podem ser consultados, democratizando o acesso à inteligência gerada.</li>
-                </ul>
-                <img src="https://placehold.co/900x500/4A1A21/FFFFFF?text=Proposta+de+Dashboard+de+Análise" alt="Dashboard de Análise" class="project-image">
-                <h3 data-translate="section5H3_2">Próximos Passos:</h3>
-                <p data-translate="section5P2">
-                    O trabalho não termina aqui. Os próximos passos incluem o deploy do modelo como uma API para integração com o sistema principal da fintech, monitoramento contínuo de sua performance e o retreinamento periódico com novos dados de clientes.
-                </p>
-            </div>
-
+    <main class="container">
+        <article class="project-case-study">
+            <header class="project-header"></header>
+            <section class="project-section"></section>
             <div class="project-actions">
-                <a href="index.html" class="btn btn-primary" data-translate="backToPortfolio"><i class="fas fa-arrow-left"></i> Voltar ao Portfólio</a>
+                <a href="index.html" class="btn btn-secondary" data-translate="backToPortfolio"><i class="fas fa-arrow-left"></i> Voltar ao Portfólio</a>
+                <a href="URL_DO_SEU_COLAB_AQUI" target="_blank" class="btn btn-primary" data-translate="viewCompleteProject"><i class="fab fa-google-drive"></i> Ver Projeto Completo (Colab)</a>
             </div>
-        </div>
+        </article>
     </main>
-    
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="social-links">
-                    <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="mailto:cfpromlk@gmail.com"><i class="fas fa-envelope"></i></a>
-                </div>
-                <p data-translate="footerText">© 2025 Wenderson Soares Werneck. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        const TranslationModule = (() => {
-            const translations = {
-                'pt': {
-                    'navSkills': 'Habilidades', 'navProjects': 'Projetos', 'navEducation': 'Formação', 'navContact': 'Contato',
-                    'caseTitle': 'Case Study: Modelo Preditivo de Risco de Crédito',
-                    'caseSubtitle': 'Um mergulho profundo na construção de uma solução de Machine Learning para reduzir perdas e otimizar a concessão de crédito em uma fintech.',
-                    'section1Title': '1. Definição do Problema de Negócio',
-                    'section1P1': 'Uma fintech, que chamaremos de "AprovaMais", estava expandindo sua carteira de clientes, mas enfrentava um aumento preocupante na taxa de inadimplência (default). O processo de aprovação de crédito era lento e dependia de regras de negócio que não capturavam a complexidade do perfil dos clientes.',
-                    'section1H3_1': 'O Desafio Principal:',
-                    'section1P2': 'Como escalar a operação de crédito de forma segura, aprovando clientes com bom potencial de pagamento e recusando aqueles com alto risco, de maneira rápida, consistente e baseada em evidências?',
-                    'section1H3_2': 'Objetivos Estratégicos:',
-                    'section1Li1': '<strong>Reduzir a Taxa de Inadimplência:</strong> Minimizar as perdas financeiras com maus pagadores.',
-                    'section1Li2': '<strong>Aumentar a Eficiência Operacional:</strong> Automatizar a decisão inicial de crédito para liberar a equipe para casos complexos.',
-                    'section1Li3': '<strong>Melhorar a Experiência do Cliente:</strong> Fornecer respostas de crédito mais rápidas e justas.',
-                    'section2Title': '2. Análise Exploratória de Dados (EDA)',
-                    'section2P1': 'Com um conjunto de dados históricos de mais de 10 mil clientes, a primeira etapa foi entender as histórias que os dados contavam. A Análise Exploratória foi crucial para descobrir padrões e guiar a construção do modelo.',
-                    'section2H3_1': 'Principais Descobertas:',
-                    'section2P2': 'Utilizando histogramas, boxplots e um mapa de calor de correlação, identificamos fatores-chave. O mapa de calor, por exemplo, revelou uma forte correlação negativa entre o <strong>tempo de emprego</strong> e a <strong>inadimplência</strong>, validando a hipótese de que a estabilidade profissional é um forte indicador de baixo risco.',
-                    'section2ImgCap1': 'O mapa de calor ajudou a visualizar as relações entre todas as variáveis simultaneamente.',
-                    'section2P3': 'Gráficos de barras também mostraram que clientes com <strong>imóvel próprio</strong> tinham uma taxa de inadimplência quase 50% menor em comparação com aqueles que moram de aluguel. Esses insights foram fundamentais para a etapa de engenharia de features.',
-                    'section3Title': '3. Pré-processamento e Engenharia de Features',
-                    'section3P1': 'Dados brutos raramente estão prontos para um modelo de Machine Learning. Esta etapa consistiu em limpar, transformar e enriquecer o dataset.',
-                    'section3H3_1': 'Técnicas Aplicadas:',
-                    'section3Li1': '<strong>Tratamento de Dados Ausentes:</strong> Valores faltantes em colunas numéricas (como \'renda\') foram preenchidos com a mediana, uma medida robusta a outliers.',
-                    'section3Li2': '<strong>One-Hot Encoding:</strong> Transformei variáveis categóricas (como \'estado_civil\' e \'escolaridade\') em formato numérico para que o modelo pudesse processá-las.',
-                    'section3Li3': '<strong>Padronização (StandardScaler):</strong> Ajustei a escala de variáveis numéricas como \'idade\' e \'renda\' para que tivessem a mesma magnitude, evitando que uma variável dominasse as outras.',
-                    'section4Title': '4. Construção e Avaliação dos Modelos',
-                    'section4P1': 'Com os dados preparados, o próximo passo foi treinar e testar diferentes algoritmos de classificação para encontrar o mais performático.',
-                    'section4H3_1': 'Modelos Testados:',
-                    'section4P2': 'Dois algoritmos foram selecionados: <strong>K-Nearest Neighbors (KNN)</strong>, como um modelo de baseline simples, e <strong>Random Forest</strong>, conhecido por sua alta precisão e robustez. Os dados foram divididos em 80% para treino e 20% para teste.',
-                    'section4H3_2': 'Resultados da Avaliação:',
-                    'section4P3': 'O Random Forest superou o KNN, alcançando uma <strong>acurácia geral de 88%</strong>. No entanto, em problemas de risco, a acurácia sozinha pode ser enganosa. A <strong>Matriz de Confusão</strong> foi a ferramenta essencial para uma análise mais profunda.',
-                    'section4ImgCap1': 'A matriz mostrou que o modelo foi particularmente bom em identificar corretamente os clientes de \'alto risco\' (Verdadeiros Negativos), o que era o objetivo principal para o negócio.',
-                    'section5Title': '5. Impacto para o Negócio e Próximos Passos',
-                    'section5P1': 'O resultado final não é apenas um código, mas uma solução estratégica com potencial de gerar valor real para a "AprovaMais".',
-                    'section5H3_1': 'Impacto Potencial:',
-                    'section5Li1': '<strong>Redução de Perdas:</strong> Ao prever com maior precisão os maus pagadores, o modelo pode levar a uma redução estimada de 15-20% nas perdas por inadimplência.',
-                    'section5Li2': '<strong>Tomada de Decisão Data-Driven:</strong> Substitui a subjetividade por um score de risco objetivo, garantindo consistência e justiça nas aprovações.',
-                    'section5Li3': '<strong>Dashboard de Insights:</strong> O projeto culminou na proposta de um dashboard simples onde os resultados podem ser consultados, democratizando o acesso à inteligência gerada.',
-                    'section5H3_2': 'Próximos Passos:',
-                    'section5P2': 'O trabalho não termina aqui. Os próximos passos incluem o deploy do modelo como uma API para integração com o sistema principal da fintech, monitoramento contínuo de sua performance e o retreinamento periódico com novos dados de clientes.',
-                    'backToPortfolio': ' Voltar ao Portfólio',
-                    'footerText': '© 2025 Wenderson Soares Werneck. Todos os direitos reservados.'
-                },
-                'en': {
-                    'navSkills': 'Skills', 'navProjects': 'Projects', 'navEducation': 'Education', 'navContact': 'Contact',
-                    'caseTitle': 'Case Study: Predictive Credit Risk Model',
-                    'caseSubtitle': 'A deep dive into building a Machine Learning solution to reduce losses and optimize credit granting in a fintech company.',
-                    'section1Title': '1. Business Problem Definition',
-                    'section1P1': 'A fintech, which we will call "ApproveMore", was expanding its client portfolio but faced a worrying increase in the default rate. The credit approval process was slow and relied on business rules that did not capture the complexity of customer profiles.',
-                    'section1H3_1': 'The Main Challenge:',
-                    'section1P2': 'How to scale the credit operation safely, approving clients with good payment potential and rejecting those with high risk, in a fast, consistent, and evidence-based manner?',
-                    'section1H3_2': 'Strategic Objectives:',
-                    'section1Li1': '<strong>Reduce Default Rate:</strong> Minimize financial losses from bad payers.',
-                    'section1Li2': '<strong>Increase Operational Efficiency:</strong> Automate the initial credit decision to free up the team for complex cases.',
-                    'section1Li3': '<strong>Improve Customer Experience:</strong> Provide faster and fairer credit responses.',
-                    'section2Title': '2. Exploratory Data Analysis (EDA)',
-                    'section2P1': 'With a historical dataset of over 10,000 customers, the first step was to understand the stories the data told. Exploratory Analysis was crucial to uncover patterns and guide model building.',
-                    'section2H3_1': 'Key Findings:',
-                    'section2P2': 'Using histograms, boxplots, and a correlation heatmap, we identified key factors. The heatmap, for example, revealed a strong negative correlation between <strong>employment duration</strong> and <strong>default risk</strong>, validating the hypothesis that professional stability is a strong indicator of low risk.',
-                    'section2ImgCap1': 'The heatmap helped visualize the relationships between all variables simultaneously.',
-                    'section2P3': 'Bar charts also showed that customers with <strong>their own property</strong> had a default rate nearly 50% lower compared to those who rent. These insights were fundamental for the feature engineering stage.',
-                    'section3Title': '3. Preprocessing and Feature Engineering',
-                    'section3P1': 'Raw data is rarely ready for a Machine Learning model. This stage consisted of cleaning, transforming, and enriching the dataset.',
-                    'section3H3_1': 'Applied Techniques:',
-                    'section3Li1': '<strong>Handling Missing Data:</strong> Missing values in numerical columns (like \'income\') were filled with the median, a robust measure against outliers.',
-                    'section3Li2': '<strong>One-Hot Encoding:</strong> I transformed categorical variables (like \'marital_status\' and \'education\') into a numerical format so the model could process them.',
-                    'section3Li3': '<strong>Standardization (StandardScaler):</strong> I adjusted the scale of numerical variables like \'age\' and \'income\' so they had the same magnitude, preventing one variable from dominating the others.',
-                    'section4Title': '4. Model Building and Evaluation',
-                    'section4P1': 'With the data prepared, the next step was to train and test different classification algorithms to find the best performer.',
-                    'section4H3_1': 'Models Tested:',
-                    'section4P2': 'Two algorithms were selected: <strong>K-Nearest Neighbors (KNN)</strong>, as a simple baseline model, and <strong>Random Forest</strong>, known for its high accuracy and robustness. The data was split into 80% for training and 20% for testing.',
-                    'section4H3_2': 'Evaluation Results:',
-                    'section4P3': 'The Random Forest outperformed KNN, achieving an <strong>overall accuracy of 88%</strong>. However, in risk problems, accuracy alone can be misleading. The <strong>Confusion Matrix</strong> was the essential tool for a deeper analysis.',
-                    'section4ImgCap1': 'The matrix showed that the model was particularly good at correctly identifying \'high-risk\' customers (True Negatives), which was the main business objective.',
-                    'section5Title': '5. Business Impact and Next Steps',
-                    'section5P1': 'The final result is not just a piece of code, but a strategic solution with the potential to generate real value for "ApproveMore".',
-                    'section5H3_1': 'Potential Impact:',
-                    'section5Li1': '<strong>Loss Reduction:</strong> By more accurately predicting bad payers, the model could lead to an estimated 15-20% reduction in default losses.',
-                    'section5Li2': '<strong>Data-Driven Decision Making:</strong> Replaces subjectivity with an objective risk score, ensuring consistency and fairness in approvals.',
-                    'section5Li3': '<strong>Insight Dashboard:</strong> The project culminated in the proposal of a simple dashboard where results can be consulted, democratizing access to the generated intelligence.',
-                    'section5H3_2': 'Next Steps:',
-                    'section5P2': 'The work does not end here. Next steps include deploying the model as an API for integration with the fintech\'s main system, continuous performance monitoring, and periodic retraining with new customer data.',
-                    'backToPortfolio': ' Back to Portfolio',
-                    'footerText': '© 2025 Wenderson Soares Werneck. All rights reserved.'
-                }
-            };
-
-            let currentLang = 'pt';
-            function applyTranslations(lang) {
-                currentLang = lang;
-                document.querySelectorAll('[data-translate]').forEach(element => {
-                    const key = element.getAttribute('data-translate');
-                    if (translations[lang] && translations[lang][key]) {
-                        element.innerHTML = translations[lang][key];
-                    }
-                });
-                document.documentElement.lang = lang.startsWith('en') ? 'en' : 'pt-BR';
-                localStorage.setItem('portfolioLanguage', lang);
-            }
-
-            function init() {
-                const languageToggle = document.getElementById('languageToggle');
-                if (languageToggle) {
-                    languageToggle.addEventListener('click', () => {
-                        const newLang = currentLang === 'pt' ? 'en' : 'pt';
-                        applyTranslations(newLang);
-                    });
-                }
-                const savedLang = localStorage.getItem('portfolioLanguage') || 'pt';
-                applyTranslations(savedLang);
-            }
-            return { init };
-        })();
-        
-        document.addEventListener('DOMContentLoaded', function() {
-            TranslationModule.init();
-
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const navMenu = document.getElementById('navMenu');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                    mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-                });
-            }
-
-            const themeToggle = document.getElementById('themeToggle');
-            if(themeToggle) {
-                const themeIcon = themeToggle.querySelector('i');
-                themeToggle.addEventListener('click', () => {
-                    document.body.classList.toggle('dark-mode');
-                    if (document.body.classList.contains('dark-mode')) {
-                        themeIcon.classList.remove('fa-moon');
-                        themeIcon.classList.add('fa-sun');
-                        localStorage.setItem('portfolioTheme', 'dark');
-                    } else {
-                        themeIcon.classList.remove('fa-sun');
-                        themeIcon.classList.add('fa-moon');
-                        localStorage.setItem('portfolioTheme', 'light');
-                    }
-                });
-
-                const savedTheme = localStorage.getItem('portfolioTheme');
-                if (savedTheme === 'dark') {
-                    document.body.classList.add('dark-mode');
-                    themeIcon.classList.remove('fa-moon');
-                    themeIcon.classList.add('fa-sun');
-                }
-            }
-        });
+        // Adicione a nova chave de tradução no seu script
+        // 'viewCompleteProject': 'View Complete Project (Colab)' para inglês
+        // 'viewCompleteProject': 'Ver Projeto Completo (Colab)' para português
     </script>
 </body>
 </html>
