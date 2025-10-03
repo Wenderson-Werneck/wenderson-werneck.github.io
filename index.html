@@ -31,689 +31,105 @@
             --border: #463A38;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
-        
-        body {
-            color: var(--text);
-            line-height: 1.6;
-            background-color: var(--background);
-            overflow-x: hidden;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Header */
-        header {
-            padding: 1.5rem 0;
-            background-color: var(--surface);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-        
-        .nav-menu a {
-            color: var(--text);
-            text-decoration: none;
-            font-weight: 500;
-            position: relative;
-            padding: 0.5rem 0;
-        }
-        
-        .nav-menu a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--primary);
-            transition: width 0.3s;
-        }
-        
-        .nav-menu a:hover::after {
-            width: 100%;
-        }
-        
-        .header-actions {
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-        }
-        
-        .social-header {
-            display: flex;
-            gap: 0.8rem;
-        }
-        
-        .social-header a, .theme-toggle, .language-toggle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-            color: var(--text);
-            background: var(--surface);
-            text-decoration: none;
-        }
-        
-        .social-header a:hover, .theme-toggle:hover, .language-toggle:hover {
-            background-color: var(--primary);
-            color: white;
-            border-color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 5rem 0;
-            text-align: center;
-        }
-        
-        .hero-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        .hero-avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 2rem;
-            border: 4px solid var(--primary);
-            background: linear-gradient(45deg, var(--primary-light), var(--primary-dark));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3.5rem;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text);
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            color: var(--primary);
-            min-height: 2.5rem;
-        }
-        
-        .typewriter {
-            overflow: hidden;
-            border-right: 3px solid var(--primary);
-            white-space: nowrap;
-            margin: 0 auto;
-            animation: blink-caret 0.75s step-end infinite;
-        }
-        
-        @keyframes blink-caret {
-            from, to { border-color: transparent; }
-            50% { border-color: var(--primary); }
-        }
-        
-        .hero-description {
-            font-size: 1.1rem;
-            margin-bottom: 2.5rem;
-            color: var(--text-light);
-            line-height: 1.8;
-            animation: fadeIn 1.5s ease-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .hero-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            animation: fadeIn 2s ease-out;
-        }
-        
-        .btn {
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-        
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-            border: 1px solid var(--primary);
-        }
-        
-        .btn-primary:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(114, 47, 55, 0.2);
-        }
-        
-        .btn-secondary {
-            background-color: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--surface);
-            transform: translateY(-2px);
-        }
-        
-        /* Sections */
-        section {
-            padding: 4rem 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .section-title {
-            font-size: 2.2rem;
-            font-weight: 600;
-            margin-bottom: 3rem;
-            text-align: center;
-            color: var(--text);
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: var(--primary);
-            margin: 1rem auto;
-        }
-        
-        /* Skills */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .skill-category {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-        }
-        
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .skill-category h3 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-        
-        .skills-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-        
-        .skill {
-            background: var(--background);
-            color: var(--text);
-            padding: 0.6rem 1.2rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: 1px solid var(--border);
-        }
-        
-        .skill:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        /* Projects */
-        .projects-filter {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .filter-btn {
-            padding: 0.6rem 1.2rem;
-            background: var(--surface);
-            color: var(--text);
-            border: 1px solid var(--border);
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-        }
-        
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2.5rem;
-        }
-        
-        .project-card {
-            background: var(--surface);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-            opacity: 1;
-            transform: scale(1);
-            animation: fadeIn 1s ease-out;
-        }
-        
-        .project-card.hidden {
-            display: none;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        }
-        
-        .project-img {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(45deg, var(--primary-light), var(--primary-dark));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 3rem;
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-        }
-        
-        .project-content h3 {
-            color: var(--text);
-            margin-bottom: 0.8rem;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-        
-        .project-content p {
-            color: var(--text-light);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .tech-tag {
-            background: var(--background);
-            color: var(--primary);
-            padding: 0.4rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .tech-tag:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-        
-        .project-link:hover {
-            color: var(--primary-dark);
-        }
-        
-        /* Education */
-        .education-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .education-item {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-        
-        .education-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .education-item h3 {
-            color: var(--text);
-            font-size: 1.2rem;
-            font-weight: 600;
-        }
-        
-        .education-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--text-light);
-            font-size: 0.9rem;
-        }
-        
-        /* Contact */
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--surface);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s;
-            text-decoration: none;
-            color: var(--text);
-        }
-        
-        .contact-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            background: var(--primary);
-            color: white;
-        }
-        
-        .contact-item:hover .contact-icon {
-            background: white;
-            color: var(--primary);
-        }
-        
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-        
-        .contact-details {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .contact-details span:first-child {
-            font-weight: 500;
-        }
-        
-        .contact-details span:last-child {
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-        
-        .feedback-form {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text);
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 1rem;
-            background: var(--background);
-            color: var(--text);
-            transition: all 0.3s;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(114, 47, 55, 0.1);
-        }
-        
-        .form-group textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--surface);
-            padding: 3rem 0;
-            text-align: center;
-            margin-top: 4rem;
-        }
-        
-        .footer-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2rem;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-        
-        .social-links a {
-            color: var(--text);
-            font-size: 1.5rem;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--background);
-        }
-        
-        .social-links a:hover {
-            color: var(--primary);
-            transform: translateY(-3px);
-            background: var(--primary-light);
-        }
-        
-        /* Responsividade */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
+        body { color: var(--text); line-height: 1.6; background-color: var(--background); overflow-x: hidden; }
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        header { padding: 1.5rem 0; background-color: var(--surface); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 100; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; position: relative; padding: 0.5rem 0; }
+        .nav-menu a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--primary); transition: width 0.3s; }
+        .nav-menu a:hover::after { width: 100%; }
+        .header-actions { display: flex; gap: 0.8rem; align-items: center; }
+        .social-header { display: flex; gap: 0.8rem; }
+        .social-header a, .theme-toggle, .language-toggle { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; border: 1px solid var(--border); color: var(--text); background: var(--surface); text-decoration: none; }
+        .social-header a:hover, .theme-toggle:hover, .language-toggle:hover { background-color: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+        .hero { padding: 5rem 0; text-align: center; }
+        .hero-content { max-width: 700px; margin: 0 auto; }
+        .hero-avatar { width: 150px; height: 150px; border-radius: 50%; object-fit: cover; margin: 0 auto 2rem; border: 4px solid var(--primary); background: linear-gradient(45deg, var(--primary-light), var(--primary-dark)); display: flex; align-items: center; justify-content: center; color: white; font-size: 3.5rem; animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
+        .hero-title { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; color: var(--text); animation: fadeIn 1s ease-out; }
+        .hero-subtitle { font-size: 1.8rem; font-weight: 400; margin-bottom: 2rem; color: var(--primary); min-height: 2.5rem; }
+        .typewriter { overflow: hidden; border-right: 3px solid var(--primary); white-space: nowrap; margin: 0 auto; animation: blink-caret 0.75s step-end infinite; }
+        @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: var(--primary); } }
+        .hero-description { font-size: 1.1rem; margin-bottom: 2.5rem; color: var(--text-light); line-height: 1.8; animation: fadeIn 1.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeIn 2s ease-out; }
+        .btn { padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; }
+        .btn-primary { background-color: var(--primary); color: white; border: 1px solid var(--primary); }
+        .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(114, 47, 55, 0.2); }
+        .btn-secondary { background-color: transparent; color: var(--text); border: 1px solid var(--border); }
+        .btn-secondary:hover { background-color: var(--surface); transform: translateY(-2px); }
+        section { padding: 4rem 0; opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
+        section.visible { opacity: 1; transform: translateY(0); }
+        .section-title { font-size: 2.2rem; font-weight: 600; margin-bottom: 3rem; text-align: center; color: var(--text); position: relative; }
+        .section-title::after { content: ''; display: block; width: 60px; height: 3px; background-color: var(--primary); margin: 1rem auto; }
+        
+        /* === NOVOS ESTILOS PARA HABILIDADES === */
+        .skills-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .skill-category { background: var(--surface); padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: all 0.3s; }
+        .skill-category:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08); }
+        .skill-category h3 { color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem; font-weight: 600; }
+        .skills-list { display: flex; flex-direction: column; gap: 1.2rem; }
+        .skill-item { display: flex; align-items: center; gap: 1rem; font-size: 1.05rem; font-weight: 500; }
+        .skill-item i { font-size: 1.5rem; color: var(--primary); width: 25px; text-align: center; }
+        
+        /* Projetos */
+        .projects-filter { display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+        .filter-btn { padding: 0.6rem 1.2rem; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 50px; cursor: pointer; transition: all 0.3s; font-weight: 500; }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2.5rem; }
+        .project-card { background: var(--surface); border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: all 0.3s; }
+        .project-card.hidden { display: none; }
+        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1); }
+        .project-img { width: 100%; height: 200px; background: linear-gradient(45deg, var(--primary-light), var(--primary-dark)); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; }
+        .project-content { padding: 1.5rem; }
+        .project-content h3 { color: var(--text); margin-bottom: 0.8rem; font-size: 1.3rem; font-weight: 600; }
+        .project-content p { color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6; }
+        .project-tech { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem; }
+        .tech-tag { background: var(--background); color: var(--primary); padding: 0.4rem 0.8rem; border-radius: 50px; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.3s; border: 1px solid transparent; }
+        .tech-tag.active, .tech-tag:hover { background: var(--primary); color: white; transform: translateY(-2px); border-color: var(--primary-dark); }
+        .project-links { display: flex; gap: 1rem; }
+        .project-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--primary); text-decoration: none; font-weight: 500; font-size: 0.9rem; transition: all 0.3s; }
+        .project-link:hover { color: var(--primary-dark); }
+        .education-list { display: flex; flex-direction: column; gap: 1.5rem; max-width: 800px; margin: 0 auto; }
+        .education-item { background: var(--surface); padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); display: flex; flex-direction: column; gap: 0.5rem; transition: all 0.3s; }
+        .education-item:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); }
+        .education-item h3 { color: var(--text); font-size: 1.2rem; font-weight: 600; }
+        .education-meta { display: flex; justify-content: space-between; color: var(--text-light); font-size: 0.9rem; }
+        .contact-container { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 900px; margin: 0 auto; }
+        .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+        .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1rem; background: var(--surface); border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); transition: all 0.3s; text-decoration: none; color: var(--text); }
+        .contact-item:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); background: var(--primary); color: white; }
+        .contact-item:hover .contact-icon { background: white; color: var(--primary); }
+        .contact-icon { width: 50px; height: 50px; border-radius: 50%; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.3s; flex-shrink: 0; }
+        .contact-details { display: flex; flex-direction: column; }
+        .contact-details span:first-child { font-weight: 500; }
+        .contact-details span:last-child { font-size: 0.9rem; opacity: 0.8; }
+        .feedback-form { background: var(--surface); padding: 2rem; border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--text); }
+        .form-group input, .form-group textarea { width: 100%; padding: 0.8rem 1rem; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; background: var(--background); color: var(--text); transition: all 0.3s; }
+        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(114, 47, 55, 0.1); }
+        .form-group textarea { min-height: 150px; resize: vertical; }
+        footer { background: var(--surface); padding: 3rem 0; text-align: center; margin-top: 4rem; }
+        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+        .social-links { display: flex; gap: 1.5rem; }
+        .social-links a { color: var(--text); font-size: 1.5rem; transition: all 0.3s; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--background); }
+        .social-links a:hover { color: var(--primary); transform: translateY(-3px); background: var(--primary-light); }
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: row;
-                justify-content: space-between;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                flex-direction: column;
-                background: var(--surface);
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-                padding: 2rem 0;
-                gap: 0;
-            }
-            
-            .nav-menu.active {
-                left: 0;
-            }
-            
-            .nav-menu li {
-                margin: 1.5rem 0;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .hero-title {
-                font-size: 2.2rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.4rem;
-            }
-            
-            .hero-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .contact-item {
-                flex-direction: column;
-                text-align: center;
-            }
+            .header-content { flex-direction: row; justify-content: space-between; }
+            .nav-menu { position: fixed; top: 80px; left: -100%; flex-direction: column; background: var(--surface); width: 100%; text-align: center; transition: 0.3s; box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05); padding: 2rem 0; gap: 0; }
+            .nav-menu.active { left: 0; }
+            .nav-menu li { margin: 1.5rem 0; }
+            .mobile-menu-btn { display: block; }
+            .hero-title { font-size: 2.2rem; }
+            .hero-subtitle { font-size: 1.4rem; }
+            .hero-actions { flex-direction: column; align-items: center; }
+            .contact-container, .projects-grid { grid-template-columns: 1fr; }
+            .contact-item { flex-direction: column; text-align: center; }
         }
     </style>
 </head>
@@ -722,34 +138,20 @@
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo">WW</a>
-                
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
+                <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#skills" data-translate="Habilidades">Habilidades</a></li>
                     <li><a href="#projects" data-translate="Projetos">Projetos</a></li>
                     <li><a href="#education" data-translate="Formação">Formação</a></li>
                     <li><a href="#contact" data-translate="Contato">Contato</a></li>
                 </ul>
-                
                 <div class="header-actions">
                     <div class="social-header">
-                        <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="https://github.com/wenderson-werneck" target="_blank" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
+                        <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/wenderson-werneck" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                     </div>
-                    
-                    <button class="theme-toggle" id="themeToggle" title="Alternar tema">
-                        <i class="fas fa-moon"></i>
-                    </button>
-                    <button class="language-toggle" id="languageToggle" title="Alternar idioma">
-                        <i class="fas fa-globe"></i>
-                    </button>
+                    <button class="theme-toggle" id="themeToggle" title="Alternar tema"><i class="fas fa-moon"></i></button>
+                    <button class="language-toggle" id="languageToggle" title="Alternar idioma"><i class="fas fa-globe"></i></button>
                 </div>
             </div>
         </div>
@@ -758,24 +160,13 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <div class="hero-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
+                <div class="hero-avatar"><i class="fas fa-user"></i></div>
                 <h1 class="hero-title">Wenderson Soares Werneck</h1>
-                <p class="hero-subtitle">
-                    <span class="typewriter" id="typewriter" data-translate="Analista de Dados & BI">Analista de Dados & BI</span>
-                </p>
-                <p class="hero-description" data-translate="heroDescription">
-                    Profissional em transição para a área de Dados, com mentalidade analítica e experiência 
-                    em transformar desafios de negócio em soluções funcionais através de dados.
-                </p>
+                <p class="hero-subtitle"><span class="typewriter" id="typewriter" data-translate="Analista de Dados & BI">Analista de Dados & BI</span></p>
+                <p class="hero-description" data-translate="heroDescription">Profissional em transição para a área de Dados, com mentalidade analítica e experiência em transformar desafios de negócio em soluções funcionais através de dados.</p>
                 <div class="hero-actions">
-                    <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" class="btn btn-primary" target="_blank" data-translate="Entrar em Contato">
-                        <i class="fab fa-whatsapp"></i> Entrar em Contato
-                    </a>
-                    <a href="#projects" class="btn btn-secondary" data-translate="Ver Projetos">
-                        <i class="fas fa-code"></i> Ver Projetos
-                    </a>
+                    <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" class="btn btn-primary" target="_blank" data-translate="Entrar em Contato"><i class="fab fa-whatsapp"></i> Entrar em Contato</a>
+                    <a href="#projects" class="btn btn-secondary" data-translate="Ver Projetos"><i class="fas fa-code"></i> Ver Projetos</a>
                 </div>
             </div>
         </div>
@@ -786,30 +177,36 @@
             <h2 class="section-title" data-translate="Habilidades Técnicas">Habilidades Técnicas</h2>
             <div class="skills-container">
                 <div class="skill-category">
-                    <h3 data-translate="Análise & Visualização">Análise & Visualização</h3>
+                    <h3 data-translate="skillsCat1">Linguagens e Bancos de Dados</h3>
                     <div class="skills-list">
-                        <span class="skill">Power BI</span>
-                        <span class="skill">Excel Avançado</span>
-                        <span class="skill">Google Sheets</span>
-                        <span class="skill">Tableau</span>
+                        <span class="skill-item"><i class="fab fa-python"></i> Python (Pandas, Scikit-learn)</span>
+                        <span class="skill-item"><i class="fas fa-database"></i> SQL (PostgreSQL)</span>
+                        <span class="skill-item"><i class="fab fa-r-project"></i> R (Básico)</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3 data-translate="Linguagens & Bancos">Linguagens & Bancos</h3>
+                    <h3 data-translate="skillsCat2">Análise e Visualização de Dados (BI)</h3>
                     <div class="skills-list">
-                        <span class="skill">SQL (PostgreSQL)</span>
-                        <span class="skill">Python</span>
-                        <span class="skill">R</span>
-                        <span class="skill">AWS</span>
+                        <span class="skill-item"><i class="fas fa-chart-bar"></i> Power BI (DAX, Power Query)</span>
+                        <span class="skill-item"><i class="fas fa-file-excel"></i> Excel Avançado</span>
+                        <span class="skill-item"><i class="fas fa-table"></i> Google Sheets</span>
+                        <span class="skill-item"><i class="fas fa-chart-pie"></i> Tableau (Básico)</span>
                     </div>
                 </div>
                 <div class="skill-category">
-                    <h3 data-translate="Metodologias">Metodologias</h3>
+                    <h3 data-translate="skillsCat3">Machine Learning e Metodologias</h3>
                     <div class="skills-list">
-                        <span class="skill">ETL</span>
-                        <span class="skill">Modelagem de Dados</span>
-                        <span class="skill">IA Aplicada</span>
-                        <span class="skill">Análise Descritiva/Inferencial</span>
+                        <span class="skill-item"><i class="fas fa-brain"></i> Modelos Preditivos (Classificação)</span>
+                        <span class="skill-item"><i class="fas fa-cogs"></i> ETL (Extração, Transformação, Carga)</span>
+                        <span class="skill-item"><i class="fas fa-project-diagram"></i> Modelagem de Dados</span>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 data-translate="skillsCat4">Ferramentas e Cloud</h3>
+                    <div class="skills-list">
+                        <span class="skill-item"><i class="fab fa-aws"></i> AWS (Básico)</span>
+                        <span class="skill-item"><i class="fab fa-git-alt"></i> Git & GitHub</span>
+                        <span class="skill-item"><i class="fab fa-google-drive"></i> Google Colab</span>
                     </div>
                 </div>
             </div>
@@ -824,153 +221,82 @@
                 <button class="filter-btn active" data-filter="all" data-translate="Todos">Todos</button>
                 <button class="filter-btn" data-filter="sql" data-translate="SQL">SQL</button>
                 <button class="filter-btn" data-filter="python" data-translate="Python">Python</button>
-                <button class="filter-btn" data-filter="powerbi" data-translate="Power BI">Power BI</button>
-                <button class="filter-btn" data-filter="automation" data-translate="Automação">Automação</button>
+                <button class="filter-btn" data-filter="power-bi" data-translate="Power BI">Power BI</button>
+                <button class="filter-btn" data-filter="automacao" data-translate="Automação">Automação</button>
             </div>
             
             <div class="projects-grid">
-                <div class="project-card" data-category="python">
-    <div class="project-img">
-        <i class="fas fa-brain"></i>
-    </div>
-    <div class="project-content">
-        <h3 data-translate="project5Title">Modelo Preditivo de Risco de Crédito</h3>
-        <p data-translate="project5Desc">Desenvolvimento de um modelo de Machine Learning para prever o risco de inadimplência de clientes, otimizando a concessão de crédito.</p>
-        <div class="project-tech">
-            <span class="tech-tag" data-filter="python">Python</span>
-            <span class="tech-tag" data-filter="python">Scikit-learn</span>
-            <span class="tech-tag" data-filter="python">Pandas</span>
-            <span class="tech-tag" data-filter="python">Machine Learning</span>
-        </div>
-        <div class="project-links">
-            <a href="project-details.html" class="project-link">
-                <i class="fas fa-search-plus"></i> Ver Detalhes
-            </a>
-            <a href="https://colab.research.google.com/drive/1AyOB4qRvz3-ifSrVmnPPSCketa-UQ7O8?usp=sharing" target="_blank" class="project-link">
-                <i class="fab fa-google-drive"></i> Ver Código (Colab)
-            </a>
-        </div>
-    </div>
-</div>
-                <div class="project-card" data-category="sql">
-                    <div class="project-img">
-                        <i class="fas fa-database"></i>
-                    </div>
+                <div class="project-card" data-tags="python machine-learning">
+                    <div class="project-img"><i class="fas fa-brain"></i></div>
                     <div class="project-content">
-                        <h3 data-translate="Banco de Dados em Nuvem">Banco de Dados em Nuvem</h3>
+                        <h3 data-translate="project5Title">Modelo Preditivo de Risco de Crédito</h3>
+                        <p data-translate="project5Desc">Desenvolvimento de um modelo de Machine Learning para prever o risco de inadimplência, otimizando a concessão de crédito.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag" data-filter="python">Python</span>
+                            <span class="tech-tag" data-filter="machine-learning">Machine Learning</span>
+                            <span class="tech-tag" data-filter="scikit-learn">Scikit-learn</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="project-details.html" class="project-link"><i class="fas fa-search-plus"></i> Ver Detalhes</a>
+                            <a href="URL_DO_SEU_COLAB_AQUI" target="_blank" class="project-link"><i class="fab fa-google-drive"></i> Ver Código (Colab)</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card" data-tags="sql aws cloud">
+                    <div class="project-img"><i class="fas fa-database"></i></div>
+                    <div class="project-content">
+                        <h3 data-translate="project1Title">Banco de Dados em Nuvem para E-commerce</h3>
                         <p data-translate="project1Desc">Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).</p>
                         <div class="project-tech">
                             <span class="tech-tag" data-filter="sql">PostgreSQL</span>
-                            <span class="tech-tag" data-filter="sql">AWS</span>
-                            <span class="tech-tag" data-filter="sql">Cloud</span>
+                            <span class="tech-tag" data-filter="aws">AWS</span>
+                            <span class="tech-tag" data-filter="cloud">Cloud</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" data-translate="Ver Projeto">
-                                <i class="fas fa-external-link-alt"></i> Ver Projeto
-                            </a>
+                            <a href="#" class="project-link" data-translate="Ver Projeto"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-category="automation">
-                    <div class="project-img">
-                        <i class="fas fa-cogs"></i>
-                    </div>
+                <div class="project-card" data-tags="automacao javascript">
+                    <div class="project-img"><i class="fas fa-cogs"></i></div>
                     <div class="project-content">
-                        <h3 data-translate="Automação de Relatórios">Automação de Relatórios</h3>
+                        <h3 data-translate="project2Title">Automação de Relatórios Operacionais</h3>
                         <p data-translate="project2Desc">Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets.</p>
                         <div class="project-tech">
-                            <span class="tech-tag" data-filter="automation">Google Apps Script</span>
-                            <span class="tech-tag" data-filter="automation">JavaScript</span>
-                            <span class="tech-tag" data-filter="automation">Google Sheets</span>
+                            <span class="tech-tag" data-filter="automacao">Google Apps Script</span>
+                            <span class="tech-tag" data-filter="javascript">JavaScript</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" data-translate="Ver Projeto">
-                                <i class="fas fa-external-link-alt"></i> Ver Projeto
-                            </a>
+                            <a href="#" class="project-link" data-translate="Ver Projeto"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
                         </div>
                     </div>
                 </div>
-                <div class="project-card" data-category="powerbi">
-                    <div class="project-img">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
+                <div class="project-card" data-tags="power-bi sql">
+                    <div class="project-img"><i class="fas fa-chart-bar"></i></div>
                     <div class="project-content">
-                        <h3 data-translate="Dashboard Analítico">Dashboard Analítico</h3>
-                        <p data-translate="project3Desc">Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas.</p>
+                        <h3 data-translate="project3Title">Dashboard Analítico de Vendas</h3>
+                        <p data-translate="project3Desc">Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas, conectado a um banco SQL.</p>
                         <div class="project-tech">
-                            <span class="tech-tag" data-filter="powerbi">Power BI</span>
-                            <span class="tech-tag" data-filter="powerbi">DAX</span>
+                            <span class="tech-tag" data-filter="power-bi">Power BI</span>
+                            <span class="tech-tag" data-filter="dax">DAX</span>
                             <span class="tech-tag" data-filter="sql">SQL</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link" data-translate="Ver Projeto">
-                                <i class="fas fa-external-link-alt"></i> Ver Projeto
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card" data-category="python">
-                    <div class="project-img">
-                        <i class="fab fa-python"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 data-translate="Análise de Dados com Python">Análise de Dados com Python</h3>
-                        <p data-translate="project4Desc">Scripts em Python para análise exploratória de dados e criação de visualizações.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag" data-filter="python">Python</span>
-                            <span class="tech-tag" data-filter="python">Pandas</span>
-                            <span class="tech-tag" data-filter="python">Matplotlib</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link" data-translate="Ver Projeto">
-                                <i class="fas fa-external-link-alt"></i> Ver Projeto
-                            </a>
+                            <a href="#" class="project-link" data-translate="Ver Projeto"><i class="fas fa-external-link-alt"></i> Ver Projeto</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    
     <section id="education">
         <div class="container">
             <h2 class="section-title" data-translate="Formação & Certificações">Formação & Certificações</h2>
             <div class="education-list">
-                <div class="education-item">
-                    <h3 data-translate="education1">Bacharelado em Ciência de Dados e Inteligência Artificial</h3>
-                    <div class="education-meta">
-                        <span>UniDomBosco</span>
-                        <span data-translate="Em andamento">2025 - Em andamento</span>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <h3 data-translate="education2">Google Data Analytics Professional Certificate</h3>
-                    <div class="education-meta">
-                        <span>Coursera / Google</span>
-                        <span data-translate="Em andamento">Em andamento</span>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <h3 data-translate="education3">Análise de Dados e Inteligência de Negócios</h3>
-                    <div class="education-meta">
-                        <span>UniGran</span>
-                        <span data-translate="Concluído">Concluído</span>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <h3 data-translate="education4">Harvard Business for All</h3>
-                    <div class="education-meta">
-                        <span>Harvard Business School</span>
-                        <span data-translate="Em andamento">Em andamento</span>
-                    </div>
-                </div>
-                <div class="education-item">
-                    <h3 data-translate="education5">Power BI Completo</h3>
-                    <div class="education-meta">
-                        <span>FM2S</span>
-                        <span data-translate="Concluído">Concluído</span>
-                    </div>
-                </div>
+                <div class="education-item"> <h3 data-translate="education1">Bacharelado em Ciência de Dados e Inteligência Artificial</h3> <div class="education-meta"> <span>UniDomBosco</span> <span data-translate="Em andamento">2025 - Em andamento</span> </div> </div>
+                <div class="education-item"> <h3 data-translate="education2">Google Data Analytics Professional Certificate</h3> <div class="education-meta"> <span>Coursera / Google</span> <span data-translate="Em andamento">Em andamento</span> </div> </div>
+                <div class="education-item"> <h3 data-translate="education3">Análise de Dados e Inteligência de Negócios</h3> <div class="education-meta"> <span>UniGran</span> <span data-translate="Concluído">Concluído</span> </div> </div>
             </div>
         </div>
     </section>
@@ -980,59 +306,15 @@
             <h2 class="section-title" data-translate="Contato">Contato</h2>
             <div class="contact-container">
                 <div class="contact-info">
-                    <a href="tel:+5527996185461" class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div class="contact-details">
-                            <span data-translate="Telefone">Telefone</span>
-                            <span>+55 (27) 99618-5461</span>
-                        </div>
-                    </a>
-                    <a href="mailto:cfpromlk@gmail.com" class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div class="contact-details">
-                            <span data-translate="Email">Email</span>
-                            <span>cfpromlk@gmail.com</span>
-                        </div>
-                    </a>
-                    <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-linkedin"></i>
-                        </div>
-                        <div class="contact-details">
-                            <span data-translate="LinkedIn">LinkedIn</span>
-                            <span>linkedin.com/in/wendersonwerneck</span>
-                        </div>
-                    </a>
-                    <a href="https://github.com/wenderson-werneck" target="_blank" class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fab fa-github"></i>
-                        </div>
-                        <div class="contact-details">
-                            <span data-translate="GitHub">GitHub</span>
-                            <span>github.com/wenderson-werneck</span>
-                        </div>
-                    </a>
+                    <a href="tel:+5527996185461" class="contact-item"> <div class="contact-icon"><i class="fas fa-phone"></i></div> <div class="contact-details"> <span data-translate="Telefone">Telefone</span> <span>+55 (27) 99618-5461</span> </div> </a>
+                    <a href="mailto:cfpromlk@gmail.com" class="contact-item"> <div class="contact-icon"><i class="fas fa-envelope"></i></div> <div class="contact-details"> <span data-translate="Email">Email</span> <span>cfpromlk@gmail.com</span> </div> </a>
                 </div>
-                
                 <div class="feedback-form">
                     <h3 data-translate="Envie uma mensagem">Envie uma mensagem</h3>
                     <form id="suggestion-form">
-                        <div class="form-group">
-                            <label for="name" data-translate="Nome">Nome</label>
-                            <input type="text" id="name" placeholder="Seu nome" data-translate="placeholderName">
-                        </div>
-                        <div class="form-group">
-                            <label for="email" data-translate="Email">Email</label>
-                            <input type="email" id="email" placeholder="Seu email" data-translate="placeholderEmail">
-                        </div>
-                        <div class="form-group">
-                            <label for="message" data-translate="Mensagem">Mensagem</label>
-                            <textarea id="message" placeholder="Sua mensagem" data-translate="placeholderMessage"></textarea>
-                        </div>
+                        <div class="form-group"> <label for="name" data-translate="Nome">Nome</label> <input type="text" id="name" placeholder="Seu nome" data-translate="placeholderName"> </div>
+                        <div class="form-group"> <label for="email" data-translate="Email">Email</label> <input type="email" id="email" placeholder="Seu email" data-translate="placeholderEmail"> </div>
+                        <div class="form-group"> <label for="message" data-translate="Mensagem">Mensagem</label> <textarea id="message" placeholder="Sua mensagem" data-translate="placeholderMessage"></textarea> </div>
                         <button type="submit" class="btn btn-primary" data-translate="Enviar Mensagem">Enviar Mensagem</button>
                     </form>
                 </div>
@@ -1044,15 +326,9 @@
         <div class="container">
             <div class="footer-content">
                 <div class="social-links">
-                    <a href="https://linkedin.com/in/wendersonwerneck" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://github.com/wenderson-werneck" target="_blank">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="mailto:cfpromlk@gmail.com">
-                        <i class="fas fa-envelope"></i>
-                    </a>
+                    <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:cfpromlk@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
                 <p data-translate="footerText">© 2025 Wenderson Soares Werneck. Todos os direitos reservados.</p>
             </div>
@@ -1060,373 +336,193 @@
     </footer>
 
     <script>
-        // ==============================================
-        // MÓDULO DE TRADUÇÃO - WENDERSON WERNECK
-        // ==============================================
-        const TranslationModule = (() => {
-            // Dicionário de traduções
-            const translations = {
-                'pt': {
-                    // Menu
-                    'Habilidades': 'Habilidades',
-                    'Projetos': 'Projetos',
-                    'Formação': 'Formação',
-                    'Contato': 'Contato',
-                    
-                    // Hero
-                    'Analista de Dados & BI': 'Analista de Dados & BI',
-                    'heroDescription': 'Profissional em transição para a área de Dados, com mentalidade analítica e experiência em transformar desafios de negócio em soluções funcionais através de dados.',
-                    'Entrar em Contato': 'Entrar em Contato',
-                    'Ver Projetos': 'Ver Projetos',
-                    
-                    // Skills
-                    'Habilidades Técnicas': 'Habilidades Técnicas',
-                    'Análise & Visualização': 'Análise & Visualização',
-                    'Linguagens & Bancos': 'Linguagens & Bancos',
-                    'Metodologias': 'Metodologias',
-                    
-                    // Projects
-                    'Projetos em Destaque': 'Projetos em Destaque',
-                    'Todos': 'Todos',
-                    'SQL': 'SQL',
-                    'Python': 'Python',
-                    'Power BI': 'Power BI',
-                    'Automação': 'Automação',
-                    'Banco de Dados em Nuvem': 'Banco de Dados em Nuvem',
-                    'project1Desc': 'Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).',
-                    'Automação de Relatórios': 'Automação de Relatórios',
-                    'project2Desc': 'Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets.',
-                    'Dashboard Analítico': 'Dashboard Analítico',
-                    'project3Desc': 'Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas.',
-                    'Análise de Dados com Python': 'Análise de Dados com Python',
-                    'project4Desc': 'Scripts em Python para análise exploratória de dados e criação de visualizações.',
-                    'project5Title': 'Modelo Preditivo de Risco de Crédito',
-                    'project5Desc': 'Desenvolvimento de um modelo de Machine Learning para prever o risco de inadimplência de clientes, otimizando a concessão de crédito.',
-                    'Ver Projeto': 'Ver Projeto',
-                    
-                    // Education
-                    'Formação & Certificações': 'Formação & Certificações',
-                    'education1': 'Bacharelado em Ciência de Dados e Inteligência Artificial',
-                    'education2': 'Google Data Analytics Professional Certificate',
-                    'education3': 'Análise de Dados e Inteligência de Negócios',
-                    'education4': 'Harvard Business for All',
-                    'education5': 'Power BI Completo',
-                    'Em andamento': 'Em andamento',
-                    'Concluído': 'Concluído',
-                    
-                    // Contact
-                    'Contato': 'Contato',
-                    'Telefone': 'Telefone',
-                    'Email': 'Email',
-                    'LinkedIn': 'LinkedIn',
-                    'GitHub': 'GitHub',
-                    'Envie uma mensagem': 'Envie uma mensagem',
-                    'Nome': 'Nome',
-                    'Mensagem': 'Mensagem',
-                    'Enviar Mensagem': 'Enviar Mensagem',
-                    'placeholderName': 'Seu nome',
-                    'placeholderEmail': 'Seu email',
-                    'placeholderMessage': 'Sua mensagem',
-                    
-                    // Footer
-                    'footerText': '© 2025 Wenderson Soares Werneck. Todos os direitos reservados.'
-                },
-                'en': {
-                    // Menu
-                    'Habilidades': 'Skills',
-                    'Projetos': 'Projects',
-                    'Formação': 'Education',
-                    'Contato': 'Contact',
-                    
-                    // Hero
-                    'Analista de Dados & BI': 'Data Analyst & BI',
-                    'heroDescription': 'Professional transitioning to the Data field, with an analytical mindset and experience in transforming business challenges into functional solutions through data.',
-                    'Entrar em Contato': 'Get in Touch',
-                    'Ver Projetos': 'View Projects',
-                    
-                    // Skills
-                    'Habilidades Técnicas': 'Technical Skills',
-                    'Análise & Visualização': 'Analysis & Visualization',
-                    'Linguagens & Bancos': 'Languages & Databases',
-                    'Metodologias': 'Methodologies',
-                    
-                    // Projects
-                    'Projetos em Destaque': 'Featured Projects',
-                    'Todos': 'All',
-                    'SQL': 'SQL',
-                    'Python': 'Python',
-                    'Power BI': 'Power BI',
-                    'Automação': 'Automation',
-                    'Banco de Dados em Nuvem': 'Cloud Database',
-                    'project1Desc': 'Development and implementation of a relational database in PostgreSQL hosted on AWS (via Neon Tech).',
-                    'Automação de Relatórios': 'Reports Automation',
-                    'project2Desc': 'Creation of scripts to automate the collection, cleaning and visualization of operational data in Google Sheets.',
-                    'Dashboard Analítico': 'Analytical Dashboard',
-                    'project3Desc': 'Development of an interactive dashboard in Power BI for sales performance analysis.',
-                    'Análise de Dados com Python': 'Data Analysis with Python',
-                    'project4Desc': 'Python scripts for exploratory data analysis and visualization creation.',
-                    'project5Title': 'Predictive Credit Risk Model',
-                    'project5Desc': 'Development of a Machine Learning model to predict customer default risk, optimizing credit granting.',
-                    'Ver Projeto': 'View Project',
-                    
-                    // Education
-                    'Formação & Certificações': 'Education & Certifications',
-                    'education1': 'Bachelor in Data Science and Artificial Intelligence',
-                    'education2': 'Google Data Analytics Professional Certificate',
-                    'education3': 'Data Analysis and Business Intelligence',
-                    'education4': 'Harvard Business for All',
-                    'education5': 'Complete Power BI',
-                    'Em andamento': 'In progress',
-                    'Concluído': 'Completed',
-                    
-                    // Contact
-                    'Contato': 'Contact',
-                    'Telefone': 'Phone',
-                    'Email': 'Email',
-                    'LinkedIn': 'LinkedIn',
-                    'GitHub': 'GitHub',
-                    'Envie uma mensagem': 'Send a message',
-                    'Nome': 'Name',
-                    'Mensagem': 'Message',
-                    'Enviar Mensagem': 'Send Message',
-                    'placeholderName': 'Your name',
-                    'placeholderEmail': 'Your email',
-                    'placeholderMessage': 'Your message',
-                    
-                    // Footer
-                    'footerText': '© 2025 Wenderson Soares Werneck. All rights reserved.'
-                }
-            };
-
-            // Estado atual do idioma
-            let currentLang = 'pt';
-
-            // Função para aplicar traduções
-            function applyTranslations(lang) {
-                currentLang = lang;
-                
-                // Atualizar todos os elementos com atributo data-translate
-                document.querySelectorAll('[data-translate]').forEach(element => {
-                    const key = element.getAttribute('data-translate');
-                    if (translations[lang][key]) {
-                        // Verificar se é um elemento de input/textarea (placeholder)
-                        if (element.placeholder !== undefined) {
-                            element.placeholder = translations[lang][key];
-                        } else {
-                            element.textContent = translations[lang][key];
-                        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // ==============================================
+            // MÓDULO DE TRADUÇÃO
+            // ==============================================
+            const TranslationModule = (() => {
+                const translations = {
+                    'pt': {
+                        'Habilidades': 'Habilidades', 'Projetos': 'Projetos', 'Formação': 'Formação', 'Contato': 'Contato',
+                        'Analista de Dados & BI': 'Analista de Dados & BI',
+                        'heroDescription': 'Profissional em transição para a área de Dados, com mentalidade analítica e experiência em transformar desafios de negócio em soluções funcionais através de dados.',
+                        'Entrar em Contato': 'Entrar em Contato', 'Ver Projetos': 'Ver Projetos',
+                        'Habilidades Técnicas': 'Habilidades Técnicas',
+                        'skillsCat1': 'Linguagens e Bancos de Dados', 'skillsCat2': 'Análise e Visualização de Dados (BI)',
+                        'skillsCat3': 'Machine Learning e Metodologias', 'skillsCat4': 'Ferramentas e Cloud',
+                        'Projetos em Destaque': 'Projetos em Destaque', 'Todos': 'Todos', 'SQL': 'SQL', 'Python': 'Python', 'Power BI': 'Power BI', 'Automação': 'Automação',
+                        'project1Title': 'Banco de Dados em Nuvem para E-commerce', 'project1Desc': 'Desenvolvimento e implementação de um banco de dados relacional em PostgreSQL hospedado na AWS (via Neon Tech).',
+                        'project2Title': 'Automação de Relatórios Operacionais', 'project2Desc': 'Criação de scripts para automatizar a coleta, limpeza e visualização de dados operacionais em Google Sheets.',
+                        'project3Title': 'Dashboard Analítico de Vendas', 'project3Desc': 'Desenvolvimento de dashboard interativo no Power BI para análise de desempenho de vendas, conectado a um banco SQL.',
+                        'project5Title': 'Modelo Preditivo de Risco de Crédito', 'project5Desc': 'Desenvolvimento de um modelo de Machine Learning para prever o risco de inadimplência, otimizando a concessão de crédito.',
+                        'Ver Projeto': 'Ver Projeto',
+                        'Formação & Certificações': 'Formação & Certificações', 'education1': 'Bacharelado em Ciência de Dados e Inteligência Artificial', 'education2': 'Google Data Analytics Professional Certificate', 'education3': 'Análise de Dados e Inteligência de Negócios',
+                        'Em andamento': 'Em andamento', 'Concluído': 'Concluído',
+                        'Telefone': 'Telefone', 'Email': 'Email', 'Envie uma mensagem': 'Envie uma mensagem', 'Nome': 'Nome', 'Mensagem': 'Mensagem', 'Enviar Mensagem': 'Enviar Mensagem',
+                        'placeholderName': 'Seu nome', 'placeholderEmail': 'Seu email', 'placeholderMessage': 'Sua mensagem',
+                        'footerText': '© 2025 Wenderson Soares Werneck. Todos os direitos reservados.'
+                    },
+                    'en': {
+                        'Habilidades': 'Skills', 'Projetos': 'Projects', 'Formação': 'Education', 'Contato': 'Contact',
+                        'Analista de Dados & BI': 'Data Analyst & BI',
+                        'heroDescription': 'Professional transitioning to the Data field, with an analytical mindset and experience in transforming business challenges into functional solutions through data.',
+                        'Entrar em Contato': 'Get in Touch', 'Ver Projetos': 'View Projects',
+                        'Habilidades Técnicas': 'Technical Skills',
+                        'skillsCat1': 'Languages and Databases', 'skillsCat2': 'Data Analysis and Visualization (BI)',
+                        'skillsCat3': 'Machine Learning and Methodologies', 'skillsCat4': 'Tools and Cloud',
+                        'Projetos em Destaque': 'Featured Projects', 'Todos': 'All', 'SQL': 'SQL', 'Python': 'Python', 'Power BI': 'Power BI', 'Automação': 'Automation',
+                        'project1Title': 'Cloud Database for E-commerce', 'project1Desc': 'Development and implementation of a relational database in PostgreSQL hosted on AWS (via Neon Tech).',
+                        'project2Title': 'Operational Reports Automation', 'project2Desc': 'Creation of scripts to automate the collection, cleaning, and visualization of operational data in Google Sheets.',
+                        'project3Title': 'Analytical Sales Dashboard', 'project3Desc': 'Development of an interactive dashboard in Power BI for sales performance analysis, connected to an SQL database.',
+                        'project5Title': 'Predictive Credit Risk Model', 'project5Desc': 'Development of a Machine Learning model to predict default risk, optimizing credit granting.',
+                        'Ver Projeto': 'View Project',
+                        'Formação & Certificações': 'Education & Certifications', 'education1': 'Bachelor in Data Science and Artificial Intelligence', 'education2': 'Google Data Analytics Professional Certificate', 'education3': 'Data Analysis and Business Intelligence',
+                        'Em andamento': 'In progress', 'Concluído': 'Completed',
+                        'Telefone': 'Phone', 'Email': 'Email', 'Envie uma mensagem': 'Send a message', 'Nome': 'Name', 'Mensagem': 'Message', 'Enviar Mensagem': 'Send Message',
+                        'placeholderName': 'Your name', 'placeholderEmail': 'Your email', 'placeholderMessage': 'Your message',
+                        'footerText': '© 2025 Wenderson Soares Werneck. All rights reserved.'
                     }
-                });
-                
-                // Atualizar o título da página
-                document.title = lang === 'en' 
-                    ? 'Wenderson Werneck | Data Analyst' 
-                    : 'Wenderson Werneck | Analista de Dados';
-                    
-                // Salvar preferência no localStorage
-                localStorage.setItem('portfolioLanguage', lang);
-                
-                console.log(`Idioma alterado para: ${lang}`);
-            }
-
-            // Inicializar o módulo
-            function init() {
-                // Adicionar evento de clique ao botão de idioma
-                const languageToggle = document.getElementById('languageToggle');
-                if (languageToggle) {
-                    languageToggle.addEventListener('click', () => {
-                        const newLang = currentLang === 'pt' ? 'en' : 'pt';
-                        applyTranslations(newLang);
+                };
+                let currentLang = 'pt';
+                function applyTranslations(lang) {
+                    currentLang = lang;
+                    document.querySelectorAll('[data-translate]').forEach(element => {
+                        const key = element.getAttribute('data-translate');
+                        if (translations[lang] && translations[lang][key]) {
+                            if (element.placeholder !== undefined) { element.placeholder = translations[lang][key]; }
+                            else { element.innerHTML = translations[lang][key]; }
+                        }
                     });
+                    document.documentElement.lang = lang.startsWith('en') ? 'en' : 'pt-BR';
+                    localStorage.setItem('portfolioLanguage', lang);
                 }
-                
-                // Verificar se há um idioma salvo no localStorage
-                const savedLang = localStorage.getItem('portfolioLanguage');
-                if (savedLang) {
+                function init() {
+                    const languageToggle = document.getElementById('languageToggle');
+                    if (languageToggle) {
+                        languageToggle.addEventListener('click', () => {
+                            const newLang = currentLang === 'pt' ? 'en' : 'pt';
+                            applyTranslations(newLang);
+                        });
+                    }
+                    const savedLang = localStorage.getItem('portfolioLanguage') || 'pt';
                     applyTranslations(savedLang);
                 }
-                
-                console.log('Módulo de tradução carregado com sucesso!');
+                return { init };
+            })();
+            TranslationModule.init();
+
+            // ==============================================
+            // LÓGICA DO FILTRO MULTI-SELEÇÃO
+            // ==============================================
+            const filterableElements = document.querySelectorAll('.filter-btn, .tech-tag');
+            const projectCards = document.querySelectorAll('.project-card');
+            let activeFilters = [];
+
+            function applyFilters() {
+                projectCards.forEach(card => {
+                    const cardTags = card.dataset.tags ? card.dataset.tags.split(' ') : [];
+                    // O card deve ser visível se não houver filtros ativos, ou se TODOS os filtros ativos estiverem presentes nas tags do card.
+                    const isVisible = activeFilters.length === 0 || activeFilters.every(filter => cardTags.includes(filter));
+                    card.classList.toggle('hidden', !isVisible);
+                });
             }
 
-            // Retornar métodos públicos
-            return {
-                init: init,
-                changeLanguage: applyTranslations,
-                getCurrentLanguage: () => currentLang
-            };
-        })();
+            filterableElements.forEach(element => {
+                element.addEventListener('click', () => {
+                    const filter = element.dataset.filter;
 
-        // ==============================================
-        // OUTRAS FUNCIONALIDADES DO SITE
-        // ==============================================
-        
-        // Menu mobile
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navMenu = document.getElementById('navMenu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.innerHTML = navMenu.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
-                : '<i class="fas fa-bars"></i>';
-        });
-        
-        // Fechar menu ao clicar em um link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
-        
-        // Toggle do tema claro/escuro
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = themeToggle.querySelector('i');
-        
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            if (document.body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        });
-        
-        // Animação de digitação
-        const typewriterElement = document.getElementById('typewriter');
-        const professions = [
-            "PostgreSQL",
-            "Python",
-            "Power BI",
-            "Excel",
-            "Rstudio",
-            "Google Sheets"
-        ];
-        
-        let professionIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typingSpeed = 100;
-        
-        function typeEffect() {
-            const currentProfession = professions[professionIndex];
-            
-            if (!isDeleting && charIndex < currentProfession.length) {
-                typewriterElement.textContent = currentProfession.substring(0, charIndex + 1);
-                charIndex++;
-                typingSpeed = 100;
-            } else if (isDeleting && charIndex > 0) {
-                typewriterElement.textContent = currentProfession.substring(0, charIndex - 1);
-                charIndex--;
-                typingSpeed = 50;
-            } else {
-                isDeleting = !isDeleting;
-                if (!isDeleting) {
-                    professionIndex = (professionIndex + 1) % professions.length;
-                }
-                typingSpeed = isDeleting ? 1000 : 500;
-            }
-            
-            setTimeout(typeEffect, typingSpeed);
-        }
-        
-        // Iniciar animação de digitação
-        setTimeout(typeEffect, 1000);
-        
-        // Filtro de projetos
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const projectCards = document.querySelectorAll('.project-card');
-        const techTags = document.querySelectorAll('.tech-tag');
-        
-        function filterProjects(filter) {
-            projectCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-            
-            // Atualizar botões ativos
-            filterButtons.forEach(btn => {
-                if (btn.getAttribute('data-filter') === filter) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-        
-        filterButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const filter = button.getAttribute('data-filter');
-                filterProjects(filter);
-            });
-        });
-        
-        // Tags clicáveis como filtros
-        techTags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                const filter = tag.getAttribute('data-filter');
-                filterProjects(filter);
-            });
-        });
-        
-        // Animação de scroll para as seções
-        function checkScroll() {
-            const sections = document.querySelectorAll('section');
-            const windowHeight = window.innerHeight;
-            
-            sections.forEach(section => {
-                const sectionTop = section.getBoundingClientRect().top;
-                if (sectionTop < windowHeight - 100) {
-                    section.classList.add('visible');
-                }
-            });
-        }
-        
-        window.addEventListener('scroll', checkScroll);
-        window.addEventListener('load', checkScroll);
-        
-        // Form submission handling
-        document.getElementById('suggestion-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const message = document.getElementById('message').value;
-            
-            if (!name || !message) {
-                alert('Por favor, preencha pelo menos o nome e a mensagem.');
-                return;
-            }
-            
-            alert('Obrigado pelo seu feedback! Entrarei em contato em breve.');
-            document.getElementById('suggestion-form').reset();
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                window.scrollTo({
-                    top: targetElement.offsetTop - 80,
-                    behavior: 'smooth'
+                    // Lógica para o botão "Todos"
+                    if (filter === 'all') {
+                        activeFilters = [];
+                        filterableElements.forEach(el => el.classList.remove('active'));
+                        document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+                    } else {
+                        // Remove a classe 'active' do botão "Todos" se outro filtro for clicado
+                        document.querySelector('.filter-btn[data-filter="all"]').classList.remove('active');
+                        
+                        // Alterna o filtro na lista de ativos
+                        const filterIndex = activeFilters.indexOf(filter);
+                        if (filterIndex > -1) {
+                            activeFilters.splice(filterIndex, 1); // Remove se já existe
+                        } else {
+                            activeFilters.push(filter); // Adiciona se não existe
+                        }
+                        
+                        // Alterna a classe 'active' visualmente
+                        // Sincroniza todos os elementos com o mesmo data-filter
+                        document.querySelectorAll(`[data-filter="${filter}"]`).forEach(el => {
+                           el.classList.toggle('active', filterIndex === -1);
+                        });
+
+                        // Se nenhum filtro estiver ativo, ativa o botão "Todos"
+                        if (activeFilters.length === 0) {
+                            document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+                        }
+                    }
+                    applyFilters();
                 });
             });
-        });
-        
-        // Inicializar o módulo de tradução quando o DOM estiver pronto
-        document.addEventListener('DOMContentLoaded', function() {
-            TranslationModule.init();
-            checkScroll(); // Verificar seções visíveis ao carregar
+
+            // ==============================================
+            // OUTRAS FUNCIONALIDADES
+            // ==============================================
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navMenu = document.getElementById('navMenu');
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+            themeToggle.addEventListener('click', () => {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                themeIcon.className = isDarkMode ? 'fas fa-sun' : 'fas fa-moon';
+                localStorage.setItem('portfolioTheme', isDarkMode ? 'dark' : 'light');
+            });
+
+            const savedTheme = localStorage.getItem('portfolioTheme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                themeIcon.className = 'fas fa-sun';
+            }
+
+            const typewriterElement = document.getElementById('typewriter');
+            const professions = ["PostgreSQL", "Python", "Power BI", "Excel", "Rstudio", "Google Sheets"];
+            let professionIndex = 0, charIndex = 0, isDeleting = false;
+            function typeEffect() {
+                const currentProfession = professions[professionIndex];
+                let typeSpeed = 100;
+                if (isDeleting) {
+                    typewriterElement.textContent = currentProfession.substring(0, charIndex - 1);
+                    charIndex--;
+                    typeSpeed = 50;
+                } else {
+                    typewriterElement.textContent = currentProfession.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+                if (!isDeleting && charIndex === currentProfession.length) {
+                    isDeleting = true;
+                    typeSpeed = 2000;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    professionIndex = (professionIndex + 1) % professions.length;
+                    typeSpeed = 500;
+                }
+                setTimeout(typeEffect, typeSpeed);
+            }
+            if (typewriterElement) typeEffect();
+
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(section => observer.observe(section));
         });
     </script>
 </body>
