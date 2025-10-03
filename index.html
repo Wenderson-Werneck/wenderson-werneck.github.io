@@ -81,6 +81,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 2.5rem;
+            transition: all 0.5s ease;
         }
         .project-card {
             background: var(--surface);
@@ -252,7 +253,7 @@
                         </div>
                         <div class="project-links">
                             <a href="project-details.html" class="project-link"><i class="fas fa-search-plus"></i> Ver Detalhes</a>
-                            <a href="URL_DO_SEU_COLAB_AQUI" target="_blank" class="project-link"><i class="fab fa-google-drive"></i> Ver Código</a>
+                            <a href="https://colab.research.google.com/drive/1AyOB4qRvz3-ifSrVmnPPSCketa-UQ7O8?usp=sharing" target="_blank" class="project-link"><i class="fab fa-google-drive"></i> Ver Código</a>
                         </div>
                     </div>
                 </div>
@@ -429,23 +430,33 @@
             let activeFilters = [];
 
             function applyFilters() {
-                // Adiciona uma classe temporária para desativar a transição de grid
-                projectsGrid.style.transition = 'none';
+                const currentlyVisible = [];
+                const currentlyHidden = [];
 
                 projectCards.forEach(card => {
                     const cardTags = card.dataset.tags ? card.dataset.tags.split(' ') : [];
                     const isVisible = activeFilters.length === 0 || activeFilters.every(filter => cardTags.includes(filter));
                     
                     if (isVisible) {
-                        card.classList.remove('is-hidden');
+                        currentlyVisible.push(card);
                     } else {
-                        card.classList.add('is-hidden');
+                        currentlyHidden.push(card);
                     }
                 });
+                
+                // Limpa o grid para reordenar
+                projectsGrid.innerHTML = '';
+                
+                // Adiciona primeiro os visíveis, depois os escondidos
+                currentlyVisible.forEach(card => {
+                    card.classList.remove('is-hidden');
+                    projectsGrid.appendChild(card);
+                });
 
-                // Força um reflow para garantir que as classes sejam aplicadas antes de reativar a transição
-                void projectsGrid.offsetWidth; 
-                projectsGrid.style.transition = '';
+                currentlyHidden.forEach(card => {
+                    card.classList.add('is-hidden');
+                    projectsGrid.appendChild(card);
+                });
             }
             
             filterableElements.forEach(element => {
