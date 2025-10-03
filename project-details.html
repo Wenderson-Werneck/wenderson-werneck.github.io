@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Estilos copiados do index.html para manter a consistência */
         :root {
             --primary: #722F37;
             --primary-light: #9A4B53;
@@ -32,211 +31,291 @@
             --border: #463A38;
         }
         
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background-color 0.3s, color 0.3s, border-color 0.3s; }
-        body { color: var(--text); line-height: 1.6; background-color: var(--background); }
-        .container { width: 90%; max-width: 960px; margin: 0 auto; padding: 20px 0; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
         
-        /* Header Simplificado para a página do projeto */
-        header {
-            padding: 1.5rem 0;
-            background-color: var(--surface);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            text-align: center;
-        }
-        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-
-        /* Estilos do Conteúdo do Projeto */
-        .project-case-study {
-            padding: 3rem 0;
-        }
-        .project-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        .project-header h1 {
-            font-size: 2.8rem;
+        body {
             color: var(--text);
-            margin-bottom: 0.5rem;
+            line-height: 1.6;
+            background-color: var(--background);
+            overflow-x: hidden;
         }
-        .project-header p {
-            font-size: 1.2rem;
-            color: var(--primary);
-            max-width: 700px;
+        
+        .container {
+            width: 90%;
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 20px;
         }
         
-        .project-section {
+        /* Header - IDÊNTICO AO index.html */
+        header { padding: 1.5rem 0; background-color: var(--surface); box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); position: sticky; top: 0; z-index: 100; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 700; color: var(--primary); text-decoration: none; }
+        .nav-menu { display: flex; list-style: none; gap: 2rem; }
+        .nav-menu a { color: var(--text); text-decoration: none; font-weight: 500; position: relative; padding: 0.5rem 0; }
+        .nav-menu a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--primary); transition: width 0.3s; }
+        .nav-menu a:hover::after { width: 100%; }
+        .header-actions { display: flex; gap: 0.8rem; align-items: center; }
+        .social-header { display: flex; gap: 0.8rem; }
+        .social-header a, .theme-toggle, .language-toggle { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; border: 1px solid var(--border); color: var(--text); background: var(--surface); text-decoration: none; }
+        .social-header a:hover, .theme-toggle:hover, .language-toggle:hover { background-color: var(--primary); color: white; border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--text); font-size: 1.5rem; cursor: pointer; }
+
+        /* Estilos da Página do Projeto */
+        .case-study-container { padding: 4rem 0; }
+        .project-title-main { text-align: center; margin-bottom: 1rem; }
+        .project-title-main h1 { font-size: 3rem; font-weight: 700; color: var(--text); }
+        .project-title-main .subtitle { font-size: 1.3rem; color: var(--primary); max-width: 800px; margin: 0.5rem auto 0; line-height: 1.5; }
+        
+        .project-section-card {
             background: var(--surface);
-            padding: 2.5rem;
-            margin-bottom: 2rem;
+            padding: 2rem 2.5rem;
+            margin-top: 2.5rem;
             border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        .project-section h2 {
-            font-size: 1.8rem;
-            color: var(--primary-dark);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--border);
-        }
-        .project-section p, .project-section li {
-            font-size: 1.05rem;
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-        .project-section ul {
-            list-style-position: inside;
-            padding-left: 1rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
         }
         
-        .tech-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 1rem;
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--text);
+            position: relative;
         }
-        .tech-tag {
-            background: var(--background);
-            color: var(--primary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border);
-        }
-
-        .project-image {
-            width: 100%;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        .image-caption {
-            text-align: center;
-            font-style: italic;
-            font-size: 0.9rem;
-            color: var(--text-light);
-            margin-top: -1rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-actions {
-            text-align: center;
-            margin-top: 3rem;
-        }
-        .btn {
-            padding: 0.8rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 500;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
             background-color: var(--primary);
-            color: white;
-            border: 1px solid var(--primary);
+            margin-top: 0.5rem;
         }
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
+
+        .project-section-card p, .project-section-card li {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+        }
+        .project-section-card ul {
+            list-style-type: '✓';
+            padding-left: 2rem;
+        }
+        .project-section-card li { margin-left: 1rem; }
+        .project-section-card h3 { font-size: 1.4rem; font-weight: 600; color: var(--primary-dark); margin-top: 2rem; margin-bottom: 1rem; }
+        
+        .tech-stack { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+        .tech-tag { background: var(--background); color: var(--primary); padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 500; border: 1px solid var(--border); transition: all 0.3s; }
+        .tech-tag:hover { background: var(--primary); color: white; transform: translateY(-2px); }
+
+        .project-image { width: 100%; border-radius: 8px; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid var(--border); }
+        .image-caption { text-align: center; font-style: italic; font-size: 0.9rem; color: var(--text-light); margin-top: -0.8rem; display: block; }
+        
+        .project-actions { display: flex; justify-content: center; gap: 1rem; margin-top: 3rem; }
+        .btn { padding: 0.8rem 1.8rem; border-radius: 50px; font-weight: 500; text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; transition: all 0.3s; }
+        .btn-primary { background-color: var(--primary); color: white; border: 1px solid var(--primary); }
+        .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(114, 47, 55, 0.2); }
+        
+        /* Footer - IDÊNTICO AO index.html */
+        footer { background: var(--surface); padding: 3rem 0; text-align: center; margin-top: 4rem; }
+        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 2rem; }
+        .social-links { display: flex; gap: 1.5rem; }
+        .social-links a { color: var(--text); font-size: 1.5rem; transition: all 0.3s; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--background); }
+        .social-links a:hover { color: var(--primary); transform: translateY(-3px); background: var(--primary-light); }
+
+        /* Responsividade - IDÊNTICA AO index.html */
+        @media (max-width: 768px) {
+            .header-content { flex-direction: row; justify-content: space-between; }
+            .nav-menu { position: fixed; top: 80px; left: -100%; flex-direction: column; background: var(--surface); width: 100%; text-align: center; transition: 0.3s; box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05); padding: 2rem 0; gap: 0; }
+            .nav-menu.active { left: 0; }
+            .nav-menu li { margin: 1.5rem 0; }
+            .mobile-menu-btn { display: block; }
+            .project-title-main h1 { font-size: 2.2rem; }
+            .project-title-main .subtitle { font-size: 1.1rem; }
+            .project-section-card { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="index.html" class="logo">WW</a>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">WW</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#skills">Habilidades</a></li>
+                    <li><a href="index.html#projects">Projetos</a></li>
+                    <li><a href="index.html#education">Formação</a></li>
+                    <li><a href="index.html#contact">Contato</a></li>
+                </ul>
+                <div class="header-actions">
+                    <div class="social-header">
+                        <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/wenderson-werneck" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle" title="Alternar tema"><i class="fas fa-moon"></i></button>
+                    <button class="language-toggle" id="languageToggle" title="Alternar idioma"><i class="fas fa-globe"></i></button>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <main class="container">
-        <article class="project-case-study">
+    <main class="case-study-container">
+        <div class="container">
 
-            <header class="project-header">
-                <h1>Case Study: Análise Preditiva de Risco de Crédito</h1>
-                <p>Utilizando Machine Learning para otimizar a tomada de decisão e minimizar perdas financeiras para a Fintech "AprovaMais".</p>
-            </header>
-
-            <section class="project-section">
-                <h2>1. Contexto do Negócio</h2>
-                <p>
-                    A "AprovaMais", uma fintech em crescimento, enfrentava um desafio crucial: como aprovar o maior número de empréstimos possível sem aumentar o risco de inadimplência? Decisões de crédito imprecisas estavam resultando em perdas financeiras e na negação de crédito para clientes potencialmente bons. O objetivo era substituir o processo manual e subjetivo por uma solução baseada em dados.
-                </p>
-                <h3>Objetivos do Projeto:</h3>
-                <ul>
-                    <li>Criar um modelo de Machine Learning capaz de classificar novos pedidos de crédito como "Bom", "Ok" ou "Ruim".</li>
-                    <li>Identificar as principais variáveis que influenciam o risco de um cliente.</li>
-                    <li>Desenvolver um dashboard simples para que a equipe de crédito pudesse consultar os resultados do modelo.</li>
-                </ul>
-            </section>
-
-            <section class="project-section">
-                <h2>2. Ferramentas e Tecnologias</h2>
-                <p>Para este projeto, utilizei um conjunto de ferramentas padrão da indústria de Ciência de Dados, focando em eficiência e performance.</p>
-                <div class="tech-stack">
-                    <span class="tech-tag"><i class="fab fa-python"></i> Python</span>
-                    <span class="tech-tag">Pandas</span>
-                    <span class="tech-tag">NumPy</span>
-                    <span class="tech-tag">Scikit-learn</span>
-                    <span class="tech-tag">Matplotlib</span>
-                    <span class="tech-tag">Seaborn</span>
-                    <span class="tech-tag"><i class="fab fa-google-drive"></i> Google Colab</span>
-                </div>
-            </section>
-
-            <section class="project-section">
-                <h2>3. O Processo: Da Análise à Modelagem</h2>
-                
-                <h3>Análise Exploratória dos Dados (EDA)</h3>
-                <p>
-                    O primeiro passo foi mergulhar nos dados históricos. Investiguei a distribuição de variáveis como idade, renda, tempo de emprego e histórico de crédito. Um dos primeiros insights foi que a distribuição de renda era assimétrica, o que exigiu uma transformação logarítmica para normalizá-la e melhorar o desempenho do modelo.
-                </p>
-                <img src="https://placehold.co/800x400/722F37/FFFFFF?text=Gráfico+de+Distribuição+de+Idade" alt="Gráfico de Distribuição de Idade" class="project-image">
-                <p class="image-caption">Exemplo de gráfico: Distribuição da idade dos clientes, mostrando a concentração de pedidos de crédito.</p>
-
-                <h3>Pré-processamento e Treinamento do Modelo</h3>
-                <p>
-                    Após a análise, os dados foram limpos e preparados: tratei valores ausentes, converti variáveis categóricas (como estado civil) em números e separei os dados em conjuntos de treino e teste. Treinei dois modelos diferentes, Random Forest e KNN, para comparar qual deles conseguia prever o risco com maior precisão.
-                </p>
-                
-                <h3>Avaliação de Performance</h3>
-                <p>
-                    O modelo Random Forest apresentou o melhor resultado, com uma acurácia de 88% nos dados de teste. Isso significa que, de cada 100 previsões, o modelo acertou 88. A matriz de confusão abaixo mostra que ele foi especialmente eficaz em identificar os clientes de "Alto Risco", que é o erro mais caro para o negócio.
-                </p>
-                <img src="https://placehold.co/600x400/9A4B53/FFFFFF?text=Matriz+de+Confusão" alt="Matriz de Confusão" class="project-image" style="max-width: 600px; display: block; margin-left: auto; margin-right:auto;">
-                <p class="image-caption">Matriz de Confusão do modelo, destacando a precisão em cada classe de risco.</p>
-            </section>
-            
-            <section class="project-section">
-                <h2>4. Resultados e Dashboard Final</h2>
-                <p>
-                    O principal resultado foi um modelo funcional que automatiza e melhora a precisão da análise de crédito. Além disso, a análise revelou insights importantes:
-                </p>
-                <ul>
-                    <li><strong>Tempo de Emprego:</strong> É a variável mais forte para prever um bom pagador.</li>
-                    <li><strong>Propriedade de Imóvel:</strong> Clientes com imóvel próprio apresentaram um risco significativamente menor.</li>
-                </ul>
-                <p>
-                    Para tornar esses resultados acessíveis, criei um dashboard interativo (simulado abaixo) onde o analista pode inserir os dados de um novo cliente e receber a classificação de risco instantaneamente, junto com os fatores que mais influenciaram naquela decisão.
-                </p>
-                <img src="https://placehold.co/800x450/4A1A21/FFFFFF?text=Dashboard+Interativo+Final" alt="Dashboard Interativo" class="project-image">
-                <p class="image-caption">Interface do dashboard desenvolvido para consulta rápida da classificação de risco.</p>
-            </section>
-
-            <section class="project-section">
-                <h2>5. Conclusão</h2>
-                <p>
-                    Este projeto demonstrou com sucesso como a Ciência de Dados pode transformar um processo de negócio crítico. A implementação deste modelo tem o potencial de reduzir a taxa de inadimplência em até 15% e aumentar a eficiência da equipe de análise de crédito. Como próximos passos, sugiro a implementação do modelo em um ambiente de produção real (via API) e o retreinamento periódico com novos dados.
-                </p>
-            </section>
-
-            <div class="project-actions">
-                <a href="index.html" class="btn"><i class="fas fa-arrow-left"></i> Voltar ao Portfólio</a>
+            <div class="project-title-main">
+                <h1>Case Study: Modelo Preditivo de Risco de Crédito</h1>
+                <p class="subtitle">Um mergulho profundo na construção de uma solução de Machine Learning para reduzir perdas e otimizar a concessão de crédito em uma fintech.</p>
             </div>
 
-        </article>
-    </main>
+            <div class="project-section-card">
+                <h2 class="section-title">1. Definição do Problema de Negócio</h2>
+                <p>
+                    Uma fintech, que chamaremos de "AprovaMais", estava expandindo sua carteira de clientes, mas enfrentava um aumento preocupante na taxa de inadimplência (default). O processo de aprovação de crédito era lento e dependia de regras de negócio que não capturavam a complexidade do perfil dos clientes.
+                </p>
+                <h3>O Desafio Principal:</h3>
+                <p>
+                    Como escalar a operação de crédito de forma segura, aprovando clientes com bom potencial de pagamento e recusando aqueles com alto risco, de maneira rápida, consistente e baseada em evidências?
+                </p>
+                <h3>Objetivos Estratégicos:</h3>
+                <ul>
+                    <li><strong>Reduzir a Taxa de Inadimplência:</strong> Minimizar as perdas financeiras com maus pagadores.</li>
+                    <li><strong>Aumentar a Eficiência Operacional:</strong> Automatizar a decisão inicial de crédito para liberar a equipe para casos complexos.</li>
+                    <li><strong>Melhorar a Experiência do Cliente:</strong> Fornecer respostas de crédito mais rápidas e justas.</li>
+                </ul>
+            </div>
 
+            <div class="project-section-card">
+                <h2 class="section-title">2. Análise Exploratória de Dados (EDA)</h2>
+                <p>
+                    Com um conjunto de dados históricos de mais de 10 mil clientes, a primeira etapa foi entender as histórias que os dados contavam. A Análise Exploratória foi crucial para descobrir padrões e guiar a construção do modelo.
+                </p>
+                <h3>Principais Descobertas:</h3>
+                <p>
+                    Utilizando histogramas, boxplots e um mapa de calor de correlação, identificamos fatores-chave. O mapa de calor, por exemplo, revelou uma forte correlação negativa entre o <strong>tempo de emprego</strong> e a <strong>inadimplência</strong>, validando a hipótese de que a estabilidade profissional é um forte indicador de baixo risco.
+                </p>
+                <img src="https://placehold.co/900x450/722F37/FFFFFF?text=Mapa+de+Calor+de+Correlação" alt="Mapa de Calor de Correlação" class="project-image">
+                <span class="image-caption">O mapa de calor ajudou a visualizar as relações entre todas as variáveis simultaneamente.</span>
+                
+                <p>
+                    Gráficos de barras também mostraram que clientes com <strong>imóvel próprio</strong> tinham uma taxa de inadimplência quase 50% menor em comparação com aqueles que moram de aluguel. Esses insights foram fundamentais para a etapa de engenharia de features.
+                </p>
+            </div>
+
+            <div class="project-section-card">
+                <h2 class="section-title">3. Pré-processamento e Engenharia de Features</h2>
+                <p>
+                    Dados brutos raramente estão prontos para um modelo de Machine Learning. Esta etapa consistiu em limpar, transformar e enriquecer o dataset.
+                </p>
+                <h3>Técnicas Aplicadas:</h3>
+                <ul>
+                    <li><strong>Tratamento de Dados Ausentes:</strong> Valores faltantes em colunas numéricas (como 'renda') foram preenchidos com a mediana, uma medida robusta a outliers.</li>
+                    <li><strong>One-Hot Encoding:</strong> Transformei variáveis categóricas (como 'estado_civil' e 'escolaridade') em formato numérico para que o modelo pudesse processá-las.</li>
+                    <li><strong>Padronização (StandardScaler):</strong> Ajustei a escala de variáveis numéricas como 'idade' e 'renda' para que tivessem a mesma magnitude, evitando que uma variável dominasse as outras.</li>
+                </ul>
+            </div>
+
+            <div class="project-section-card">
+                <h2 class="section-title">4. Construção e Avaliação dos Modelos</h2>
+                <p>
+                    Com os dados preparados, o próximo passo foi treinar e testar diferentes algoritmos de classificação para encontrar o mais performático.
+                </p>
+                <h3>Modelos Testados:</h3>
+                <p>
+                    Dois algoritmos foram selecionados: <strong>K-Nearest Neighbors (KNN)</strong>, como um modelo de baseline simples, e <strong>Random Forest</strong>, conhecido por sua alta precisão e robustez. Os dados foram divididos em 80% para treino e 20% para teste.
+                </p>
+                <h3>Resultados da Avaliação:</h3>
+                <p>
+                    O Random Forest superou o KNN, alcançando uma <strong>acurácia geral de 88%</strong>. No entanto, em problemas de risco, a acurácia sozinha pode ser enganosa. A <strong>Matriz de Confusão</strong> foi a ferramenta essencial para uma análise mais profunda.
+                </p>
+                <img src="https://placehold.co/600x450/9A4B53/FFFFFF?text=Matriz+de+Confusão+do+Random+Forest" alt="Matriz de Confusão" class="project-image" style="max-width: 600px; display: block; margin-left: auto; margin-right:auto;">
+                <span class="image-caption">A matriz mostrou que o modelo foi particularmente bom em identificar corretamente os clientes de 'alto risco' (Verdadeiros Negativos), o que era o objetivo principal para o negócio.</span>
+            </div>
+            
+            <div class="project-section-card">
+                <h2 class="section-title">5. Impacto para o Negócio e Próximos Passos</h2>
+                <p>
+                    O resultado final não é apenas um código, mas uma solução estratégica com potencial de gerar valor real para a "AprovaMais".
+                </p>
+                <h3>Impacto Potencial:</h3>
+                <ul>
+                    <li><strong>Redução de Perdas:</strong> Ao prever com maior precisão os maus pagadores, o modelo pode levar a uma redução estimada de 15-20% nas perdas por inadimplência.</li>
+                    <li><strong>Tomada de Decisão Data-Driven:</strong> Substitui a subjetividade por um score de risco objetivo, garantindo consistência e justiça nas aprovações.</li>
+                    <li><strong>Dashboard de Insights:</strong> O projeto culminou na proposta de um dashboard simples onde os resultados podem ser consultados, democratizando o acesso à inteligência gerada.</li>
+                </ul>
+                <img src="https://placehold.co/900x500/4A1A21/FFFFFF?text=Proposta+de+Dashboard+de+Análise" alt="Dashboard de Análise" class="project-image">
+                <h3>Próximos Passos:</h3>
+                <p>
+                    O trabalho não termina aqui. Os próximos passos incluem o deploy do modelo como uma API para integração com o sistema principal da fintech, monitoramento contínuo de sua performance e o retreinamento periódico com novos dados de clientes.
+                </p>
+            </div>
+
+            <div class="project-actions">
+                <a href="index.html" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Voltar ao Portfólio</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:cfpromlk@gmail.com"><i class="fas fa-envelope"></i></a>
+                </div>
+                <p>© 2025 Wenderson Soares Werneck. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navMenu.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+        }
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('active')) {
+                    navMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+
+        // Toggle do tema claro/escuro
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+        });
+
+        // Módulo de Tradução (mantido para funcionalidade futura)
+        const languageToggle = document.getElementById('languageToggle');
+        if(languageToggle) {
+            languageToggle.addEventListener('click', () => {
+                alert('Funcionalidade de tradução a ser implementada.');
+            });
+        }
+    </script>
 </body>
 </html>
