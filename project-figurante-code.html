@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figurante Code — Wenderson Werneck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--blue:#007ACC;--blue-bright:#1F9CF0;--blue-dark:#005A9E;--blue-dim:#0D2137;--blue-glow:rgba(0,122,204,0.2);--bg:#0D1117;--bg-surface:#161B22;--bg-card:#1C2330;--border:#30363D;--border-lit:#007ACC55;--text:#E6EDF3;--text-muted:#A0ADB8;--text-dim:#6E7882;--green:#3FB950;--orange:#F0883E;--purple:#BC8CFF;--red:#F85149;--accent:#007ACC;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+        .container{width:90%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+        header{padding:1rem 0;background:rgba(13,17,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+        .header-inner{display:flex;justify-content:space-between;align-items:center;}
+        .logo{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--blue);text-decoration:none;}
+        .logo span{color:var(--text-muted);}
+        .back-btn{font-size:0.85rem;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s;}
+        .back-btn:hover{color:var(--blue);}
+        .proj-hero{padding:4rem 0 2rem;}
+        .proj-badge{font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:20px;border:1px solid var(--blue);color:var(--blue);background:rgba(0,122,204,0.1);display:inline-block;margin-bottom:1.2rem;}
+        .proj-icon-wrap{font-size:3.5rem;margin-bottom:1rem;display:block;}
+        .proj-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:0.8rem;}
+        .proj-subtitle{font-size:1.05rem;color:var(--text-muted);margin-bottom:2rem;max-width:640px;line-height:1.7;}
+        .proj-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;}
+        .meta-chip{font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.35rem 0.8rem;border-radius:6px;border:1px solid var(--border);color:var(--text-muted);}
+        .meta-chip i{margin-right:0.4rem;color:var(--blue);}
+        .proj-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
+        .btn{padding:0.65rem 1.4rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.25s;cursor:pointer;border:none;}
+        .btn-primary{background:var(--blue);color:white;}
+        .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 24px var(--blue-glow);}
+        .btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border);}
+        .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
+        .proj-divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
+        .prose h2{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--text);display:flex;align-items:center;gap:0.6rem;}
+        .prose h2::before{content:'';display:inline-block;width:3px;height:1.2em;background:var(--blue);border-radius:2px;}
+        .prose p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem;}
+        .prose ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
+        .prose ul li{color:var(--text-muted);padding-left:1.4rem;position:relative;line-height:1.7;}
+        .prose ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.85rem;}
+        .arch-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1.4rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);line-height:1.9;overflow-x:auto;margin-bottom:1.5rem;}
+        .arch-box .hl{color:var(--blue);}
+        .arch-box .dim{color:var(--text-dim);}
+        .arch-box .ok{color:var(--green);}
+        .arch-box .warn{color:var(--orange);}
+        .arch-box .pu{color:var(--purple);}
+        .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.8rem;margin-bottom:1.5rem;}
+        .stack-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;display:flex;align-items:center;gap:0.7rem;transition:border-color 0.2s;}
+        .stack-item:hover{border-color:var(--blue);}
+        .stack-item i{color:var(--blue);font-size:1rem;width:18px;text-align:center;}
+        .stack-item span{font-size:0.82rem;font-weight:600;color:var(--text-muted);}
+        .callout{background:var(--blue-dim);border:1px solid var(--border-lit);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
+        .callout p{color:var(--text-muted);margin:0;font-size:0.9rem;}
+        .callout strong{color:var(--blue);}
+        .routing-table{width:100%;border-collapse:collapse;margin-bottom:1.5rem;font-size:0.85rem;}
+        .routing-table th{font-family:'JetBrains Mono',monospace;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text-dim);padding:0.5rem 1rem;text-align:left;border-bottom:1px solid var(--border);}
+        .routing-table td{padding:0.7rem 1rem;border-bottom:1px solid var(--border);color:var(--text-muted);}
+        .routing-table tr:last-child td{border-bottom:none;}
+        .routing-table td:first-child{font-family:'JetBrains Mono',monospace;color:var(--blue);font-size:0.8rem;}
+        .proj-footer{border-top:1px solid var(--border);padding:2rem 0;margin-top:4rem;}
+        .proj-footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+        .proj-footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-dim);}
+        .proj-footer-links{display:flex;gap:1rem;}
+        .proj-footer-links a{color:var(--text-dim);font-size:1.1rem;transition:color 0.2s;text-decoration:none;}
+        .proj-footer-links a:hover{color:var(--blue);}
+        .proj-nav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem;}
+        .proj-nav a{display:flex;align-items:center;gap:0.5rem;color:var(--text-muted);text-decoration:none;font-size:0.88rem;font-weight:600;padding:0.6rem 1rem;border:1px solid var(--border);border-radius:8px;transition:all 0.2s;}
+        .proj-nav a:hover{border-color:var(--blue);color:var(--blue);}
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="header-inner">
+            <a href="index.html" class="logo">WW<span>.dev</span></a>
+            <a href="index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar aos projetos</a>
+        </div>
+    </div>
+</header>
+
+<section class="proj-hero">
+    <div class="container">
+        <span class="proj-badge">IA · Roteamento · Destilação · RAG</span>
+        <span class="proj-icon-wrap">💻</span>
+        <h1 class="proj-title">Figurante Code</h1>
+        <p class="proj-subtitle">Agente de programação com roteamento inteligente entre modelos e destilação progressiva de conhecimento via RAG. Modelos locais ficam mais inteligentes com o tempo, sem pagar por cada resposta.</p>
+        <div class="proj-meta">
+            <span class="meta-chip"><i class="fas fa-circle" style="color:var(--green)"></i>Ativo</span>
+            <span class="meta-chip"><i class="fas fa-brain"></i>480B → 3B via RAG</span>
+            <span class="meta-chip"><i class="fas fa-server"></i>localhost:5001</span>
+            <span class="meta-chip"><i class="fab fa-python"></i>Python · Flask</span>
+        </div>
+        <div class="proj-actions">
+            <a href="https://github.com/wenderson-werneck" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> Ver no GitHub</a>
+            <a href="index.html#projects" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+    </div>
+</section>
+
+<hr class="proj-divider" style="margin:0;">
+
+<div class="container" style="padding-top:3rem;padding-bottom:4rem;">
+    <div class="prose">
+
+        <h2>O problema</h2>
+        <p>Modelos locais de 3B parâmetros são rápidos e gratuitos, mas insuficientes para problemas complexos de código. Modelos de 480B via API são excelentes, mas têm cotas e custo. A pergunta: dá para ter o melhor dos dois mundos?</p>
+
+        <hr class="proj-divider">
+
+        <h2>A ideia central: destilação via RAG</h2>
+        <div class="callout">
+            <p><strong>Sessão 1:</strong> você faz uma pergunta difícil → roteada para Alibaba 480B → resposta salva no ChromaDB.</p>
+            <p style="margin-top:0.5rem;"><strong>Sessão 2:</strong> você faz uma pergunta similar → RAG encontra a resposta anterior → modelo local de 3B responde com o conhecimento destilado do 480B. Zero chamadas à nuvem.</p>
+        </div>
+        <p>Com o tempo, a base de conhecimento cresce e o modelo local resolve cada vez mais perguntas que antes precisariam de API. A cota do 480B é usada apenas para expandir o conhecimento, não para repetir respostas já conhecidas.</p>
+
+        <hr class="proj-divider">
+
+        <h2>Cascata de roteamento</h2>
+        <div class="arch-box">
+<span>Pergunta recebida</span>
+<span class="dim">     │</span>
+<span class="hl">  classificar_complexidade()</span>
+<span class="dim">     │  KEYWORDS_HIGH: arquitetura, concorrência, otimização...</span>
+<span class="dim">     │  len(pergunta) &gt; 500 → forçar HIGH</span>
+<span class="dim">     │</span>
+<span class="dim">  ┌──┴──────────────────────────────────┐</span>
+<span class="ok">  LOW</span>                                <span class="warn">MEDIUM / HIGH</span>
+<span class="dim">   │                                     │</span>
+<span class="pu">  RAG check</span>                         <span class="pu">RAG check</span>
+<span class="dim">  (threshold 0.35)                  (threshold 0.35)</span>
+<span class="dim">   │                                     │</span>
+<span class="ok">  Ollama local</span>                   <span class="hl">Alibaba 480B MoE</span>
+<span class="dim">  qwen2.5-coder:3b               qwen3-coder-plus</span>
+<span class="dim">  (sem cota, sempre disponível)   RateLimitError?</span>
+<span class="dim">                                         │</span>
+<span class="dim">                                  <span class="warn">OpenRouter</span> (fallback)</span>
+<span class="dim">                                         │</span>
+<span class="dim">                                  <span class="ok">Ollama local</span> (fallback final)</span>
+<span class="dim">                                         │</span>
+<span class="ok">                             salvar no ChromaDB → destilação futura</span>
+        </div>
+
+        <hr class="proj-divider">
+
+        <h2>Tabela de roteamento</h2>
+        <table class="routing-table">
+            <thead>
+                <tr><th>Complexidade</th><th>Sequência de provedores</th><th>Modelo principal</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>low</td><td>RAG → Local direto</td><td>qwen2.5-coder:3b (Ollama)</td></tr>
+                <tr><td>medium</td><td>RAG → Alibaba → OpenRouter → Local</td><td>qwen3-coder-plus (480B MoE)</td></tr>
+                <tr><td>high</td><td>RAG → Alibaba → OpenRouter → Local</td><td>qwen3-coder-plus (480B MoE)</td></tr>
+            </tbody>
+        </table>
+
+        <hr class="proj-divider">
+
+        <h2>Cross-feed bidirecional com o Figurante</h2>
+        <p>Toda resposta do Figurante Code é salva não só na coleção <code>figurante_codigo</code>, mas também na <code>figurante_memoria</code> — o mesmo banco que o assistente principal usa. Isso significa que o Figurante (porta 5000) aprende automaticamente com as interações de código que acontecem no Figurante Code (porta 5001), sem nenhuma ação manual.</p>
+        <p>O ecossistema completo fica mais inteligente a cada interação.</p>
+
+        <hr class="proj-divider">
+
+        <h2>Por que o qwen3-coder-plus?</h2>
+        <p>480B parâmetros totais com arquitetura MoE — apenas ~30B ativos por token. Eficiência computacional de 30B com capacidade efetiva de 480B. Nos benchmarks de código, supera GPT-4o em várias categorias. A Alibaba oferece cota gratuita de 1-2M tokens nos primeiros 90 dias.</p>
+
+        <hr class="proj-divider">
+
+        <h2>Stack completa</h2>
+        <div class="stack-grid">
+            <div class="stack-item"><i class="fab fa-python"></i><span>Python · Flask</span></div>
+            <div class="stack-item"><i class="fas fa-brain"></i><span>Alibaba DashScope</span></div>
+            <div class="stack-item"><i class="fas fa-route"></i><span>OpenRouter</span></div>
+            <div class="stack-item"><i class="fas fa-microchip"></i><span>Ollama local</span></div>
+            <div class="stack-item"><i class="fas fa-database"></i><span>ChromaDB</span></div>
+            <div class="stack-item"><i class="fas fa-code"></i><span>Single-file UI</span></div>
+        </div>
+
+    </div>
+
+    <div class="proj-nav">
+        <a href="project-aprovamais.html"><i class="fas fa-arrow-left"></i> AprovaMais</a>
+        <span></span>
+    </div>
+</div>
+
+<footer class="proj-footer">
+    <div class="container">
+        <div class="proj-footer-inner">
+            <span class="proj-footer-copy">© 2025 Wenderson Soares Werneck</span>
+            <div class="proj-footer-links">
+                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

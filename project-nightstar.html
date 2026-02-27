@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NightStar — Wenderson Werneck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--blue:#007ACC;--blue-bright:#1F9CF0;--blue-dark:#005A9E;--blue-dim:#0D2137;--blue-glow:rgba(0,122,204,0.2);--bg:#0D1117;--bg-surface:#161B22;--bg-card:#1C2330;--border:#30363D;--border-lit:#007ACC55;--text:#E6EDF3;--text-muted:#A0ADB8;--text-dim:#6E7882;--green:#3FB950;--orange:#F0883E;--purple:#BC8CFF;--red:#F85149;--accent:#1F9CF0;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+        .container{width:90%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+        header{padding:1rem 0;background:rgba(13,17,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+        .header-inner{display:flex;justify-content:space-between;align-items:center;}
+        .logo{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--blue);text-decoration:none;}
+        .logo span{color:var(--text-muted);}
+        .back-btn{font-size:0.85rem;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s;}
+        .back-btn:hover{color:var(--blue);}
+        .proj-hero{padding:4rem 0 2rem;}
+        .proj-badge{font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:20px;border:1px solid var(--accent);color:var(--accent);background:rgba(31,156,240,0.1);display:inline-block;margin-bottom:1.2rem;}
+        .proj-icon-wrap{font-size:3.5rem;margin-bottom:1rem;display:block;}
+        .proj-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:0.8rem;}
+        .proj-subtitle{font-size:1.05rem;color:var(--text-muted);margin-bottom:2rem;max-width:640px;line-height:1.7;}
+        .proj-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;}
+        .meta-chip{font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.35rem 0.8rem;border-radius:6px;border:1px solid var(--border);color:var(--text-muted);}
+        .meta-chip i{margin-right:0.4rem;color:var(--blue);}
+        .proj-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
+        .btn{padding:0.65rem 1.4rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.25s;cursor:pointer;border:none;}
+        .btn-primary{background:var(--blue);color:white;}
+        .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 24px var(--blue-glow);}
+        .btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border);}
+        .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
+        .proj-divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
+        .prose h2{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--text);display:flex;align-items:center;gap:0.6rem;}
+        .prose h2::before{content:'';display:inline-block;width:3px;height:1.2em;background:var(--blue);border-radius:2px;}
+        .prose p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem;}
+        .prose ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
+        .prose ul li{color:var(--text-muted);padding-left:1.4rem;position:relative;line-height:1.7;}
+        .prose ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.85rem;}
+        .arch-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1.4rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);line-height:1.9;overflow-x:auto;margin-bottom:1.5rem;}
+        .arch-box .hl{color:var(--blue);}
+        .arch-box .dim{color:var(--text-dim);}
+        .arch-box .ok{color:var(--green);}
+        .arch-box .warn{color:var(--orange);}
+        .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.8rem;margin-bottom:1.5rem;}
+        .stack-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;display:flex;align-items:center;gap:0.7rem;transition:border-color 0.2s;}
+        .stack-item:hover{border-color:var(--blue);}
+        .stack-item i{color:var(--blue);font-size:1rem;width:18px;text-align:center;}
+        .stack-item span{font-size:0.82rem;font-weight:600;color:var(--text-muted);}
+        .callout{background:var(--blue-dim);border:1px solid var(--border-lit);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
+        .callout p{color:var(--text-muted);margin:0;font-size:0.9rem;}
+        .callout strong{color:var(--blue);}
+        .metric-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
+        .metric{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;flex:1;min-width:120px;}
+        .metric-val{font-size:1.8rem;font-weight:800;color:var(--blue);line-height:1;}
+        .metric-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem;text-transform:uppercase;letter-spacing:0.05em;font-family:'JetBrains Mono',monospace;}
+        .proj-footer{border-top:1px solid var(--border);padding:2rem 0;margin-top:4rem;}
+        .proj-footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+        .proj-footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-dim);}
+        .proj-footer-links{display:flex;gap:1rem;}
+        .proj-footer-links a{color:var(--text-dim);font-size:1.1rem;transition:color 0.2s;text-decoration:none;}
+        .proj-footer-links a:hover{color:var(--blue);}
+        .proj-nav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem;}
+        .proj-nav a{display:flex;align-items:center;gap:0.5rem;color:var(--text-muted);text-decoration:none;font-size:0.88rem;font-weight:600;padding:0.6rem 1rem;border:1px solid var(--border);border-radius:8px;transition:all 0.2s;}
+        .proj-nav a:hover{border-color:var(--blue);color:var(--blue);}
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="header-inner">
+            <a href="index.html" class="logo">WW<span>.dev</span></a>
+            <a href="index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar aos projetos</a>
+        </div>
+    </div>
+</header>
+
+<section class="proj-hero">
+    <div class="container">
+        <span class="proj-badge">RPA · Playwright · RAG</span>
+        <span class="proj-icon-wrap">⭐</span>
+        <h1 class="proj-title">NightStar</h1>
+        <p class="proj-subtitle">Bot RPA que automatiza candidaturas a vagas de emprego. Varre formulários, mapeia campos ao perfil do candidato via RAG vetorial e preenche tudo automaticamente — parando antes do envio para revisão.</p>
+        <div class="proj-meta">
+            <span class="meta-chip"><i class="fas fa-circle" style="color:var(--green)"></i>Ativo</span>
+            <span class="meta-chip"><i class="fab fa-python"></i>Python · Playwright</span>
+            <span class="meta-chip"><i class="fas fa-database"></i>ChromaDB · RAG</span>
+            <span class="meta-chip"><i class="fas fa-check-circle" style="color:var(--green)"></i>Gupy · LinkedIn</span>
+        </div>
+        <div class="proj-actions">
+            <a href="https://github.com/wenderson-werneck" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> Ver no GitHub</a>
+            <a href="index.html#projects" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+    </div>
+</section>
+
+<hr class="proj-divider" style="margin:0;">
+
+<div class="container" style="padding-top:3rem;padding-bottom:4rem;">
+    <div class="prose">
+
+        <h2>O problema</h2>
+        <p>Candidatar-se a vagas é repetitivo ao extremo. Cada plataforma de RH (Gupy, LinkedIn, Workday) pede os mesmos dados — nome, email, experiência, formação — em formulários completamente diferentes, com fluxos diferentes e comportamentos diferentes. Horas por semana perdidas copiando e colando informações que já existem em outro lugar.</p>
+
+        <hr class="proj-divider">
+
+        <h2>Métricas de impacto</h2>
+        <div class="metric-row">
+            <div class="metric">
+                <div class="metric-val">~3s</div>
+                <div class="metric-label">varredura (era 40s)</div>
+            </div>
+            <div class="metric">
+                <div class="metric-val">70%+</div>
+                <div class="metric-label">campos automáticos</div>
+            </div>
+            <div class="metric">
+                <div class="metric-val">&lt;300ms</div>
+                <div class="metric-label">cancelamento</div>
+            </div>
+            <div class="metric">
+                <div class="metric-val">3</div>
+                <div class="metric-label">camadas de mapeamento</div>
+            </div>
+        </div>
+
+        <hr class="proj-divider">
+
+        <h2>As 3 camadas de mapeamento</h2>
+        <div class="callout">
+            <p><strong>Decisão central de design:</strong> nunca chamar a IA para campos que podem ser resolvidos deterministicamente. Isso reduziu o tempo de varredura de ~40s para ~3s.</p>
+        </div>
+        <div class="arch-box">
+<span>Campo: <span class="hl">"Cidade de residência"</span></span>
+<span class="dim">         │</span>
+<span class="ok">  [1] Mapa Direto</span>   <span class="dim">→ dict embutido com 40+ termos → 0ms</span>
+<span class="dim">         │ (falhou)</span>
+<span class="hl">  [2] RAG Vetorial do perfil.json</span>
+<span class="dim">         │ ChromaDB local · embeddings offline · ~50ms</span>
+<span class="dim">         │ (falhou: relevância &lt; 0.60)</span>
+<span class="warn">  [3] Campo Pendente</span>
+<span class="dim">         │ Figurante chamado APENAS com autorização do usuário</span>
+<span class="ok">         ✓ Ollama nunca chamado durante varredura</span>
+        </div>
+
+        <hr class="proj-divider">
+
+        <h2>Fluxo completo</h2>
+        <ul>
+            <li>Você cola a URL da vaga no Figurante com <code>/nightstar &lt;URL&gt;</code></li>
+            <li>Chrome abre com perfil persistente — login salvo de sessões anteriores</li>
+            <li>Você navega até o formulário; NightStar varre e mapeia campos</li>
+            <li>Relatório: campos mapeados (verde) e pendentes (amarelo) com inputs reais do formulário</li>
+            <li>Opção A: você preenche os pendentes manualmente nos cards</li>
+            <li>Opção B: clica em "🤖 Figurante" — IA resolve pendentes com base no seu perfil</li>
+            <li>Clica em "▶️ Preencher" — Playwright preenche tudo no browser em tempo real</li>
+            <li>NightStar para antes do envio — você revisa e confirma</li>
+        </ul>
+
+        <hr class="proj-divider">
+
+        <h2>Detalhe técnico: perfil persistente do Chrome</h2>
+        <p>Em vez de abrir uma instância limpa do browser a cada execução, o NightStar usa <code>launch_persistent_context</code> do Playwright com um diretório local (<code>nightstar_profile/</code>). Isso preserva cookies, logins e histórico entre sessões — você faz login uma vez em cada plataforma; nas seguintes, os cookies já estão lá.</p>
+
+        <hr class="proj-divider">
+
+        <h2>Stack completa</h2>
+        <div class="stack-grid">
+            <div class="stack-item"><i class="fas fa-globe"></i><span>Playwright</span></div>
+            <div class="stack-item"><i class="fab fa-python"></i><span>Python 3.11</span></div>
+            <div class="stack-item"><i class="fas fa-database"></i><span>ChromaDB (RAG)</span></div>
+            <div class="stack-item"><i class="fas fa-brain"></i><span>Ollama (fallback)</span></div>
+            <div class="stack-item"><i class="fas fa-code"></i><span>BeautifulSoup</span></div>
+            <div class="stack-item"><i class="fas fa-server"></i><span>Flask</span></div>
+        </div>
+
+        <hr class="proj-divider">
+
+        <h2>Plataformas suportadas</h2>
+        <ul>
+            <li><strong>Gupy</strong> — upload automático de currículo, autocomplete de cidade/estado, fluxo multi-etapas</li>
+            <li><strong>LinkedIn Easy Apply</strong> — abertura de modal, recusa do currículo LinkedIn, uso do seu PDF local</li>
+            <li><strong>Genérico</strong> — heurísticas por label, aria-label, placeholder, name, id — funciona na maioria dos formulários</li>
+        </ul>
+
+    </div>
+
+    <div class="proj-nav">
+        <a href="project-figurante.html"><i class="fas fa-arrow-left"></i> Figurante</a>
+        <a href="project-nexus.html">Nexus AI <i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<footer class="proj-footer">
+    <div class="container">
+        <div class="proj-footer-inner">
+            <span class="proj-footer-copy">© 2025 Wenderson Soares Werneck</span>
+            <div class="proj-footer-links">
+                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

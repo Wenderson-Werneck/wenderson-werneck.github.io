@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus AI — Wenderson Werneck</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root{--blue:#007ACC;--blue-bright:#1F9CF0;--blue-dark:#005A9E;--blue-dim:#0D2137;--blue-glow:rgba(0,122,204,0.2);--bg:#0D1117;--bg-surface:#161B22;--bg-card:#1C2330;--border:#30363D;--border-lit:#007ACC55;--text:#E6EDF3;--text-muted:#A0ADB8;--text-dim:#6E7882;--green:#3FB950;--orange:#F0883E;--purple:#BC8CFF;--red:#F85149;--accent:#3FB950;}
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
+        .container{width:90%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+        header{padding:1rem 0;background:rgba(13,17,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+        .header-inner{display:flex;justify-content:space-between;align-items:center;}
+        .logo{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--blue);text-decoration:none;}
+        .logo span{color:var(--text-muted);}
+        .back-btn{font-size:0.85rem;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s;}
+        .back-btn:hover{color:var(--blue);}
+        .proj-hero{padding:4rem 0 2rem;}
+        .proj-badge{font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:20px;border:1px solid var(--accent);color:var(--accent);background:rgba(63,185,80,0.1);display:inline-block;margin-bottom:1.2rem;}
+        .proj-icon-wrap{font-size:3.5rem;margin-bottom:1rem;display:block;}
+        .proj-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:0.8rem;}
+        .proj-subtitle{font-size:1.05rem;color:var(--text-muted);margin-bottom:2rem;max-width:640px;line-height:1.7;}
+        .proj-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;}
+        .meta-chip{font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.35rem 0.8rem;border-radius:6px;border:1px solid var(--border);color:var(--text-muted);}
+        .meta-chip i{margin-right:0.4rem;color:var(--blue);}
+        .proj-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
+        .btn{padding:0.65rem 1.4rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.25s;cursor:pointer;border:none;}
+        .btn-primary{background:var(--blue);color:white;}
+        .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 24px var(--blue-glow);}
+        .btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border);}
+        .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
+        .proj-divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
+        .prose h2{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--text);display:flex;align-items:center;gap:0.6rem;}
+        .prose h2::before{content:'';display:inline-block;width:3px;height:1.2em;background:var(--blue);border-radius:2px;}
+        .prose p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem;}
+        .prose ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
+        .prose ul li{color:var(--text-muted);padding-left:1.4rem;position:relative;line-height:1.7;}
+        .prose ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.85rem;}
+        .arch-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1.4rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);line-height:1.9;overflow-x:auto;margin-bottom:1.5rem;}
+        .arch-box .hl{color:var(--blue);}
+        .arch-box .dim{color:var(--text-dim);}
+        .arch-box .ok{color:var(--green);}
+        .arch-box .warn{color:var(--orange);}
+        .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.8rem;margin-bottom:1.5rem;}
+        .stack-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;display:flex;align-items:center;gap:0.7rem;transition:border-color 0.2s;}
+        .stack-item:hover{border-color:var(--blue);}
+        .stack-item i{color:var(--blue);font-size:1rem;width:18px;text-align:center;}
+        .stack-item span{font-size:0.82rem;font-weight:600;color:var(--text-muted);}
+        .callout{background:var(--blue-dim);border:1px solid var(--border-lit);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
+        .callout p{color:var(--text-muted);margin:0;font-size:0.9rem;}
+        .callout strong{color:var(--blue);}
+        .proj-footer{border-top:1px solid var(--border);padding:2rem 0;margin-top:4rem;}
+        .proj-footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+        .proj-footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-dim);}
+        .proj-footer-links{display:flex;gap:1rem;}
+        .proj-footer-links a{color:var(--text-dim);font-size:1.1rem;transition:color 0.2s;text-decoration:none;}
+        .proj-footer-links a:hover{color:var(--blue);}
+        .proj-nav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem;}
+        .proj-nav a{display:flex;align-items:center;gap:0.5rem;color:var(--text-muted);text-decoration:none;font-size:0.88rem;font-weight:600;padding:0.6rem 1rem;border:1px solid var(--border);border-radius:8px;transition:all 0.2s;}
+        .proj-nav a:hover{border-color:var(--blue);color:var(--blue);}
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="header-inner">
+            <a href="index.html" class="logo">WW<span>.dev</span></a>
+            <a href="index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar aos projetos</a>
+        </div>
+    </div>
+</header>
+
+<section class="proj-hero">
+    <div class="container">
+        <span class="proj-badge">Busca · Semântica · Gemini · Colab</span>
+        <span class="proj-icon-wrap">🤖</span>
+        <h1 class="proj-title">Nexus AI</h1>
+        <p class="proj-subtitle">Agente inteligente de busca e ranqueamento de vagas. O Gemini expande um cargo em 15 variações e 30 skills, busca em 20+ países via API e ranqueia cada vaga pela similaridade semântica com o seu CV.</p>
+        <div class="proj-meta">
+            <span class="meta-chip"><i class="fas fa-circle" style="color:var(--green)"></i>Ativo</span>
+            <span class="meta-chip"><i class="fab fa-google"></i>Gemini 1.5 Flash</span>
+            <span class="meta-chip"><i class="fas fa-globe"></i>Adzuna API · 20+ países</span>
+            <span class="meta-chip"><i class="fab fa-python"></i>Streamlit · Google Colab</span>
+        </div>
+        <div class="proj-actions">
+            <a href="https://github.com/wenderson-werneck" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> Ver no GitHub</a>
+            <a href="index.html#projects" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Voltar</a>
+        </div>
+    </div>
+</section>
+
+<hr class="proj-divider" style="margin:0;">
+
+<div class="container" style="padding-top:3rem;padding-bottom:4rem;">
+    <div class="prose">
+        <h2>O problema</h2>
+        <p>Plataformas de emprego ordenam vagas por data de publicação ou palavra-chave exata. Isso significa que a melhor vaga para o seu perfil pode estar na página 5, enquanto na página 1 estão vagas irrelevantes publicadas hoje. O Nexus AI inverte essa lógica: ordena por compatibilidade real.</p>
+
+        <hr class="proj-divider">
+
+        <h2>Pipeline completo</h2>
+        <div class="arch-box">
+<span>Você digita: <span class="hl">"Machine Learning Engineer"</span></span>
+<span class="dim">        │</span>
+<span class="ok">[1] expandir_gemini()</span>
+<span class="dim">        │  Prompt → Gemini 1.5 Flash → JSON</span>
+<span class="dim">        │  Gera 15 variações de título + 30 skills</span>
+<span class="dim">        │  Idioma detectado pelo país selecionado (pt/en/es)</span>
+<span class="dim">        │  Fallback: PROFILE_DB embutido (sem internet)</span>
+<span class="dim">        │</span>
+<span class="hl">[2] NexusOrchestrator.fetch_adzuna()</span>
+<span class="dim">        │  Para cada título: 2 páginas × 50 vagas</span>
+<span class="dim">        │  Deduplicação por ID · Remove HTML das descrições</span>
+<span class="dim">        │  20+ países suportados</span>
+<span class="dim">        │</span>
+<span class="ok">[3] processar_ranking()</span>
+<span class="dim">        │  Match_Profile: cos_sim(perfil_embedding, desc_embedding)</span>
+<span class="dim">        │  Match_Pesquisa: título × skills com pesos configuráveis</span>
+<span class="warn">        │  Penalização: -50 se empresa ausente ou link suspeito</span>
+<span class="dim">        │  Match_Final: média ponderada (sliders da UI)</span>
+<span class="dim">        │</span>
+<span class="ok">        ✓ Tabela ordenada por compatibilidade real</span>
+        </div>
+
+        <hr class="proj-divider">
+
+        <h2>Score em dois eixos</h2>
+        <div class="callout">
+            <p><strong>Match_Profile</strong> — similaridade coseno entre o embedding do seu CV (<code>profile.json</code>) e a descrição de cada vaga. Mede o quanto a vaga <em>realmente</em> se alinha ao que você sabe e faz.</p>
+        </div>
+        <div class="callout">
+            <p><strong>Match_Pesquisa</strong> — presença dos títulos gerados no título da vaga (peso configurável) + proporção de skills na descrição (peso configurável). Mede o quanto a vaga usa os termos da sua busca.</p>
+        </div>
+        <p>Você controla o equilíbrio entre os dois via sliders. O score final é a média ponderada configurada em tempo real — sem refazer a busca.</p>
+
+        <hr class="proj-divider">
+
+        <h2>Fallback offline</h2>
+        <p>Se o Gemini falhar (cota, conexão, chave inválida), o <code>PROFILE_DB</code> embutido assume automaticamente. É um dicionário com títulos e skills por área (dados, ML, dev) em três idiomas (pt, en, es). O agente nunca para por falta de API.</p>
+
+        <hr class="proj-divider">
+
+        <h2>Stack completa</h2>
+        <div class="stack-grid">
+            <div class="stack-item"><i class="fas fa-chart-bar"></i><span>Streamlit</span></div>
+            <div class="stack-item"><i class="fab fa-google"></i><span>Gemini 1.5 Flash</span></div>
+            <div class="stack-item"><i class="fas fa-globe"></i><span>Adzuna API</span></div>
+            <div class="stack-item"><i class="fas fa-vector-square"></i><span>SentenceTransformers</span></div>
+            <div class="stack-item"><i class="fab fa-python"></i><span>Pandas</span></div>
+            <div class="stack-item"><i class="fas fa-network-wired"></i><span>pyngrok</span></div>
+        </div>
+    </div>
+
+    <div class="proj-nav">
+        <a href="project-nightstar.html"><i class="fas fa-arrow-left"></i> NightStar</a>
+        <a href="project-aprovamais.html">AprovaMais <i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<footer class="proj-footer">
+    <div class="container">
+        <div class="proj-footer-inner">
+            <span class="proj-footer-copy">© 2025 Wenderson Soares Werneck</span>
+            <div class="proj-footer-links">
+                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+</html>
