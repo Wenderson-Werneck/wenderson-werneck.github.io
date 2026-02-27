@@ -20,8 +20,8 @@
             --border:      #30363D;
             --border-lit:  #007ACC55;
             --text:        #E6EDF3;
-            --text-muted:  #7D8590;
-            --text-dim:    #484F58;
+            --text-muted:  #A0ADB8;
+            --text-dim:    #6E7882;
             --green:       #3FB950;
             --orange:      #F0883E;
             --purple:      #BC8CFF;
@@ -336,64 +336,99 @@
             box-shadow: 0 12px 40px rgba(0,122,204,0.15);
         }
         .project-card.hidden { display: none; }
-        .project-header {
-            padding: 1.5rem 1.5rem 0;
-            display: flex; justify-content: space-between; align-items: flex-start;
+
+        /* ─── CARD IMAGE ─── */
+        .project-img {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+            flex-shrink: 0;
         }
-        .project-icon {
-            width: 48px; height: 48px;
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.4rem;
+        .project-img img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
         }
-        .project-status {
+        .project-card:hover .project-img img { transform: scale(1.05); }
+        /* Fallback when no image */
+        .project-img-fallback {
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            gap: 0.5rem;
+        }
+        .project-img-fallback span { font-size: 2.8rem; }
+        .project-img-fallback small {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.7rem;
-            padding: 0.25rem 0.6rem;
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        /* Status badge overlaid on image */
+        .project-status {
+            position: absolute; top: 0.7rem; right: 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.55rem;
             border-radius: 20px;
             border: 1px solid;
+            backdrop-filter: blur(6px);
         }
-        .status-active { color: var(--green); border-color: var(--green); background: rgba(63,185,80,0.1); }
-        .status-study { color: var(--orange); border-color: var(--orange); background: rgba(240,136,62,0.1); }
-        .project-body { padding: 1rem 1.5rem; flex: 1; }
-        .project-body h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
-        .project-body p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+        .status-active { color: var(--green); border-color: var(--green); background: rgba(13,17,23,0.7); }
+        .status-study  { color: var(--orange); border-color: var(--orange); background: rgba(13,17,23,0.7); }
+
+        .project-body { padding: 1.1rem 1.4rem 0.6rem; flex: 1; }
+        .project-body h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text); }
+        .project-body p  { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; }
+
         .project-tech {
-            display: flex; flex-wrap: wrap; gap: 0.4rem;
-            padding: 0 1.5rem 1rem;
+            display: flex; flex-wrap: wrap; gap: 0.35rem;
+            padding: 0 1.4rem 0.8rem;
         }
         .tech-pill {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.68rem;
-            padding: 0.2rem 0.55rem;
+            font-size: 0.67rem;
+            padding: 0.2rem 0.5rem;
             border-radius: 4px;
             background: var(--bg-card);
-            color: var(--text-dim);
+            color: var(--text-muted);
             border: 1px solid var(--border);
         }
+
+        /* ─── CARD FOOTER: two equal buttons ─── */
         .project-footer {
-            padding: 1rem 1.5rem;
+            padding: 0.9rem 1.4rem;
             border-top: 1px solid var(--border);
-            display: flex; gap: 1rem; align-items: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
         }
-        .project-link {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: var(--blue);
+        .project-btn {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 0.5rem 0.7rem;
+            border-radius: 7px;
             text-decoration: none;
-            display: flex; align-items: center; gap: 0.4rem;
-            transition: color 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+            transition: all 0.2s;
+            white-space: nowrap;
         }
-        .project-link:hover { color: var(--blue-bright); }
-        .project-link-secondary {
-            font-size: 0.82rem;
+        .project-btn-doc {
+            background: var(--blue-dim);
+            color: var(--blue-bright);
+            border: 1px solid var(--blue-dark);
+        }
+        .project-btn-doc:hover { background: var(--blue); color: white; border-color: var(--blue); }
+        .project-btn-gh {
+            background: var(--bg-card);
             color: var(--text-muted);
-            text-decoration: none;
-            display: flex; align-items: center; gap: 0.4rem;
-            transition: color 0.2s;
-            margin-left: auto;
+            border: 1px solid var(--border);
         }
-        .project-link-secondary:hover { color: var(--text); }
+        .project-btn-gh:hover { border-color: var(--text); color: var(--text); }
 
         /* ─── EDUCATION ─── */
         .education-grid {
@@ -558,16 +593,16 @@
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item">
+                        <span class="stat-number">200k</span>
+                        <span class="stat-label">Registros processados</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">70%+</span>
+                        <span class="stat-label">Redução de trabalho manual</span>
+                    </div>
+                    <div class="stat-item">
                         <span class="stat-number">5</span>
-                        <span class="stat-label">Projetos</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">3+</span>
-                        <span class="stat-label">Anos de estudo</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Offline AI</span>
+                        <span class="stat-label">Projetos publicados</span>
                     </div>
                 </div>
                 <div class="hero-buttons">
@@ -703,8 +738,12 @@
 
             <!-- FIGURANTE -->
             <div class="project-card" data-tags="ia automacao">
-                <div class="project-header">
-                    <div class="project-icon" style="background: rgba(188,140,255,0.15); color: #BC8CFF;">🎭</div>
+                <div class="project-img" style="background: linear-gradient(135deg, #1a0d2e 0%, #2d1b4e 50%, #1a0a3a 100%);">
+                    <!-- Troque por: <img src="img/figurante.png" alt="Figurante"> -->
+                    <div class="project-img-fallback">
+                        <span>🎭</span>
+                        <small>Figurante</small>
+                    </div>
                     <span class="project-status status-active">● ativo</span>
                 </div>
                 <div class="project-body">
@@ -719,15 +758,19 @@
                     <span class="tech-pill">SSE</span>
                 </div>
                 <div class="project-footer">
-                    <a href="project-figurante.html" class="project-link"><i class="fas fa-arrow-right"></i> Ver detalhes</a>
-                    <a href="https://github.com/wenderson-werneck" target="_blank" class="project-link-secondary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="project-figurante.html" class="project-btn project-btn-doc"><i class="fas fa-file-alt"></i> Documentação</a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank" class="project-btn project-btn-gh"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
 
             <!-- NIGHTSTAR -->
             <div class="project-card" data-tags="ia automacao">
-                <div class="project-header">
-                    <div class="project-icon" style="background: rgba(0,122,204,0.15); color: #1F9CF0;">⭐</div>
+                <div class="project-img" style="background: linear-gradient(135deg, #040d1a 0%, #071828 50%, #0a1f35 100%);">
+                    <!-- Troque por: <img src="img/nightstar.png" alt="NightStar"> -->
+                    <div class="project-img-fallback">
+                        <span>⭐</span>
+                        <small>NightStar</small>
+                    </div>
                     <span class="project-status status-active">● ativo</span>
                 </div>
                 <div class="project-body">
@@ -742,15 +785,19 @@
                     <span class="tech-pill">BeautifulSoup</span>
                 </div>
                 <div class="project-footer">
-                    <a href="project-nightstar.html" class="project-link"><i class="fas fa-arrow-right"></i> Ver detalhes</a>
-                    <a href="https://github.com/wenderson-werneck" target="_blank" class="project-link-secondary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="project-nightstar.html" class="project-btn project-btn-doc"><i class="fas fa-file-alt"></i> Documentação</a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank" class="project-btn project-btn-gh"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
 
             <!-- NEXUS AI -->
             <div class="project-card" data-tags="ia dados automacao">
-                <div class="project-header">
-                    <div class="project-icon" style="background: rgba(63,185,80,0.12); color: #3FB950;">🤖</div>
+                <div class="project-img" style="background: linear-gradient(135deg, #0d1f0d 0%, #132613 50%, #0a1a0a 100%);">
+                    <!-- Troque por: <img src="img/nexus.png" alt="Nexus AI"> -->
+                    <div class="project-img-fallback">
+                        <span>🤖</span>
+                        <small>Nexus AI</small>
+                    </div>
                     <span class="project-status status-active">● ativo</span>
                 </div>
                 <div class="project-body">
@@ -765,15 +812,19 @@
                     <span class="tech-pill">Google Colab</span>
                 </div>
                 <div class="project-footer">
-                    <a href="project-nexus.html" class="project-link"><i class="fas fa-arrow-right"></i> Ver detalhes</a>
-                    <a href="https://github.com/wenderson-werneck" target="_blank" class="project-link-secondary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="project-nexus.html" class="project-btn project-btn-doc"><i class="fas fa-file-alt"></i> Documentação</a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank" class="project-btn project-btn-gh"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
 
             <!-- APROVAMAIS -->
             <div class="project-card" data-tags="ml dados">
-                <div class="project-header">
-                    <div class="project-icon" style="background: rgba(240,136,62,0.12); color: #F0883E;">📊</div>
+                <div class="project-img" style="background: linear-gradient(135deg, #1f1004 0%, #2a1a08 50%, #1a0f04 100%);">
+                    <!-- Troque por: <img src="img/aprovamais.png" alt="AprovaMais"> -->
+                    <div class="project-img-fallback">
+                        <span>📊</span>
+                        <small>AprovaMais</small>
+                    </div>
                     <span class="project-status status-study">◆ estudo</span>
                 </div>
                 <div class="project-body">
@@ -788,15 +839,19 @@
                     <span class="tech-pill">Pandas</span>
                 </div>
                 <div class="project-footer">
-                    <a href="project-aprovamais.html" class="project-link"><i class="fas fa-arrow-right"></i> Ver detalhes</a>
-                    <a href="https://colab.research.google.com/drive/1AyOB4qRvz3-ifSrVmnPPSCketa-UQ7O8?usp=sharing" target="_blank" class="project-link-secondary"><i class="fab fa-google-drive"></i> Notebook</a>
+                    <a href="project-aprovamais.html" class="project-btn project-btn-doc"><i class="fas fa-file-alt"></i> Documentação</a>
+                    <a href="https://colab.research.google.com/drive/1AyOB4qRvz3-ifSrVmnPPSCketa-UQ7O8?usp=sharing" target="_blank" class="project-btn project-btn-gh"><i class="fab fa-google-drive"></i> Notebook</a>
                 </div>
             </div>
 
             <!-- FIGURANTE CODE -->
             <div class="project-card" data-tags="ia dados">
-                <div class="project-header">
-                    <div class="project-icon" style="background: rgba(0,122,204,0.12); color: #007ACC;">💻</div>
+                <div class="project-img" style="background: linear-gradient(135deg, #001826 0%, #002035 50%, #001520 100%);">
+                    <!-- Troque por: <img src="img/figurante-code.png" alt="Figurante Code"> -->
+                    <div class="project-img-fallback">
+                        <span>💻</span>
+                        <small>Figurante Code</small>
+                    </div>
                     <span class="project-status status-active">● ativo</span>
                 </div>
                 <div class="project-body">
@@ -811,8 +866,8 @@
                     <span class="tech-pill">Ollama</span>
                 </div>
                 <div class="project-footer">
-                    <a href="project-figurante-code.html" class="project-link"><i class="fas fa-arrow-right"></i> Ver detalhes</a>
-                    <a href="https://github.com/wenderson-werneck" target="_blank" class="project-link-secondary"><i class="fab fa-github"></i> GitHub</a>
+                    <a href="project-figurante-code.html" class="project-btn project-btn-doc"><i class="fas fa-file-alt"></i> Documentação</a>
+                    <a href="https://github.com/wenderson-werneck" target="_blank" class="project-btn project-btn-gh"><i class="fab fa-github"></i> GitHub</a>
                 </div>
             </div>
 
@@ -956,12 +1011,7 @@
             </div>
             <div class="contact-form">
                 <h3 class="form-title">Envie uma mensagem</h3>
-                <!-- 
-                    INSTRUÇÃO: Para ativar o formulário, cadastre-se em formspree.io,
-                    crie um form e substitua "YOUR_FORM_ID" pelo seu ID.
-                    Ex: action="https://formspree.io/f/abcdefgh"
-                -->
-                <form id="contactForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <form id="contactForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="fname">Nome</label>
@@ -1000,7 +1050,20 @@
     </div>
 </footer>
 
+<!-- EmailJS — envia o formulário direto para wendersonwerneck@gmail.com sem backend -->
+<!-- INSTRUÇÕES (2 minutos):
+  1. Acesse https://www.emailjs.com e crie uma conta gratuita
+  2. Em "Email Services" conecte sua conta Gmail
+  3. Em "Email Templates" crie um template com variáveis: {{from_name}}, {{from_email}}, {{message}}
+  4. Substitua os três valores abaixo pelos seus IDs reais:
+       YOUR_PUBLIC_KEY   → Account > API Keys > Public Key
+       YOUR_SERVICE_ID   → Email Services > seu serviço > Service ID
+       YOUR_TEMPLATE_ID  → Email Templates > seu template > Template ID
+-->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
+(function(){ emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' }); })();
+
 // ─── TYPEWRITER ───
 const roles = [
     'Analista de Dados',
@@ -1095,34 +1158,38 @@ document.getElementById('mobileBtn').addEventListener('click', () => {
     document.getElementById('mainNav').classList.toggle('open');
 });
 
-// ─── FORM ───
+// ─── FORM via EmailJS ───
 const form = document.getElementById('contactForm');
 const status = document.getElementById('form-status');
-form.addEventListener('submit', async e => {
+
+form.addEventListener('submit', async function(e) {
     e.preventDefault();
-    status.className = ''; status.style.display = 'none';
+    status.className = '';
+    status.style.display = 'none';
+
     const btn = form.querySelector('button[type=submit]');
+    const originalHTML = btn.innerHTML;
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+
+    const params = {
+        from_name:  document.getElementById('fname').value,
+        from_email: document.getElementById('femail').value,
+        message:    document.getElementById('fmsg').value,
+    };
+
     try {
-        const res = await fetch(form.action, {
-            method: 'POST',
-            body: new FormData(form),
-            headers: { 'Accept': 'application/json' }
-        });
-        if (res.ok) {
-            status.textContent = '✓ Mensagem enviada! Responderei em breve.';
-            status.className = 'ok';
-            form.reset();
-        } else {
-            throw new Error();
-        }
-    } catch {
-        status.textContent = '✗ Erro ao enviar. Tente pelo WhatsApp ou email.';
+        await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', params);
+        status.textContent = '✓ Mensagem enviada! Responderei em breve.';
+        status.className = 'ok';
+        form.reset();
+    } catch (err) {
+        status.textContent = '✗ Erro ao enviar. Tente pelo WhatsApp ou email direto.';
         status.className = 'err';
+        console.error('EmailJS error:', err);
     } finally {
         btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar mensagem';
+        btn.innerHTML = originalHTML;
     }
 });
 </script>
