@@ -1,232 +1,1259 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Figurante — Wenderson Werneck</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --blue:#007ACC;--blue-bright:#1F9CF0;--blue-dark:#005A9E;--blue-dim:#0D2137;--blue-glow:rgba(0,122,204,0.2);
-            --bg:#0D1117;--bg-surface:#161B22;--bg-card:#1C2330;--border:#30363D;--border-lit:#007ACC55;
-            --text:#E6EDF3;--text-muted:#A0ADB8;--text-dim:#6E7882;
-            --green:#3FB950;--orange:#F0883E;--purple:#BC8CFF;--red:#F85149;
-            --accent:#BC8CFF;
-        }
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
-        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
-        .container{width:90%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Figurante — Wenderson Werneck</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#007ACC;--green:#1A7F37;--purple:#6639BA;--orange:#BC4C00;}
+[data-theme="light"]{--bg:#FFFFFF;--bg-s:#F6F8FA;--bg-c:#FFFFFF;--border:#D0D7DE;--text:#1F2328;--tm:#57606A;--td:#8C959F;--bdim:#EAF3FB;--glow:rgba(0,122,204,.12);}
+[data-theme="dark"]{--bg:#0D1117;--bg-s:#161B22;--bg-c:#1C2330;--border:#30363D;--text:#E6EDF3;--tm:#A0ADB8;--td:#6E7882;--bdim:#0D2137;--glow:rgba(0,122,204,.2);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .25s,color .25s;}
+a{color:var(--blue);text-decoration:none;}
+.w{width:90%;max-width:1100px;margin:0 auto;padding:0 20px;}
 
-        /* NAV */
-        header{padding:1rem 0;background:rgba(13,17,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-        .header-inner{display:flex;justify-content:space-between;align-items:center;}
-        .logo{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--blue);text-decoration:none;}
-        .logo span{color:var(--text-muted);}
-        .back-btn{font-size:0.85rem;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s;}
-        .back-btn:hover{color:var(--blue);}
+/* HEADER */
+header{padding:.85rem 0;background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;transition:background .25s;}
+[data-theme="dark"] header{background:rgba(13,17,23,.94);backdrop-filter:blur(16px);}
+.hdr{display:flex;align-items:center;gap:.8rem;}
+.back-btn{display:flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--tm);border:1px solid var(--border);padding:.32rem .65rem;border-radius:6px;transition:all .2s;flex-shrink:0;}
+.back-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--glow);}
+.hdr-logo{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--blue);}
+.hdr-logo span{color:var(--tm);}
+.icon-btn{width:33px;height:33px;border-radius:7px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:transparent;color:var(--tm);cursor:pointer;font-size:.82rem;text-decoration:none;transition:all .2s;margin-left:auto;}
+.icon-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--glow);}
 
-        /* HERO */
-        .proj-hero{padding:4rem 0 2rem;}
-        .proj-badge{font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:20px;border:1px solid var(--accent);color:var(--accent);background:rgba(188,140,255,0.1);display:inline-block;margin-bottom:1.2rem;}
-        .proj-icon-wrap{font-size:3.5rem;margin-bottom:1rem;display:block;}
-        .proj-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:0.8rem;}
-        .proj-subtitle{font-size:1.05rem;color:var(--text-muted);margin-bottom:2rem;max-width:640px;line-height:1.7;}
-        .proj-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;}
-        .meta-chip{font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.35rem 0.8rem;border-radius:6px;border:1px solid var(--border);color:var(--text-muted);}
-        .meta-chip i{margin-right:0.4rem;color:var(--blue);}
-        .proj-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
-        .btn{padding:0.65rem 1.4rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.25s;cursor:pointer;border:none;}
-        .btn-primary{background:var(--blue);color:white;}
-        .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 24px var(--blue-glow);}
-        .btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border);}
-        .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
+/* HERO */
+.hero{padding:3rem 0 2rem;border-bottom:1px solid var(--border);}
+.hero-in{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--blue);letter-spacing:.13em;text-transform:uppercase;margin-bottom:.65rem;}
+.eyebrow::before{content:'// ';color:var(--td);}
+.proj-title{font-size:2.3rem;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:.45rem;}
+.proj-title em{font-style:normal;color:var(--blue);}
+.tagline{font-size:.95rem;color:var(--tm);max-width:560px;line-height:1.75;margin-bottom:1.2rem;}
+.badges{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem;}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.18rem .5rem;border-radius:4px;border:1px solid;}
+.ba{color:#3FB950;border-color:#3FB950;background:rgba(63,185,80,.08);}
+.bl{color:var(--blue);border-color:rgba(0,122,204,.4);background:var(--bdim);}
+.metrics{display:flex;gap:2rem;padding:1rem 0;border-top:1px solid var(--border);}
+.met{text-align:left;}
+.met-n{font-family:'JetBrains Mono',monospace;font-size:1.45rem;font-weight:700;color:var(--blue);}
+.met-l{font-size:.65rem;color:var(--tm);text-transform:uppercase;letter-spacing:.05em;}
+.hero-thumb{width:200px;height:145px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3.2rem;flex-shrink:0;}
 
-        /* CONTENT */
-        .proj-divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
-        .prose h2{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--text);display:flex;align-items:center;gap:0.6rem;}
-        .prose h2::before{content:'';display:inline-block;width:3px;height:1.2em;background:var(--blue);border-radius:2px;}
-        .prose p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem;}
-        .prose ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
-        .prose ul li{color:var(--text-muted);padding-left:1.4rem;position:relative;line-height:1.7;}
-        .prose ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.85rem;}
+/* SECTIONS */
+.sec{padding:2.5rem 0;border-bottom:1px solid var(--border);}
+.sec:last-child{border-bottom:none;}
+.sec-ey{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--blue);letter-spacing:.13em;text-transform:uppercase;margin-bottom:.4rem;}
+.sec-ey::before{content:'// ';color:var(--td);}
+.sec-h{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;margin-bottom:1.3rem;}
+.sec-h em{font-style:normal;color:var(--blue);}
 
-        /* ARCHITECTURE DIAGRAM */
-        .arch-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1.4rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);line-height:1.9;overflow-x:auto;margin-bottom:1.5rem;}
-        .arch-box .hl{color:var(--blue);}
-        .arch-box .dim{color:var(--text-dim);}
-        .arch-box .ok{color:var(--green);}
-        .arch-box .warn{color:var(--orange);}
+/* DESCRIPTION GRID */
+.desc-g{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.dblock h3{font-size:.78rem;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.55rem;font-family:'JetBrains Mono',monospace;}
+.dblock p,.dblock li{font-size:.88rem;color:var(--tm);line-height:1.75;}
+.dblock ul{list-style:none;display:flex;flex-direction:column;gap:.28rem;}
+.dblock ul li{padding-left:1rem;position:relative;}
+.dblock ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:.75rem;}
 
-        /* STACK GRID */
-        .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.8rem;margin-bottom:1.5rem;}
-        .stack-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;display:flex;align-items:center;gap:0.7rem;transition:border-color 0.2s;}
-        .stack-item:hover{border-color:var(--blue);}
-        .stack-item i{color:var(--blue);font-size:1rem;width:18px;text-align:center;}
-        .stack-item span{font-size:0.82rem;font-weight:600;color:var(--text-muted);}
+/* FLOW STEPS */
+.flow{display:flex;flex-direction:column;gap:.45rem;}
+.fstep{display:flex;align-items:flex-start;gap:.85rem;padding:.7rem .95rem;background:var(--bg-s);border:1px solid var(--border);border-radius:8px;transition:border-color .2s;}
+.fstep:hover{border-color:var(--blue);}
+.fnum{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;color:var(--blue);background:var(--bdim);padding:.18rem .42rem;border-radius:4px;flex-shrink:0;margin-top:.08rem;}
+.fstep h4{font-size:.83rem;font-weight:700;margin-bottom:.15rem;}
+.fstep p{font-size:.78rem;color:var(--tm);}
+.farrow{text-align:center;font-family:'JetBrains Mono',monospace;color:var(--td);font-size:.75rem;padding:.08rem 0;}
 
-        /* HIGHLIGHT BOX */
-        .callout{background:var(--blue-dim);border:1px solid var(--border-lit);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
-        .callout p{color:var(--text-muted);margin:0;font-size:0.9rem;}
-        .callout strong{color:var(--blue);}
+/* FILE TREE */
+.tree{font-family:'JetBrains Mono',monospace;font-size:.77rem;background:var(--bg-s);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;line-height:2.1;}
+.tl{display:flex;align-items:center;gap:.45rem;color:var(--tm);}
+.tl.dir{color:var(--text);font-weight:700;}
+.tl.cl{cursor:pointer;border-radius:5px;padding:.08rem .38rem;margin:-.08rem -.38rem;transition:all .2s;}
+.tl.cl:hover{background:var(--bdim);color:var(--blue);}
+.tl .ti{color:var(--blue);width:13px;font-size:.72rem;}
+.tl .fi{color:var(--td);width:13px;font-size:.72rem;}
+.tl .gs{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);margin-left:.25rem;}
+.tl .ge{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:var(--bdim);color:var(--blue);border:1px solid rgba(0,122,204,.3);margin-left:.25rem;}
+.tl .gx{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:rgba(188,76,0,.08);color:#BC4C00;border:1px solid rgba(188,76,0,.2);margin-left:.25rem;}
+.ti2{margin-left:1.3rem;}
+.ti4{margin-left:2.6rem;}
+.ti6{margin-left:3.9rem;}
 
-        /* FOOTER */
-        .proj-footer{border-top:1px solid var(--border);padding:2rem 0;margin-top:4rem;}
-        .proj-footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-        .proj-footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-dim);}
-        .proj-footer-links{display:flex;gap:1rem;}
-        .proj-footer-links a{color:var(--text-dim);font-size:1.1rem;transition:color 0.2s;text-decoration:none;}
-        .proj-footer-links a:hover{color:var(--blue);}
+/* CODE MODAL */
+.cm-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:500;align-items:center;justify-content:center;padding:1rem;}
+.cm-ov.open{display:flex;}
+.cm-box{background:#0D1117;border:1px solid #30363D;border-radius:14px;width:100%;max-width:880px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 28px 72px rgba(0,0,0,.55);animation:pop .2s ease;}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.cm-hd{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.15rem;border-bottom:1px solid #21262D;flex-shrink:0;gap:1rem;}
+.cm-fname{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#1F9CF0;display:flex;align-items:center;gap:.5rem;min-width:0;}
+.cm-fname span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cm-actions{display:flex;gap:.35rem;flex-shrink:0;}
+.dl-btn{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.28rem .65rem;border-radius:5px;border:1px solid #30363D;background:rgba(31,156,240,.1);color:#1F9CF0;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.3rem;}
+.dl-btn:hover{background:rgba(31,156,240,.22);border-color:#1F9CF0;}
+.cl-btn{width:26px;height:26px;border-radius:5px;background:none;border:1px solid #30363D;color:#6E7882;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:all .2s;}
+.cl-btn:hover{color:#E6EDF3;background:#21262D;}
+.cm-body{overflow-y:auto;flex:1;}
+.code-wrap{display:flex;}
+.ln{flex-shrink:0;width:3.2rem;padding:1.1rem .4rem 1.1rem 1.1rem;text-align:right;font-family:'JetBrains Mono',monospace;font-size:.71rem;line-height:1.88;color:#30363D;border-right:1px solid #21262D;user-select:none;}
+.cc{flex:1;padding:1.1rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:.71rem;line-height:1.88;color:#c9d1d9;white-space:pre-wrap;word-break:break-word;}
+/* syntax colors */
+.sk{color:#ff7b72}.sf{color:#d2a8ff}.ss{color:#a5d6ff}.scm{color:#484f58;font-style:italic}.sn{color:#f0883e}.scl{color:#ffa657}.sk2{color:#79c0ff}
 
-        /* NAV BETWEEN PROJECTS */
-        .proj-nav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem;}
-        .proj-nav a{display:flex;align-items:center;gap:0.5rem;color:var(--text-muted);text-decoration:none;font-size:0.88rem;font-weight:600;padding:0.6rem 1rem;border:1px solid var(--border);border-radius:8px;transition:all 0.2s;}
-        .proj-nav a:hover{border-color:var(--blue);color:var(--blue);}
-    </style>
+/* INSTALL */
+.isteps{display:flex;flex-direction:column;gap:.75rem;}
+.is{display:flex;gap:.85rem;align-items:flex-start;padding:.85rem .95rem;background:var(--bg-s);border:1px solid var(--border);border-radius:8px;}
+.is-n{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;background:var(--blue);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;}
+.is h4{font-size:.83rem;font-weight:700;margin-bottom:.18rem;}
+.is p{font-size:.78rem;color:var(--tm);}
+.is p code{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.05rem .3rem;}
+.cmd{font-family:'JetBrains Mono',monospace;font-size:.7rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.45rem .75rem;margin-top:.38rem;color:var(--tm);cursor:pointer;display:block;transition:border-color .2s;}
+.cmd::before{content:'$ ';color:var(--blue);}
+.cmd:hover{border-color:var(--blue);}
+.cmd.copied{border-color:#3FB950!important;color:#3FB950;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:1.5rem 0;}
+.ft{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;}
+.ft-copy{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--td);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-in{grid-template-columns:1fr;}
+  .hero-thumb{display:none;}
+  .desc-g{grid-template-columns:1fr;}
+  .metrics{flex-wrap:wrap;gap:1rem;}
+}
+.hero-thumb{background:linear-gradient(135deg,#1a0d2e,#2d1b4e);}</style>
 </head>
 <body>
 <header>
-    <div class="container">
-        <div class="header-inner">
-            <a href="index.html" class="logo">WW<span>.dev</span></a>
-            <a href="index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar aos projetos</a>
-        </div>
+  <div class="w">
+    <div class="hdr">
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Portfólio</a>
+      <a href="index.html" class="hdr-logo" style="margin-left:.5rem;">WW<span>.dev</span></a>
+      <button class="icon-btn" id="themeBtn" title="Tema"><i class="fas fa-moon"></i></button>
     </div>
+  </div>
 </header>
 
-<section class="proj-hero">
-    <div class="container">
-        <span class="proj-badge">IA Local · Offline · Memória</span>
-        <span class="proj-icon-wrap">🎭</span>
-        <h1 class="proj-title">Figurante</h1>
-        <p class="proj-subtitle">Agente de IA pessoal, offline e com memória semântica persistente. Roda 100% no seu hardware — sem assinatura, sem nuvem, sem nenhum dado saindo da sua máquina.</p>
-        <div class="proj-meta">
-            <span class="meta-chip"><i class="fas fa-circle" style="color:var(--green)"></i>Ativo / em uso diário</span>
-            <span class="meta-chip"><i class="fab fa-python"></i>Python · Flask</span>
-            <span class="meta-chip"><i class="fas fa-brain"></i>Ollama · ChromaDB</span>
-            <span class="meta-chip"><i class="fas fa-microchip"></i>Dell Latitude 5290 · 8GB RAM</span>
+<section class="hero">
+  <div class="w">
+    <div class="hero-in">
+      <div>
+        <p class="eyebrow">IA Local · Flask · Ollama · ChromaDB</p>
+        <h1 class="proj-title">🎭 <em>Figurante</em></h1>
+        <p class="tagline">Agente de IA pessoal 100% offline com memória semântica persistente. Roda no seu hardware, aprende com o tempo, sem nuvem e sem assinatura.</p>
+        <div class="badges">
+          <span class="badge ba">● ativo</span>
+          <span class="badge bl">Python</span><span class="badge bl">Flask</span>
+          <span class="badge bl">Ollama</span><span class="badge bl">ChromaDB</span>
+          <span class="badge bl">SSE</span>
         </div>
-        <div class="proj-actions">
-            <a href="https://github.com/wenderson-werneck" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> Ver no GitHub</a>
-            <a href="index.html#projects" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <div class="metrics">
+          <div class="met"><div class="met-n">100%</div><div class="met-l">Offline</div></div>
+          <div class="met"><div class="met-n">2</div><div class="met-l">Modelos LLM</div></div>
+          <div class="met"><div class="met-n">∞</div><div class="met-l">Memória</div></div>
+          <div class="met"><div class="met-n">8</div><div class="met-l">Comandos</div></div>
         </div>
+      </div>
+      <div class="hero-thumb">🎭</div>
     </div>
+  </div>
 </section>
 
-<hr class="proj-divider" style="margin:0;">
-
-<div class="container" style="padding-top:3rem;padding-bottom:4rem;">
-    <div class="prose">
-
-        <h2>O problema</h2>
-        <p>Assistentes de IA como ChatGPT e Claude enviam tudo que você digita para servidores externos. Todo documento que você analisa, todo código que você compartilha, toda conversa passa por terceiros. Para uso pessoal e profissional intenso, isso é um problema real de privacidade.</p>
-        <p>O Figurante foi construído para eliminar esse problema completamente.</p>
-
-        <hr class="proj-divider">
-
-        <h2>A solução</h2>
-        <p>Um assistente pessoal construído sobre dois pilares: <strong>Ollama</strong> para rodar modelos de linguagem localmente, e <strong>ChromaDB</strong> para memória vetorial persistente. Todo o tráfego é <code>localhost</code>. Nenhum dado sai da máquina.</p>
-
-        <div class="callout">
-            <p><strong>Diferencial central:</strong> O Figurante tem <strong>memória semântica real</strong> — não apenas histórico de sessão. Ele lembra de informações de conversas passadas, indexa vetorialmente e as recupera automaticamente quando relevante para a conversa atual.</p>
-        </div>
-
-        <hr class="proj-divider">
-
-        <h2>Arquitetura</h2>
-        <div class="arch-box">
-<span class="dim">┌─────────────────────────────────────────────────────┐</span>
-<span class="dim">│            Browser → localhost:5000                 │</span>
-<span class="dim">│   Chat · Sessões · Upload · Memory Panel · Rules    │</span>
-<span class="dim">└───────────────────────┬─────────────────────────────┘</span>
-                        <span class="dim">│ HTTP / SSE (streaming)</span>
-<span class="dim">┌───────────────────────▼─────────────────────────────┐</span>
-<span class="dim">│                   Flask (app.py)                    │</span>
-<span class="dim">│                                                     │</span>
-<span class="hl">│  /api/perguntar  /api/memory  /api/nightstar/*      │</span>
-<span class="dim">│                                                     │</span>
-<span class="dim">│  ┌─────────────┐  ┌──────────┐  ┌───────────────┐  │</span>
-<span class="dim">│  │  Sessões    │  │ Memória  │  │  NightStar    │  │</span>
-<span class="dim">│  │  (RAM)      │  │ ChromaDB │  │  Integration  │  │</span>
-<span class="dim">│  └──────┬──────┘  └────┬─────┘  └───────────────┘  │</span>
-<span class="dim">│         │              │                             │</span>
-<span class="dim">│  ┌──────▼──────────────▼─────────────────────────┐  │</span>
-<span class="hl">│  │   Ollama (localhost:11434)                    │  │</span>
-<span class="ok">│  │   sam860/dolphin3-qwen2.5:1.5b  (modo paz)   │  │</span>
-<span class="ok">│  │   sam860/dolphin3-qwen2.5:3b    (modo ira)   │  │</span>
-<span class="dim">│  └───────────────────────────────────────────────┘  │</span>
-<span class="dim">│                                                     │</span>
-<span class="dim">│  ┌─────────────────────────────────────────────┐    │</span>
-<span class="warn">│  │  ChromaDB (disco local)                     │    │</span>
-<span class="dim">│  │  figurante_memoria · figurante_codigo        │    │</span>
-<span class="dim">│  └─────────────────────────────────────────────┘    │</span>
-<span class="dim">└─────────────────────────────────────────────────────┘</span>
-        </div>
-
-        <hr class="proj-divider">
-
-        <h2>Como a memória funciona</h2>
-        <p>O sistema de memória é a parte mais interessante tecnicamente. A cada mensagem, o agente faz uma busca semântica no ChromaDB para recuperar contexto de conversas anteriores relevantes:</p>
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Visão Geral</p>
+    <h2 class="sec-h">O que é o <em>Figurante</em></h2>
+    <div class="desc-g">
+      <div class="dblock">
+        <h3>Problema resolvido</h3>
+        <p>LLMs na nuvem exigem internet, cobram por token e enviam seus dados para servidores externos. O Figurante elimina todas essas dependências: roda 100% local, com memória vetorial que persiste entre sessões.</p>
+      </div>
+      <div class="dblock">
+        <h3>Funcionalidades</h3>
         <ul>
-            <li>Mensagem do usuário é usada como query vetorial</li>
-            <li>ChromaDB retorna os 5 documentos mais similares (distância coseno &lt; 0.7)</li>
-            <li>Os documentos recuperados são injetados no system prompt como "MEMÓRIA RELEVANTE"</li>
-            <li>O modelo responde com contexto de sessões que podem ter ocorrido dias atrás</li>
-            <li>Após a resposta, o par pergunta/resposta é salvo vetorialmente para uso futuro</li>
+          <li>Memória semântica via ChromaDB + embeddings ONNX offline</li>
+          <li>Dois modos: <strong>paz</strong> (1.5B, rápido) e <strong>ira</strong> (3B, preciso)</li>
+          <li>Upload de arquivos PDF, TXT, CSV, código no contexto</li>
+          <li>Streaming com cancelamento real via threading.Event</li>
+          <li>Múltiplas conversas com histórico isolado por chat_id</li>
+          <li>Regras editáveis inline pelo chat (<code>/rules</code>)</li>
+          <li>Modo Brain para ingestão em lote (<code>/brain</code>)</li>
+          <li>Integração nativa com o NightStar (<code>/signup URL</code>)</li>
         </ul>
-        <p>Embeddings gerados com <code>all-MiniLM-L6-v2</code> via ONNX — 100% offline após o primeiro download.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <hr class="proj-divider">
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Arquitetura</p>
+    <h2 class="sec-h">Como <em>funciona</em></h2>
+    <div class="flow">
+      <div class="fstep"><span class="fnum">01</span><div><h4>Browser → Flask <code style="font-family:'JetBrains Mono',monospace;font-size:.75rem">localhost:5000</code></h4><p>Requisição HTTP/SSE. Cada conversa tem um <code>chat_id</code> único — histórico e tema (paz/ira) são isolados.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">02</span><div><h4>ChromaDB — busca semântica</h4><p>A pergunta vira embedding (all-MiniLM-L6-v2, 100% offline) e retorna as 4 memórias mais relevantes por similaridade coseno.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">03</span><div><h4>Contexto enriquecido → Ollama</h4><p>Memórias relevantes + regras do usuário + histórico da conversa são combinados no system prompt antes de ir ao modelo.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">04</span><div><h4>Streaming SSE → Browser</h4><p>Tokens fluem em tempo real. Cancelamento via threading.Event — sem esperar resposta completa.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">05</span><div><h4>Destilação — ChromaDB aprende</h4><p>Par pergunta/resposta é salvo de volta. A cada sessão o agente fica mais contextualizado, sem fine-tuning.</p></div></div>
+    </div>
+  </div>
+</section>
 
-        <h2>Stack completa</h2>
-        <div class="stack-grid">
-            <div class="stack-item"><i class="fab fa-python"></i><span>Python 3.11 + Flask</span></div>
-            <div class="stack-item"><i class="fas fa-brain"></i><span>Ollama (local LLM)</span></div>
-            <div class="stack-item"><i class="fas fa-database"></i><span>ChromaDB (RAG)</span></div>
-            <div class="stack-item"><i class="fas fa-vector-square"></i><span>SentenceTransformers</span></div>
-            <div class="stack-item"><i class="fas fa-stream"></i><span>SSE (streaming)</span></div>
-            <div class="stack-item"><i class="fab fa-js"></i><span>Vanilla JS</span></div>
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Código-Fonte</p>
+    <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
+    <p style="font-size:.83rem;color:var(--tm);margin-bottom:1.1rem;">Clique em qualquer arquivo para ver o código. Arquivos marcados com <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);">sanitizado</span> tiveram dados pessoais removidos. Arquivos <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:var(--bdim);color:var(--blue);border:1px solid rgba(0,122,204,.3);">template</span> são exemplos para você preencher com seus dados.</p>
+    <div class="tree">
+      <div class="tl dir"><i class="fas fa-folder-open ti"></i>figurante/</div>
+      <div class="ti2">
+        <div class="tl cl" onclick="openFile('app.py')"><i class="fas fa-file-code fi"></i>app.py <span class="gs">sanitizado</span></div>
+        <div class="tl cl" onclick="openFile('requirements.txt')"><i class="fas fa-file-alt fi"></i>requirements.txt</div>
+        <div class="tl" style="color:var(--td);font-size:.72rem;margin-top:.15rem;"><i class="fas fa-eye-slash fi"></i>regras_figurante.md <span style="color:var(--td);"># editável pelo usuário — não versionado</span></div>
+        <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>banco_de_conversas.json <span style="color:var(--td);"># runtime — não versionado</span></div>
+        <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>memoria_profunda/ <span style="color:var(--td);"># ChromaDB — não versionado</span></div>
+        <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>data/</div>
+        <div class="ti2">
+          <div class="tl cl" onclick="openFile('perfil.example.json')"><i class="fas fa-file-code fi"></i>perfil.example.json <span class="ge">template</span></div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>perfil.json <span style="color:var(--td);"># seus dados reais — não versionado</span></div>
         </div>
-
-        <hr class="proj-divider">
-
-        <h2>Funcionalidades</h2>
-        <ul>
-            <li>Dois modos de operação: <strong>paz</strong> (1.5B, rápido) e <strong>ira</strong> (3B, preciso) — trocáveis em runtime</li>
-            <li>Memória semântica persistente entre sessões e reinicializações</li>
-            <li>Upload de arquivos: PDF, TXT, CSV, código — conteúdo injetado no contexto</li>
-            <li>Modo Brain para análise profunda de documentos</li>
-            <li>Sistema de regras (<code>regras_figurante.md</code>) — identidade editável pelo próprio chat</li>
-            <li>Streaming com cancelamento real via <code>threading.Event</code></li>
-            <li>Múltiplas sessões simultâneas com histórico isolado</li>
-            <li>Integração direta com NightStar via painel lateral</li>
-        </ul>
-
-        <hr class="proj-divider">
-
-        <h2>Aprendizados</h2>
-        <p>O maior aprendizado foi entender a diferença entre contexto de sessão (efêmero, RAM) e memória semântica (persistente, ChromaDB). O desafio não é salvar — é recuperar as informações certas na hora certa, com relevância suficiente para ser útil sem poluir o contexto do modelo.</p>
-        <p>Implementar streaming cancelável com SSE e <code>threading.Event</code> também foi mais trabalhoso do que parecia — garantir que threads não ficassem órfãs exigiu atenção ao ciclo de vida completo da requisição.</p>
-
+        <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>NightStar/ <span style="font-weight:400;font-size:.7rem;color:var(--td);"># subprojeto</span></div>
+        <div class="ti2">
+          <div class="tl cl" onclick="openFile('config.py')"><i class="fas fa-file-code fi"></i>config.py</div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>nightstar_profile/ <span style="color:var(--td);"># cookies do browser — não versionado</span></div>
+        </div>
+        <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>templates/ + static/ <span style="font-weight:400;font-size:.7rem;color:var(--td);"># interface web</span></div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="proj-nav">
-        <span></span>
-        <a href="project-nightstar.html">NightStar <i class="fas fa-arrow-right"></i></a>
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Instalação</p>
+    <h2 class="sec-h"><em>Como usar</em></h2>
+    <div class="isteps">
+      <div class="is"><div class="is-n">1</div><div><h4>Instale o Ollama</h4><p>Baixe em <a href="https://ollama.com" target="_blank">ollama.com</a> e depois baixe os modelos:</p><div class="cmd" onclick="copyCmd(this)">ollama pull sam860/dolphin3-qwen2.5:1.5b</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">ollama pull sam860/dolphin3-qwen2.5:3b</div></div></div>
+      <div class="is"><div class="is-n">2</div><div><h4>Instale as dependências</h4><div class="cmd" onclick="copyCmd(this)">pip install flask chromadb sentence-transformers ollama</div></div></div>
+      <div class="is"><div class="is-n">3</div><div><h4>Configure seu perfil</h4><p>Copie <code>perfil.example.json</code> → <code>data/perfil.json</code> e preencha com seus dados reais.</p></div></div>
+      <div class="is"><div class="is-n">4</div><div><h4>Inicie o Figurante</h4><div class="cmd" onclick="copyCmd(this)">python app.py</div><p style="margin-top:.35rem;">Acesse <code>http://localhost:5000</code> no navegador.</p></div></div>
+      <div class="is"><div class="is-n">5</div><div><h4>Para o Coding Agent (opcional)</h4><p>Configure a chave da Alibaba Cloud para usar o modelo 480B na nuvem:</p><div class="cmd" onclick="copyCmd(this)">set QWEN_API_KEY=sua_chave_aqui && python app.py</div></div></div>
     </div>
+  </div>
+</section>
+<footer>
+  <div class="w">
+    <div class="ft">
+      <span class="ft-copy">© 2025 Wenderson Soares Werneck</span>
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar ao portfólio</a>
+    </div>
+  </div>
+</footer>
+
+<div class="cm-ov" id="codeModal">
+  <div class="cm-box">
+    <div class="cm-hd">
+      <div class="cm-fname" id="cmFname"><i class="fas fa-file-code"></i><span>arquivo.py</span></div>
+      <div class="cm-actions">
+        <button class="dl-btn" onclick="dlCurrent()"><i class="fas fa-download"></i> Download</button>
+        <button class="cl-btn" onclick="closeCode()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="cm-body">
+      <div class="code-wrap">
+        <pre class="ln" id="cmLn"></pre>
+        <pre class="cc" id="cmCode"></pre>
+      </div>
+    </div>
+  </div>
 </div>
 
-<footer class="proj-footer">
-    <div class="container">
-        <div class="proj-footer-inner">
-            <span class="proj-footer-copy">© 2025 Wenderson Soares Werneck</span>
-            <div class="proj-footer-links">
-                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </div>
-</footer>
+<script>
+const FILES = {
+  "app.py": `"""
+app.py — Figurante | Servidor Flask principal
+
+Comandos no chat:
+  /model paz|ira       → Troca modelo
+  /brain               → Ativa modo aprendizado (tudo vai pra memória)
+  /brain exit          → Desativa modo aprendizado
+  /rules               → Abre editor de regras inline
+  /signup              → Abre NightStar
+  /signup exit         → Fecha NightStar
+  /memory              → Mostra contagem de memórias
+  /memory clear        → Limpa toda a memória
+"""
+
+from flask import Flask, render_template, request, jsonify, Response, stream_with_context
+import ollama
+import json
+import os
+import sys
+import uuid
+import threading
+import re
+from pathlib import Path
+from datetime import datetime
+
+app = Flask(__name__)
+
+# ── Paths ──────────────────────────────────────────────────────────────────────
+BASE_DIR          = Path(__file__).parent
+ARQUIVO_HISTORICO = BASE_DIR / "banco_de_conversas.json"
+ARQUIVO_REGRAS    = BASE_DIR / "regras_figurante.md"
+NIGHTSTAR_DIR     = BASE_DIR / "NightStar"
+MEMORIA_DIR       = BASE_DIR / "memoria_profunda"
+MEMORIA_DIR.mkdir(exist_ok=True)
+
+sys.path.insert(0, str(NIGHTSTAR_DIR))
+
+# ── Modelos ────────────────────────────────────────────────────────────────────
+MOTORES = {
+    "paz": "sam860/dolphin3-qwen2.5:1.5b",
+    "ira": "sam860/dolphin3-qwen2.5:3b",
+}
+
+# ── Estado global ──────────────────────────────────────────────────────────────
+modo_brain_ativo  = False
+requisicao_ativa  = {}   # chat_id → threading.Event (para cancelar)
+
+nightstar_estado = {
+    "status":   "idle",
+    "progresso": [],
+    "relatorio": None,
+    "url_atual": None,
+    "cancelar":  False,
+    "sugestoes": [],
+    "iniciar_agora": False,
+    "_executar_preenchimento": False,
+}
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# CODING AGENT — Roteador de Modelos
+# Roteia entre: local (Ollama) → cloud (Qwen API) → fallback (local 7b)
+# ══════════════════════════════════════════════════════════════════════════════
+
+CODING_MODELS = {
+    "local_leve":  "qwen2.5-coder:3b",    # Ollama local — leve, sem internet
+    "local_pesado": "qwen2.5-coder:7b",   # Ollama local — fallback pesado
+    "cloud":       "qwen3-coder-plus",    # Qwen API — nuvem, inteligência máxima
+}
+
+class CodingAgent:
+    """
+    Roteador inteligente de modelos de programação.
+    Alterna entre local (Ollama) e nuvem (Qwen API) com base em:
+    - Complexidade da tarefa (low/medium/high)
+    - Disponibilidade de cota da API
+    - Conectividade de rede
+    """
+    def __init__(self):
+        self.quota_ativa   = False  # True quando API key configurada
+        self.api_key       = os.getenv("QWEN_API_KEY", "")
+        if self.api_key:
+            self.quota_ativa = True
+
+    def classificar_complexidade(self, prompt: str) -> str:
+        """Heurística simples para estimar complexidade pelo tamanho e palavras-chave."""
+        pesadas = ["analise", "refatora", "arquitetura", "repositório", "módulo inteiro",
+                   "sistema", "integração", "otimiza", "analisa tudo", "todo o código"]
+        prompt_lower = prompt.lower()
+        if any(p in prompt_lower for p in pesadas) or len(prompt) > 800:
+            return "high"
+        if len(prompt) > 200:
+            return "medium"
+        return "low"
+
+    def completar(self, prompt: str, complexidade: str = None,
+                  system: str = None) -> dict:
+        """
+        Retorna: {"resposta": str, "modelo_usado": str, "provedor": str}
+        """
+        if complexidade is None:
+            complexidade = self.classificar_complexidade(prompt)
+
+        msgs = []
+        if system:
+            msgs.append({"role": "system", "content": system})
+        msgs.append({"role": "user", "content": prompt})
+
+        # Tarefa leve OU sem cota → usa local leve
+        if complexidade == "low" or not self.quota_ativa:
+            return self._local(msgs, CODING_MODELS["local_leve"])
+
+        # Tarefa pesada/média com cota → tenta nuvem, fallback local
+        if self.quota_ativa and self.api_key:
+            try:
+                return self._cloud(msgs)
+            except Exception as e:
+                print(f"[CodingAgent] Cloud falhou ({e}), fallback para local pesado")
+                self.quota_ativa = False
+                return self._local(msgs, CODING_MODELS["local_pesado"])
+
+        return self._local(msgs, CODING_MODELS["local_leve"])
+
+    def _local(self, msgs: list, modelo: str) -> dict:
+        resp = ollama.chat(model=modelo, messages=msgs,
+                           options={"num_ctx": 8192, "temperature": 0.2})
+        return {
+            "resposta":     resp["message"]["content"],
+            "modelo_usado": modelo,
+            "provedor":     "ollama_local",
+        }
+
+    def _cloud(self, msgs: list) -> dict:
+        """Chama a API da Alibaba Cloud (compatível com SDK OpenAI)."""
+        try:
+            import openai
+        except ImportError:
+            raise ImportError("openai não instalado. pip install openai")
+        cliente = openai.OpenAI(
+            api_key=self.api_key,
+            base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        )
+        resp = cliente.chat.completions.create(
+            model=CODING_MODELS["cloud"],
+            messages=msgs,
+            max_tokens=4096,
+            temperature=0.2,
+        )
+        return {
+            "resposta":     resp.choices[0].message.content,
+            "modelo_usado": CODING_MODELS["cloud"],
+            "provedor":     "qwen_cloud",
+        }
+
+    def status(self) -> dict:
+        return {
+            "quota_ativa":    self.quota_ativa,
+            "api_configurada": bool(self.api_key),
+            "modelos":        CODING_MODELS,
+        }
+
+# Instância global do CodingAgent
+_coding_agent = None
+
+def get_coding_agent() -> CodingAgent:
+    global _coding_agent
+    if _coding_agent is None:
+        _coding_agent = CodingAgent()
+    return _coding_agent
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 1. MEMÓRIA PROFUNDA (ChromaDB)
+# ══════════════════════════════════════════════════════════════════════════════
+
+def _get_colecao():
+    try:
+        import chromadb
+        c = chromadb.PersistentClient(path=str(MEMORIA_DIR))
+        return c.get_or_create_collection("figurante_memoria",
+                                          metadata={"hnsw:space": "cosine"})
+    except Exception as e:
+        print(f"[MEM] {e}")
+        return None
+
+def salvar_na_memoria(conteudo: str, origem: str = "chat",
+                       metadata_extra: dict = None) -> bool:
+    col = _get_colecao()
+    if not col or not conteudo.strip():
+        return False
+    try:
+        meta = {"origem": origem,
+                "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
+        if metadata_extra:
+            meta.update({k: str(v) for k, v in metadata_extra.items()})
+        col.add(documents=[conteudo],
+                ids=[f"{origem}_{uuid.uuid4().hex[:12]}"],
+                metadatas=[meta])
+        return True
+    except Exception as e:
+        print(f"[MEM] salvar: {e}")
+        return False
+
+def buscar_na_memoria(consulta: str, n: int = 4) -> list[str]:
+    col = _get_colecao()
+    if not col:
+        return []
+    try:
+        total = col.count()
+        if total == 0:
+            return []
+        res = col.query(query_texts=[consulta], n_results=min(n, total))
+        return [d for d in res.get("documents", [[]])[0] if d and d.strip()]
+    except Exception as e:
+        print(f"[MEM] buscar: {e}")
+        return []
+
+def contar_memorias() -> int:
+    col = _get_colecao()
+    try:
+        return col.count() if col else 0
+    except Exception:
+        return 0
+
+def listar_memorias(limite: int = 50) -> list[dict]:
+    """Retorna lista de memórias com id, conteúdo resumido e metadados."""
+    col = _get_colecao()
+    if not col:
+        return []
+    try:
+        total = col.count()
+        if total == 0:
+            return []
+        res = col.get(limit=min(limite, total),
+                      include=["documents", "metadatas"])
+        itens = []
+        for i, doc_id in enumerate(res["ids"]):
+            doc  = res["documents"][i]
+            meta = res["metadatas"][i]
+            itens.append({
+                "id":        doc_id,
+                "resumo":    doc[:180] + ("..." if len(doc) > 180 else ""),
+                "conteudo":  doc,
+                "origem":    meta.get("origem", "?"),
+                "timestamp": meta.get("timestamp", ""),
+                "nome":      meta.get("nome", ""),
+            })
+        return sorted(itens, key=lambda x: x["timestamp"], reverse=True)
+    except Exception as e:
+        print(f"[MEM] listar: {e}")
+        return []
+
+def deletar_memoria(doc_id: str) -> bool:
+    col = _get_colecao()
+    if not col:
+        return False
+    try:
+        col.delete(ids=[doc_id])
+        return True
+    except Exception as e:
+        print(f"[MEM] deletar: {e}")
+        return False
+
+def limpar_memoria() -> bool:
+    try:
+        import chromadb
+        c = chromadb.PersistentClient(path=str(MEMORIA_DIR))
+        c.delete_collection("figurante_memoria")
+        return True
+    except Exception as e:
+        print(f"[MEM] limpar: {e}")
+        return False
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 2. REGRAS DO FIGURANTE
+# ══════════════════════════════════════════════════════════════════════════════
+
+def carregar_regras() -> str:
+    if ARQUIVO_REGRAS.exists():
+        return ARQUIVO_REGRAS.read_text(encoding="utf-8")
+    return "# Nenhuma regra definida ainda.\\n"
+
+def salvar_regras(conteudo: str) -> bool:
+    try:
+        ARQUIVO_REGRAS.write_text(conteudo, encoding="utf-8")
+        return True
+    except Exception as e:
+        print(f"[REGRAS] {e}")
+        return False
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 3. BANCO DE CONVERSAS E IDENTIDADE
+# ══════════════════════════════════════════════════════════════════════════════
+
+def carregar_banco() -> dict:
+    if ARQUIVO_HISTORICO.exists():
+        with open(ARQUIVO_HISTORICO, "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {}
+
+def salvar_banco(banco: dict):
+    with open(ARQUIVO_HISTORICO, "w", encoding="utf-8") as f:
+        json.dump(banco, f, ensure_ascii=False, indent=4)
+
+def criar_instrucoes(motor: str, memorias: list[str] = None) -> str:
+    regras = carregar_regras()
+    bloco_mem = ""
+    if memorias:
+        bloco_mem = "\\n\\nMEMÓRIAS RELEVANTES:\\n" + \\
+                    "".join(f"  [{i+1}] {m[:400]}\\n" for i, m in enumerate(memorias))
+    return (
+        f"Você é o Figurante, IA local 100% offline no computador do usuário.\\n"
+        f"Seu criador trabalha com manutenção de caminhões e desenvolve projetos em "
+        f"Python e Machine Learning. Você opera no modo '{motor}'.\\n\\n"
+        f"REGRAS (leis absolutas — arquivo editável pelo usuário):\\n"
+        f"{regras}\\n\\n"
+        f"CONTROLE DO NIGHTSTAR:\\n"
+        f"- Escanear vaga: <activate_nightstar>URL</activate_nightstar>\\n"
+        f"- Fechar painel: <close_nightstar>true</close_nightstar>"
+        f"{bloco_mem}"
+    )
+
+def carregar_perfil() -> dict:
+    from config import PERFIL_JSON
+    with open(PERFIL_JSON, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+def salvar_perfil(perfil: dict):
+    from config import PERFIL_JSON
+    with open(PERFIL_JSON, "w", encoding="utf-8") as f:
+        json.dump(perfil, f, ensure_ascii=False, indent=2)
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 4. ROTAS DO FIGURANTE (Chat)
+# ══════════════════════════════════════════════════════════════════════════════
+
+@app.route("/")
+def home():
+    return render_template("index.html")
+
+@app.route("/api/conversas", methods=["GET"])
+def listar_conversas():
+    banco = carregar_banco()
+    return jsonify([{"id": k, "titulo": v["titulo"], "tema": v["tema"]}
+                    for k, v in banco.items()])
+
+@app.route("/api/conversas", methods=["POST"])
+def nova_conversa():
+    banco   = carregar_banco()
+    chat_id = str(uuid.uuid4())
+    banco[chat_id] = {
+        "titulo":    "Nova Conversa",
+        "tema":      "paz",
+        "mensagens": [{"role": "system", "content": criar_instrucoes("paz")}],
+    }
+    salvar_banco(banco)
+    return jsonify({"id": chat_id, "tema": "paz"})
+
+@app.route("/api/conversas/<chat_id>", methods=["GET"])
+def carregar_chat(chat_id):
+    banco = carregar_banco()
+    return jsonify(banco[chat_id]) if chat_id in banco else (jsonify({"erro": "Não encontrado"}), 404)
+
+@app.route("/api/conversas/<chat_id>", methods=["DELETE"])
+def deletar_chat(chat_id):
+    banco = carregar_banco()
+    if chat_id in banco:
+        del banco[chat_id]
+        salvar_banco(banco)
+        return jsonify({"sucesso": True})
+    return jsonify({"erro": "Não encontrado"}), 404
+
+@app.route("/api/perguntar", methods=["POST"])
+def perguntar():
+    global modo_brain_ativo
+    dados            = request.json or {}
+    chat_id          = dados.get("chat_id")
+    pergunta         = dados.get("mensagem", "").strip()
+    arquivos_brain   = dados.get("arquivos_brain", [])
+    arquivos_prompt  = dados.get("arquivos_prompt", [])  # ← arquivos vinculados ao prompt normal
+
+    banco = carregar_banco()
+    if chat_id not in banco:
+        return jsonify({"resposta": "Erro: Chat inválido."}), 400
+
+    sessao  = banco[chat_id]
+    comando = pergunta.lower().strip()
+
+    # ── Comandos de sistema ───────────────────────────────────────────────────
+
+    if comando in ("/model ira", "/model paz"):
+        novo_tema = comando.split()[1]
+        sessao["tema"] = novo_tema
+        sessao["mensagens"][0]["content"] = criar_instrucoes(novo_tema)
+        salvar_banco(banco)
+        icone = "🔥" if novo_tema == "ira" else "❄️"
+        return jsonify({"resposta": f"{icone} Modo **{novo_tema.upper()}** ativado.",
+                        "sistema": True, "novo_tema": novo_tema,
+                        "acao_nightstar": None, "modo_brain": modo_brain_ativo})
+
+    if comando == "/brain":
+        modo_brain_ativo = True
+        return jsonify({"resposta": (f"🧠 **Modo Brain ativado!**\\n\\n"
+                                     f"Tudo que enviar vai para a memória.\\n"
+                                     f"Use \`/brain exit\` para parar.\\n"
+                                     f"Total atual: **{contar_memorias()}** memórias."),
+                        "sistema": True, "novo_tema": sessao["tema"],
+                        "acao_nightstar": None, "modo_brain": True})
+
+    if comando == "/brain exit":
+        modo_brain_ativo = False
+        return jsonify({"resposta": (f"🧠 **Modo Brain desativado.**\\n"
+                                     f"Total salvo: **{contar_memorias()}** memórias."),
+                        "sistema": True, "novo_tema": sessao["tema"],
+                        "acao_nightstar": None, "modo_brain": False})
+
+    if comando == "/memory":
+        total = contar_memorias()
+        return jsonify({"resposta": f"🧠 **{total}** memória(s) armazenada(s). Abrindo gerenciador...",
+                        "sistema": True, "novo_tema": sessao["tema"],
+                        "acao_nightstar": None, "modo_brain": modo_brain_ativo,
+                        "abrir_modal_memorias": True})
+
+    if comando == "/memory clear":
+        ok = limpar_memoria()
+        return jsonify({"resposta": "🗑️ Memória **limpa**." if ok else "⚠️ Erro ao limpar.",
+                        "sistema": True, "novo_tema": sessao["tema"],
+                        "acao_nightstar": None, "modo_brain": modo_brain_ativo})
+
+    if comando == "/rules":
+        regras = carregar_regras()
+        return jsonify({"resposta": regras, "sistema": True,
+                        "novo_tema": sessao["tema"], "acao_nightstar": None,
+                        "modo_brain": modo_brain_ativo, "abrir_editor_regras": True})
+
+    if comando == "/signup":
+        return jsonify({"resposta": "🌟 NightStar ativado!", "sistema": True,
+                        "novo_tema": sessao["tema"], "acao_nightstar": "abrir",
+                        "modo_brain": modo_brain_ativo})
+
+    if comando == "/signup exit":
+        return jsonify({"resposta": "🌟 NightStar fechado.", "sistema": True,
+                        "novo_tema": sessao["tema"], "acao_nightstar": "fechar",
+                        "modo_brain": modo_brain_ativo})
+
+    # ── Modo Brain: salva e retorna ───────────────────────────────────────────
+    if modo_brain_ativo:
+        salvos = 0
+        if pergunta:
+            if salvar_na_memoria(pergunta, "chat_usuario"):
+                salvos += 1
+        for arq in arquivos_brain:
+            cont = arq.get("conteudo", "").strip()
+            nome = arq.get("nome", "arquivo")
+            if cont:
+                if salvar_na_memoria(f"[Arquivo: {nome}]\\n{cont}", "arquivo",
+                                     {"nome": nome}):
+                    salvos += 1
+        return jsonify({
+            "resposta": (f"🧠 **+{salvos}** salvo(s). Total: **{contar_memorias()}** memórias.\\n"
+                         f"Use \`/brain exit\` para parar."),
+            "sistema": True, "novo_tema": sessao["tema"],
+            "acao_nightstar": None, "modo_brain": True,
+        })
+
+    # ── Monta prompt com arquivos anexados ao prompt normal ───────────────────
+    conteudo_usuario = pergunta
+    if arquivos_prompt:
+        for arq in arquivos_prompt:
+            nome = arq.get("nome", "arquivo")
+            cont = arq.get("conteudo", "").strip()
+            if cont:
+                conteudo_usuario += f"\\n\\n---\\n📎 **{nome}:**\\n\`\`\`\\n{cont[:8000]}\\n\`\`\`"
+
+    sessao["mensagens"].append({"role": "user", "content": conteudo_usuario})
+    if sessao["titulo"] == "Nova Conversa" and pergunta:
+        sessao["titulo"] = pergunta[:28] + "..."
+
+    memorias = buscar_na_memoria(pergunta)
+    if memorias:
+        sys_enr = criar_instrucoes(sessao["tema"], memorias)
+        msgs = [{"role": "system", "content": sys_enr}] + sessao["mensagens"][1:]
+    else:
+        msgs = sessao["mensagens"]
+
+    # Registra evento de cancelamento para este chat
+    evt = threading.Event()
+    requisicao_ativa[chat_id] = evt
+
+    try:
+        motor  = MOTORES[sessao["tema"]]
+        resp   = ollama.chat(model=motor, messages=msgs,
+                             options={"num_ctx": 4096, "temperature": 0.7})
+        texto  = resp["message"]["content"]
+
+        # Extrai tags XML
+        acao_ns = None
+        url_ns  = None
+        m = re.search(r"<activate_nightstar>(.*?)</activate_nightstar>", texto)
+        if m:
+            url_ns  = m.group(1).strip()
+            acao_ns = "abrir"
+            texto   = re.sub(r"<activate_nightstar>.*?</activate_nightstar>", "", texto)
+        if "<close_nightstar>" in texto:
+            acao_ns = "fechar"
+            texto   = re.sub(r"<close_nightstar>.*?</close_nightstar>", "", texto)
+        texto = texto.strip()
+
+        sessao["mensagens"].append({"role": "assistant", "content": texto})
+        salvar_banco(banco)
+
+        return jsonify({
+            "resposta": texto, "sistema": False, "novo_tema": sessao["tema"],
+            "acao_nightstar": acao_ns, "url_nightstar": url_ns,
+            "modo_brain": modo_brain_ativo,
+        })
+
+    except Exception as e:
+        return jsonify({"resposta": f"⚠️ Erro: {e}"}), 500
+    finally:
+        requisicao_ativa.pop(chat_id, None)
+
+@app.route("/api/cancelar-resposta", methods=["POST"])
+def cancelar_resposta():
+    """Cancela a requisição em andamento para um chat."""
+    chat_id = (request.json or {}).get("chat_id")
+    evt = requisicao_ativa.get(chat_id)
+    if evt:
+        evt.set()
+        requisicao_ativa.pop(chat_id, None)
+        return jsonify({"ok": True})
+    return jsonify({"ok": False, "msg": "Nenhuma requisição ativa"})
+
+@app.route("/api/brain/status", methods=["GET"])
+def brain_status():
+    return jsonify({"ativo": modo_brain_ativo, "total": contar_memorias()})
+
+# ── Rotas de Memória ──────────────────────────────────────────────────────────
+
+@app.route("/api/memoria/listar", methods=["GET"])
+def memoria_listar():
+    return jsonify({"memorias": listar_memorias()})
+
+@app.route("/api/memoria/deletar", methods=["POST"])
+def memoria_deletar():
+    doc_id = (request.json or {}).get("id")
+    ok = deletar_memoria(doc_id) if doc_id else False
+    return jsonify({"ok": ok})
+
+# ── Rotas de Regras ───────────────────────────────────────────────────────────
+
+@app.route("/api/regras", methods=["GET"])
+def get_regras():
+    return jsonify({"conteudo": carregar_regras()})
+
+@app.route("/api/regras", methods=["POST"])
+def post_regras():
+    dados   = request.json or {}
+    conteudo = dados.get("conteudo", "")
+    ok = salvar_regras(conteudo)
+    return jsonify({"ok": ok})
+
+
+@app.route("/api/coding/completar", methods=["POST"])
+def coding_completar():
+    """Rota para usar o CodingAgent diretamente (para futuras integrações)."""
+    dados       = request.json or {}
+    prompt      = dados.get("prompt", "").strip()
+    complexidade = dados.get("complexidade", None)  # "low" / "medium" / "high" / None (auto)
+    system      = dados.get("system", None)
+
+    if not prompt:
+        return jsonify({"erro": "Prompt vazio."}), 400
+
+    try:
+        agente    = get_coding_agent()
+        resultado = agente.completar(prompt, complexidade, system)
+        return jsonify(resultado)
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
+
+@app.route("/api/coding/status", methods=["GET"])
+def coding_status():
+    return jsonify(get_coding_agent().status())
+
+
+@app.route("/api/coding/quota", methods=["POST"])
+def coding_toggle_quota():
+    """Ativa/desativa cota manualmente (ex: quando cota acabar)."""
+    dados   = request.json or {}
+    ativar  = dados.get("ativa", True)
+    api_key = dados.get("api_key", "")
+    agente  = get_coding_agent()
+    if api_key:
+        agente.api_key  = api_key
+        os.environ["QWEN_API_KEY"] = api_key
+    agente.quota_ativa = ativar
+    return jsonify({"ok": True, "quota_ativa": agente.quota_ativa})
+
+# ══════════════════════════════════════════════════════════════════════════════
+# 5. ROTAS DO NIGHTSTAR
+# ══════════════════════════════════════════════════════════════════════════════
+
+@app.route("/api/nightstar/iniciar", methods=["POST"])
+def nightstar_iniciar():
+    global nightstar_estado
+    dados = request.json or {}
+    url   = dados.get("url", "").strip()
+    if not url.startswith("http"):
+        return jsonify({"erro": "URL inválida."}), 400
+    if nightstar_estado["status"] in ("scanning", "filling", "waiting"):
+        return jsonify({"erro": "Operação já em andamento."}), 409
+    nightstar_estado = {
+        "status": "waiting", "progresso": ["🌟 NightStar iniciado...", f"🔗 URL: {url}"],
+        "relatorio": None, "url_atual": url, "cancelar": False, "sugestoes": [],
+        "iniciar_agora": False, "_executar_preenchimento": False,
+        "confirmar_envio": False, "aguardando_confirmacao_envio": False,
+    }
+    threading.Thread(target=_executar_varredura, args=(url,), daemon=True).start()
+    return jsonify({"ok": True})
+
+@app.route("/api/nightstar/cancelar", methods=["POST"])
+def nightstar_cancelar():
+    global nightstar_estado
+    nightstar_estado["cancelar"] = True
+    nightstar_estado["progresso"].append("⚠️ Cancelamento solicitado...")
+    return jsonify({"ok": True})
+
+@app.route("/api/nightstar/iniciar-agora", methods=["POST"])
+def nightstar_iniciar_agora():
+    global nightstar_estado
+    if nightstar_estado.get("status") != "waiting":
+        return jsonify({"erro": "Não há varredura aguardando."}), 400
+    nightstar_estado["iniciar_agora"] = True
+    nightstar_estado["status"] = "scanning"
+    nightstar_estado["progresso"].append("🚀 Varredura iniciada!")
+    return jsonify({"ok": True})
+
+@app.route("/api/nightstar/status", methods=["GET"])
+def nightstar_status():
+    return jsonify({k: v for k, v in nightstar_estado.items() if not k.startswith("_")})
+
+@app.route("/api/nightstar/iniciar-preenchimento", methods=["POST"])
+def nightstar_iniciar_preenchimento():
+    global nightstar_estado
+    dados = request.json or {}
+    fase  = dados.get("fase", "sugestoes")
+    if nightstar_estado["status"] not in ("done", "filling"):
+        return jsonify({"erro": "Execute uma varredura primeiro."}), 400
+    if fase == "preencher":
+        nightstar_estado["status"] = "filling"
+        nightstar_estado["cancelar"] = False
+        nightstar_estado["_executar_preenchimento"] = True
+        nightstar_estado["progresso"].append("🖊️ Preenchendo na página...")
+        return jsonify({"ok": True})
+    nightstar_estado["status"] = "filling"
+    nightstar_estado["cancelar"] = False
+    nightstar_estado["progresso"].append("🤖 Gerando sugestões...")
+    threading.Thread(target=_executar_preenchimento, daemon=True).start()
+    return jsonify({"ok": True})
+
+def _executar_preenchimento():
+    global nightstar_estado
+    try:
+        perfil    = carregar_perfil()
+        pendentes = perfil.get("metadados", {}).get("campos_pendentes", [])
+        sem_valor = [p for p in pendentes if p.get("status") == "PENDENTE" and not p.get("valor")]
+        if not sem_valor:
+            nightstar_estado["progresso"].append("✅ Nenhum campo pendente.")
+            nightstar_estado["status"] = "done"
+            return
+        perfil_resumo = json.dumps({
+            "identificacao": perfil.get("identificacao", {}),
+            "habilidades":   perfil.get("habilidades_tecnicas", {}),
+            "experiencia":   [e.get("cargo", "") for e in perfil.get("experiencia_profissional", [])],
+            "resumo":        perfil.get("resumo_profissional", ""),
+        }, ensure_ascii=False)
+        sugestoes = []
+        for campo in sem_valor:
+            if nightstar_estado["cancelar"]:
+                nightstar_estado["status"] = "done"
+                nightstar_estado["sugestoes"] = sugestoes
+                return
+            nome = campo.get("campo", "")
+            desc = campo.get("descricao", "")
+            nightstar_estado["progresso"].append(f"🤖 Gerando: {nome}...")
+            try:
+                resp  = ollama.chat(model=MOTORES["paz"],
+                                    messages=[{"role": "system", "content": criar_instrucoes("paz")},
+                                              {"role": "user", "content":
+                                               f"Perfil: {perfil_resumo}\\nCampo: \\"{nome}\\"\\n"
+                                               f"Descrição: \\"{desc}\\"\\n\\n"
+                                               f"Responda APENAS com o valor, sem explicações."}],
+                                    options={"num_ctx": 2048, "temperature": 0.4})
+                valor = resp["message"]["content"].strip()
+                sugestoes.append({"chave_sugerida": campo.get("chave_sugerida"), "campo": nome,
+                                   "descricao": desc, "valor_gerado": valor,
+                                   "aprovado": None, "valor_final": valor})
+                nightstar_estado["progresso"].append(f"✅ {nome}: ok")
+            except Exception as e:
+                nightstar_estado["progresso"].append(f"⚠️ {nome}: {e}")
+        nightstar_estado["sugestoes"] = sugestoes
+        nightstar_estado["status"]    = "done"
+        nightstar_estado["progresso"].append(f"✅ {len(sugestoes)} sugestão(ões) prontas!")
+    except Exception as e:
+        nightstar_estado["status"] = "error"
+        nightstar_estado["progresso"].append(f"❌ {e}")
+
+@app.route("/api/nightstar/sugestoes/aprovar", methods=["POST"])
+def nightstar_aprovar_sugestao():
+    global nightstar_estado
+    dados       = request.json or {}
+    chave       = dados.get("chave_sugerida")
+    aprovado    = dados.get("aprovado")
+    valor_final = dados.get("valor_final")
+    for s in nightstar_estado["sugestoes"]:
+        if s["chave_sugerida"] == chave:
+            s["aprovado"] = aprovado
+            s["valor_final"] = valor_final
+            break
+    if aprovado:
+        try:
+            perfil = carregar_perfil()
+            for p in perfil.get("metadados", {}).get("campos_pendentes", []):
+                if p.get("chave_sugerida") == chave:
+                    p["valor"] = valor_final
+                    p["status"] = "PREENCHIDO"
+                    break
+            salvar_perfil(perfil)
+        except Exception as e:
+            return jsonify({"erro": str(e)}), 500
+    return jsonify({"ok": True})
+
+@app.route("/api/nightstar/perfil", methods=["GET"])
+def nightstar_perfil():
+    try:
+        perfil = carregar_perfil()
+        return jsonify({"pendentes": perfil.get("metadados", {}).get("campos_pendentes", [])})
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
+@app.route("/api/nightstar/perfil/preencher", methods=["POST"])
+def nightstar_preencher_manual():
+    try:
+        dados  = request.json or {}
+        chave  = dados.get("chave_sugerida")
+        valor  = dados.get("valor")
+        perfil = carregar_perfil()
+        for campo in perfil.get("metadados", {}).get("campos_pendentes", []):
+            if campo.get("chave_sugerida") == chave:
+                campo["valor"]  = valor
+                campo["status"] = "PREENCHIDO"
+                break
+        salvar_perfil(perfil)
+        return jsonify({"ok": True})
+    except Exception as e:
+        return jsonify({"erro": str(e)}), 500
+
+
+@app.route("/api/nightstar/confirmar-envio", methods=["POST"])
+def nightstar_confirmar_envio():
+    """Confirma o envio da candidatura (modo semi-auto)."""
+    global nightstar_estado
+    if not nightstar_estado.get("aguardando_confirmacao_envio"):
+        return jsonify({"erro": "NightStar nao esta aguardando confirmacao de envio."}), 400
+    nightstar_estado["confirmar_envio"] = True
+    nightstar_estado["progresso"].append("📤 Envio confirmado pelo usuario!")
+    return jsonify({"ok": True})
+
+
+@app.route("/api/nightstar/resetar", methods=["POST"])
+def nightstar_resetar():
+    global nightstar_estado
+    nightstar_estado = {
+        "status": "idle", "progresso": [], "relatorio": None, "url_atual": None,
+        "cancelar": False, "sugestoes": [], "iniciar_agora": False,
+        "_executar_preenchimento": False,
+    }
+    return jsonify({"ok": True})
+
+def _executar_varredura(url: str):
+    global nightstar_estado
+    try:
+        from src.bot_core import NightStar
+        import logging
+        class Cap(logging.Handler):
+            def emit(self, r):
+                if not nightstar_estado.get("cancelar"):
+                    nightstar_estado["progresso"].append(self.format(r))
+        cap = Cap()
+        cap.setFormatter(logging.Formatter("%(message)s"))
+        logging.getLogger().addHandler(cap)
+        bot = NightStar()
+        bot.estado_nightstar = nightstar_estado
+        relatorio = bot.executar_retornando(url)
+        if nightstar_estado.get("cancelar"):
+            nightstar_estado["status"] = "idle"
+            nightstar_estado["progresso"].append("🛑 Cancelado.")
+        else:
+            nightstar_estado["status"]   = "done"
+            nightstar_estado["relatorio"] = relatorio
+            nightstar_estado["progresso"].append("✅ Concluído! Browser mantido aberto.")
+    except Exception as e:
+        nightstar_estado["status"] = "error"
+        nightstar_estado["progresso"].append(f"❌ {e}")
+
+# ══════════════════════════════════════════════════════════════════════════════
+if __name__ == "__main__":
+    app.run(debug=True, port=5000)
+`,
+  "config.py": `# config.py — Configurações centrais do NightStar
+# Edite este arquivo para adaptar ao seu ambiente.
+
+from pathlib import Path
+
+# ── Diretórios base ──────────────────────────────────────────────────────────
+BASE_DIR   = Path(__file__).parent
+DATA_DIR   = BASE_DIR / "data"
+LOGS_DIR   = BASE_DIR / "logs"
+SRC_DIR    = BASE_DIR / "src"
+
+# ── Arquivos de dados ────────────────────────────────────────────────────────
+PERFIL_JSON     = DATA_DIR / "perfil.json"
+MAPEAMENTOS_JSON = DATA_DIR / "mapeamentos.json"
+
+# ── Ollama ───────────────────────────────────────────────────────────────────
+OLLAMA_URL   = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "qwen2.5"   # Ajuste para o nome exato do seu modelo
+                            # (rode 'ollama list' no terminal para confirmar)
+
+# ── Playwright ───────────────────────────────────────────────────────────────
+BROWSER_HEADLESS = False    # False = abre o browser visualmente (recomendado para debug)
+BROWSER_TIMEOUT  = 30_000  # Timeout em ms para carregamento de páginas (30 segundos)
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+LOG_LEVEL = "DEBUG"         # DEBUG | INFO | WARNING | ERROR
+`,
+  "requirements.txt": `# Nexus_AutoFill — Dependências do Projeto
+# Instale com: pip install -r requirements.txt
+# Após instalar, rode: playwright install chromium
+
+playwright>=1.44.0          # Automação web moderna
+beautifulsoup4>=4.12.0      # Limpeza e parsing de HTML
+ollama>=0.2.0               # Lib oficial do Ollama (igual ao seu app.py do Figurante)
+colorlog>=6.8.0             # Logs coloridos no console do VS Code
+`,
+  "perfil.example.json": `{
+  "identificacao": {
+    "nome_completo": "Seu Nome Completo",
+    "email": "seu@email.com",
+    "telefone": "+55 (XX) XXXXX-XXXX",
+    "localizacao": {
+      "cidade": "Sua Cidade",
+      "estado": "Seu Estado",
+      "pais": "Brasil"
+    },
+    "links": {
+      "linkedin": "https://linkedin.com/in/seuperfil",
+      "github": "https://github.com/seuusuario",
+      "portfolio": "https://seusite.com"
+    }
+  },
+  "resumo_profissional": "Escreva aqui seu resumo profissional de 2-3 linhas.",
+  "formacao_academica": [
+    {
+      "instituicao": "Nome da Universidade",
+      "curso": "Nome do Curso",
+      "status": "Em andamento",
+      "previsao_conclusao": "2028"
+    }
+  ],
+  "experiencia_profissional": [
+    {
+      "empresa": "Nome da Empresa",
+      "cargo": "Seu Cargo",
+      "periodo": "2021 – Atual",
+      "atividades": [
+        "Descrição da atividade 1.",
+        "Descrição da atividade 2."
+      ]
+    }
+  ],
+  "habilidades_tecnicas": {
+    "linguagens": [
+      "Python",
+      "SQL"
+    ],
+    "ferramentas": [
+      "Power BI",
+      "Excel"
+    ],
+    "ia_ml": [
+      "Scikit-learn",
+      "Ollama"
+    ]
+  },
+  "idiomas": {
+    "portugues": "Nativo",
+    "ingles": "Intermediário"
+  },
+  "documentos": {
+    "curriculo_path": "C:/Users/Seu_Usuario/Documents/curriculo.pdf"
+  }
+}`,
+};
+
+// THEME
+const HTML = document.documentElement;
+const TB = document.getElementById('themeBtn');
+const sv = localStorage.getItem('ww_theme');
+if(sv === 'dark'){HTML.setAttribute('data-theme','dark');TB.querySelector('i').className='fas fa-sun';}
+TB.addEventListener('click',()=>{
+  const dark = HTML.getAttribute('data-theme')==='dark';
+  HTML.setAttribute('data-theme',dark?'light':'dark');
+  TB.querySelector('i').className=dark?'fas fa-moon':'fas fa-sun';
+  localStorage.setItem('ww_theme',dark?'light':'dark');
+});
+
+// SYNTAX HIGHLIGHT
+function highlight(code, fname){
+  const ext = fname.split('.').pop().toLowerCase();
+  let s = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  if(ext==='json'){
+    return s
+      .replace(/"([^"]+)"\s*:/g,'<span class="ss">"$1"</span>:')
+      .replace(/:\s*"([^"]*)"/g,': <span class="sf">"$1"</span>')
+      .replace(/:\s*(true|false|null)/g,': <span class="sk">$1</span>')
+      .replace(/:\s*(-?\d+\.?\d*)/g,': <span class="sn">$1</span>');
+  }
+  if(ext==='ipynb'){
+    return s.replace(/"source":\s*\[/g,'<span class="sk">"source"</span>: [')
+            .replace(/"cell_type":\s*"([^"]*)"/g,'"cell_type": <span class="ss">"$1"</span>');
+  }
+  return s
+    .replace(/(#[^\n]*)/g,'<span class="scm">$1</span>')
+    .replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,'<span class="ss">$1</span>')
+    .replace(/\b(def|class|import|from|return|if|else|elif|for|while|try|except|finally|with|as|in|not|and|or|True|False|None|async|await|lambda|yield|pass|break|continue|raise|global|nonlocal)\b/g,'<span class="sk">$1</span>')
+    .replace(/\b([A-Z][A-Za-z0-9_]{1,})\b/g,'<span class="scl">$1</span>')
+    .replace(/\b(\d+\.?\d*)\b/g,'<span class="sn">$1</span>');
+}
+
+// CODE MODAL
+let _curFile='', _curContent='';
+function openFile(fname){
+  const content = FILES[fname];
+  if(!content){console.warn('File not found:',fname);return;}
+  _curFile=fname; _curContent=content;
+  document.getElementById('cmFname').querySelector('span').textContent=fname;
+  const lines = content.split('\n');
+  document.getElementById('cmLn').textContent = lines.map((_,i)=>i+1).join('\n');
+  document.getElementById('cmCode').innerHTML = highlight(content,fname);
+  document.getElementById('codeModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCode(){
+  document.getElementById('codeModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function dlCurrent(){
+  const blob=new Blob([_curContent],{type:'text/plain'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=_curFile; a.click();
+}
+function copyCmd(el){
+  const txt=el.textContent.replace(/^\$ /,'');
+  navigator.clipboard.writeText(txt).then(()=>{
+    el.classList.add('copied');
+    setTimeout(()=>el.classList.remove('copied'),1300);
+  });
+}
+document.getElementById('codeModal').addEventListener('click',e=>{
+  if(e.target===document.getElementById('codeModal')) closeCode();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCode();});
+
+</script>
 </body>
 </html>

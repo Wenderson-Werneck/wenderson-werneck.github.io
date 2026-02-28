@@ -1,174 +1,541 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
-    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus AI — Wenderson Werneck</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root{--blue:#007ACC;--blue-bright:#1F9CF0;--blue-dark:#005A9E;--blue-dim:#0D2137;--blue-glow:rgba(0,122,204,0.2);--bg:#0D1117;--bg-surface:#161B22;--bg-card:#1C2330;--border:#30363D;--border-lit:#007ACC55;--text:#E6EDF3;--text-muted:#A0ADB8;--text-dim:#6E7882;--green:#3FB950;--orange:#F0883E;--purple:#BC8CFF;--red:#F85149;--accent:#3FB950;}
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
-        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
-        .container{width:90%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
-        header{padding:1rem 0;background:rgba(13,17,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-        .header-inner{display:flex;justify-content:space-between;align-items:center;}
-        .logo{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--blue);text-decoration:none;}
-        .logo span{color:var(--text-muted);}
-        .back-btn{font-size:0.85rem;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s;}
-        .back-btn:hover{color:var(--blue);}
-        .proj-hero{padding:4rem 0 2rem;}
-        .proj-badge{font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:20px;border:1px solid var(--accent);color:var(--accent);background:rgba(63,185,80,0.1);display:inline-block;margin-bottom:1.2rem;}
-        .proj-icon-wrap{font-size:3.5rem;margin-bottom:1rem;display:block;}
-        .proj-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:0.8rem;}
-        .proj-subtitle{font-size:1.05rem;color:var(--text-muted);margin-bottom:2rem;max-width:640px;line-height:1.7;}
-        .proj-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;}
-        .meta-chip{font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.35rem 0.8rem;border-radius:6px;border:1px solid var(--border);color:var(--text-muted);}
-        .meta-chip i{margin-right:0.4rem;color:var(--blue);}
-        .proj-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
-        .btn{padding:0.65rem 1.4rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.25s;cursor:pointer;border:none;}
-        .btn-primary{background:var(--blue);color:white;}
-        .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 24px var(--blue-glow);}
-        .btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border);}
-        .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
-        .proj-divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
-        .prose h2{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--text);display:flex;align-items:center;gap:0.6rem;}
-        .prose h2::before{content:'';display:inline-block;width:3px;height:1.2em;background:var(--blue);border-radius:2px;}
-        .prose p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem;}
-        .prose ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
-        .prose ul li{color:var(--text-muted);padding-left:1.4rem;position:relative;line-height:1.7;}
-        .prose ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.85rem;}
-        .arch-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1.4rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);line-height:1.9;overflow-x:auto;margin-bottom:1.5rem;}
-        .arch-box .hl{color:var(--blue);}
-        .arch-box .dim{color:var(--text-dim);}
-        .arch-box .ok{color:var(--green);}
-        .arch-box .warn{color:var(--orange);}
-        .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.8rem;margin-bottom:1.5rem;}
-        .stack-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;display:flex;align-items:center;gap:0.7rem;transition:border-color 0.2s;}
-        .stack-item:hover{border-color:var(--blue);}
-        .stack-item i{color:var(--blue);font-size:1rem;width:18px;text-align:center;}
-        .stack-item span{font-size:0.82rem;font-weight:600;color:var(--text-muted);}
-        .callout{background:var(--blue-dim);border:1px solid var(--border-lit);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
-        .callout p{color:var(--text-muted);margin:0;font-size:0.9rem;}
-        .callout strong{color:var(--blue);}
-        .proj-footer{border-top:1px solid var(--border);padding:2rem 0;margin-top:4rem;}
-        .proj-footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-        .proj-footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-dim);}
-        .proj-footer-links{display:flex;gap:1rem;}
-        .proj-footer-links a{color:var(--text-dim);font-size:1.1rem;transition:color 0.2s;text-decoration:none;}
-        .proj-footer-links a:hover{color:var(--blue);}
-        .proj-nav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem;}
-        .proj-nav a{display:flex;align-items:center;gap:0.5rem;color:var(--text-muted);text-decoration:none;font-size:0.88rem;font-weight:600;padding:0.6rem 1rem;border:1px solid var(--border);border-radius:8px;transition:all 0.2s;}
-        .proj-nav a:hover{border-color:var(--blue);color:var(--blue);}
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Nexus AI — Wenderson Werneck</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#007ACC;--green:#1A7F37;--purple:#6639BA;--orange:#BC4C00;}
+[data-theme="light"]{--bg:#FFFFFF;--bg-s:#F6F8FA;--bg-c:#FFFFFF;--border:#D0D7DE;--text:#1F2328;--tm:#57606A;--td:#8C959F;--bdim:#EAF3FB;--glow:rgba(0,122,204,.12);}
+[data-theme="dark"]{--bg:#0D1117;--bg-s:#161B22;--bg-c:#1C2330;--border:#30363D;--text:#E6EDF3;--tm:#A0ADB8;--td:#6E7882;--bdim:#0D2137;--glow:rgba(0,122,204,.2);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .25s,color .25s;}
+a{color:var(--blue);text-decoration:none;}
+.w{width:90%;max-width:1100px;margin:0 auto;padding:0 20px;}
+
+/* HEADER */
+header{padding:.85rem 0;background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;transition:background .25s;}
+[data-theme="dark"] header{background:rgba(13,17,23,.94);backdrop-filter:blur(16px);}
+.hdr{display:flex;align-items:center;gap:.8rem;}
+.back-btn{display:flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--tm);border:1px solid var(--border);padding:.32rem .65rem;border-radius:6px;transition:all .2s;flex-shrink:0;}
+.back-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--glow);}
+.hdr-logo{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--blue);}
+.hdr-logo span{color:var(--tm);}
+.icon-btn{width:33px;height:33px;border-radius:7px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:transparent;color:var(--tm);cursor:pointer;font-size:.82rem;text-decoration:none;transition:all .2s;margin-left:auto;}
+.icon-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--glow);}
+
+/* HERO */
+.hero{padding:3rem 0 2rem;border-bottom:1px solid var(--border);}
+.hero-in{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--blue);letter-spacing:.13em;text-transform:uppercase;margin-bottom:.65rem;}
+.eyebrow::before{content:'// ';color:var(--td);}
+.proj-title{font-size:2.3rem;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:.45rem;}
+.proj-title em{font-style:normal;color:var(--blue);}
+.tagline{font-size:.95rem;color:var(--tm);max-width:560px;line-height:1.75;margin-bottom:1.2rem;}
+.badges{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem;}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.18rem .5rem;border-radius:4px;border:1px solid;}
+.ba{color:#3FB950;border-color:#3FB950;background:rgba(63,185,80,.08);}
+.bl{color:var(--blue);border-color:rgba(0,122,204,.4);background:var(--bdim);}
+.metrics{display:flex;gap:2rem;padding:1rem 0;border-top:1px solid var(--border);}
+.met{text-align:left;}
+.met-n{font-family:'JetBrains Mono',monospace;font-size:1.45rem;font-weight:700;color:var(--blue);}
+.met-l{font-size:.65rem;color:var(--tm);text-transform:uppercase;letter-spacing:.05em;}
+.hero-thumb{width:200px;height:145px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3.2rem;flex-shrink:0;}
+
+/* SECTIONS */
+.sec{padding:2.5rem 0;border-bottom:1px solid var(--border);}
+.sec:last-child{border-bottom:none;}
+.sec-ey{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--blue);letter-spacing:.13em;text-transform:uppercase;margin-bottom:.4rem;}
+.sec-ey::before{content:'// ';color:var(--td);}
+.sec-h{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;margin-bottom:1.3rem;}
+.sec-h em{font-style:normal;color:var(--blue);}
+
+/* DESCRIPTION GRID */
+.desc-g{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.dblock h3{font-size:.78rem;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.55rem;font-family:'JetBrains Mono',monospace;}
+.dblock p,.dblock li{font-size:.88rem;color:var(--tm);line-height:1.75;}
+.dblock ul{list-style:none;display:flex;flex-direction:column;gap:.28rem;}
+.dblock ul li{padding-left:1rem;position:relative;}
+.dblock ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:.75rem;}
+
+/* FLOW STEPS */
+.flow{display:flex;flex-direction:column;gap:.45rem;}
+.fstep{display:flex;align-items:flex-start;gap:.85rem;padding:.7rem .95rem;background:var(--bg-s);border:1px solid var(--border);border-radius:8px;transition:border-color .2s;}
+.fstep:hover{border-color:var(--blue);}
+.fnum{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;color:var(--blue);background:var(--bdim);padding:.18rem .42rem;border-radius:4px;flex-shrink:0;margin-top:.08rem;}
+.fstep h4{font-size:.83rem;font-weight:700;margin-bottom:.15rem;}
+.fstep p{font-size:.78rem;color:var(--tm);}
+.farrow{text-align:center;font-family:'JetBrains Mono',monospace;color:var(--td);font-size:.75rem;padding:.08rem 0;}
+
+/* FILE TREE */
+.tree{font-family:'JetBrains Mono',monospace;font-size:.77rem;background:var(--bg-s);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;line-height:2.1;}
+.tl{display:flex;align-items:center;gap:.45rem;color:var(--tm);}
+.tl.dir{color:var(--text);font-weight:700;}
+.tl.cl{cursor:pointer;border-radius:5px;padding:.08rem .38rem;margin:-.08rem -.38rem;transition:all .2s;}
+.tl.cl:hover{background:var(--bdim);color:var(--blue);}
+.tl .ti{color:var(--blue);width:13px;font-size:.72rem;}
+.tl .fi{color:var(--td);width:13px;font-size:.72rem;}
+.tl .gs{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);margin-left:.25rem;}
+.tl .ge{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:var(--bdim);color:var(--blue);border:1px solid rgba(0,122,204,.3);margin-left:.25rem;}
+.tl .gx{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:rgba(188,76,0,.08);color:#BC4C00;border:1px solid rgba(188,76,0,.2);margin-left:.25rem;}
+.ti2{margin-left:1.3rem;}
+.ti4{margin-left:2.6rem;}
+.ti6{margin-left:3.9rem;}
+
+/* CODE MODAL */
+.cm-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:500;align-items:center;justify-content:center;padding:1rem;}
+.cm-ov.open{display:flex;}
+.cm-box{background:#0D1117;border:1px solid #30363D;border-radius:14px;width:100%;max-width:880px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 28px 72px rgba(0,0,0,.55);animation:pop .2s ease;}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.cm-hd{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.15rem;border-bottom:1px solid #21262D;flex-shrink:0;gap:1rem;}
+.cm-fname{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#1F9CF0;display:flex;align-items:center;gap:.5rem;min-width:0;}
+.cm-fname span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cm-actions{display:flex;gap:.35rem;flex-shrink:0;}
+.dl-btn{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.28rem .65rem;border-radius:5px;border:1px solid #30363D;background:rgba(31,156,240,.1);color:#1F9CF0;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.3rem;}
+.dl-btn:hover{background:rgba(31,156,240,.22);border-color:#1F9CF0;}
+.cl-btn{width:26px;height:26px;border-radius:5px;background:none;border:1px solid #30363D;color:#6E7882;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:all .2s;}
+.cl-btn:hover{color:#E6EDF3;background:#21262D;}
+.cm-body{overflow-y:auto;flex:1;}
+.code-wrap{display:flex;}
+.ln{flex-shrink:0;width:3.2rem;padding:1.1rem .4rem 1.1rem 1.1rem;text-align:right;font-family:'JetBrains Mono',monospace;font-size:.71rem;line-height:1.88;color:#30363D;border-right:1px solid #21262D;user-select:none;}
+.cc{flex:1;padding:1.1rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:.71rem;line-height:1.88;color:#c9d1d9;white-space:pre-wrap;word-break:break-word;}
+/* syntax colors */
+.sk{color:#ff7b72}.sf{color:#d2a8ff}.ss{color:#a5d6ff}.scm{color:#484f58;font-style:italic}.sn{color:#f0883e}.scl{color:#ffa657}.sk2{color:#79c0ff}
+
+/* INSTALL */
+.isteps{display:flex;flex-direction:column;gap:.75rem;}
+.is{display:flex;gap:.85rem;align-items:flex-start;padding:.85rem .95rem;background:var(--bg-s);border:1px solid var(--border);border-radius:8px;}
+.is-n{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;background:var(--blue);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;}
+.is h4{font-size:.83rem;font-weight:700;margin-bottom:.18rem;}
+.is p{font-size:.78rem;color:var(--tm);}
+.is p code{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.05rem .3rem;}
+.cmd{font-family:'JetBrains Mono',monospace;font-size:.7rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.45rem .75rem;margin-top:.38rem;color:var(--tm);cursor:pointer;display:block;transition:border-color .2s;}
+.cmd::before{content:'$ ';color:var(--blue);}
+.cmd:hover{border-color:var(--blue);}
+.cmd.copied{border-color:#3FB950!important;color:#3FB950;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:1.5rem 0;}
+.ft{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;}
+.ft-copy{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--td);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-in{grid-template-columns:1fr;}
+  .hero-thumb{display:none;}
+  .desc-g{grid-template-columns:1fr;}
+  .metrics{flex-wrap:wrap;gap:1rem;}
+}
+.hero-thumb{background:linear-gradient(135deg,#0d1f0d,#132613);}</style>
 </head>
 <body>
 <header>
-    <div class="container">
-        <div class="header-inner">
-            <a href="index.html" class="logo">WW<span>.dev</span></a>
-            <a href="index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar aos projetos</a>
-        </div>
+  <div class="w">
+    <div class="hdr">
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Portfólio</a>
+      <a href="index.html" class="hdr-logo" style="margin-left:.5rem;">WW<span>.dev</span></a>
+      <button class="icon-btn" id="themeBtn" title="Tema"><i class="fas fa-moon"></i></button>
     </div>
+  </div>
 </header>
 
-<section class="proj-hero">
-    <div class="container">
-        <span class="proj-badge">Busca · Semântica · Gemini · Colab</span>
-        <span class="proj-icon-wrap">🤖</span>
-        <h1 class="proj-title">Nexus AI</h1>
-        <p class="proj-subtitle">Agente inteligente de busca e ranqueamento de vagas. O Gemini expande um cargo em 15 variações e 30 skills, busca em 20+ países via API e ranqueia cada vaga pela similaridade semântica com o seu CV.</p>
-        <div class="proj-meta">
-            <span class="meta-chip"><i class="fas fa-circle" style="color:var(--green)"></i>Ativo</span>
-            <span class="meta-chip"><i class="fab fa-google"></i>Gemini 1.5 Flash</span>
-            <span class="meta-chip"><i class="fas fa-globe"></i>Adzuna API · 20+ países</span>
-            <span class="meta-chip"><i class="fab fa-python"></i>Streamlit · Google Colab</span>
+<section class="hero">
+  <div class="w">
+    <div class="hero-in">
+      <div>
+        <p class="eyebrow">Streamlit · Gemini API · Adzuna · SentenceTransformers</p>
+        <h1 class="proj-title">🤖 <em>Nexus AI</em></h1>
+        <p class="tagline">Agente de busca e ranqueamento semântico de vagas. Um cargo se transforma em 15 títulos + 30 skills via Gemini, busca em 20+ países via Adzuna, e cada vaga é ranqueada por similaridade com seu CV.</p>
+        <div class="badges">
+          <span class="badge ba">● ativo</span>
+          <span class="badge bl">Python</span><span class="badge bl">Streamlit</span>
+          <span class="badge bl">Gemini API</span><span class="badge bl">Adzuna API</span>
+          <span class="badge bl">SentenceTransformers</span>
         </div>
-        <div class="proj-actions">
-            <a href="https://github.com/wenderson-werneck" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> Ver no GitHub</a>
-            <a href="index.html#projects" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <div class="metrics">
+          <div class="met"><div class="met-n">1000+</div><div class="met-l">Vagas/busca</div></div>
+          <div class="met"><div class="met-n">20+</div><div class="met-l">Países</div></div>
+          <div class="met"><div class="met-n">15×</div><div class="met-l">Expansão cargos</div></div>
+          <div class="met"><div class="met-n">2</div><div class="met-l">Eixos de score</div></div>
         </div>
+      </div>
+      <div class="hero-thumb">🤖</div>
     </div>
+  </div>
 </section>
 
-<hr class="proj-divider" style="margin:0;">
-
-<div class="container" style="padding-top:3rem;padding-bottom:4rem;">
-    <div class="prose">
-        <h2>O problema</h2>
-        <p>Plataformas de emprego ordenam vagas por data de publicação ou palavra-chave exata. Isso significa que a melhor vaga para o seu perfil pode estar na página 5, enquanto na página 1 estão vagas irrelevantes publicadas hoje. O Nexus AI inverte essa lógica: ordena por compatibilidade real.</p>
-
-        <hr class="proj-divider">
-
-        <h2>Pipeline completo</h2>
-        <div class="arch-box">
-<span>Você digita: <span class="hl">"Machine Learning Engineer"</span></span>
-<span class="dim">        │</span>
-<span class="ok">[1] expandir_gemini()</span>
-<span class="dim">        │  Prompt → Gemini 1.5 Flash → JSON</span>
-<span class="dim">        │  Gera 15 variações de título + 30 skills</span>
-<span class="dim">        │  Idioma detectado pelo país selecionado (pt/en/es)</span>
-<span class="dim">        │  Fallback: PROFILE_DB embutido (sem internet)</span>
-<span class="dim">        │</span>
-<span class="hl">[2] NexusOrchestrator.fetch_adzuna()</span>
-<span class="dim">        │  Para cada título: 2 páginas × 50 vagas</span>
-<span class="dim">        │  Deduplicação por ID · Remove HTML das descrições</span>
-<span class="dim">        │  20+ países suportados</span>
-<span class="dim">        │</span>
-<span class="ok">[3] processar_ranking()</span>
-<span class="dim">        │  Match_Profile: cos_sim(perfil_embedding, desc_embedding)</span>
-<span class="dim">        │  Match_Pesquisa: título × skills com pesos configuráveis</span>
-<span class="warn">        │  Penalização: -50 se empresa ausente ou link suspeito</span>
-<span class="dim">        │  Match_Final: média ponderada (sliders da UI)</span>
-<span class="dim">        │</span>
-<span class="ok">        ✓ Tabela ordenada por compatibilidade real</span>
-        </div>
-
-        <hr class="proj-divider">
-
-        <h2>Score em dois eixos</h2>
-        <div class="callout">
-            <p><strong>Match_Profile</strong> — similaridade coseno entre o embedding do seu CV (<code>profile.json</code>) e a descrição de cada vaga. Mede o quanto a vaga <em>realmente</em> se alinha ao que você sabe e faz.</p>
-        </div>
-        <div class="callout">
-            <p><strong>Match_Pesquisa</strong> — presença dos títulos gerados no título da vaga (peso configurável) + proporção de skills na descrição (peso configurável). Mede o quanto a vaga usa os termos da sua busca.</p>
-        </div>
-        <p>Você controla o equilíbrio entre os dois via sliders. O score final é a média ponderada configurada em tempo real — sem refazer a busca.</p>
-
-        <hr class="proj-divider">
-
-        <h2>Fallback offline</h2>
-        <p>Se o Gemini falhar (cota, conexão, chave inválida), o <code>PROFILE_DB</code> embutido assume automaticamente. É um dicionário com títulos e skills por área (dados, ML, dev) em três idiomas (pt, en, es). O agente nunca para por falta de API.</p>
-
-        <hr class="proj-divider">
-
-        <h2>Stack completa</h2>
-        <div class="stack-grid">
-            <div class="stack-item"><i class="fas fa-chart-bar"></i><span>Streamlit</span></div>
-            <div class="stack-item"><i class="fab fa-google"></i><span>Gemini 1.5 Flash</span></div>
-            <div class="stack-item"><i class="fas fa-globe"></i><span>Adzuna API</span></div>
-            <div class="stack-item"><i class="fas fa-vector-square"></i><span>SentenceTransformers</span></div>
-            <div class="stack-item"><i class="fab fa-python"></i><span>Pandas</span></div>
-            <div class="stack-item"><i class="fas fa-network-wired"></i><span>pyngrok</span></div>
-        </div>
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Visão Geral</p>
+    <h2 class="sec-h">O que é o <em>Nexus AI</em></h2>
+    <div class="desc-g">
+      <div class="dblock">
+        <h3>Problema resolvido</h3>
+        <p>Buscar vagas manualmente em múltiplos sites gera resultados genéricos e não considera o fit real com seu perfil. O Nexus usa IA para expandir a busca e ranquear por semelhança semântica com suas habilidades.</p>
+      </div>
+      <div class="dblock">
+        <h3>Funcionalidades</h3>
+        <ul>
+          <li>Gemini expande 1 cargo em 15 títulos alternativos + 30 skills</li>
+          <li>Fallback offline quando Gemini não disponível (base hardcoded)</li>
+          <li>Adzuna API: busca em BR, US, UK, CA, AU, DE, FR e mais</li>
+          <li>Score em 2 eixos: afinidade com perfil + relevância da pesquisa</li>
+          <li>Penalização automática de vagas com inconsistência de integridade</li>
+          <li>Filtros de senioridade, faixa salarial, palavras negativas</li>
+          <li>Interface Streamlit com pesos ajustáveis em tempo real</li>
+          <li>Exportação dos resultados ranqueados</li>
+        </ul>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="proj-nav">
-        <a href="project-nightstar.html"><i class="fas fa-arrow-left"></i> NightStar</a>
-        <a href="project-aprovamais.html">AprovaMais <i class="fas fa-arrow-right"></i></a>
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Arquitetura</p>
+    <h2 class="sec-h">Pipeline de <em>Ranqueamento</em></h2>
+    <div class="flow">
+      <div class="fstep"><span class="fnum">01</span><div><h4>Expansão via Gemini</h4><p>Usuário digita um cargo. Gemini gera 15 variações de título + 30 skills relacionadas. Fallback: base de conhecimento offline por categoria (dados, dev, ML, RPA…).</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">02</span><div><h4>Fetch Adzuna — múltiplos países</h4><p>Para cada título expandido, o NexusOrchestrator faz chamadas paginadas à API Adzuna. Deduplicação por ID para evitar vagas repetidas.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">03</span><div><h4>Embedding + Score</h4><p>SentenceTransformer (all-MiniLM-L6-v2) gera embeddings de cada vaga. Score final = (Peso Profile × sim_perfil) + (Peso Pesquisa × sim_query). Penalização por sênior/estágio se aplicável.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">04</span><div><h4>Interface Streamlit</h4><p>Resultados exibidos em tabela ordenada por score. Usuário ajusta pesos dos eixos em sliders. Acesso via ngrok no Colab.</p></div></div>
     </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Código-Fonte</p>
+    <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
+    <p style="font-size:.83rem;color:var(--tm);margin-bottom:1.1rem;">Projeto desenvolvido no Google Colab. O notebook contém todas as células. <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);">sanitizado</span> — 3 tokens removidos e substituídos por variáveis de ambiente.</p>
+    <div class="tree">
+      <div class="tl dir"><i class="fab fa-google ti" style="color:#4285F4;"></i>Google Colab — Nexus_Bot/</div>
+      <div class="ti2">
+        <div class="tl cl" onclick="openFile('Nexus_AI.ipynb')"><i class="fas fa-file-code fi"></i>Nexus_AI.ipynb <span class="gs">sanitizado</span></div>
+        <div class="tl dir" style="margin-top:.3rem;"><i class="fab fa-google-drive ti" style="color:#4285F4;"></i>Google Drive — Nexus_Bot/ <span style="font-weight:400;font-size:.7rem;color:var(--td);"># gerado pelo notebook</span></div>
+        <div class="ti2">
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-file-code fi"></i>nexus_engine.py <span style="color:var(--td);"># gerado pela Célula 2</span></div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-file-code fi"></i>nexus_ai.py <span style="color:var(--td);"># gerado pela Célula 3</span></div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-file-code fi"></i>app.py <span style="color:var(--td);"># gerado pela Célula 4 (Streamlit)</span></div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-folder-open fi"></i>data/ <span style="color:var(--td);"># resultados exportados</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Instalação</p>
+    <h2 class="sec-h"><em>Como usar</em></h2>
+    <div class="isteps">
+      <div class="is"><div class="is-n">1</div><div><h4>Abra o notebook no Google Colab</h4><p>Faça upload do <code>Nexus_AI.ipynb</code> para o Colab ou abra via Google Drive.</p></div></div>
+      <div class="is"><div class="is-n">2</div><div><h4>Configure as chaves (Colab Secrets)</h4><p>No Colab, clique no ícone 🔑 na barra lateral → adicione os secrets:</p><div class="cmd" onclick="copyCmd(this)">GEMINI_KEY = sua_chave_google_ai_studio</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">ADZUNA_APP_ID = seu_app_id_adzuna</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">ADZUNA_APP_KEY = seu_app_key_adzuna</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">NGROK_TOKEN = seu_token_ngrok</div></div></div>
+      <div class="is"><div class="is-n">3</div><div><h4>Execute as células em ordem</h4><p>Célula 1 (Setup) → Célula 2 (Engine) → Célula 3 (IA) → Célula 4 (Interface) → Célula 5 (Servidor). O link do dashboard aparece no output da Célula 5.</p></div></div>
+      <div class="is"><div class="is-n">4</div><div><h4>APIs gratuitas</h4><p><strong>Adzuna:</strong> cadastro gratuito em <a href="https://developer.adzuna.com" target="_blank">developer.adzuna.com</a> — 1000 req/mês grátis.<br><strong>Gemini:</strong> gratuito via Google AI Studio. <strong>ngrok:</strong> gratuito em ngrok.com.</p></div></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="w">
+    <div class="ft">
+      <span class="ft-copy">© 2025 Wenderson Soares Werneck</span>
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar ao portfólio</a>
+    </div>
+  </div>
+</footer>
+
+<div class="cm-ov" id="codeModal">
+  <div class="cm-box">
+    <div class="cm-hd">
+      <div class="cm-fname" id="cmFname"><i class="fas fa-file-code"></i><span>arquivo.py</span></div>
+      <div class="cm-actions">
+        <button class="dl-btn" onclick="dlCurrent()"><i class="fas fa-download"></i> Download</button>
+        <button class="cl-btn" onclick="closeCode()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="cm-body">
+      <div class="code-wrap">
+        <pre class="ln" id="cmLn"></pre>
+        <pre class="cc" id="cmCode"></pre>
+      </div>
+    </div>
+  </div>
 </div>
 
-<footer class="proj-footer">
-    <div class="container">
-        <div class="proj-footer-inner">
-            <span class="proj-footer-copy">© 2025 Wenderson Soares Werneck</span>
-            <div class="proj-footer-links">
-                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </div>
-</footer>
+<script>
+const FILES = {
+  "Nexus_AI.ipynb": `{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "executionInfo": {
+     "elapsed": 54958,
+     "status": "ok",
+     "timestamp": 1772033124016,
+     "user": {
+      "displayName": "Wenderson werneck",
+      "userId": "09649910962808872733"
+     },
+     "user_tz": 180
+    },
+    "id": "EbO9qVlYmmj8",
+    "outputId": "c7232714-40e0-4dda-e9c7-a35e0e832e4f"
+   },
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "🚀 Atualizando bibliotecas do Google (Correção do Erro 404)...\\n",
+      "\\u001b[2K     \\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\u001b[0m \\u001b[32m79.5/79.5 kB\\u001b[0m \\u001b[31m2.5 MB/s\\u001b[0m eta \\u001b[36m0:00:00\\u001b[0m\\n",
+      "\\u001b[2K     \\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\u001b[0m \\u001b[32m91.2/91.2 kB\\u001b[0m \\u001b[31m3.9 MB/s\\u001b[0m eta \\u001b[36m0:00:00\\u001b[0m\\n",
+      "\\u001b[2K   \\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\u001b[0m \\u001b[32m9.1/9.1 MB\\u001b[0m \\u001b[31m37.4 MB/s\\u001b[0m eta \\u001b[36m0:00:00\\u001b[0m\\n",
+      "\\u001b[2K   \\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\u001b[0m \\u001b[32m12.4/12.4 MB\\u001b[0m \\u001b[31m38.6 MB/s\\u001b[0m eta \\u001b[36m0:00:00\\u001b[0m\\n",
+      "\\u001b[2K   \\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\u001b[0m \\u001b[32m64.7/64.7 kB\\u001b[0m \\u001b[31m1.9 MB/s\\u001b[0m eta \\u001b[36m0:00:00\\u001b[0m\\n",
+      "\\u001b[2K   \\u001b[90m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\\u001b[0m \\u001b[32m6.9/6.9 MB\\u001b[0m \\u001b[31m35.0 MB/s\\u001b[0m eta \\u001b[36m0:00:00\\u001b[0m\\n",
+      "\\u001b[?25h\\u001b[31mERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\\n",
+      "google-colab 1.0.0 requires pandas==2.2.2, but you have pandas 2.3.3 which is incompatible.\\n",
+      "google-colab 1.0.0 requires requests==2.32.4, but you have requests 2.32.5 which is incompatible.\\u001b[0m\\u001b[31m\\n",
+      "\\u001b[0mMounted at /content/drive\\n",
+      "✅ Ambiente Atualizado e Pronto.\\n"
+     ]
+    }
+   ],
+   "source": [
+    "# --- # Célula 1: SETUP (ATUALIZAÇÃO OBRIGATÓRIA) ---\\nimport os\\nfrom google.colab import drive\\n\\nprint(\\"🚀 Atualizando bibliotecas do Google (Correção do Erro 404)...\\")\\n# O '-U' força a atualização para a versão mais recente que suporta o Flash\\n!pip install -U -q google-generativeai streamlit pyngrok sentence-transformers pandas requests\\n\\ndrive.mount('/content/drive', force_remount=True)\\nPASTA = '/content/drive/My Drive/Nexus_Bot'\\nif not os.path.exists(f\\"{PASTA}/data\\"): os.makedirs(f\\"{PASTA}/data\\")\\nprint(\\"✅ Ambiente Atualizado e Pronto.\\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "executionInfo": {
+     "elapsed": 604,
+     "status": "ok",
+     "timestamp": 1772033124630,
+     "user": {
+      "displayName": "Wenderson werneck",
+      "userId": "09649910962808872733"
+     },
+     "user_tz": 180
+    },
+    "id": "lxrIICmcmreT",
+    "outputId": "5c34dc05-be7f-483a-b504-91365f9d1d76"
+   },
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "Overwriting /content/drive/My Drive/Nexus_Bot/nexus_engine.py\\n"
+     ]
+    }
+   ],
+   "source": [
+    "# --- # Célula 2: MOTOR DE BUSCA (EXPANDIDO) ---\\n%%writefile \\"/content/drive/My Drive/Nexus_Bot/nexus_engine.py\\"\\nimport requests\\nimport time\\nimport re\\nimport json\\n\\nclass NexusOrchestrator:\\n    def __init__(self, ad_id, ad_key, negatives):\\n        self.ad_id = ad_id\\n        self.ad_key = ad_key\\n        self.negatives = negatives\\n\\n    def fetch_adzuna(self, query, log_container, country_code=\\"br\\"):\\n        results = []\\n        ids_vistos = set()\\n\\n        # Mapeamento de moedas/idiomas básicos para log\\n        log_container.write(f\\"🌍 [Adzuna] Buscando em '{country_code.upper()}' por: '{query}'...\\")\\n\\n        # Paginação (1 a 2 para não estourar limite rápido)\\n        for p in range(1, 3):\\n            try:\\n                url = f\\"https://api.adzuna.com/v1/api/jobs/{country_code}/search/{p}\\"\\n                params = {\\n                    \\"app_id\\": self.ad_id,\\n                    \\"app_key\\": self.ad_key,\\n                    \\"what\\": query,\\n                    \\"what_exclude\\": self.negatives,\\n                    \\"results_per_page\\": 50,\\n                    \\"content-type\\": \\"application/json\\"\\n                }\\n\\n                r = requests.get(url, params=params, timeout=10)\\n\\n                if r.status_code == 200:\\n                    data = r.json()\\n                    for j in data.get('results', []):\\n                        jid = j.get('id')\\n                        if jid not in ids_vistos:\\n                            empresa = j.get('company', {}).get('display_name', '').strip()\\n                            # Normalização de dados\\n                            results.append({\\n                                'id': str(jid),\\n                                'Titulo': j.get('title', 'Sem Título'),\\n                                'Empresa': empresa if empresa else \\"NÃO INFORMADA\\",\\n                                'Local': j.get('location', {}).get('display_name', 'N/A'),\\n                                'Link': j.get('redirect_url', ''),\\n                                'Desc': re.sub('<.*?>', '', j.get('description', '')),\\n                                'Fonte': f'Adzuna {country_code.upper()}',\\n                                'DataRaw': j.get('created', '')\\n                            })\\n                            ids_vistos.add(jid)\\n                elif r.status_code == 400:\\n                    log_container.warning(f\\"⚠️ País '{country_code}' não suportado ou erro de parâmetro.\\")\\n                    break # Para de tentar páginas se o país for inválido\\n\\n                time.sleep(0.3)\\n            except Exception as e:\\n                pass # Ignora erros de conexão pontuais\\n\\n        return results\\n\\n    # Placeholder para futura implementação do Jooble ou InfoJobs\\n    def fetch_jooble(self, query, log_container):\\n        # Requer API Key do Jooble (Gratuita)\\n        # Implementar quando o usuário obtiver a chave\\n        return []"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "id": "3UjtgC-_mumD",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1772033125026,
+     "user_tz": 180,
+     "elapsed": 392,
+     "user": {
+      "displayName": "Wenderson werneck",
+      "userId": "09649910962808872733"
+     }
+    },
+    "outputId": "296e1db9-3201-4400-d3dc-fccff00e9b71"
+   },
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "Overwriting /content/drive/My Drive/Nexus_Bot/nexus_ai.py\\n"
+     ]
+    }
+   ],
+   "source": [
+    "# --- # Célula 3: CÉREBRO TUNADO + LÓGICA DE PESOS ---\\n%%writefile \\"/content/drive/My Drive/Nexus_Bot/nexus_ai.py\\"\\nimport google.generativeai as genai\\nfrom sentence_transformers import SentenceTransformer, util\\nimport pandas as pd\\nimport json\\n\\n# --- 1. BASE DE CONHECIMENTO (SEU PERFIL TÉCNICO) ---\\n# Fallback caso a API do Google falhe.\\nPROFILE_DB = {\\n    \\"pt\\": {\\n        \\"dados\\": (\\"Analista de Dados\\\\nEngenheiro de Analytics\\\\nEngenheiro de Dados Junior\\\\nAnalista de BI\\", \\"Python, SQL, Power BI, Excel, Google BigQuery, Pandas, ETL, Git, Dashboards\\"),\\n        \\"ml\\": (\\"Engenheiro de Machine Learning\\\\nCientista de Dados\\\\nDesenvolvedor de IA\\\\nEngenheiro de MLOps\\", \\"Python, TensorFlow, PyTorch, Scikit-learn, RAG, LLM, OpenCV, MLOps, Deep Learning, Keras\\"),\\n        \\"dev\\": (\\"Desenvolvedor Python\\\\nEngenheiro de Software (Dados)\\\\nAutomação de Processos\\", \\"Python, Streamlit, Selenium, API REST, Docker, Git, Automação, Flask\\")\\n    },\\n    \\"en\\": {\\n        \\"dados\\": (\\"Data Analyst\\\\nAnalytics Engineer\\\\nJunior Data Engineer\\\\nBI Analyst\\", \\"Python, SQL, Power BI, Excel, BigQuery, Tableau, ETL, Data Warehousing, Git\\"),\\n        \\"ml\\": (\\"Machine Learning Engineer\\\\nData Scientist\\\\nAI Engineer\\\\nComputer Vision Engineer\\", \\"Python, TensorFlow, PyTorch, Scikit-learn, RAG, Generative AI, MLOps, Docker, Kubernetes\\"),\\n        \\"dev\\": (\\"Python Developer\\\\nBackend Engineer\\\\nData Software Engineer\\", \\"Python, Streamlit, Selenium, REST APIs, Docker, CI/CD, Git, Cloud Computing\\")\\n    },\\n    \\"es\\": {\\n        \\"dados\\": (\\"Analista de Datos\\\\nIngeniero de Analytics\\\\nDesarrollador BI\\", \\"Python, SQL, Power BI, Excel, BigQuery, ETL, Visualización de Datos, Git\\"),\\n        \\"ml\\": (\\"Ingeniero de Machine Learning\\\\nCientífico de Datos\\\\nIngeniero de IA\\", \\"Python, TensorFlow, PyTorch, Scikit-learn, RAG, IA Generativa, MLOps\\"),\\n        \\"dev\\": (\\"Desarrollador Python\\\\nIngeniero de Backend\\", \\"Python, Streamlit, Selenium, API, Docker, Git, Scripting\\")\\n    }\\n}\\n\\ndef load_ai():\\n    return SentenceTransformer('all-MiniLM-L6-v2'), util\\n\\n# --- 2. EXPANSÃO INTELIGENTE ---\\ndef expandir_gemini(cargo, api_key, country_code):\\n    lang = \\"en\\"\\n    if country_code in [\\"br\\", \\"pt\\", \\"ao\\"]: lang = \\"pt\\"\\n    elif country_code in [\\"ar\\", \\"mx\\", \\"es\\", \\"cl\\", \\"co\\", \\"pe\\"]: lang = \\"es\\"\\n\\n    cargo_lower = cargo.lower()\\n\\n    try:\\n        genai.configure(api_key=api_key)\\n        model = genai.GenerativeModel('gemini-1.5-flash')\\n\\n        prompt = f\\"\\"\\"\\n        TASK: Tech Recruitment Strategy.\\n        PROFILE: Transitioning to Data/AI.\\n        ROLE: \\"{cargo}\\"\\n        LANGUAGE: {lang.upper()} (Response strictly in this language).\\n\\n        OUTPUT (JSON ONLY):\\n        {{\\n          \\"titles\\": [\\"Title 1\\", \\"Title 2\\"... (15 variations)],\\n          \\"skills\\": [\\"Skill 1\\", \\"Skill 2\\"... (30 tech skills)]\\n        }}\\n        \\"\\"\\"\\n\\n        response = model.generate_content(prompt)\\n        text = response.text.replace(\\"\`\`\`json\\", \\"\\").replace(\\"\`\`\`\\", \\"\\").strip()\\n        data = json.loads(text)\\n\\n        t = \\"\\\\n\\".join(data.get(\\"titles\\", []))\\n        s = \\", \\".join(data.get(\\"skills\\", []))\\n        return t, s\\n\\n    except Exception as e:\\n        # Fallback para o Dicionário Tunado\\n        db_lang = PROFILE_DB.get(lang, PROFILE_DB[\\"en\\"])\\n        if any(x in cargo_lower for x in ['machine', 'learning', 'ia', 'ai', 'vision', 'nlp']):\\n            return db_lang[\\"ml\\"]\\n        elif any(x in cargo_lower for x in ['dev', 'soft', 'python', 'backend']):\\n            return db_lang[\\"dev\\"]\\n        else:\\n            return db_lang[\\"dados\\"]\\n\\n# --- 3. RANKING COM TODOS OS PESOS (RESTAURADO) ---\\ndef processar_ranking(df, profile_path, titles_in, skills_in, model, util, w_profile, w_pesq, p_tit, p_skill):\\n    # A. Afinidade Profile (RAG)\\n    try:\\n        with open(profile_path, 'r') as f: pf = json.load(f)\\n        profile_txt = f\\"{pf.get('resumo_profissional_texto', '')} {', '.join(pf.get('hard_skills', []))}\\"\\n    except: profile_txt = titles_in\\n\\n    emb_p = model.encode(profile_txt, convert_to_tensor=True)\\n    emb_v = model.encode(df['Desc'].tolist(), convert_to_tensor=True)\\n    df['Match_Profile'] = util.cos_sim(emb_p, emb_v)[0].cpu().numpy() * 100\\n\\n    # B. Afinidade Pesquisa (Com pesos Título vs Skills restaurados)\\n    list_t = [t.lower().strip() for t in titles_in.split('\\\\n') if t.strip()]\\n    score_tit = df['Titulo'].apply(lambda x: 100 if any(t in x.lower() for t in list_t) else 0)\\n\\n    list_s = [s.lower().strip() for s in skills_in.split(',') if s.strip()]\\n    if list_s:\\n        score_tech = df['Desc'].apply(lambda d: (sum(1 for s in list_s if s in d.lower()) / len(list_s)) * 100)\\n    else: score_tech = 0\\n\\n    # Normalização dos pesos de pesquisa (0 a 1)\\n    wt = p_tit / 100.0\\n    ws = p_skill / 100.0\\n    # Garante que a soma seja proporcional a 100%\\n    total_div = wt + ws or 1\\n    df['Match_Pesquisa'] = ((score_tit * wt) + (score_tech * ws)) / total_div\\n\\n    # C. Integridade\\n    def check_integrity(r):\\n        if r['Empresa'] == \\"NÃO INFORMADA\\" or \\"cadernonacional\\" in str(r['Link']).lower():\\n            return -50.0, \\"🔴 PENALIZADA\\"\\n        return 0.0, \\"🟢 OK\\"\\n    df[['Redutor', 'Integridade']] = df.apply(check_integrity, axis=1, result_type='expand')\\n\\n    # D. Final (Profile vs Pesquisa)\\n    total_w = w_profile + w_pesq or 1\\n    df['Match_Final'] = (((df['Match_Profile'] * w_profile) + (df['Match_Pesquisa'] * w_pesq)) / total_w) + df['Redutor']\\n\\n    return df"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "source": [
+    "# --- # Célula 4: INTERFACE COMPLETA (FILTROS + PESOS + PAÍSES) ---\\n%%writefile \\"/content/drive/My Drive/Nexus_Bot/app.py\\"\\nimport streamlit as st\\nimport pandas as pd\\nimport sys\\nimport os\\nfrom datetime import datetime, timezone, timedelta\\nsys.path.append('/content/drive/My Drive/Nexus_Bot')\\nfrom nexus_engine import NexusOrchestrator\\nfrom nexus_ai import processar_ranking, load_ai, expandir_gemini\\n\\nst.set_page_config(page_title=\\"Nexus Sentinel v7.7\\", layout=\\"wide\\")\\n\\n# Inicialização\\nif 'titles_to_search' not in st.session_state: st.session_state.titles_to_search = \\"\\"\\nif 'skills_to_search' not in st.session_state: st.session_state.skills_to_search = \\"\\"\\nif 'raw_pool' not in st.session_state: st.session_state.raw_pool = None\\n\\nGEMINI_KEY = os.environ.get(\\"GEMINI_KEY\\")  # Configure em Colab Secrets\\n\\n# Lista de Países (Completa conforme Adzuna)\\nPAISES = {\\n    \\"🌍 TODOS (Global)\\": \\"all\\", \\"🇧🇷 Brasil\\": \\"br\\", \\"🇺🇸 Estados Unidos\\": \\"us\\",\\n    \\"🇬🇧 Reino Unido\\": \\"gb\\", \\"🇨🇦 Canadá\\": \\"ca\\", \\"🇦🇺 Austrália\\": \\"au\\",\\n    \\"🇩🇪 Alemanha\\": \\"de\\", \\"🇫🇷 França\\": \\"fr\\", \\"🇮🇳 Índia\\": \\"in\\", \\"🇳🇱 Holanda\\": \\"nl\\",\\n    \\"🇮🇹 Itália\\": \\"it\\", \\"🇪🇸 Espanha\\": \\"es\\", \\"🇲🇽 México\\": \\"mx\\", \\"🇦🇹 Áustria\\": \\"at\\",\\n    \\"🇧🇪 Bélgica\\": \\"be\\", \\"🇨🇭 Suíça\\": \\"ch\\", \\"🇳🇿 Nova Zelândia\\": \\"nz\\",\\n    \\"🇵🇱 Polônia\\": \\"pl\\", \\"🇷🇺 Rússia\\": \\"ru\\", \\"🇸🇬 Singapura\\": \\"sg\\", \\"🇿🇦 África do Sul\\": \\"za\\"\\n}\\n\\nwith st.sidebar:\\n    st.title(\\"⚙️ Painel de Controle\\")\\n\\n    # --- 1. FILTROS GERAIS (TOPO) ---\\n    st.subheader(\\"📍 Localização & Filtros\\")\\n    pais_nome = st.selectbox(\\"País Alvo:\\", list(PAISES.keys()), index=1) # Default BR\\n    country_code = PAISES[pais_nome]\\n\\n    # Filtro de Estado só aparece se for Brasil\\n    estados = []\\n    if country_code == \\"br\\":\\n        estados = st.multiselect(\\"Regiões (BR):\\", [\\"TODOS\\", \\"SP\\", \\"RJ\\", \\"MG\\", \\"ES\\", \\"RS\\", \\"SC\\", \\"PR\\", \\"BA\\", \\"PE\\", \\"DF\\", \\"GO\\", \\"CE\\"], default=[\\"TODOS\\"])\\n\\n    dias = st.selectbox(\\"Janela de Data:\\", [\\"TUDO\\", 1, 7, 15, 30], index=0)\\n    # Chave única para evitar erro de ID duplicado\\n    neg_input = st.text_input(\\"Excluir Termos:\\", \\"Sênior, Estágio, Senior\\", key=\\"n_input\\")\\n\\n    st.divider()\\n\\n    # --- 2. PESOS (BAIXO) ---\\n    st.subheader(\\"⚖️ Calibragem do Algoritmo\\")\\n\\n    with st.expander(\\"1. Pesos da Pesquisa (Termos)\\", expanded=False):\\n        st.caption(\\"Quanto vale cada parte da busca?\\")\\n        p_tit = st.slider(\\"Peso do Título\\", 0, 100, 80)\\n        p_skill = st.slider(\\"Peso das Skills\\", 0, 100, 20)\\n\\n    with st.expander(\\"2. Pesos do Ranking (Final)\\", expanded=True):\\n        st.caption(\\"O que define o topo da lista?\\")\\n        w_profile = st.slider(\\"Afinidade Profile (Seu CV)\\", 0, 100, 50)\\n        w_pesq = st.slider(\\"Afinidade Pesquisa (Termos)\\", 0, 100, 50)\\n\\n    st.divider()\\n    if st.button(\\"🗑️ NOVA PESQUISA (RESET)\\", type=\\"primary\\"):\\n        st.session_state.clear()\\n        st.rerun()\\n\\nst.title(f\\"🤖 Nexus Bot: {pais_nome}\\")\\n\\n# --- ETAPA 1: IA INTELIGENTE ---\\ncargo_base = st.text_input(\\"1. Digite o Cargo Base:\\", \\"Machine Learning Engineer\\")\\n\\nif st.button(\\"🧠 Gerar Estrutura (Tunada)\\"):\\n    with st.spinner(\\"Consultando Nexus Brain (Gemini + Profile)...\\"):\\n        t, s = expandir_gemini(cargo_base, GEMINI_KEY, country_code)\\n        st.session_state.titles_to_search = t\\n        st.session_state.skills_to_search = s\\n        st.success(\\"✅ Estrutura Carregada!\\")\\n\\nc1, c2 = st.columns(2)\\nwith c1: t_input = st.text_area(\\"✍️ Títulos (Editável):\\", value=st.session_state.titles_to_search, height=150)\\nwith c2: s_input = st.text_area(\\"✍️ Skills (Editável):\\", value=st.session_state.skills_to_search, height=150)\\n\\n# --- ETAPA 2: MOTOR DE BUSCA ---\\nif st.button(\\"🚀 EXECUTAR PESQUISA\\", type=\\"primary\\"):\\n    engine = NexusOrchestrator(os.environ.get(\\"ADZUNA_APP_ID\\"), os.environ.get(\\"ADZUNA_APP_KEY\\"), neg_input)\\n\\n    log = st.status(f\\"🏗️ Coletando vagas em {pais_nome}...\\", expanded=True)\\n    pool = []\\n    termos = [t.strip() for t in t_input.split('\\\\n') if t.strip()]\\n\\n    for t in termos:\\n        pool.extend(engine.fetch_adzuna(t, log, country_code=country_code))\\n\\n    if pool:\\n        st.session_state.raw_pool = pd.DataFrame(pool).drop_duplicates('id')\\n        log.update(label=\\"✅ Coleta Finalizada!\\", state=\\"complete\\")\\n    else:\\n        log.error(\\"Nenhuma vaga encontrada.\\")\\n\\n# --- ETAPA 3: RANKING E EXIBIÇÃO ---\\nif st.session_state.raw_pool is not None and not st.session_state.raw_pool.empty:\\n    df = st.session_state.raw_pool.copy()\\n    model, util = load_ai()\\n\\n    # Chama o ranking passando TODOS os pesos do sidebar\\n    df = processar_ranking(df, '/content/drive/My Drive/Nexus_Bot/data/profile.json', t_input, s_input, model, util, w_profile, w_pesq, p_tit, p_skill)\\n\\n    # Filtros Finais\\n    df['DataDt'] = pd.to_datetime(df['DataRaw'], errors='coerce', utc=True)\\n    df['Data'] = df['DataDt'].dt.strftime('%d/%m/%Y')\\n\\n    if dias != \\"TUDO\\":\\n        df = df[df['DataDt'] >= (datetime.now(timezone.utc) - timedelta(days=int(dias)))]\\n\\n    # Filtro de Estado (Apenas se for BR e não for TODOS)\\n    if country_code == \\"br\\" and \\"TODOS\\" not in estados and estados:\\n        pattern = '|'.join(estados)\\n        df = df[df['Local'].astype(str).str.contains(pattern, case=False, na=False)]\\n\\n    df = df.sort_values('Match_Final', ascending=False)\\n\\n    st.write(\\"---\\")\\n    st.subheader(f\\"📊 Relatório Final: {len(df)} vagas qualificadas\\")\\n    st.dataframe(\\n        df[['Match_Final', 'Match_Profile', 'Match_Pesquisa', 'Integridade', 'Fonte', 'Data', 'Titulo', 'Empresa', 'Local', 'Link']],\\n        column_config={\\n            \\"Match_Final\\": st.column_config.ProgressColumn(\\"Ranking\\", format=\\"%.0f%%\\", min_value=-50, max_value=100),\\n            \\"Link\\": st.column_config.LinkColumn(\\"Link\\")\\n        }, use_container_width=True, hide_index=True, height=800\\n    )"
+   ],
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "id": "tMahp98_CRSd",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1772033125471,
+     "user_tz": 180,
+     "elapsed": 435,
+     "user": {
+      "displayName": "Wenderson werneck",
+      "userId": "09649910962808872733"
+     }
+    },
+    "outputId": "04196d20-8941-420b-b4a0-7e424f155af5"
+   },
+   "execution_count": 4,
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "Overwriting /content/drive/My Drive/Nexus_Bot/app.py\\n"
+     ]
+    }
+   ]
+  },
+  {
+   "cell_type": "code",
+   "source": [
+    "import os\\n# --- # Célula 5: RUN SERVER ---\\nfrom pyngrok import ngrok\\nimport time\\n\\nNGROK_TOKEN = os.environ.get(\\"NGROK_TOKEN\\")  # Configure em Colab Secrets\\nngrok.set_auth_token(NGROK_TOKEN)\\n\\n!pkill -f streamlit\\nngrok.kill()\\nprint(\\"🚀 Iniciando Nexus Sentinel...\\")\\n!nohup streamlit run \\"/content/drive/My Drive/Nexus_Bot/app.py\\" > log.txt 2>&1 &\\ntime.sleep(10)\\nurl = ngrok.connect(8501).public_url\\nprint(f\\"\\\\n👉 DASHBOARD: {url}\\")"
+   ],
+   "metadata": {
+    "colab": {
+     "base_uri": "https://localhost:8080/"
+    },
+    "id": "3df0-S2WCWoV",
+    "executionInfo": {
+     "status": "ok",
+     "timestamp": 1772033137896,
+     "user_tz": 180,
+     "elapsed": 12421,
+     "user": {
+      "displayName": "Wenderson werneck",
+      "userId": "09649910962808872733"
+     }
+    },
+    "outputId": "da55b1c3-1e8c-40bc-b48d-deb9c30cd235"
+   },
+   "execution_count": 5,
+   "outputs": [
+    {
+     "output_type": "stream",
+     "name": "stdout",
+     "text": [
+      "🚀 Iniciando Nexus Sentinel...\\n",
+      "\\n",
+      "👉 DASHBOARD: https://fd39-34-186-0-31.ngrok-free.app\\n"
+     ]
+    }
+   ]
+  }
+ ],
+ "metadata": {
+  "colab": {
+   "provenance": [],
+   "authorship_tag": "ABX9TyPYmniyNcpot4Wf/QVZGf9d"
+  },
+  "kernelspec": {
+   "display_name": "Python 3",
+   "name": "python3"
+  },
+  "language_info": {
+   "name": "python"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}`,
+};
+
+// THEME
+const HTML = document.documentElement;
+const TB = document.getElementById('themeBtn');
+const sv = localStorage.getItem('ww_theme');
+if(sv === 'dark'){HTML.setAttribute('data-theme','dark');TB.querySelector('i').className='fas fa-sun';}
+TB.addEventListener('click',()=>{
+  const dark = HTML.getAttribute('data-theme')==='dark';
+  HTML.setAttribute('data-theme',dark?'light':'dark');
+  TB.querySelector('i').className=dark?'fas fa-moon':'fas fa-sun';
+  localStorage.setItem('ww_theme',dark?'light':'dark');
+});
+
+// SYNTAX HIGHLIGHT
+function highlight(code, fname){
+  const ext = fname.split('.').pop().toLowerCase();
+  let s = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  if(ext==='json'){
+    return s
+      .replace(/"([^"]+)"\s*:/g,'<span class="ss">"$1"</span>:')
+      .replace(/:\s*"([^"]*)"/g,': <span class="sf">"$1"</span>')
+      .replace(/:\s*(true|false|null)/g,': <span class="sk">$1</span>')
+      .replace(/:\s*(-?\d+\.?\d*)/g,': <span class="sn">$1</span>');
+  }
+  if(ext==='ipynb'){
+    return s.replace(/"source":\s*\[/g,'<span class="sk">"source"</span>: [')
+            .replace(/"cell_type":\s*"([^"]*)"/g,'"cell_type": <span class="ss">"$1"</span>');
+  }
+  return s
+    .replace(/(#[^\n]*)/g,'<span class="scm">$1</span>')
+    .replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,'<span class="ss">$1</span>')
+    .replace(/\b(def|class|import|from|return|if|else|elif|for|while|try|except|finally|with|as|in|not|and|or|True|False|None|async|await|lambda|yield|pass|break|continue|raise|global|nonlocal)\b/g,'<span class="sk">$1</span>')
+    .replace(/\b([A-Z][A-Za-z0-9_]{1,})\b/g,'<span class="scl">$1</span>')
+    .replace(/\b(\d+\.?\d*)\b/g,'<span class="sn">$1</span>');
+}
+
+// CODE MODAL
+let _curFile='', _curContent='';
+function openFile(fname){
+  const content = FILES[fname];
+  if(!content){console.warn('File not found:',fname);return;}
+  _curFile=fname; _curContent=content;
+  document.getElementById('cmFname').querySelector('span').textContent=fname;
+  const lines = content.split('\n');
+  document.getElementById('cmLn').textContent = lines.map((_,i)=>i+1).join('\n');
+  document.getElementById('cmCode').innerHTML = highlight(content,fname);
+  document.getElementById('codeModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCode(){
+  document.getElementById('codeModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function dlCurrent(){
+  const blob=new Blob([_curContent],{type:'text/plain'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=_curFile; a.click();
+}
+function copyCmd(el){
+  const txt=el.textContent.replace(/^\$ /,'');
+  navigator.clipboard.writeText(txt).then(()=>{
+    el.classList.add('copied');
+    setTimeout(()=>el.classList.remove('copied'),1300);
+  });
+}
+document.getElementById('codeModal').addEventListener('click',e=>{
+  if(e.target===document.getElementById('codeModal')) closeCode();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCode();});
+
+</script>
 </body>
 </html>

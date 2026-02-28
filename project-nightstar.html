@@ -1,208 +1,2101 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NightStar — Wenderson Werneck</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root{--blue:#007ACC;--blue-bright:#1F9CF0;--blue-dark:#005A9E;--blue-dim:#0D2137;--blue-glow:rgba(0,122,204,0.2);--bg:#0D1117;--bg-surface:#161B22;--bg-card:#1C2330;--border:#30363D;--border-lit:#007ACC55;--text:#E6EDF3;--text-muted:#A0ADB8;--text-dim:#6E7882;--green:#3FB950;--orange:#F0883E;--purple:#BC8CFF;--red:#F85149;--accent:#1F9CF0;}
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
-        body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.4;}
-        .container{width:90%;max-width:900px;margin:0 auto;padding:0 20px;position:relative;z-index:1;}
-        header{padding:1rem 0;background:rgba(13,17,23,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
-        .header-inner{display:flex;justify-content:space-between;align-items:center;}
-        .logo{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:700;color:var(--blue);text-decoration:none;}
-        .logo span{color:var(--text-muted);}
-        .back-btn{font-size:0.85rem;color:var(--text-muted);text-decoration:none;display:flex;align-items:center;gap:0.5rem;transition:color 0.2s;}
-        .back-btn:hover{color:var(--blue);}
-        .proj-hero{padding:4rem 0 2rem;}
-        .proj-badge{font-family:'JetBrains Mono',monospace;font-size:0.72rem;padding:0.25rem 0.7rem;border-radius:20px;border:1px solid var(--accent);color:var(--accent);background:rgba(31,156,240,0.1);display:inline-block;margin-bottom:1.2rem;}
-        .proj-icon-wrap{font-size:3.5rem;margin-bottom:1rem;display:block;}
-        .proj-title{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:0.8rem;}
-        .proj-subtitle{font-size:1.05rem;color:var(--text-muted);margin-bottom:2rem;max-width:640px;line-height:1.7;}
-        .proj-meta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem;}
-        .meta-chip{font-family:'JetBrains Mono',monospace;font-size:0.75rem;padding:0.35rem 0.8rem;border-radius:6px;border:1px solid var(--border);color:var(--text-muted);}
-        .meta-chip i{margin-right:0.4rem;color:var(--blue);}
-        .proj-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;}
-        .btn{padding:0.65rem 1.4rem;border-radius:8px;font-weight:700;font-size:0.88rem;text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;transition:all 0.25s;cursor:pointer;border:none;}
-        .btn-primary{background:var(--blue);color:white;}
-        .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 8px 24px var(--blue-glow);}
-        .btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border);}
-        .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
-        .proj-divider{border:none;border-top:1px solid var(--border);margin:2.5rem 0;}
-        .prose h2{font-size:1.3rem;font-weight:700;margin-bottom:1rem;color:var(--text);display:flex;align-items:center;gap:0.6rem;}
-        .prose h2::before{content:'';display:inline-block;width:3px;height:1.2em;background:var(--blue);border-radius:2px;}
-        .prose p{color:var(--text-muted);line-height:1.8;margin-bottom:1rem;}
-        .prose ul{list-style:none;display:flex;flex-direction:column;gap:0.5rem;margin-bottom:1.5rem;}
-        .prose ul li{color:var(--text-muted);padding-left:1.4rem;position:relative;line-height:1.7;}
-        .prose ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:0.85rem;}
-        .arch-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1.4rem;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-muted);line-height:1.9;overflow-x:auto;margin-bottom:1.5rem;}
-        .arch-box .hl{color:var(--blue);}
-        .arch-box .dim{color:var(--text-dim);}
-        .arch-box .ok{color:var(--green);}
-        .arch-box .warn{color:var(--orange);}
-        .stack-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:0.8rem;margin-bottom:1.5rem;}
-        .stack-item{background:var(--bg-surface);border:1px solid var(--border);border-radius:8px;padding:0.9rem 1rem;display:flex;align-items:center;gap:0.7rem;transition:border-color 0.2s;}
-        .stack-item:hover{border-color:var(--blue);}
-        .stack-item i{color:var(--blue);font-size:1rem;width:18px;text-align:center;}
-        .stack-item span{font-size:0.82rem;font-weight:600;color:var(--text-muted);}
-        .callout{background:var(--blue-dim);border:1px solid var(--border-lit);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:1rem 1.2rem;margin-bottom:1.5rem;}
-        .callout p{color:var(--text-muted);margin:0;font-size:0.9rem;}
-        .callout strong{color:var(--blue);}
-        .metric-row{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem;}
-        .metric{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;flex:1;min-width:120px;}
-        .metric-val{font-size:1.8rem;font-weight:800;color:var(--blue);line-height:1;}
-        .metric-label{font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem;text-transform:uppercase;letter-spacing:0.05em;font-family:'JetBrains Mono',monospace;}
-        .proj-footer{border-top:1px solid var(--border);padding:2rem 0;margin-top:4rem;}
-        .proj-footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-        .proj-footer-copy{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--text-dim);}
-        .proj-footer-links{display:flex;gap:1rem;}
-        .proj-footer-links a{color:var(--text-dim);font-size:1.1rem;transition:color 0.2s;text-decoration:none;}
-        .proj-footer-links a:hover{color:var(--blue);}
-        .proj-nav{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:3rem;}
-        .proj-nav a{display:flex;align-items:center;gap:0.5rem;color:var(--text-muted);text-decoration:none;font-size:0.88rem;font-weight:600;padding:0.6rem 1rem;border:1px solid var(--border);border-radius:8px;transition:all 0.2s;}
-        .proj-nav a:hover{border-color:var(--blue);color:var(--blue);}
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NightStar — Wenderson Werneck</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--blue:#007ACC;--green:#1A7F37;--purple:#6639BA;--orange:#BC4C00;}
+[data-theme="light"]{--bg:#FFFFFF;--bg-s:#F6F8FA;--bg-c:#FFFFFF;--border:#D0D7DE;--text:#1F2328;--tm:#57606A;--td:#8C959F;--bdim:#EAF3FB;--glow:rgba(0,122,204,.12);}
+[data-theme="dark"]{--bg:#0D1117;--bg-s:#161B22;--bg-c:#1C2330;--border:#30363D;--text:#E6EDF3;--tm:#A0ADB8;--td:#6E7882;--bdim:#0D2137;--glow:rgba(0,122,204,.2);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .25s,color .25s;}
+a{color:var(--blue);text-decoration:none;}
+.w{width:90%;max-width:1100px;margin:0 auto;padding:0 20px;}
+
+/* HEADER */
+header{padding:.85rem 0;background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;transition:background .25s;}
+[data-theme="dark"] header{background:rgba(13,17,23,.94);backdrop-filter:blur(16px);}
+.hdr{display:flex;align-items:center;gap:.8rem;}
+.back-btn{display:flex;align-items:center;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--tm);border:1px solid var(--border);padding:.32rem .65rem;border-radius:6px;transition:all .2s;flex-shrink:0;}
+.back-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--glow);}
+.hdr-logo{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--blue);}
+.hdr-logo span{color:var(--tm);}
+.icon-btn{width:33px;height:33px;border-radius:7px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:transparent;color:var(--tm);cursor:pointer;font-size:.82rem;text-decoration:none;transition:all .2s;margin-left:auto;}
+.icon-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--glow);}
+
+/* HERO */
+.hero{padding:3rem 0 2rem;border-bottom:1px solid var(--border);}
+.hero-in{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:start;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.67rem;color:var(--blue);letter-spacing:.13em;text-transform:uppercase;margin-bottom:.65rem;}
+.eyebrow::before{content:'// ';color:var(--td);}
+.proj-title{font-size:2.3rem;font-weight:800;letter-spacing:-.03em;line-height:1.05;margin-bottom:.45rem;}
+.proj-title em{font-style:normal;color:var(--blue);}
+.tagline{font-size:.95rem;color:var(--tm);max-width:560px;line-height:1.75;margin-bottom:1.2rem;}
+.badges{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.4rem;}
+.badge{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.18rem .5rem;border-radius:4px;border:1px solid;}
+.ba{color:#3FB950;border-color:#3FB950;background:rgba(63,185,80,.08);}
+.bl{color:var(--blue);border-color:rgba(0,122,204,.4);background:var(--bdim);}
+.metrics{display:flex;gap:2rem;padding:1rem 0;border-top:1px solid var(--border);}
+.met{text-align:left;}
+.met-n{font-family:'JetBrains Mono',monospace;font-size:1.45rem;font-weight:700;color:var(--blue);}
+.met-l{font-size:.65rem;color:var(--tm);text-transform:uppercase;letter-spacing:.05em;}
+.hero-thumb{width:200px;height:145px;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:3.2rem;flex-shrink:0;}
+
+/* SECTIONS */
+.sec{padding:2.5rem 0;border-bottom:1px solid var(--border);}
+.sec:last-child{border-bottom:none;}
+.sec-ey{font-family:'JetBrains Mono',monospace;font-size:.66rem;color:var(--blue);letter-spacing:.13em;text-transform:uppercase;margin-bottom:.4rem;}
+.sec-ey::before{content:'// ';color:var(--td);}
+.sec-h{font-size:1.35rem;font-weight:800;letter-spacing:-.02em;margin-bottom:1.3rem;}
+.sec-h em{font-style:normal;color:var(--blue);}
+
+/* DESCRIPTION GRID */
+.desc-g{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+.dblock h3{font-size:.78rem;font-weight:700;color:var(--tm);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.55rem;font-family:'JetBrains Mono',monospace;}
+.dblock p,.dblock li{font-size:.88rem;color:var(--tm);line-height:1.75;}
+.dblock ul{list-style:none;display:flex;flex-direction:column;gap:.28rem;}
+.dblock ul li{padding-left:1rem;position:relative;}
+.dblock ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:.75rem;}
+
+/* FLOW STEPS */
+.flow{display:flex;flex-direction:column;gap:.45rem;}
+.fstep{display:flex;align-items:flex-start;gap:.85rem;padding:.7rem .95rem;background:var(--bg-s);border:1px solid var(--border);border-radius:8px;transition:border-color .2s;}
+.fstep:hover{border-color:var(--blue);}
+.fnum{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;color:var(--blue);background:var(--bdim);padding:.18rem .42rem;border-radius:4px;flex-shrink:0;margin-top:.08rem;}
+.fstep h4{font-size:.83rem;font-weight:700;margin-bottom:.15rem;}
+.fstep p{font-size:.78rem;color:var(--tm);}
+.farrow{text-align:center;font-family:'JetBrains Mono',monospace;color:var(--td);font-size:.75rem;padding:.08rem 0;}
+
+/* FILE TREE */
+.tree{font-family:'JetBrains Mono',monospace;font-size:.77rem;background:var(--bg-s);border:1px solid var(--border);border-radius:10px;padding:1.1rem 1.3rem;line-height:2.1;}
+.tl{display:flex;align-items:center;gap:.45rem;color:var(--tm);}
+.tl.dir{color:var(--text);font-weight:700;}
+.tl.cl{cursor:pointer;border-radius:5px;padding:.08rem .38rem;margin:-.08rem -.38rem;transition:all .2s;}
+.tl.cl:hover{background:var(--bdim);color:var(--blue);}
+.tl .ti{color:var(--blue);width:13px;font-size:.72rem;}
+.tl .fi{color:var(--td);width:13px;font-size:.72rem;}
+.tl .gs{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);margin-left:.25rem;}
+.tl .ge{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:var(--bdim);color:var(--blue);border:1px solid rgba(0,122,204,.3);margin-left:.25rem;}
+.tl .gx{font-size:.54rem;padding:.07rem .32rem;border-radius:3px;background:rgba(188,76,0,.08);color:#BC4C00;border:1px solid rgba(188,76,0,.2);margin-left:.25rem;}
+.ti2{margin-left:1.3rem;}
+.ti4{margin-left:2.6rem;}
+.ti6{margin-left:3.9rem;}
+
+/* CODE MODAL */
+.cm-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(5px);z-index:500;align-items:center;justify-content:center;padding:1rem;}
+.cm-ov.open{display:flex;}
+.cm-box{background:#0D1117;border:1px solid #30363D;border-radius:14px;width:100%;max-width:880px;max-height:92vh;display:flex;flex-direction:column;box-shadow:0 28px 72px rgba(0,0,0,.55);animation:pop .2s ease;}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+.cm-hd{display:flex;align-items:center;justify-content:space-between;padding:.8rem 1.15rem;border-bottom:1px solid #21262D;flex-shrink:0;gap:1rem;}
+.cm-fname{font-family:'JetBrains Mono',monospace;font-size:.76rem;color:#1F9CF0;display:flex;align-items:center;gap:.5rem;min-width:0;}
+.cm-fname span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.cm-actions{display:flex;gap:.35rem;flex-shrink:0;}
+.dl-btn{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.28rem .65rem;border-radius:5px;border:1px solid #30363D;background:rgba(31,156,240,.1);color:#1F9CF0;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:.3rem;}
+.dl-btn:hover{background:rgba(31,156,240,.22);border-color:#1F9CF0;}
+.cl-btn{width:26px;height:26px;border-radius:5px;background:none;border:1px solid #30363D;color:#6E7882;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.82rem;transition:all .2s;}
+.cl-btn:hover{color:#E6EDF3;background:#21262D;}
+.cm-body{overflow-y:auto;flex:1;}
+.code-wrap{display:flex;}
+.ln{flex-shrink:0;width:3.2rem;padding:1.1rem .4rem 1.1rem 1.1rem;text-align:right;font-family:'JetBrains Mono',monospace;font-size:.71rem;line-height:1.88;color:#30363D;border-right:1px solid #21262D;user-select:none;}
+.cc{flex:1;padding:1.1rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:.71rem;line-height:1.88;color:#c9d1d9;white-space:pre-wrap;word-break:break-word;}
+/* syntax colors */
+.sk{color:#ff7b72}.sf{color:#d2a8ff}.ss{color:#a5d6ff}.scm{color:#484f58;font-style:italic}.sn{color:#f0883e}.scl{color:#ffa657}.sk2{color:#79c0ff}
+
+/* INSTALL */
+.isteps{display:flex;flex-direction:column;gap:.75rem;}
+.is{display:flex;gap:.85rem;align-items:flex-start;padding:.85rem .95rem;background:var(--bg-s);border:1px solid var(--border);border-radius:8px;}
+.is-n{font-family:'JetBrains Mono',monospace;font-size:.68rem;font-weight:700;background:var(--blue);color:#fff;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;}
+.is h4{font-size:.83rem;font-weight:700;margin-bottom:.18rem;}
+.is p{font-size:.78rem;color:var(--tm);}
+.is p code{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:.05rem .3rem;}
+.cmd{font-family:'JetBrains Mono',monospace;font-size:.7rem;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:.45rem .75rem;margin-top:.38rem;color:var(--tm);cursor:pointer;display:block;transition:border-color .2s;}
+.cmd::before{content:'$ ';color:var(--blue);}
+.cmd:hover{border-color:var(--blue);}
+.cmd.copied{border-color:#3FB950!important;color:#3FB950;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:1.5rem 0;}
+.ft{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;}
+.ft-copy{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--td);}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .hero-in{grid-template-columns:1fr;}
+  .hero-thumb{display:none;}
+  .desc-g{grid-template-columns:1fr;}
+  .metrics{flex-wrap:wrap;gap:1rem;}
+}
+.hero-thumb{background:linear-gradient(135deg,#040d1a,#071828,#0a1f35);}</style>
 </head>
 <body>
 <header>
-    <div class="container">
-        <div class="header-inner">
-            <a href="index.html" class="logo">WW<span>.dev</span></a>
-            <a href="index.html#projects" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar aos projetos</a>
-        </div>
+  <div class="w">
+    <div class="hdr">
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Portfólio</a>
+      <a href="index.html" class="hdr-logo" style="margin-left:.5rem;">WW<span>.dev</span></a>
+      <button class="icon-btn" id="themeBtn" title="Tema"><i class="fas fa-moon"></i></button>
     </div>
+  </div>
 </header>
 
-<section class="proj-hero">
-    <div class="container">
-        <span class="proj-badge">RPA · Playwright · RAG</span>
-        <span class="proj-icon-wrap">⭐</span>
-        <h1 class="proj-title">NightStar</h1>
-        <p class="proj-subtitle">Bot RPA que automatiza candidaturas a vagas de emprego. Varre formulários, mapeia campos ao perfil do candidato via RAG vetorial e preenche tudo automaticamente — parando antes do envio para revisão.</p>
-        <div class="proj-meta">
-            <span class="meta-chip"><i class="fas fa-circle" style="color:var(--green)"></i>Ativo</span>
-            <span class="meta-chip"><i class="fab fa-python"></i>Python · Playwright</span>
-            <span class="meta-chip"><i class="fas fa-database"></i>ChromaDB · RAG</span>
-            <span class="meta-chip"><i class="fas fa-check-circle" style="color:var(--green)"></i>Gupy · LinkedIn</span>
+<section class="hero">
+  <div class="w">
+    <div class="hero-in">
+      <div>
+        <p class="eyebrow">RPA · Playwright · RAG · Automação</p>
+        <h1 class="proj-title">⭐ <em>NightStar</em></h1>
+        <p class="tagline">Bot de automação de candidaturas com 3 camadas de inteligência: mapeamento direto (0ms), RAG vetorial e fallback de IA. Preenche formulários multi-etapa, detecta captchas e aguarda confirmação antes de enviar.</p>
+        <div class="badges">
+          <span class="badge ba">● ativo</span>
+          <span class="badge bl">Python</span><span class="badge bl">Playwright</span>
+          <span class="badge bl">ChromaDB</span><span class="badge bl">RAG</span>
+          <span class="badge bl">BeautifulSoup</span>
         </div>
-        <div class="proj-actions">
-            <a href="https://github.com/wenderson-werneck" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> Ver no GitHub</a>
-            <a href="index.html#projects" class="btn btn-ghost"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <div class="metrics">
+          <div class="met"><div class="met-n">~3s</div><div class="met-l">Varredura</div></div>
+          <div class="met"><div class="met-n">70%+</div><div class="met-l">Campos auto</div></div>
+          <div class="met"><div class="met-n">40+</div><div class="met-l">Mapeamentos</div></div>
+          <div class="met"><div class="met-n">Semi</div><div class="met-l">Auto — rev. humana</div></div>
         </div>
+      </div>
+      <div class="hero-thumb">⭐</div>
     </div>
+  </div>
 </section>
 
-<hr class="proj-divider" style="margin:0;">
-
-<div class="container" style="padding-top:3rem;padding-bottom:4rem;">
-    <div class="prose">
-
-        <h2>O problema</h2>
-        <p>Candidatar-se a vagas é repetitivo ao extremo. Cada plataforma de RH (Gupy, LinkedIn, Workday) pede os mesmos dados — nome, email, experiência, formação — em formulários completamente diferentes, com fluxos diferentes e comportamentos diferentes. Horas por semana perdidas copiando e colando informações que já existem em outro lugar.</p>
-
-        <hr class="proj-divider">
-
-        <h2>Métricas de impacto</h2>
-        <div class="metric-row">
-            <div class="metric">
-                <div class="metric-val">~3s</div>
-                <div class="metric-label">varredura (era 40s)</div>
-            </div>
-            <div class="metric">
-                <div class="metric-val">70%+</div>
-                <div class="metric-label">campos automáticos</div>
-            </div>
-            <div class="metric">
-                <div class="metric-val">&lt;300ms</div>
-                <div class="metric-label">cancelamento</div>
-            </div>
-            <div class="metric">
-                <div class="metric-val">3</div>
-                <div class="metric-label">camadas de mapeamento</div>
-            </div>
-        </div>
-
-        <hr class="proj-divider">
-
-        <h2>As 3 camadas de mapeamento</h2>
-        <div class="callout">
-            <p><strong>Decisão central de design:</strong> nunca chamar a IA para campos que podem ser resolvidos deterministicamente. Isso reduziu o tempo de varredura de ~40s para ~3s.</p>
-        </div>
-        <div class="arch-box">
-<span>Campo: <span class="hl">"Cidade de residência"</span></span>
-<span class="dim">         │</span>
-<span class="ok">  [1] Mapa Direto</span>   <span class="dim">→ dict embutido com 40+ termos → 0ms</span>
-<span class="dim">         │ (falhou)</span>
-<span class="hl">  [2] RAG Vetorial do perfil.json</span>
-<span class="dim">         │ ChromaDB local · embeddings offline · ~50ms</span>
-<span class="dim">         │ (falhou: relevância &lt; 0.60)</span>
-<span class="warn">  [3] Campo Pendente</span>
-<span class="dim">         │ Figurante chamado APENAS com autorização do usuário</span>
-<span class="ok">         ✓ Ollama nunca chamado durante varredura</span>
-        </div>
-
-        <hr class="proj-divider">
-
-        <h2>Fluxo completo</h2>
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Visão Geral</p>
+    <h2 class="sec-h">O que é o <em>NightStar</em></h2>
+    <div class="desc-g">
+      <div class="dblock">
+        <h3>Problema resolvido</h3>
+        <p>Preencher formulários de candidatura manualmente consome 20–40 minutos por vaga — e a maioria dos campos são sempre os mesmos. O NightStar automatiza isso em ~3 segundos de varredura + preenchimento, com revisão humana antes de enviar.</p>
+      </div>
+      <div class="dblock">
+        <h3>Funcionalidades</h3>
         <ul>
-            <li>Você cola a URL da vaga no Figurante com <code>/nightstar &lt;URL&gt;</code></li>
-            <li>Chrome abre com perfil persistente — login salvo de sessões anteriores</li>
-            <li>Você navega até o formulário; NightStar varre e mapeia campos</li>
-            <li>Relatório: campos mapeados (verde) e pendentes (amarelo) com inputs reais do formulário</li>
-            <li>Opção A: você preenche os pendentes manualmente nos cards</li>
-            <li>Opção B: clica em "🤖 Figurante" — IA resolve pendentes com base no seu perfil</li>
-            <li>Clica em "▶️ Preencher" — Playwright preenche tudo no browser em tempo real</li>
-            <li>NightStar para antes do envio — você revisa e confirma</li>
+          <li>3 camadas: mapa direto (40+ termos) → RAG vetorial → IA fallback</li>
+          <li>Suporte a Gupy, LinkedIn, Solides e formulários genéricos</li>
+          <li>Campos: texto, select, radio, checkbox, date, file upload</li>
+          <li>Detecção de captcha — pausa e aguarda resolução manual</li>
+          <li>Modo semi-auto: preenche tudo e para antes de enviar</li>
+          <li>Aprende mapeamentos por domínio e reutiliza em sessões futuras</li>
+          <li>Screenshots automáticos de cada etapa nos logs</li>
+          <li>Browser persistente com perfil Chrome — mantém login</li>
         </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <hr class="proj-divider">
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Arquitetura</p>
+    <h2 class="sec-h">3 Camadas de <em>Inteligência</em></h2>
+    <div class="flow">
+      <div class="fstep"><span class="fnum">01</span><div><h4>Scanner — extrai campos do DOM</h4><p>BeautifulSoup + heurísticas extraem labels, inputs, selects, radios, checkboxes de toda a página — incluindo iframes. Identifica plataforma (Gupy, LinkedIn…) e ativa adapter específico.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">02</span><div><h4>Camada 1 — Mapa Direto (0ms)</h4><p>Dicionário com 40+ termos comuns em PT/EN ("nome", "email", "linkedin", "cargo"…) resolve instantaneamente ~60% dos campos sem chamar IA.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">03</span><div><h4>Camada 2 — Figurante mapeia (RAG)</h4><p>Campo desconhecido vai para o Figurante com a lista de chaves do perfil. Retorna a chave correspondente + confiança (alta/média/baixa). Confiança baixa tenta modelo mais forte.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">04</span><div><h4>Camada 3 — IA gera valor</h4><p>Se não há correspondência no perfil, o Figurante gera o valor com base no contexto do campo. Resultados pendentes ficam para revisão humana.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">05</span><div><h4>Semi-Auto — revisão antes de enviar</h4><p>Preenche tudo, tira screenshot, pausa e exibe "Confirmar Envio" para o usuário revisar no browser antes de qualquer submissão.</p></div></div>
+    </div>
+  </div>
+</section>
 
-        <h2>Detalhe técnico: perfil persistente do Chrome</h2>
-        <p>Em vez de abrir uma instância limpa do browser a cada execução, o NightStar usa <code>launch_persistent_context</code> do Playwright com um diretório local (<code>nightstar_profile/</code>). Isso preserva cookies, logins e histórico entre sessões — você faz login uma vez em cada plataforma; nas seguintes, os cookies já estão lá.</p>
-
-        <hr class="proj-divider">
-
-        <h2>Stack completa</h2>
-        <div class="stack-grid">
-            <div class="stack-item"><i class="fas fa-globe"></i><span>Playwright</span></div>
-            <div class="stack-item"><i class="fab fa-python"></i><span>Python 3.11</span></div>
-            <div class="stack-item"><i class="fas fa-database"></i><span>ChromaDB (RAG)</span></div>
-            <div class="stack-item"><i class="fas fa-brain"></i><span>Ollama (fallback)</span></div>
-            <div class="stack-item"><i class="fas fa-code"></i><span>BeautifulSoup</span></div>
-            <div class="stack-item"><i class="fas fa-server"></i><span>Flask</span></div>
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Código-Fonte</p>
+    <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
+    <div class="tree">
+      <div class="tl dir"><i class="fas fa-folder-open ti"></i>NightStar/</div>
+      <div class="ti2">
+        <div class="tl cl" onclick="openFile('config.py')"><i class="fas fa-file-code fi"></i>config.py</div>
+        <div class="tl cl" onclick="openFile('main.py')"><i class="fas fa-file-code fi"></i>main.py</div>
+        <div class="tl cl" onclick="openFile('requirements.txt')"><i class="fas fa-file-alt fi"></i>requirements.txt</div>
+        <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>src/</div>
+        <div class="ti2">
+          <div class="tl cl" onclick="openFile('bot_core.py')"><i class="fas fa-file-code fi"></i>bot_core.py <span class="gs">sanitizado</span></div>
+          <div class="tl cl" onclick="openFile('brain.py')"><i class="fas fa-file-code fi"></i>brain.py <span class="gs">sanitizado</span></div>
+          <div class="tl cl" onclick="openFile('utils.py')"><i class="fas fa-file-code fi"></i>utils.py</div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-file-code fi"></i>adapters.py <span style="color:var(--td);"># adaptadores Gupy/LinkedIn (não publicado)</span></div>
         </div>
-
-        <hr class="proj-divider">
-
-        <h2>Plataformas suportadas</h2>
-        <ul>
-            <li><strong>Gupy</strong> — upload automático de currículo, autocomplete de cidade/estado, fluxo multi-etapas</li>
-            <li><strong>LinkedIn Easy Apply</strong> — abertura de modal, recusa do currículo LinkedIn, uso do seu PDF local</li>
-            <li><strong>Genérico</strong> — heurísticas por label, aria-label, placeholder, name, id — funciona na maioria dos formulários</li>
-        </ul>
-
+        <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>data/</div>
+        <div class="ti2">
+          <div class="tl cl" onclick="openFile('perfil.example.json')"><i class="fas fa-file-code fi"></i>perfil.example.json <span class="ge">template</span></div>
+          <div class="tl cl" onclick="openFile('mapeamentos.example.json')"><i class="fas fa-file-code fi"></i>mapeamentos.example.json <span class="ge">template</span></div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>perfil.json <span style="color:var(--td);"># dados reais — não versionado</span></div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>mapeamentos.json <span style="color:var(--td);"># histórico real — não versionado</span></div>
+        </div>
+        <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>logs/</div>
+        <div class="ti2">
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>screenshots/ <span style="color:var(--td);"># gerado automaticamente</span></div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>sessao_*.log <span style="color:var(--td);"># gerado automaticamente</span></div>
+        </div>
+        <div class="tl" style="color:var(--td);font-size:.72rem;margin-top:.15rem;"><i class="fas fa-eye-slash fi"></i>nightstar_profile/ <span style="color:var(--td);"># cookies/sessão do browser</span></div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="proj-nav">
-        <a href="project-figurante.html"><i class="fas fa-arrow-left"></i> Figurante</a>
-        <a href="project-nexus.html">Nexus AI <i class="fas fa-arrow-right"></i></a>
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Instalação</p>
+    <h2 class="sec-h"><em>Como usar</em></h2>
+    <div class="isteps">
+      <div class="is"><div class="is-n">1</div><div><h4>Pré-requisito: Figurante rodando</h4><p>O NightStar usa o Figurante como cérebro. Certifique-se de que o <code>app.py</code> do Figurante está rodando na porta 5000.</p></div></div>
+      <div class="is"><div class="is-n">2</div><div><h4>Instale dependências</h4><div class="cmd" onclick="copyCmd(this)">pip install playwright beautifulsoup4 ollama colorlog</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">playwright install chromium</div></div></div>
+      <div class="is"><div class="is-n">3</div><div><h4>Configure seu perfil</h4><p>Copie <code>perfil.example.json</code> → <code>data/perfil.json</code> com seus dados. Configure <code>documentos.curriculo_path</code> para upload automático do PDF.</p></div></div>
+      <div class="is"><div class="is-n">4</div><div><h4>Execute via Figurante (recomendado)</h4><p>No chat do Figurante, use o comando:</p><div class="cmd" onclick="copyCmd(this)">/signup https://url-da-vaga.com</div></div></div>
+      <div class="is"><div class="is-n">5</div><div><h4>Ou execute standalone</h4><div class="cmd" onclick="copyCmd(this)">python main.py https://url-da-vaga.com</div></div></div>
     </div>
+  </div>
+</section>
+<footer>
+  <div class="w">
+    <div class="ft">
+      <span class="ft-copy">© 2025 Wenderson Soares Werneck</span>
+      <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar ao portfólio</a>
+    </div>
+  </div>
+</footer>
+
+<div class="cm-ov" id="codeModal">
+  <div class="cm-box">
+    <div class="cm-hd">
+      <div class="cm-fname" id="cmFname"><i class="fas fa-file-code"></i><span>arquivo.py</span></div>
+      <div class="cm-actions">
+        <button class="dl-btn" onclick="dlCurrent()"><i class="fas fa-download"></i> Download</button>
+        <button class="cl-btn" onclick="closeCode()"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+    <div class="cm-body">
+      <div class="code-wrap">
+        <pre class="ln" id="cmLn"></pre>
+        <pre class="cc" id="cmCode"></pre>
+      </div>
+    </div>
+  </div>
 </div>
 
-<footer class="proj-footer">
-    <div class="container">
-        <div class="proj-footer-inner">
-            <span class="proj-footer-copy">© 2025 Wenderson Soares Werneck</span>
-            <div class="proj-footer-links">
-                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </div>
-</footer>
+<script>
+const FILES = {
+  "bot_core.py": `# NightStar/src/bot_core.py — v2
+# Orquestrador principal do NightStar.
+#
+# Suporte completo a:
+# - text/email/tel/url/number/textarea  → preenchimento direto
+# - select/combobox                     → fuzzy match + Figurante
+# - radio buttons                       → Figurante decide opcao
+# - checkboxes                          → Figurante decide quais marcar
+# - date pickers                        → formatos BR e ISO
+# - file upload (curriculo, foto)       → upload do arquivo do perfil
+# - campos condicionais                 → re-scan apos cada preenchimento
+# - multi-step forms                    → navegacao automatica entre etapas
+# - validacao em tempo real             → aguarda erros sumirem antes de avancar
+# - captcha                             → pausa e pede intervencao manual
+# - shadow DOM / iframes                → estrategias especificas
+# - modais de confirmacao               → detecta e confirma automaticamente
+# - timeout de sessao                   → detecta redirect e avisa
+# - screenshots automaticos             → registra cada etapa
+
+import sys
+import time
+import re
+import json
+from pathlib import Path
+from datetime import datetime
+
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout, Page
+
+sys.path.append(str(Path(__file__).parent.parent))
+from config import BROWSER_HEADLESS, BROWSER_TIMEOUT
+from src.utils import (
+    criar_logger, carregar_perfil, salvar_perfil,
+    carregar_mapeamentos, salvar_mapeamentos,
+    extrair_labels_inputs, normalizar_texto, timestamp_agora,
+    detectar_plataforma, fuzzy_match, melhor_opcao_select,
+)
+from src.brain import Cerebro
+from src.adapters import get_adapter
+
+logger = criar_logger("bot_core")
+
+# ── Constantes de Navegacao ───────────────────────────────────────────────────
+
+BOTOES_AVANCAR = [
+    "avançar", "avancar", "próximo", "proximo", "continuar", "continue",
+    "next", "seguinte", "próxima etapa", "proxima etapa", "próxima página",
+    "salvar e continuar", "save and continue", "salvar e avançar",
+    "ir para", "prosseguir", "go to next", "next step", "step forward",
+    "próxima", "next page",
+]
+
+BOTOES_FINALIZAR = [
+    "enviar candidatura", "enviar curriculo", "candidatar", "candidatar-se",
+    "send application", "submit application", "apply now", "apply",
+    "finalizar candidatura", "concluir candidatura", "enviar inscrição",
+    "submeter", "submit", "enviar", "finalizar", "finish", "concluir",
+    "cadastrar candidatura", "completar candidatura",
+]
+
+BOTOES_SALVAR = [
+    "salvar", "save", "salvar rascunho", "save draft",
+]
+
+BOTOES_CONFIRMAR = [
+    "confirmar", "confirm", "ok", "sim", "yes", "aceitar", "accept",
+    "prosseguir", "continuar",
+]
+
+# Indicadores de CAPTCHA
+CAPTCHA_HINTS = [
+    "captcha", "recaptcha", "hcaptcha", "cf-challenge",
+    "turnstile", "please verify", "prove you are human",
+]
+
+# Indicadores de erro de validacao
+ERRO_HINTS = [
+    "campo obrigatório", "campo obrigatorio", "required field",
+    "preencha este campo", "invalid", "inválido", "invalido",
+    "formato inválido", "error", "erro", "obrigatório",
+]
+
+# Timeout padrao para elementos (ms)
+T_ELEM = 2000
+T_ACAO = 800
+
+
+class NightStar:
+    """
+    Bot completo de preenchimento de formularios de candidatura.
+    Orquestra: varredura → mapeamento → resolucao de valores → preenchimento → navegacao.
+    """
+
+    def __init__(self, semi_auto: bool = True):
+        self.cerebro    = Cerebro()
+        self.perfil     = carregar_perfil()
+        self.mapeamentos = carregar_mapeamentos()
+        self.chaves_perfil = self.cerebro.extrair_chaves_planas(self.perfil)
+        self.perfil_texto  = self.cerebro.perfil_resumido(self.perfil)
+        self.estado_nightstar: dict = {}
+        self._mapa_direto_cache: dict = {}
+        # Semi-auto: preenche tudo mas PARA antes de enviar para revisao do usuario
+        self.semi_auto = semi_auto
+        logger.info(f"NightStar v2 — perfil carregado ({len(self.chaves_perfil)} chaves) | semi_auto={semi_auto}")
+
+    # =========================================================================
+    # BROWSER
+    # =========================================================================
+
+    def _abrir_browser(self, playwright):
+        logger.info("Abrindo Navegador com Perfil Persistente...")
+    
+    # Define uma pasta local para salvar seus dados (logins, cookies, etc.)
+        user_data_dir = "./nightstar_profile"
+    
+    # Lançamos o contexto persistente direto
+        context = playwright.chromium.launch_persistent_context(
+            user_data_dir=user_data_dir,
+            headless=False, # Mantenha False para conseguir logar a primeira vez
+            channel="chrome", # Dica: Usar o Chrome real do seu PC passa mais confiança que o Chromium
+            args=[
+                "--start-maximized",
+                "--disable-blink-features=AutomationControlled", # Esconde que é um bot
+            ],
+            viewport=None, # Permite que o Chrome use o tamanho real da janela
+        )
+
+    # Nota: Em contextos persistentes, o objeto 'browser' é interno. 
+    # Para manter compatibilidade com seu código atual:
+        return None, context
+
+    def _navegar(self, page: Page, url: str):
+        logger.info(f"Navegando: {url}")
+        try:
+            page.goto(url, timeout=BROWSER_TIMEOUT, wait_until="domcontentloaded")
+            page.wait_for_timeout(2500)
+        except PlaywrightTimeout:
+            logger.error(f"Timeout ao carregar: {url}")
+
+    def _screenshot(self, page: Page, nome: str = ""):
+        """Salva screenshot na pasta logs/screenshots/."""
+        try:
+            from config import LOGS_DIR
+            shots_dir = LOGS_DIR / "screenshots"
+            shots_dir.mkdir(exist_ok=True)
+            ts = datetime.now().strftime("%H%M%S")
+            caminho = shots_dir / f"{ts}_{nome or 'auto'}.png"
+            page.screenshot(path=str(caminho), full_page=False)
+            logger.debug(f"Screenshot: {caminho.name}")
+        except Exception as e:
+            logger.debug(f"Screenshot falhou: {e}")
+
+    # =========================================================================
+    # AGUARDA CONFIRMACAO DO USUARIO
+    # =========================================================================
+
+    def _aguardar_inicio(self, page: Page, url_alvo: str) -> bool:
+        from urllib.parse import urlparse
+        alvo = urlparse(url_alvo)
+        self._log("🌐 Browser aberto! Navegue ate a pagina do formulario e faca login se necessario.")
+        self._log(f"📍 URL alvo: {url_alvo}")
+        self._log("✋ Clique em 'Iniciar agora' no painel quando estiver pronto.")
+
+        ultimo_estado = None
+        while True:
+            if self.estado_nightstar.get("cancelar"):
+                return False
+            if self.estado_nightstar.get("iniciar_agora"):
+                self.estado_nightstar["iniciar_agora"] = False
+                self._log("✅ Iniciando varredura...")
+                return True
+            try:
+                atual = urlparse(page.url)
+                na_url = alvo.netloc in atual.netloc
+                if na_url != ultimo_estado:
+                    if na_url:
+                        self._log("✅ Pagina correta detectada!")
+                    else:
+                        self._log("⏳ Aguardando... navegue ate o formulario.")
+                    ultimo_estado = na_url
+            except Exception:
+                pass
+            time.sleep(1.5)
+
+    # =========================================================================
+    # SCANNER — Varre campos da pagina atual
+    # =========================================================================
+
+    def _escanear_pagina(self, page: Page) -> list[dict]:
+        """
+        Escaneia a pagina atual em busca de campos de formulario.
+        Tambem tenta escanear dentro de iframes.
+        """
+        html = page.content()
+        plataforma = detectar_plataforma(page.url, html)
+        campos = extrair_labels_inputs(html, plataforma)
+
+        # Tambem varre iframes visiveis
+        try:
+            for frame in page.frames:
+                if frame == page.main_frame:
+                    continue
+                try:
+                    frame_html = frame.content()
+                    if frame_html and len(frame_html) > 200:
+                        campos_frame = extrair_labels_inputs(frame_html, plataforma)
+                        for c in campos_frame:
+                            c["_frame"] = frame.name or frame.url
+                        campos.extend(campos_frame)
+                except Exception:
+                    pass
+        except Exception:
+            pass
+
+        logger.info(f"Scanner: {len(campos)} campos na pagina.")
+        self._log(f"🔍 {len(campos)} campos encontrados.")
+        return campos
+
+    # =========================================================================
+    # RESOLVER — Converte campo em valor a ser preenchido
+    # =========================================================================
+
+    def _valor_do_perfil(self, chave: str) -> str | None:
+        """Navega pelo perfil usando notacao de pontos."""
+        if not chave:
+            return None
+        partes = re.split(r"\\.|\\[0\\]", chave)
+        partes = [p for p in partes if p]
+        val = self.perfil
+        try:
+            for p in partes:
+                if isinstance(val, list):
+                    val = val[0]
+                val = val[p]
+            return str(val).strip() if val else None
+        except (KeyError, IndexError, TypeError):
+            return None
+
+    def _processar_campo(self, campo: dict) -> dict:
+        """
+        Processa um campo e resolve qual valor preencher.
+        Resultado: {status, chave_perfil, valor, confianca, ...}
+        """
+        resultado = {
+            "campo_original": campo["identificador"],
+            "tipo":           campo["tipo"],
+            "opcoes":         campo.get("opcoes", []),
+            "seletores":      campo.get("seletores", []),
+            "obrigatorio":    campo.get("obrigatorio", False),
+            "max_length":     campo.get("max_length"),
+            "plataforma":     campo.get("plataforma", "generico"),
+            "status":         "pendente",
+            "chave_perfil":   None,
+            "valor":          None,
+            "confianca":      None,
+            "_campo_raw":     campo,
+        }
+
+        ident = campo["identificador"]
+        tipo  = campo["tipo"]
+
+        # Ignora campos sem identificador util
+        if not ident or ident in ("text", "select", "textarea", "checkbox", "radio", "file"):
+            resultado["status"] = "ignorado"
+            return resultado
+
+        # ── 1. Mapa direto (sem IA, instantaneo) ──────────────────────────
+        chave_direta = self._mapa_direto(ident)
+        if chave_direta:
+            valor = self._valor_do_perfil(chave_direta)
+            if valor:
+                resultado.update(status="mapeado", chave_perfil=chave_direta,
+                                 valor=valor, confianca="alta")
+                logger.info(f"✓ Mapa direto: [{ident}] → {chave_direta}")
+                return resultado
+
+        # ── 2. Figurante mapeia para chave do perfil ───────────────────────
+        mapeamento = self.cerebro.mapear_campo(ident, self.chaves_perfil)
+        if mapeamento:
+            chave = mapeamento.get("chave_correspondente")
+            conf  = mapeamento.get("confianca", "baixa")
+            if chave and chave != "null" and conf in ("alta", "media"):
+                valor = self._valor_do_perfil(chave)
+                if valor:
+                    resultado.update(status="mapeado", chave_perfil=chave,
+                                     valor=valor, confianca=conf)
+                    logger.info(f"✓ IA mapeou: [{ident}] → {chave} ({conf})")
+                    return resultado
+
+        # ── 3. Figurante categoriza e gera valor ───────────────────────────
+        categ = self.cerebro.categorizar_campo(ident, tipo)
+        if categ:
+            resultado.update(status="pendente", categorizacao=categ)
+            self._adicionar_pendente(ident, categ)
+            self._log(f"  ⚠️ Deixando para você revisar: [{ident}] -> Pendente")
+            return resultado
+
+        # Campo completamente desconhecido — precisa intervencao
+        logger.warning(f"✗ Campo desconhecido: [{ident}]")
+        resultado.update(status="pendente", categorizacao=categ)
+        self._adicionar_pendente(ident, categ)
+        return resultado
+
+    def _mapa_direto(self, identificador: str) -> str | None:
+        """Mapeamento direto de termos comuns sem precisar do Figurante."""
+        ident_n = normalizar_texto(identificador)
+        MAPA = {
+            # Identificacao
+            "nome": "identificacao.nome_completo",
+            "nome completo": "identificacao.nome_completo",
+            "full name": "identificacao.nome_completo",
+            "email": "identificacao.email",
+            "e-mail": "identificacao.email",
+            "correio eletronico": "identificacao.email",
+            "telefone": "identificacao.telefone",
+            "celular": "identificacao.telefone",
+            "phone": "identificacao.telefone",
+            "whatsapp": "identificacao.telefone",
+            "cidade": "identificacao.localizacao.cidade",
+            "city": "identificacao.localizacao.cidade",
+            "estado": "identificacao.localizacao.estado",
+            "state": "identificacao.localizacao.estado",
+            "pais": "identificacao.localizacao.pais",
+            "country": "identificacao.localizacao.pais",
+            "linkedin": "identificacao.links.linkedin",
+            "github": "identificacao.links.github",
+            "portfolio": "identificacao.links.portfolio",
+            "portifolio": "identificacao.links.portfolio",
+            "site pessoal": "identificacao.links.portfolio",
+            "website": "identificacao.links.portfolio",
+            # Formacao
+            "curso": "formacao_academica[0].curso",
+            "formacao": "formacao_academica[0].curso",
+            "graduacao": "formacao_academica[0].curso",
+            "instituicao": "formacao_academica[0].instituicao",
+            "universidade": "formacao_academica[0].instituicao",
+            "faculdade": "formacao_academica[0].instituicao",
+            "college": "formacao_academica[0].instituicao",
+            "degree": "formacao_academica[0].curso",
+            # Experiencia
+            "cargo": "experiencia_profissional[0].cargo",
+            "cargo atual": "experiencia_profissional[0].cargo",
+            "job title": "experiencia_profissional[0].cargo",
+            "empresa": "experiencia_profissional[0].empresa",
+            "empresa atual": "experiencia_profissional[0].empresa",
+            "company": "experiencia_profissional[0].empresa",
+            # Apresentacao
+            "sobre voce": "resumo_profissional",
+            "apresentacao": "resumo_profissional",
+            "resumo": "resumo_profissional",
+            "apresente-se": "resumo_profissional",
+            "fale sobre voce": "resumo_profissional",
+            "tell us about yourself": "resumo_profissional",
+            "summary": "resumo_profissional",
+            "bio": "resumo_profissional",
+        }
+        for termo, chave in MAPA.items():
+            if normalizar_texto(termo) in ident_n or ident_n in normalizar_texto(termo):
+                return chave
+        # Verifica mapeamentos salvos de sessoes anteriores
+        plataforma = self._mapa_direto_cache.get(ident_n)
+        return plataforma
+
+    # =========================================================================
+    # PREENCHEDOR — Preenche um campo na pagina
+    # =========================================================================
+
+    def _preencher_campo(self, page: Page, resultado: dict) -> bool:
+        """
+        Preenche um campo na pagina com base no tipo e valor resolvido.
+        Retorna True se teve sucesso.
+        """
+        status = resultado.get("status")
+        if status not in ("mapeado", "gerado"):
+            return False
+
+        valor = resultado.get("valor", "")
+        tipo  = resultado.get("tipo", "text")
+        opcoes = resultado.get("opcoes", [])
+        seletores = resultado.get("seletores", [])
+        nome  = resultado.get("campo_original", "")
+
+        if not valor and tipo not in ("checkbox", "radio", "file"):
+            return False
+
+        # ── Select ────────────────────────────────────────────────────────
+        if tipo in ("select", "select-one", "select-multiple"):
+            return self._preencher_select(page, seletores, nome, valor, opcoes)
+
+        # ── Radio ─────────────────────────────────────────────────────────
+        if tipo == "radio":
+            return self._preencher_radio(page, nome, resultado)
+
+        # ── Checkbox ──────────────────────────────────────────────────────
+        if tipo == "checkbox":
+            return self._preencher_checkbox(page, nome, resultado)
+
+        # ── File Upload ───────────────────────────────────────────────────
+        if tipo == "file":
+            return self._preencher_file(page, seletores, nome)
+
+        # ── Date ──────────────────────────────────────────────────────────
+        if tipo in ("date", "month"):
+            return self._preencher_data(page, seletores, nome, valor)
+
+        # ── Texto / Email / Tel / URL / Number / Textarea ─────────────────
+        return self._preencher_texto(page, seletores, nome, valor, resultado.get("max_length"))
+
+    def _localizar_elemento(self, page: Page, seletores: list[str], timeout: int = T_ELEM):
+        """Tenta cada seletor em ordem ate encontrar um elemento visivel."""
+        for sel in seletores:
+            try:
+                el = page.locator(sel).first
+                if el.count() > 0 and el.is_visible(timeout=timeout):
+                    return el
+            except Exception:
+                continue
+        return None
+
+    def _preencher_texto(self, page: Page, seletores: list[str], nome: str,
+                         valor: str, max_length: int | None) -> bool:
+        el = self._localizar_elemento(page, seletores)
+        if not el:
+            return False
+        try:
+            # Respeita limite de caracteres
+            if max_length and len(valor) > max_length:
+                valor = valor[:max_length]
+                logger.debug(f"Valor truncado para {max_length} chars: {nome}")
+            el.click(timeout=T_ACAO)
+            el.fill("")           # Limpa antes
+            page.wait_for_timeout(150)
+            el.fill(valor)
+            page.wait_for_timeout(300)
+            exibir = f"'{valor[:40]}...'" if len(valor) > 40 else f"'{valor}'"
+            self._log(f"  ✅ {nome} → {exibir}")
+            return True
+        except Exception as e:
+            logger.warning(f"Falha ao preencher texto [{nome}]: {e}")
+            return False
+
+    def _preencher_select(self, page: Page, seletores: list[str], nome: str,
+                          valor: str, opcoes: list[str]) -> bool:
+        """
+        Seleciona opcao num <select>.
+        Tenta: 1) match direto, 2) fuzzy, 3) Figurante, 4) primeiro item.
+        """
+        el = self._localizar_elemento(page, seletores)
+        if not el:
+            return False
+
+        # Coleta opcoes reais do DOM se nao foram passadas
+        if not opcoes:
+            try:
+                opcoes = page.evaluate(
+                    """(sel) => Array.from(document.querySelector(sel)?.options || [])
+                       .map(o => o.text).filter(t => t.trim() && t !== '--')""",
+                    seletores[0] if seletores else "select"
+                )
+            except Exception:
+                pass
+
+        # Estrategia 1: melhor_opcao_select (deterministico)
+        opcao_escolhida = melhor_opcao_select(valor, opcoes)
+
+        # Estrategia 2: Figurante (IA)
+        if not opcao_escolhida and opcoes:
+            res_ia = self.cerebro.resolver_select(nome, valor, opcoes)
+            if res_ia and res_ia.get("opcao_escolhida") and \\
+               res_ia.get("confianca") in ("alta", "media"):
+                opcao_escolhida = res_ia["opcao_escolhida"]
+
+        if opcao_escolhida:
+            try:
+                el.select_option(label=opcao_escolhida)
+                page.wait_for_timeout(300)
+                self._log(f"  ✅ {nome} → '{opcao_escolhida}'")
+                return True
+            except Exception:
+                # Tenta por value
+                try:
+                    el.select_option(value=opcao_escolhida)
+                    page.wait_for_timeout(300)
+                    self._log(f"  ✅ {nome} → '{opcao_escolhida}' (por value)")
+                    return True
+                except Exception as e:
+                    logger.warning(f"Falha select [{nome}]: {e}")
+
+        # Estrategia 3: seleciona primeiro item nao-vazio
+        if opcoes:
+            try:
+                el.select_option(label=opcoes[0])
+                page.wait_for_timeout(300)
+                self._log(f"  ⚠️ {nome} → '{opcoes[0]}' (primeiro disponivel)")
+                return True
+            except Exception:
+                pass
+        return False
+
+    def _preencher_radio(self, page: Page, nome_grupo: str, resultado: dict) -> bool:
+        """Seleciona o radio button correto baseado no perfil + Figurante."""
+        opcoes = resultado.get("opcoes", [])
+        if not opcoes:
+            return False
+
+        # Pede ao Figurante para decidir
+        res = self.cerebro.resolver_radio(nome_grupo, opcoes, self.perfil_texto)
+        opcao_escolhida = None
+        if res:
+            opcao_escolhida = res.get("opcao_escolhida")
+
+        if not opcao_escolhida:
+            # Fallback: escolhe a primeira opcao
+            opcao_escolhida = opcoes[0].get("label") if opcoes else None
+
+        if not opcao_escolhida:
+            return False
+
+        # Tenta clicar no radio pelo ID ou label
+        for opcao in opcoes:
+            lbl  = normalizar_texto(opcao.get("label", ""))
+            alvo = normalizar_texto(opcao_escolhida)
+            if alvo in lbl or lbl in alvo:
+                # Tenta pelo ID
+                opcao_id = opcao.get("id", "")
+                if opcao_id:
+                    try:
+                        el = page.locator(f"#{opcao_id}").first
+                        if el.count() > 0:
+                            el.click(timeout=T_ACAO)
+                            page.wait_for_timeout(300)
+                            self._log(f"  ✅ {nome_grupo} → '{opcao.get('label')}' (radio)")
+                            return True
+                    except Exception:
+                        pass
+                # Tenta pelo label
+                try:
+                    lbl_texto = opcao.get("label", "").replace("'", "\\\\'")
+                    el = page.locator(f"label:has-text('{lbl_texto}')").first
+                    if el.count() > 0:
+                        el.click(timeout=T_ACAO)
+                        page.wait_for_timeout(300)
+                        self._log(f"  ✅ {nome_grupo} → '{opcao.get('label')}' (radio label)")
+                        return True
+                except Exception:
+                    pass
+        return False
+
+    def _preencher_checkbox(self, page: Page, nome_grupo: str, resultado: dict) -> bool:
+        """Marca/desmarca checkboxes com base no Figurante."""
+        opcoes = resultado.get("opcoes", [])
+        tipo   = resultado.get("tipo", "checkbox")
+
+        # Checkbox simples (sem grupo de opcoes — geralmente termos/concordancia)
+        if not opcoes and tipo == "checkbox":
+            nome = resultado.get("campo_original", "")
+            nome_n = normalizar_texto(nome)
+            # Termos de uso, politica de privacidade, LGPD → sempre marcar
+            SEMPRE_MARCAR = ["termo", "politica", "lgpd", "aceito", "concordo",
+                             "agree", "consent", "privacy", "terms", "condicoes"]
+            if any(t in nome_n for t in SEMPRE_MARCAR):
+                for sel in resultado.get("seletores", []):
+                    try:
+                        el = page.locator(sel).first
+                        if el.count() > 0:
+                            if not el.is_checked():
+                                el.click(timeout=T_ACAO)
+                            self._log(f"  ✅ {nome} → marcado (concordancia)")
+                            return True
+                    except Exception:
+                        continue
+            return False
+
+        # Grupo de checkboxes — Figurante decide quais marcar
+        res = self.cerebro.resolver_checkboxes(nome_grupo, opcoes, self.perfil_texto)
+        if not res:
+            return False
+
+        opcoes_marcar = res.get("opcoes_marcar", [])
+        marcados = 0
+        for opcao in opcoes:
+            lbl   = opcao.get("label", "")
+            value = opcao.get("value", "")
+            deve_marcar = any(
+                normalizar_texto(m) in normalizar_texto(lbl) or
+                normalizar_texto(lbl) in normalizar_texto(m) or
+                normalizar_texto(m) in normalizar_texto(value)
+                for m in opcoes_marcar
+            )
+            if deve_marcar:
+                opcao_id = opcao.get("id", "")
+                if opcao_id:
+                    try:
+                        el = page.locator(f"#{opcao_id}").first
+                        if el.count() > 0 and not el.is_checked():
+                            el.click(timeout=T_ACAO)
+                            page.wait_for_timeout(200)
+                            self._log(f"  ✅ {nome_grupo} → '{lbl}' marcado")
+                            marcados += 1
+                    except Exception:
+                        pass
+        return marcados > 0
+
+    def _preencher_data(self, page: Page, seletores: list[str],
+                        nome: str, valor: str) -> bool:
+        """
+        Preenche campos de data. Tenta formato ISO (YYYY-MM-DD) e BR (DD/MM/YYYY).
+        """
+        el = self._localizar_elemento(page, seletores)
+        if not el:
+            return False
+        # Detecta formato esperado pelo campo
+        try:
+            tipo_input = el.get_attribute("type") or "text"
+            # Normaliza o valor para os formatos mais comuns
+            valor_limpo = re.sub(r"[^\\d/\\-]", "", valor)
+            if tipo_input == "date":
+                # HTML date input espera YYYY-MM-DD
+                partes = re.split(r"[/\\-\\.]", valor_limpo)
+                if len(partes) == 3:
+                    d, m, a = partes if len(partes[0]) <= 2 else (partes[2], partes[1], partes[0])
+                    valor_iso = f"{a.zfill(4)}-{m.zfill(2)}-{d.zfill(2)}"
+                    el.fill(valor_iso)
+                else:
+                    el.fill(valor_limpo)
+            else:
+                # Formato textual — digita como esta
+                el.click(timeout=T_ACAO)
+                el.fill(valor)
+            page.wait_for_timeout(300)
+            self._log(f"  ✅ {nome} → '{valor}' (data)")
+            return True
+        except Exception as e:
+            logger.warning(f"Falha data [{nome}]: {e}")
+            return False
+
+    def _preencher_file(self, page: Page, seletores: list[str], nome: str) -> bool:
+        """Faz upload do curriculo ou arquivo configurado no perfil."""
+        # Busca caminho do curriculo no perfil
+        curriculo_path = None
+        try:
+            curriculo_path = self.perfil.get("documentos", {}).get("curriculo_path", "")
+            if not curriculo_path:
+                # Busca nos caminhos comuns
+                for caminho in [
+                    Path.home() / "Documents" / "curriculo.pdf",
+                    Path.home() / "Desktop" / "curriculo.pdf",
+                    Path.cwd() / "curriculo.pdf",
+                ]:
+                    if caminho.exists():
+                        curriculo_path = str(caminho)
+                        break
+        except Exception:
+            pass
+
+        if not curriculo_path or not Path(curriculo_path).exists():
+            self._log(f"  ⚠️ {nome} — curriculo nao configurado. Configure em perfil.json → documentos.curriculo_path")
+            return False
+
+        for sel in seletores:
+            try:
+                page.set_input_files(sel, curriculo_path)
+                page.wait_for_timeout(500)
+                self._log(f"  ✅ {nome} → curriculo enviado")
+                return True
+            except Exception:
+                continue
+        return False
+
+    # =========================================================================
+    # VALIDACAO — Detecta erros antes de avancar
+    # =========================================================================
+
+    def _detectar_erros_validacao(self, page: Page) -> list[str]:
+        """Detecta mensagens de erro de validacao na pagina."""
+        erros = []
+        try:
+            # Elementos com classes comuns de erro
+            for sel in [
+                ".error", ".invalid", ".has-error", "[aria-invalid='true']",
+                ".field-error", ".form-error", ".alert-danger",
+                "[role='alert']", ".error-message", ".validation-error",
+            ]:
+                els = page.locator(sel)
+                count = els.count()
+                for i in range(min(count, 5)):
+                    try:
+                        txt = els.nth(i).inner_text(timeout=500).strip()
+                        if txt and any(h in txt.lower() for h in ERRO_HINTS):
+                            erros.append(txt[:100])
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+        return erros
+
+    def _tem_captcha(self, page: Page) -> bool:
+        """Detecta se ha captcha na pagina."""
+        try:
+            html = page.content().lower()
+            return any(h in html for h in CAPTCHA_HINTS)
+        except Exception:
+            return False
+
+    def _detectar_modal(self, page: Page) -> bool:
+        """Detecta e fecha modais de confirmacao automaticamente."""
+        modais = [
+            "[role='dialog']", ".modal", ".dialog",
+            "[aria-modal='true']", ".popup",
+        ]
+        for sel in modais:
+            try:
+                modal = page.locator(sel).first
+                if modal.count() > 0 and modal.is_visible(timeout=500):
+                    # Procura botao de confirmacao dentro do modal
+                    for txt in BOTOES_CONFIRMAR:
+                        btn = modal.locator(f"button:has-text('{txt}')").first
+                        if btn.count() > 0 and btn.is_visible(timeout=300):
+                            btn.click()
+                            page.wait_for_timeout(800)
+                            self._log(f"  🔔 Modal confirmado: '{txt}'")
+                            return True
+            except Exception:
+                continue
+        return False
+
+    # =========================================================================
+    # NAVEGACAO — Detecta e clica no botao correto
+    # =========================================================================
+
+    def _coletar_botoes_pagina(self, page: Page) -> list[str]:
+        """Coleta textos de todos os botoes visiveis na pagina."""
+        textos = []
+        try:
+            for sel in ["button", "a[role='button']", "input[type='submit']",
+                        "[role='button']", "input[type='button']"]:
+                els = page.locator(sel)
+                count = els.count()
+                for i in range(min(count, 15)):
+                    try:
+                        txt = els.nth(i).inner_text(timeout=400).strip()
+                        if txt and len(txt) < 60:
+                            textos.append(txt)
+                    except Exception:
+                        pass
+        except Exception:
+            pass
+        return textos
+
+    def _encontrar_botao(self, page: Page, lista_textos: list[str]):
+        """Busca botao visivel cujo texto contenha algum item da lista."""
+        for texto in lista_textos:
+            texto_esc = texto.replace("'", "\\\\'")
+            for sel in [
+                f"button:has-text('{texto_esc}')",
+                f"a:has-text('{texto_esc}')",
+                f"input[type='submit'][value*='{texto_esc}' i]",
+                f"[role='button']:has-text('{texto_esc}')",
+            ]:
+                try:
+                    el = page.locator(sel).first
+                    if el.count() > 0 and el.is_visible(timeout=T_ELEM):
+                        return el, texto
+                except Exception:
+                    continue
+        return None, None
+
+    def _decidir_navegacao(self, page: Page) -> tuple:
+        """
+        Decide qual botao clicar: avancar, finalizar, salvar ou nenhum.
+        Retorna (elemento_botao, acao_str) ou (None, None).
+        """
+        # Tenta avancar antes de finalizar (evita enviar antes de terminar)
+        btn, txt = self._encontrar_botao(page, BOTOES_AVANCAR)
+        if btn:
+            return btn, "avancar"
+
+        # Analisa com Figurante se nao achou pattern simples
+        textos_botoes = self._coletar_botoes_pagina(page)
+        if textos_botoes:
+            analise = self.cerebro.analisar_botoes_pagina(textos_botoes, page.url)
+            if analise:
+                acao = analise.get("acao")
+                texto_botao = analise.get("texto_botao", "")
+                if acao == "avancar":
+                    btn, _ = self._encontrar_botao(page, [texto_botao] + BOTOES_AVANCAR)
+                    if btn:
+                        return btn, "avancar"
+                elif acao == "finalizar":
+                    btn, _ = self._encontrar_botao(page, [texto_botao] + BOTOES_FINALIZAR)
+                    if btn:
+                        return btn, "finalizar"
+                elif acao == "salvar":
+                    btn, _ = self._encontrar_botao(page, [texto_botao] + BOTOES_SALVAR)
+                    if btn:
+                        return btn, "salvar"
+
+        # Fallback: tenta finalizar
+        btn, txt = self._encontrar_botao(page, BOTOES_FINALIZAR)
+        if btn:
+            return btn, "finalizar"
+
+        btn, txt = self._encontrar_botao(page, BOTOES_SALVAR)
+        if btn:
+            return btn, "salvar"
+
+        return None, None
+
+    # =========================================================================
+    # LOOP PRINCIPAL — Preenche e navega por todas as paginas
+    # =========================================================================
+
+    def _loop_preenchimento(self, page: Page, resultados_iniciais: list[dict],
+                            max_paginas: int = 20):
+        """
+        Loop principal: preenche a pagina atual → clica no botao certo → repete.
+        Para quando: sem mais botoes, formulario enviado, cancelado ou max_paginas.
+        """
+        resultados = list(resultados_iniciais)
+        pagina     = 1
+        url_anterior = ""
+
+        while pagina <= max_paginas:
+            if self.estado_nightstar.get("cancelar"):
+                self._log("🛑 Cancelado pelo usuario.")
+                break
+
+            self._log(f"\\n📄 Etapa {pagina} — {page.url[:60]}")
+            self._screenshot(page, f"pagina_{pagina:02d}_antes")
+            page.wait_for_timeout(1200)
+
+            # Verifica captcha
+            if self._tem_captcha(page):
+                self._log("🔐 CAPTCHA detectado! Resolva manualmente e aguarde...")
+                while self._tem_captcha(page):
+                    if self.estado_nightstar.get("cancelar"):
+                        break
+                    time.sleep(3)
+                self._log("✅ CAPTCHA resolvido, continuando...")
+
+            # Fecha modais automaticamente
+            self._detectar_modal(page)
+
+            # Re-escaneia a pagina
+            campos_pagina = self._escanear_pagina(page)
+            preenchidos   = 0
+            nao_preenchidos = []
+
+            for campo in campos_pagina:
+                if self.estado_nightstar.get("cancelar"):
+                    break
+
+                # Evita reprocessar campos ja resolvidos em paginas anteriores
+                nome_campo = campo["identificador"]
+                resultado_existente = next(
+                    (r for r in resultados if r["campo_original"] == nome_campo), None
+                )
+
+                if resultado_existente and resultado_existente.get("status") in ("mapeado", "gerado"):
+                    r = resultado_existente
+                else:
+                    r = self._processar_campo(campo)
+                    if not resultado_existente:
+                        resultados.append(r)
+
+                sucesso = self._preencher_campo(page, r)
+                if sucesso:
+                    preenchidos += 1
+                    page.wait_for_timeout(150)  # Pausa entre campos
+                elif r.get("status") == "pendente":
+                    nao_preenchidos.append(nome_campo)
+
+            self._log(f"  ✏️ {preenchidos} campo(s) preenchido(s).")
+            if nao_preenchidos:
+                self._log(f"  ⚠️ Pendentes: {', '.join(nao_preenchidos[:5])}")
+
+            # Aguarda animacoes e validacoes do site
+            page.wait_for_timeout(700)
+
+            # Verifica erros de validacao antes de avancar
+            erros = self._detectar_erros_validacao(page)
+            if erros:
+                self._log(f"  ⚠️ Erros detectados: {erros[:2]}")
+                # Tenta continuar mesmo assim (alguns erros sao falso-positivos)
+                page.wait_for_timeout(1000)
+
+            self._screenshot(page, f"pagina_{pagina:02d}_depois")
+
+            # Decide proximo passo
+            btn, acao = self._decidir_navegacao(page)
+
+            if not btn:
+                self._log("🏁 Sem mais botoes de navegacao. Formulario concluido.")
+                break
+
+            if acao == "finalizar":
+                if self.semi_auto:
+                    # MODO SEMI-AUTO: para aqui e espera aprovacao do usuario
+                    self._screenshot(page, "pronto_para_enviar")
+                    self._log("─" * 50)
+                    self._log("✋ SEMI-AUTO: Tudo preenchido e revisado!")
+                    self._log("   Confira o formulario no browser.")
+                    self._log("   Clique em '📤 Confirmar Envio' no painel quando estiver pronto.")
+                    self._log("─" * 50)
+                    self.estado_nightstar["aguardando_confirmacao_envio"] = True
+
+                    # Aguarda confirmacao ou cancelamento
+                    while True:
+                        if self.estado_nightstar.get("cancelar"):
+                            self._log("🛑 Cancelado. Formulario NAO enviado.")
+                            self.estado_nightstar["aguardando_confirmacao_envio"] = False
+                            break
+                        if self.estado_nightstar.get("confirmar_envio"):
+                            self.estado_nightstar["confirmar_envio"] = False
+                            self.estado_nightstar["aguardando_confirmacao_envio"] = False
+                            self._log("📤 Enviando candidatura (aprovado pelo usuario)...")
+                            try:
+                                btn.click(timeout=T_ACAO)
+                                page.wait_for_timeout(3000)
+                                self._screenshot(page, "enviado")
+                                self._log("✅ Candidatura enviada com sucesso!")
+                                self._log(f"🌐 Pagina final: {page.url}")
+                            except Exception as e:
+                                self._log(f"⚠️ Erro ao enviar: {e}")
+                            break
+                        time.sleep(1.5)
+                else:
+                    # MODO FULL AUTO: envia direto sem esperar
+                    self._log(f"📤 Enviando candidatura (full auto)...")
+                    try:
+                        btn.click(timeout=T_ACAO)
+                        page.wait_for_timeout(3000)
+                        self._screenshot(page, "enviado")
+                        self._log("✅ Candidatura enviada com sucesso!")
+                        self._log(f"🌐 Pagina final: {page.url}")
+                    except Exception as e:
+                        self._log(f"⚠️ Erro ao enviar: {e}")
+                break
+
+            # Avanca para proxima pagina
+            self._log(f"➡️ Avancando ({acao})...")
+            url_antes = page.url
+            try:
+                btn.click(timeout=T_ACAO)
+                page.wait_for_timeout(2500)
+                # Verifica se realmente mudou de pagina
+                if page.url == url_antes and page.url == url_anterior:
+                    self._log("⚠️ Pagina nao mudou. Pode haver erro de validacao.")
+                    page.wait_for_timeout(1500)
+                url_anterior = url_antes
+                pagina += 1
+            except Exception as e:
+                self._log(f"⚠️ Erro ao avancar: {e}")
+                break
+
+        # Salva mapeamentos aprendidos para reutilizar
+        self._salvar_mapeamentos_sessao(page.url, resultados)
+        self._log("\\n✅ NightStar concluiu. Browser permanece aberto para revisao.")
+        return resultados
+
+    # =========================================================================
+    # HELPERS
+    # =========================================================================
+
+    def _log(self, mensagem: str):
+        logger.info(mensagem)
+        self.estado_nightstar.setdefault("progresso", []).append(mensagem)
+
+    def _adicionar_pendente(self, campo: str, categ: dict | None):
+        pendentes = self.perfil.setdefault("metadados", {}).setdefault("campos_pendentes", [])
+        if any(normalizar_texto(p.get("campo", "")) == normalizar_texto(campo) for p in pendentes):
+            return
+        pendentes.append({
+            "campo":         campo,
+            "status":        "PENDENTE",
+            "descoberto_em": timestamp_agora(),
+            "chave_sugerida": categ.get("chave_sugerida") if categ else None,
+            "categoria":     categ.get("categoria") if categ else "outro",
+            "descricao":     categ.get("descricao") if categ else None,
+            "valor":         None,
+        })
+        logger.warning(f"+ PENDENTE: '{campo}'")
+
+    def _salvar_mapeamentos_sessao(self, url: str, resultados: list[dict]):
+        """Salva mapeamentos aprendidos para reutilizar em sessoes futuras."""
+        from urllib.parse import urlparse
+        dominio = urlparse(url).netloc.replace("www.", "")
+        self.mapeamentos.setdefault("plataformas", {})[dominio] = {
+            "url":             url,
+            "ultima_varredura": timestamp_agora(),
+            "total_campos":    len(resultados),
+            "campos_mapeados": [
+                {"campo": r["campo_original"], "chave": r.get("chave_perfil")}
+                for r in resultados if r.get("status") in ("mapeado", "gerado")
+            ],
+        }
+        # Aprende mapeamentos diretos para proxima vez
+        for r in resultados:
+            if r.get("status") == "mapeado" and r.get("chave_perfil"):
+                ident_n = normalizar_texto(r["campo_original"])
+                self._mapa_direto_cache[ident_n] = r["chave_perfil"]
+        salvar_mapeamentos(self.mapeamentos)
+        salvar_perfil(self.perfil)
+
+    def _exibir_relatorio(self, resultados: list[dict]):
+        mapeados  = [r for r in resultados if r["status"] in ("mapeado", "gerado")]
+        pendentes = [r for r in resultados if r["status"] == "pendente"]
+        ignorados = [r for r in resultados if r["status"] == "ignorado"]
+        self._log(f"\\n{'─'*50}")
+        self._log(f"RELATORIO FINAL")
+        self._log(f"  Total:    {len(resultados)}")
+        self._log(f"  Sucesso:  {len(mapeados)}")
+        self._log(f"  Pendente: {len(pendentes)}")
+        self._log(f"  Ignorado: {len(ignorados)}")
+        if pendentes:
+            self._log(f"  Campos pendentes:")
+            for p in pendentes[:10]:
+                self._log(f"    - {p['campo_original']}")
+        self._log(f"{'─'*50}")
+
+    # =========================================================================
+    # PONTO DE ENTRADA — Usado pelo app.py (Figurante)
+    # =========================================================================
+
+    def executar_retornando(self, url: str) -> list:
+        """
+        Modo Figurante: abre browser, aguarda confirmacao, executa tudo.
+        O browser permanece aberto ao terminar para o usuario revisar.
+        """
+        resultados = []
+
+        with sync_playwright() as p:
+            browser, context = self._abrir_browser(p)
+            page = context.new_page()
+            self._navegar(page, url)
+
+            # Aguarda usuario fazer login e confirmar
+            if not self._aguardar_inicio(page, url):
+                self._log("🛑 Cancelado.")
+                return []
+
+            # Ativa adaptador da plataforma (Gupy, LinkedIn, etc.)
+            html_atual = page.content()
+            plataforma = detectar_plataforma(page.url, html_atual)
+            adapter    = get_adapter(plataforma, page, self.perfil, self._log)
+            if not adapter.pre_varredura():
+                self._log("⚠️ Adaptador nao conseguiu preparar a pagina. Tentando assim mesmo...")
+            self.estado_nightstar["plataforma"] = plataforma
+
+            # Varredura inicial
+            campos = self._escanear_pagina(page)
+            if not campos:
+                self._log("⚠️ Nenhum campo encontrado. Verifique se esta na pagina correta.")
+                return []
+
+            for campo in campos:
+                if self.estado_nightstar.get("cancelar"):
+                    break
+                r = self._processar_campo(campo)
+                resultados.append(r)
+
+            salvar_perfil(self.perfil)
+            self._salvar_mapeamentos_sessao(url, resultados)
+
+            # Salva referencias para o preenchimento
+            self.estado_nightstar["_page"]      = page
+            self.estado_nightstar["_browser"]   = browser
+            self.estado_nightstar["_playwright"] = p
+            self.estado_nightstar["_resultados"] = resultados
+
+            self._log(f"✅ Varredura: {len(resultados)} campos.")
+            self._log("⏸️ Revise o relatorio e clique em '🖊️ Preencher'.")
+
+            self.estado_nightstar["relatorio"] = resultados
+            self.estado_nightstar["status"] = "done"
+
+            # Aguarda comando de preenchimento
+            while self.estado_nightstar.get("_page") is not None:
+                if self.estado_nightstar.get("_executar_preenchimento"):
+                    self.estado_nightstar["_executar_preenchimento"] = False
+                    resultados = self._loop_preenchimento(page, resultados)
+                    self._exibir_relatorio(resultados)
+                    self.estado_nightstar["_page"] = None
+                    break
+                if self.estado_nightstar.get("cancelar"):
+                    self._log("🛑 Cancelado. Browser aberto.")
+                    self.estado_nightstar["_page"] = None
+                    break
+                time.sleep(1)
+
+            logger.info("NightStar encerrado. Browser permanece aberto.")
+            return resultados
+
+    def executar(self, url: str):
+        """Modo terminal (main.py)."""
+        with sync_playwright() as p:
+            browser, context = self._abrir_browser(p)
+            page = context.new_page()
+            self._navegar(page, url)
+            try:
+                campos = self._escanear_pagina(page)
+                resultados = [self._processar_campo(c) for c in campos]
+                resultados = self._loop_preenchimento(page, resultados)
+                self._exibir_relatorio(resultados)
+            finally:
+                input("\\nPressione Enter para fechar o browser...")
+                browser.close()
+`,
+  "brain.py": `# NightStar/src/brain.py — v2
+# Interface do NightStar com o Figurante (Qwen local).
+# Agora inclui: mapeamento, categorizacao, geracao de valores,
+# resolucao de selects/radios/checkboxes e analise de botoes de navegacao.
+
+import json
+import sys
+from pathlib import Path
+import re
+import ollama
+
+sys.path.append(str(Path(__file__).parent.parent))
+from src.utils import criar_logger, normalizar_texto
+
+logger = criar_logger("brain")
+
+MOTORES = {
+    "paz": "sam860/dolphin3-qwen2.5:1.5b",
+    "ira": "sam860/dolphin3-qwen2.5:3b",
+}
+
+def _instrucoes(motor: str) -> str:
+    return (
+        f"Voce e o Figurante, IA local do usuario. "
+        f"Modo atual: '{motor}'. Voce auxilia o NightStar, bot de automacao de candidaturas. "
+        f"REGRA: Responda SEMPRE em portugues do Brasil. "
+        f"Quando solicitado JSON, retorne APENAS o JSON puro, sem markdown, sem backticks, sem explicacoes."
+    )
+
+
+# ── Prompts ───────────────────────────────────────────────────────────────────
+
+PROMPT_MAPEAR = """Campo do formulario: "{campo}"
+Chaves do perfil disponíveis: {chaves}
+
+Retorne APENAS este JSON:
+{{"chave_correspondente": "chave_do_perfil_ou_null", "confianca": "alta|media|baixa", "justificativa": "explicacao breve"}}"""
+
+PROMPT_CATEGORIZAR = """Campo de formulario: "{campo}"
+Tipo HTML: "{tipo}"
+
+Retorne APENAS este JSON:
+{{"chave_sugerida": "snake_case", "categoria": "identificacao|formacao|experiencia|habilidades|preferencias|outro", "descricao": "o que e este campo", "exemplo_valor": "valor tipico"}}"""
+
+PROMPT_GERAR_VALOR = """Voce esta preenchendo um formulario de candidatura em nome do candidato.
+Campo: "{campo}"
+Tipo: "{tipo}"
+Descricao do campo: "{descricao}"
+
+Dados do candidato disponiveis:
+{dados_perfil}
+
+Gere o valor mais adequado para este campo. Retorne APENAS este JSON:
+{{"valor": "valor_gerado", "confianca": "alta|media|baixa", "justificativa": "por que este valor"}}"""
+
+PROMPT_RESOLVER_SELECT = """Voce esta preenchendo um campo SELECT de um formulario.
+Campo: "{campo}"
+Valor desejado pelo candidato: "{valor_desejado}"
+Opcoes disponíveis no formulario: {opcoes}
+
+Qual opcao da lista corresponde melhor ao valor desejado?
+Retorne APENAS este JSON:
+{{"opcao_escolhida": "texto_exato_da_opcao_ou_null", "confianca": "alta|media|baixa"}}"""
+
+PROMPT_RESOLVER_CHECKBOX = """Voce esta preenchendo checkboxes de um formulario de candidatura.
+Campo/Pergunta: "{campo}"
+Opcoes disponíveis: {opcoes}
+Dados do candidato: {dados_perfil}
+
+Quais opcoes devem ser MARCADAS para o candidato?
+Retorne APENAS este JSON:
+{{"opcoes_marcar": ["lista", "de", "opcoes", "a", "marcar"], "justificativa": "por que estas opcoes"}}"""
+
+PROMPT_RESOLVER_RADIO = """Voce esta preenchendo um campo radio de um formulario.
+Campo/Pergunta: "{campo}"
+Opcoes: {opcoes}
+Dados do candidato: {dados_perfil}
+
+Qual opcao o candidato deve escolher?
+Retorne APENAS este JSON:
+{{"opcao_escolhida": "label_ou_value_da_opcao", "confianca": "alta|media|baixa", "justificativa": "motivo"}}"""
+
+PROMPT_ANALISAR_BOTAO = """Voce esta automando um formulario de candidatura. 
+Texto dos botoes visiveis nesta pagina: {botoes}
+URL atual: {url}
+
+Este e um formulario multi-etapa?
+Qual botao devo clicar agora?
+- Se houver botao de "avancar/continuar/proximo" retorne "avancar"
+- Se houver botao de "enviar/finalizar/candidatar" e esta for a ultima etapa retorne "finalizar"
+- Se houver apenas "salvar" sem avancar retorne "salvar"
+- Se nao tiver botao claro retorne "aguardar"
+
+Retorne APENAS este JSON:
+{{"acao": "avancar|finalizar|salvar|aguardar", "texto_botao": "texto exato do botao a clicar", "justificativa": "motivo"}}"""
+
+
+# ── Classe Principal ──────────────────────────────────────────────────────────
+
+class Cerebro:
+    """
+    Interface do NightStar com o Figurante.
+    Responsabilidades:
+    - Mapear campos de formulario para chaves do perfil
+    - Categorizar campos desconhecidos
+    - Gerar valores para campos sem correspondencia direta
+    - Resolver opcoes de select/radio/checkbox
+    - Analisar qual botao de navegacao clicar
+    """
+
+    def __init__(self, motor_padrao: str = "paz"):
+        self.motor_atual = motor_padrao
+        self._verificar_modelos()
+
+    def _verificar_modelos(self):
+        try:
+            instalados = [m["name"] for m in ollama.list()["models"]]
+            for modo, modelo in MOTORES.items():
+                ok = any(modelo in m for m in instalados)
+                s = "OK" if ok else "NAO ENCONTRADO"
+                logger.info(f"Figurante [{modo}] {s}: {modelo}")
+        except Exception as e:
+            logger.error(f"Erro ao conectar Ollama: {e}")
+
+    def _chamar(self, prompt: str, motor: str = None) -> str | None:
+        motor = motor or self.motor_atual
+        modelo = MOTORES[motor]
+        try:
+            resp = ollama.chat(
+                model=modelo,
+                messages=[
+                    {"role": "system", "content": _instrucoes(motor)},
+                    {"role": "user",   "content": prompt},
+                ],
+                options={"num_ctx": 4096, "temperature": 0.05},
+            )
+            return resp["message"]["content"].strip()
+        except Exception as e:
+            logger.error(f"Erro Figurante [{motor}]: {e}")
+            return None
+
+    def _json(self, texto: str) -> dict | None:
+        if not texto:
+            return None
+        try:
+            return json.loads(texto)
+        except json.JSONDecodeError:
+            pass
+        # Extrai bloco JSON se vier com texto ao redor
+        m = re.search(r"\\{[\\s\\S]*\\}", texto)
+        if m:
+            try:
+                return json.loads(m.group())
+            except Exception:
+                pass
+        logger.warning(f"JSON invalido do Figurante: {texto[:120]}")
+        return None
+
+    def _chamar_json(self, prompt: str, motor: str = None) -> dict | None:
+        return self._json(self._chamar(prompt, motor))
+
+    # ── Mapeamento ────────────────────────────────────────────────────────────
+
+    def mapear_campo(self, campo: str, chaves_perfil: list[str]) -> dict | None:
+        """Mapeia um campo de formulario para uma chave do perfil.json."""
+        chaves_str = ", ".join(chaves_perfil[:50])
+        prompt = PROMPT_MAPEAR.format(campo=campo, chaves=chaves_str)
+        r = self._chamar_json(prompt, "paz")
+        # Confianca baixa: tenta com modelo mais forte
+        if r and r.get("confianca") == "baixa":
+            r2 = self._chamar_json(prompt, "ira")
+            if r2 and r2.get("confianca") in ("alta", "media"):
+                r = r2
+        return r
+
+    # ── Categorizacao ─────────────────────────────────────────────────────────
+
+    def categorizar_campo(self, campo: str, tipo: str = "text") -> dict | None:
+        """Categoriza um campo completamente desconhecido."""
+        prompt = PROMPT_CATEGORIZAR.format(campo=campo, tipo=tipo)
+        return self._chamar_json(prompt, "ira")
+
+    # ── Geracao de Valor ──────────────────────────────────────────────────────
+
+    def gerar_valor(self, campo: str, tipo: str, descricao: str,
+                    dados_perfil: str) -> dict | None:
+        """
+        Gera um valor adequado para um campo sem correspondencia direta no perfil.
+        Usado quando o campo e desconhecido mas o Figurante pode inferir o valor.
+        """
+        prompt = PROMPT_GERAR_VALOR.format(
+            campo=campo, tipo=tipo, descricao=descricao, dados_perfil=dados_perfil
+        )
+        return self._chamar_json(prompt, "ira")
+
+    # ── Resolucao de Opcoes ───────────────────────────────────────────────────
+
+    def resolver_select(self, campo: str, valor_desejado: str,
+                        opcoes: list[str]) -> dict | None:
+        """
+        Dado um select com opcoes especificas, identifica qual opcao corresponde
+        ao valor desejado (fuzzy matching inteligente via Figurante).
+        """
+        if not opcoes:
+            return None
+        prompt = PROMPT_RESOLVER_SELECT.format(
+            campo=campo,
+            valor_desejado=valor_desejado,
+            opcoes=json.dumps(opcoes, ensure_ascii=False),
+        )
+        return self._chamar_json(prompt, "paz")
+
+    def resolver_radio(self, campo: str, opcoes: list[dict],
+                       dados_perfil: str) -> dict | None:
+        """Decide qual opcao de radio o candidato deve selecionar."""
+        opcoes_str = json.dumps(
+            [o.get("label", o.get("value", "")) for o in opcoes],
+            ensure_ascii=False
+        )
+        prompt = PROMPT_RESOLVER_RADIO.format(
+            campo=campo, opcoes=opcoes_str, dados_perfil=dados_perfil[:600]
+        )
+        return self._chamar_json(prompt, "paz")
+
+    def resolver_checkboxes(self, campo: str, opcoes: list[dict],
+                            dados_perfil: str) -> dict | None:
+        """Decide quais checkboxes marcar."""
+        opcoes_str = json.dumps(
+            [o.get("label", o.get("value", "")) for o in opcoes],
+            ensure_ascii=False
+        )
+        prompt = PROMPT_RESOLVER_CHECKBOX.format(
+            campo=campo, opcoes=opcoes_str, dados_perfil=dados_perfil[:600]
+        )
+        return self._chamar_json(prompt, "ira")
+
+    # ── Analise de Botoes ─────────────────────────────────────────────────────
+
+    def analisar_botoes_pagina(self, textos_botoes: list[str], url: str) -> dict | None:
+        """
+        Decide qual botao clicar na pagina atual.
+        Retorna: {acao: "avancar|finalizar|salvar|aguardar", texto_botao: str}
+        """
+        if not textos_botoes:
+            return None
+        prompt = PROMPT_ANALISAR_BOTAO.format(
+            botoes=json.dumps(textos_botoes, ensure_ascii=False),
+            url=url,
+        )
+        return self._chamar_json(prompt, "paz")
+
+    # ── Utilitarios ───────────────────────────────────────────────────────────
+
+    def extrair_chaves_planas(self, perfil: dict, prefixo: str = "") -> list[str]:
+        """Extrai todas as chaves do perfil.json em formato plano."""
+        chaves = []
+        for k, v in perfil.items():
+            chave = f"{prefixo}.{k}" if prefixo else k
+            if isinstance(v, dict):
+                chaves.extend(self.extrair_chaves_planas(v, chave))
+            elif isinstance(v, list) and v and isinstance(v[0], dict):
+                chaves.extend(self.extrair_chaves_planas(v[0], f"{chave}[0]"))
+            else:
+                chaves.append(chave)
+        return chaves
+
+    def perfil_resumido(self, perfil: dict) -> str:
+        """Gera resumo textual do perfil para usar em prompts de geracao de valor."""
+        linhas = []
+        p = perfil
+        try:
+            ide = p.get("identificacao", {})
+            linhas.append(f"Nome: {ide.get('nome_completo', '')}")
+            linhas.append(f"Email: {ide.get('email', '')}")
+            linhas.append(f"Telefone: {ide.get('telefone', '')}")
+            loc = ide.get("localizacao", {})
+            linhas.append(f"Cidade: {loc.get('cidade', '')}, {loc.get('estado', '')}")
+            linhas.append(f"Resumo: {p.get('resumo_profissional', '')[:200]}")
+            for exp in p.get("experiencia_profissional", [])[:2]:
+                linhas.append(f"Exp: {exp.get('cargo','')} em {exp.get('empresa','')}")
+            for form in p.get("formacao_academica", [])[:2]:
+                linhas.append(f"Formacao: {form.get('curso','')} - {form.get('instituicao','')}")
+            habs = p.get("habilidades_tecnicas", {})
+            for cat, lista in habs.items():
+                if isinstance(lista, list):
+                    linhas.append(f"{cat}: {', '.join(str(x) for x in lista[:5])}")
+        except Exception:
+            pass
+        return "\\n".join(linhas)
+`,
+  "utils.py": `# src/utils.py — Funções auxiliares do Nexus_AutoFill
+# Responsabilidades: limpeza de HTML, leitura/escrita de JSON, logging.
+
+import json
+import logging
+import re
+import sys
+from datetime import datetime
+from pathlib import Path
+
+import colorlog
+from bs4 import BeautifulSoup
+
+# Importa configurações centrais
+sys.path.append(str(Path(__file__).parent.parent))
+from config import PERFIL_JSON, MAPEAMENTOS_JSON, LOGS_DIR, LOG_LEVEL
+
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+
+def criar_logger(nome: str) -> logging.Logger:
+    """Cria um logger colorido para o console do VS Code."""
+    LOGS_DIR.mkdir(exist_ok=True)
+
+    logger = logging.getLogger(nome)
+    logger.setLevel(getattr(logging, LOG_LEVEL, logging.DEBUG))
+
+    if logger.handlers:
+        return logger  # Evita duplicar handlers em reimportações
+
+    # Handler colorido para o console
+    console_handler = colorlog.StreamHandler()
+    console_handler.setFormatter(colorlog.ColoredFormatter(
+        "%(log_color)s[%(asctime)s] %(levelname)-8s%(reset)s %(message)s",
+        datefmt="%H:%M:%S",
+        log_colors={
+            "DEBUG":    "cyan",
+            "INFO":     "green",
+            "WARNING":  "yellow",
+            "ERROR":    "red",
+            "CRITICAL": "bold_red",
+        }
+    ))
+
+    # Handler para arquivo de log (salvo em logs/)
+    log_file = LOGS_DIR / f"sessao_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
+    file_handler = logging.FileHandler(log_file, encoding="utf-8")
+    file_handler.setFormatter(logging.Formatter(
+        "[%(asctime)s] %(levelname)-8s %(message)s", datefmt="%H:%M:%S"
+    ))
+
+    logger.addHandler(console_handler)
+    logger.addHandler(file_handler)
+    return logger
+
+
+logger = criar_logger("utils")
+
+
+# ── Manipulação de JSON ──────────────────────────────────────────────────────
+
+def carregar_json(caminho: Path) -> dict:
+    """Carrega um arquivo JSON com tratamento de erros."""
+    try:
+        with open(caminho, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        logger.error(f"Arquivo não encontrado: {caminho}")
+        return {}
+    except json.JSONDecodeError as e:
+        logger.error(f"Erro ao ler JSON ({caminho}): {e}")
+        return {}
+
+
+def salvar_json(caminho: Path, dados: dict) -> bool:
+    """Salva dados em um arquivo JSON com indentação legível."""
+    try:
+        caminho.parent.mkdir(parents=True, exist_ok=True)
+        with open(caminho, "w", encoding="utf-8") as f:
+            json.dump(dados, f, ensure_ascii=False, indent=2)
+        logger.debug(f"JSON salvo: {caminho}")
+        return True
+    except Exception as e:
+        logger.error(f"Erro ao salvar JSON ({caminho}): {e}")
+        return False
+
+
+def carregar_perfil() -> dict:
+    """Atalho para carregar o perfil.json."""
+    return carregar_json(PERFIL_JSON)
+
+
+def salvar_perfil(perfil: dict) -> bool:
+    """Atalho para salvar o perfil.json."""
+    return salvar_json(PERFIL_JSON, perfil)
+
+
+def carregar_mapeamentos() -> dict:
+    """Atalho para carregar o mapeamentos.json."""
+    return carregar_json(MAPEAMENTOS_JSON)
+
+
+def salvar_mapeamentos(mapeamentos: dict) -> bool:
+    """Atalho para salvar o mapeamentos.json."""
+    return salvar_json(MAPEAMENTOS_JSON, mapeamentos)
+
+
+# ── Limpeza de HTML ──────────────────────────────────────────────────────────
+
+def limpar_html(html_bruto: str) -> str:
+    """
+    Remove tags HTML, scripts, estilos e normaliza espaços.
+    Retorna apenas o texto relevante para análise.
+    """
+    soup = BeautifulSoup(html_bruto, "html.parser")
+
+    # Remove elementos que não contêm texto útil
+    for tag in soup(["script", "style", "meta", "noscript", "svg", "path"]):
+        tag.decompose()
+
+    texto = soup.get_text(separator=" ")
+    # Normaliza espaços e quebras de linha
+    texto = re.sub(r"\\s+", " ", texto).strip()
+    return texto
+
+
+def extrair_labels_inputs(html_bruto: str) -> list[dict]:
+    """
+    Extrai todos os campos de formulário do HTML com seus labels.
+    Retorna lista de dicts: {tipo, nome, id, placeholder, label_texto}
+    """
+    soup = BeautifulSoup(html_bruto, "html.parser")
+    campos = []
+
+    # Tipos de campos relevantes
+    seletores = soup.find_all(["input", "select", "textarea"])
+
+    for elemento in seletores:
+        tipo  = elemento.get("type", elemento.name)
+        nome  = elemento.get("name", "")
+        id_el = elemento.get("id", "")
+        placeholder = elemento.get("placeholder", "")
+
+        # Ignora campos ocultos, submit e botões
+        if tipo in ("hidden", "submit", "button", "reset", "image"):
+            continue
+
+        # Tenta encontrar o label associado
+        label_texto = ""
+        if id_el:
+            label = soup.find("label", {"for": id_el})
+            if label:
+                label_texto = label.get_text(strip=True)
+
+        # Se não achou pelo 'for', tenta label pai
+        if not label_texto:
+            pai = elemento.find_parent("label")
+            if pai:
+                label_texto = pai.get_text(strip=True)
+
+        # Monta o identificador mais legível disponível
+        identificador = label_texto or placeholder or nome or id_el or tipo
+
+        campos.append({
+            "tipo": tipo,
+            "nome": nome,
+            "id": id_el,
+            "placeholder": placeholder,
+            "label": label_texto,
+            "identificador": identificador.strip()
+        })
+
+    logger.debug(f"Campos extraídos do HTML: {len(campos)}")
+    return campos
+
+
+# ── Helpers ──────────────────────────────────────────────────────────────────
+
+def normalizar_texto(texto: str) -> str:
+    """Normaliza texto para comparação: minúsculas, sem acentos, sem espaços extras."""
+    import unicodedata
+    texto = texto.lower().strip()
+    texto = unicodedata.normalize("NFD", texto)
+    texto = "".join(c for c in texto if unicodedata.category(c) != "Mn")
+    texto = re.sub(r"[^a-z0-9\\s]", " ", texto)
+    texto = re.sub(r"\\s+", " ", texto).strip()
+    return texto
+
+
+def timestamp_agora() -> str:
+    """Retorna timestamp no formato ISO para logs e metadados."""
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+`,
+  "config.py": `# config.py — Configurações centrais do NightStar
+# Edite este arquivo para adaptar ao seu ambiente.
+
+from pathlib import Path
+
+# ── Diretórios base ──────────────────────────────────────────────────────────
+BASE_DIR   = Path(__file__).parent
+DATA_DIR   = BASE_DIR / "data"
+LOGS_DIR   = BASE_DIR / "logs"
+SRC_DIR    = BASE_DIR / "src"
+
+# ── Arquivos de dados ────────────────────────────────────────────────────────
+PERFIL_JSON     = DATA_DIR / "perfil.json"
+MAPEAMENTOS_JSON = DATA_DIR / "mapeamentos.json"
+
+# ── Ollama ───────────────────────────────────────────────────────────────────
+OLLAMA_URL   = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "qwen2.5"   # Ajuste para o nome exato do seu modelo
+                            # (rode 'ollama list' no terminal para confirmar)
+
+# ── Playwright ───────────────────────────────────────────────────────────────
+BROWSER_HEADLESS = False    # False = abre o browser visualmente (recomendado para debug)
+BROWSER_TIMEOUT  = 30_000  # Timeout em ms para carregamento de páginas (30 segundos)
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+LOG_LEVEL = "DEBUG"         # DEBUG | INFO | WARNING | ERROR
+`,
+  "main.py": `# main.py — Ponto de entrada do Nexus_AutoFill
+# Execute com: python main.py
+
+import sys
+from src.bot_core import NexusBot
+from src.utils import criar_logger
+
+logger = criar_logger("main")
+
+
+def main():
+    print("""
+╔══════════════════════════════════════════════╗
+║          NEXUS_AUTOFILL — v1.0               ║
+║     Sincronizador Passivo de Currículos      ║
+╚══════════════════════════════════════════════╝
+    """)
+
+    # Aceita URL como argumento de linha de comando ou pede interativamente
+    if len(sys.argv) > 1:
+        url = sys.argv[1]
+    else:
+        url = input(
+            "Cole a URL da página de currículo/perfil (Gupy, Solides, etc.):\\n> "
+        ).strip()
+
+    if not url.startswith("http"):
+        logger.error("URL inválida. Certifique-se de incluir 'https://'")
+        sys.exit(1)
+
+    bot = NexusBot()
+    bot.executar(url)
+
+
+if __name__ == "__main__":
+    main()
+`,
+  "requirements.txt": `# Nexus_AutoFill — Dependências do Projeto
+# Instale com: pip install -r requirements.txt
+# Após instalar, rode: playwright install chromium
+
+playwright>=1.44.0          # Automação web moderna
+beautifulsoup4>=4.12.0      # Limpeza e parsing de HTML
+ollama>=0.2.0               # Lib oficial do Ollama (igual ao seu app.py do Figurante)
+colorlog>=6.8.0             # Logs coloridos no console do VS Code
+`,
+  "perfil.example.json": `{
+  "identificacao": {
+    "nome_completo": "Seu Nome Completo",
+    "email": "seu@email.com",
+    "telefone": "+55 (XX) XXXXX-XXXX",
+    "localizacao": {
+      "cidade": "Sua Cidade",
+      "estado": "Seu Estado",
+      "pais": "Brasil"
+    },
+    "links": {
+      "linkedin": "https://linkedin.com/in/seuperfil",
+      "github": "https://github.com/seuusuario",
+      "portfolio": "https://seusite.com"
+    }
+  },
+  "resumo_profissional": "Escreva aqui seu resumo profissional de 2-3 linhas.",
+  "formacao_academica": [
+    {
+      "instituicao": "Nome da Universidade",
+      "curso": "Nome do Curso",
+      "status": "Em andamento",
+      "previsao_conclusao": "2028"
+    }
+  ],
+  "experiencia_profissional": [
+    {
+      "empresa": "Nome da Empresa",
+      "cargo": "Seu Cargo",
+      "periodo": "2021 – Atual",
+      "atividades": [
+        "Descrição da atividade 1.",
+        "Descrição da atividade 2."
+      ]
+    }
+  ],
+  "habilidades_tecnicas": {
+    "linguagens": [
+      "Python",
+      "SQL"
+    ],
+    "ferramentas": [
+      "Power BI",
+      "Excel"
+    ],
+    "ia_ml": [
+      "Scikit-learn",
+      "Ollama"
+    ]
+  },
+  "idiomas": {
+    "portugues": "Nativo",
+    "ingles": "Intermediário"
+  },
+  "documentos": {
+    "curriculo_path": "C:/Users/Seu_Usuario/Documents/curriculo.pdf"
+  }
+}`,
+  "mapeamentos.example.json": `{
+  "plataformas": {
+    "exemplo.gupy.io": {
+      "url": "https://exemplo.gupy.io/jobs/123/apply",
+      "ultima_varredura": "2024-01-01 00:00:00",
+      "total_campos": 5,
+      "campos_mapeados": [
+        {
+          "campo": "nome",
+          "chave": "identificacao.nome_completo"
+        },
+        {
+          "campo": "email",
+          "chave": "identificacao.email"
+        }
+      ]
+    }
+  }
+}`,
+};
+
+// THEME
+const HTML = document.documentElement;
+const TB = document.getElementById('themeBtn');
+const sv = localStorage.getItem('ww_theme');
+if(sv === 'dark'){HTML.setAttribute('data-theme','dark');TB.querySelector('i').className='fas fa-sun';}
+TB.addEventListener('click',()=>{
+  const dark = HTML.getAttribute('data-theme')==='dark';
+  HTML.setAttribute('data-theme',dark?'light':'dark');
+  TB.querySelector('i').className=dark?'fas fa-moon':'fas fa-sun';
+  localStorage.setItem('ww_theme',dark?'light':'dark');
+});
+
+// SYNTAX HIGHLIGHT
+function highlight(code, fname){
+  const ext = fname.split('.').pop().toLowerCase();
+  let s = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  if(ext==='json'){
+    return s
+      .replace(/"([^"]+)"\s*:/g,'<span class="ss">"$1"</span>:')
+      .replace(/:\s*"([^"]*)"/g,': <span class="sf">"$1"</span>')
+      .replace(/:\s*(true|false|null)/g,': <span class="sk">$1</span>')
+      .replace(/:\s*(-?\d+\.?\d*)/g,': <span class="sn">$1</span>');
+  }
+  if(ext==='ipynb'){
+    return s.replace(/"source":\s*\[/g,'<span class="sk">"source"</span>: [')
+            .replace(/"cell_type":\s*"([^"]*)"/g,'"cell_type": <span class="ss">"$1"</span>');
+  }
+  return s
+    .replace(/(#[^\n]*)/g,'<span class="scm">$1</span>')
+    .replace(/("(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*')/g,'<span class="ss">$1</span>')
+    .replace(/\b(def|class|import|from|return|if|else|elif|for|while|try|except|finally|with|as|in|not|and|or|True|False|None|async|await|lambda|yield|pass|break|continue|raise|global|nonlocal)\b/g,'<span class="sk">$1</span>')
+    .replace(/\b([A-Z][A-Za-z0-9_]{1,})\b/g,'<span class="scl">$1</span>')
+    .replace(/\b(\d+\.?\d*)\b/g,'<span class="sn">$1</span>');
+}
+
+// CODE MODAL
+let _curFile='', _curContent='';
+function openFile(fname){
+  const content = FILES[fname];
+  if(!content){console.warn('File not found:',fname);return;}
+  _curFile=fname; _curContent=content;
+  document.getElementById('cmFname').querySelector('span').textContent=fname;
+  const lines = content.split('\n');
+  document.getElementById('cmLn').textContent = lines.map((_,i)=>i+1).join('\n');
+  document.getElementById('cmCode').innerHTML = highlight(content,fname);
+  document.getElementById('codeModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeCode(){
+  document.getElementById('codeModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+function dlCurrent(){
+  const blob=new Blob([_curContent],{type:'text/plain'});
+  const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=_curFile; a.click();
+}
+function copyCmd(el){
+  const txt=el.textContent.replace(/^\$ /,'');
+  navigator.clipboard.writeText(txt).then(()=>{
+    el.classList.add('copied');
+    setTimeout(()=>el.classList.remove('copied'),1300);
+  });
+}
+document.getElementById('codeModal').addEventListener('click',e=>{
+  if(e.target===document.getElementById('codeModal')) closeCode();
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCode();});
+
+</script>
 </body>
 </html>
