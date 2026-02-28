@@ -193,25 +193,12 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
-    <p class="sec-ey">Arquitetura</p>
-    <h2 class="sec-h">Pipeline de <em>Ranqueamento</em></h2>
-    <div class="flow">
-      <div class="fstep"><span class="fnum">01</span><div><h4>Expansão via Gemini</h4><p>Usuário digita um cargo. Gemini gera 15 variações de título + 30 skills relacionadas. Fallback: base de conhecimento offline por categoria (dados, dev, ML, RPA…).</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">02</span><div><h4>Fetch Adzuna — múltiplos países</h4><p>Para cada título expandido, o NexusOrchestrator faz chamadas paginadas à API Adzuna. Deduplicação por ID para evitar vagas repetidas.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">03</span><div><h4>Embedding + Score</h4><p>SentenceTransformer (all-MiniLM-L6-v2) gera embeddings de cada vaga. Score final = (Peso Profile × sim_perfil) + (Peso Pesquisa × sim_query). Penalização por sênior/estágio se aplicável.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">04</span><div><h4>Interface Streamlit</h4><p>Resultados exibidos em tabela ordenada por score. Usuário ajusta pesos dos eixos em sliders. Acesso via ngrok no Colab.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="w">
     <p class="sec-ey">Código-Fonte</p>
     <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
-    <p style="font-size:.83rem;color:var(--tm);margin-bottom:1.1rem;">Projeto desenvolvido no Google Colab. O notebook contém todas as células. <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);">sanitizado</span> — 3 tokens removidos e substituídos por variáveis de ambiente.</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1.1rem;">
+      <p style="font-size:.83rem;color:var(--tm);margin:0;">Projeto desenvolvido no Google Colab. O notebook contém todas as células. <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);">sanitizado</span> — tokens removidos e substituídos por variáveis de ambiente.</p>
+      <button onclick="dlProject('nexus')" style="font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.42rem 1rem;border-radius:7px;border:1px solid rgba(0,122,204,.4);background:var(--bdim);color:var(--blue);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.4rem;transition:all .2s;" onmouseover="this.style.background='rgba(0,122,204,.18)'" onmouseout="this.style.background='var(--bdim)'"><i class="fas fa-download"></i> Baixar Projeto Completo</button>
+    </div>
     <div class="tree">
       <div class="tl dir"><i class="fab fa-google ti" style="color:#4285F4;"></i>Google Colab — Nexus_Bot/</div>
       <div class="ti2">
@@ -230,10 +217,26 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
+    <p class="sec-ey">Arquitetura</p>
+    <h2 class="sec-h">Pipeline de <em>Ranqueamento</em></h2>
+    <div class="flow">
+      <div class="fstep"><span class="fnum">01</span><div><h4>Expansão via Gemini</h4><p>Usuário digita um cargo. Gemini gera 15 variações de título + 30 skills relacionadas. Fallback: base de conhecimento offline por categoria (dados, dev, ML, RPA…).</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">02</span><div><h4>Fetch Adzuna — múltiplos países</h4><p>Para cada título expandido, o NexusOrchestrator faz chamadas paginadas à API Adzuna. Deduplicação por ID para evitar vagas repetidas.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">03</span><div><h4>Embedding + Score</h4><p>SentenceTransformer (all-MiniLM-L6-v2) gera embeddings de cada vaga. Score final = (Peso Profile × sim_perfil) + (Peso Pesquisa × sim_query). Penalização por sênior/estágio se aplicável.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">04</span><div><h4>Interface Streamlit</h4><p>Resultados exibidos em tabela ordenada por score. Usuário ajusta pesos dos eixos em sliders. Acesso via ngrok no Colab.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
     <p class="sec-ey">Instalação</p>
     <h2 class="sec-h"><em>Como usar</em></h2>
     <div class="isteps">
-      <div class="is"><div class="is-n">1</div><div><h4>Abra o notebook no Google Colab</h4><p>Faça upload do <code>Nexus_AI.ipynb</code> para o Colab ou abra via Google Drive.</p></div></div>
+      <div class="is"><div class="is-n">1</div><div><h4>Obtenha o notebook</h4><p><strong>Opção A — Git:</strong></p><div class="cmd" onclick="copyCmd(this)">git clone https://github.com/wenderson-werneck/nexus-ai</div><p style="margin-top:.5rem;"><strong>Opção B — Download:</strong> use o botão <em>⬇ Baixar Projeto Completo</em> na seção Código-Fonte acima. Depois faça upload do <code>Nexus_AI.ipynb</code> no Google Colab.</p></div></div>
       <div class="is"><div class="is-n">2</div><div><h4>Configure as chaves (Colab Secrets)</h4><p>No Colab, clique no ícone 🔑 na barra lateral → adicione os secrets:</p><div class="cmd" onclick="copyCmd(this)">GEMINI_KEY = sua_chave_google_ai_studio</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">ADZUNA_APP_ID = seu_app_id_adzuna</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">ADZUNA_APP_KEY = seu_app_key_adzuna</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">NGROK_TOKEN = seu_token_ngrok</div></div></div>
       <div class="is"><div class="is-n">3</div><div><h4>Execute as células em ordem</h4><p>Célula 1 (Setup) → Célula 2 (Engine) → Célula 3 (IA) → Célula 4 (Interface) → Célula 5 (Servidor). O link do dashboard aparece no output da Célula 5.</p></div></div>
       <div class="is"><div class="is-n">4</div><div><h4>APIs gratuitas</h4><p><strong>Adzuna:</strong> cadastro gratuito em <a href="https://developer.adzuna.com" target="_blank">developer.adzuna.com</a> — 1000 req/mês grátis.<br><strong>Gemini:</strong> gratuito via Google AI Studio. <strong>ngrok:</strong> gratuito em ngrok.com.</p></div></div>
@@ -243,7 +246,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 <footer>
   <div class="w">
     <div class="ft">
-      <span class="ft-copy">© 2025 Wenderson Soares Werneck</span>
+      <span class="ft-copy">© 2026 Wenderson Soares Werneck</span>
       <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar ao portfólio</a>
     </div>
   </div>
@@ -481,6 +484,16 @@ TB.addEventListener('click',()=>{
 });
 
 // SYNTAX HIGHLIGHT
+// DOWNLOAD PROJECT
+function dlProject(name){
+  const zip = Object.entries(FILES).map(([fname, content]) =>
+    fname + ':\n' + '='.repeat(60) + '\n' + content + '\n\n'
+  ).join('');
+  const blob = new Blob([zip], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = (name||'projeto') + '_arquivos.txt'; a.click();
+}
+
 function highlight(code, fname){
   const ext = fname.split('.').pop().toLowerCase();
   let s = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');

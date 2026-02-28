@@ -193,6 +193,25 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
+<section class="sec">
+  <div class="w">
+    <p class="sec-ey">Código-Fonte</p>
+    <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1.1rem;">
+      <p style="font-size:.83rem;color:var(--tm);margin:0;">Clique no arquivo para ver o notebook completo. O dataset é gerado internamente pelo próprio código.</p>
+      <button onclick="dlProject('aprovamais')" style="font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.42rem 1rem;border-radius:7px;border:1px solid rgba(0,122,204,.4);background:var(--bdim);color:var(--blue);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.4rem;transition:all .2s;" onmouseover="this.style.background='rgba(0,122,204,.18)'" onmouseout="this.style.background='var(--bdim)'"><i class="fas fa-download"></i> Baixar Projeto Completo</button>
+    </div>
+    <div class="tree">
+      <div class="tl dir"><i class="fab fa-google ti" style="color:#4285F4;"></i>Google Colab — Risco de Crédito/</div>
+      <div class="ti2">
+        <div class="tl cl" onclick="openFile('Risco_de_credito_Aprovamais.ipynb')"><i class="fas fa-file-code fi"></i>Risco_de_credito_Aprovamais.ipynb</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
     <p class="sec-ey">Pipeline</p>
     <h2 class="sec-h">6 Etapas do <em>Projeto</em></h2>
     <div class="flow">
@@ -213,24 +232,11 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
-    <p class="sec-ey">Código-Fonte</p>
-    <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
-    <div class="tree">
-      <div class="tl dir"><i class="fab fa-google ti" style="color:#4285F4;"></i>Google Colab — Risco de Crédito/</div>
-      <div class="ti2">
-        <div class="tl cl" onclick="openFile('Risco_de_credito_Aprovamais.ipynb')"><i class="fas fa-file-code fi"></i>Risco_de_credito_Aprovamais.ipynb</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="w">
     <p class="sec-ey">Instalação</p>
     <h2 class="sec-h"><em>Como executar</em></h2>
     <div class="isteps">
-      <div class="is"><div class="is-n">1</div><div><h4>Opção A — Google Colab (recomendado)</h4><p>Faça upload do notebook para o Colab. Todas as dependências já estão instaladas no ambiente Colab.</p></div></div>
-      <div class="is"><div class="is-n">2</div><div><h4>Opção B — Local</h4><div class="cmd" onclick="copyCmd(this)">pip install pandas scikit-learn xgboost imbalanced-learn matplotlib seaborn jupyter</div></div></div>
+      <div class="is"><div class="is-n">1</div><div><h4>Obtenha o notebook</h4><p><strong>Opção A — Git:</strong></p><div class="cmd" onclick="copyCmd(this)">git clone https://github.com/wenderson-werneck/aprovamais</div><p style="margin-top:.5rem;"><strong>Opção B — Download:</strong> use o botão <em>⬇ Baixar Projeto Completo</em> na seção Código-Fonte acima, depois faça upload do <code>.ipynb</code> no Google Colab.</p></div></div>
+      <div class="is"><div class="is-n">2</div><div><h4>Opção: Executar Localmente</h4><div class="cmd" onclick="copyCmd(this)">pip install pandas scikit-learn xgboost imbalanced-learn matplotlib seaborn jupyter</div></div></div>
       <div class="is"><div class="is-n">3</div><div><h4>Execute as células em ordem</h4><p>O notebook é auto-contido — gera o dataset internamente, sem necessidade de arquivo CSV externo. Tempo de execução estimado: 15–30 minutos.</p></div></div>
     </div>
   </div>
@@ -238,7 +244,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 <footer>
   <div class="w">
     <div class="ft">
-      <span class="ft-copy">© 2025 Wenderson Soares Werneck</span>
+      <span class="ft-copy">© 2026 Wenderson Soares Werneck</span>
       <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar ao portfólio</a>
     </div>
   </div>
@@ -280,6 +286,16 @@ TB.addEventListener('click',()=>{
 });
 
 // SYNTAX HIGHLIGHT
+// DOWNLOAD PROJECT
+function dlProject(name){
+  const zip = Object.entries(FILES).map(([fname, content]) =>
+    fname + ':\n' + '='.repeat(60) + '\n' + content + '\n\n'
+  ).join('');
+  const blob = new Blob([zip], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = (name||'projeto') + '_arquivos.txt'; a.click();
+}
+
 function highlight(code, fname){
   const ext = fname.split('.').pop().toLowerCase();
   let s = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');

@@ -193,25 +193,12 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
-    <p class="sec-ey">Arquitetura</p>
-    <h2 class="sec-h">Roteamento e <em>Destilação</em></h2>
-    <div class="flow">
-      <div class="fstep"><span class="fnum">01</span><div><h4>Classificação de complexidade</h4><p>Heurística analisa tamanho do prompt e palavras-chave ("refatora", "arquitetura", "sistema"…). Resultado: low / medium / high.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">02</span><div><h4>RAG — checa cache semântico</h4><p>Antes de qualquer chamada, busca no ChromaDB se há resposta similar salva de sessões anteriores. Threshold coseno 0.35. Hit → responde local, 0 tokens gastos.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">03</span><div><h4>Roteamento de modelo</h4><p><strong>low ou cache miss leve:</strong> qwen2.5-coder:3b local (Ollama, 0ms). <strong>medium/high com cota:</strong> qwen3-coder-plus 480B (Alibaba Cloud). <strong>Fallback:</strong> qwen2.5-coder:7b local.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">04</span><div><h4>Destilação — ChromaDB aprende</h4><p>Resposta do modelo cloud → salva no ChromaDB com embedding. Próxima vez que pergunta similar aparecer, o modelo local usa essa memória sem chamar a API.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="w">
     <p class="sec-ey">Código-Fonte</p>
     <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
-    <p style="font-size:.83rem;color:var(--tm);margin-bottom:1.1rem;">O Figurante Code está integrado ao <code>app.py</code> principal do Figurante. A classe <code>CodingAgent</code> e todas as rotas <code>/api/coding/*</code> estão no mesmo arquivo.</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1.1rem;">
+      <p style="font-size:.83rem;color:var(--tm);margin:0;">O Figurante Code está integrado ao <code>app.py</code> principal do Figurante. A classe <code>CodingAgent</code> e todas as rotas <code>/api/coding/*</code> estão no mesmo arquivo.</p>
+      <button onclick="dlProject('figurante-code')" style="font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.42rem 1rem;border-radius:7px;border:1px solid rgba(0,122,204,.4);background:var(--bdim);color:var(--blue);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.4rem;transition:all .2s;" onmouseover="this.style.background='rgba(0,122,204,.18)'" onmouseout="this.style.background='var(--bdim)'"><i class="fas fa-download"></i> Baixar Projeto Completo</button>
+    </div>
     <div class="tree">
       <div class="tl dir"><i class="fas fa-folder-open ti"></i>figurante/ <span style="font-weight:400;font-size:.7rem;color:var(--td);"># mesmo repositório do Figurante</span></div>
       <div class="ti2">
@@ -230,20 +217,37 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
+    <p class="sec-ey">Arquitetura</p>
+    <h2 class="sec-h">Roteamento e <em>Destilação</em></h2>
+    <div class="flow">
+      <div class="fstep"><span class="fnum">01</span><div><h4>Classificação de complexidade</h4><p>Heurística analisa tamanho do prompt e palavras-chave ("refatora", "arquitetura", "sistema"…). Resultado: low / medium / high.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">02</span><div><h4>RAG — checa cache semântico</h4><p>Antes de qualquer chamada, busca no ChromaDB se há resposta similar salva de sessões anteriores. Threshold coseno 0.35. Hit → responde local, 0 tokens gastos.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">03</span><div><h4>Roteamento de modelo</h4><p><strong>low ou cache miss leve:</strong> qwen2.5-coder:3b local (Ollama, 0ms). <strong>medium/high com cota:</strong> qwen3-coder-plus 480B (Alibaba Cloud). <strong>Fallback:</strong> qwen2.5-coder:7b local.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">04</span><div><h4>Destilação — ChromaDB aprende</h4><p>Resposta do modelo cloud → salva no ChromaDB com embedding. Próxima vez que pergunta similar aparecer, o modelo local usa essa memória sem chamar a API.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
     <p class="sec-ey">Instalação</p>
     <h2 class="sec-h"><em>Como usar</em></h2>
     <div class="isteps">
-      <div class="is"><div class="is-n">1</div><div><h4>Pré-requisito: Figurante na porta 5000</h4><p>O Figurante Code é uma extensão do Figurante. Certifique-se de que o Figurante principal está rodando.</p></div></div>
-      <div class="is"><div class="is-n">2</div><div><h4>Configure a chave da Alibaba Cloud (opcional)</h4><p>Sem chave, roda apenas no modo local (Ollama). Com chave, usa o modelo 480B para tarefas pesadas:</p><div class="cmd" onclick="copyCmd(this)">set QWEN_API_KEY=sua_chave_dashscope</div></div></div>
-      <div class="is"><div class="is-n">3</div><div><h4>Instale openai SDK (para modo cloud)</h4><div class="cmd" onclick="copyCmd(this)">pip install openai</div></div></div>
-      <div class="is"><div class="is-n">4</div><div><h4>Inicie e teste</h4><div class="cmd" onclick="copyCmd(this)">python app.py</div><p style="margin-top:.35rem;">Verifique o status do roteador em <code>http://localhost:5000/api/coding/status</code>.</p></div></div>
+      <div class="is"><div class="is-n">1</div><div><h4>Obtenha os arquivos</h4><p><strong>Opção A — Git:</strong></p><div class="cmd" onclick="copyCmd(this)">git clone https://github.com/wenderson-werneck/figurante</div><p style="margin-top:.5rem;"><strong>Opção B — Download:</strong> use o botão <em>⬇ Baixar Projeto Completo</em> na seção Código-Fonte acima.</p></div></div>
+      <div class="is"><div class="is-n">2</div><div><h4>Pré-requisito: Figurante na porta 5000</h4><p>O Figurante Code é uma extensão do Figurante. Certifique-se de que o Figurante principal está rodando.</p></div></div>
+      <div class="is"><div class="is-n">3</div><div><h4>Configure a chave da Alibaba Cloud (opcional)</h4><p>Sem chave, roda apenas no modo local (Ollama). Com chave, usa o modelo 480B para tarefas pesadas:</p><div class="cmd" onclick="copyCmd(this)">set QWEN_API_KEY=sua_chave_dashscope</div></div></div>
+      <div class="is"><div class="is-n">4</div><div><h4>Instale openai SDK (para modo cloud)</h4><div class="cmd" onclick="copyCmd(this)">pip install openai</div></div></div>
+      <div class="is"><div class="is-n">5</div><div><h4>Inicie e teste</h4><div class="cmd" onclick="copyCmd(this)">python app.py</div><p style="margin-top:.35rem;">Verifique o status do roteador em <code>http://localhost:5000/api/coding/status</code>.</p></div></div>
     </div>
   </div>
 </section>
 <footer>
   <div class="w">
     <div class="ft">
-      <span class="ft-copy">© 2025 Wenderson Soares Werneck</span>
+      <span class="ft-copy">© 2026 Wenderson Soares Werneck</span>
       <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar ao portfólio</a>
     </div>
   </div>
@@ -1130,6 +1134,16 @@ TB.addEventListener('click',()=>{
 });
 
 // SYNTAX HIGHLIGHT
+// DOWNLOAD PROJECT
+function dlProject(name){
+  const zip = Object.entries(FILES).map(([fname, content]) =>
+    fname + ':\n' + '='.repeat(60) + '\n' + content + '\n\n'
+  ).join('');
+  const blob = new Blob([zip], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = (name||'projeto') + '_arquivos.txt'; a.click();
+}
+
 function highlight(code, fname){
   const ext = fname.split('.').pop().toLowerCase();
   let s = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');

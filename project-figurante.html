@@ -193,27 +193,12 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
-    <p class="sec-ey">Arquitetura</p>
-    <h2 class="sec-h">Como <em>funciona</em></h2>
-    <div class="flow">
-      <div class="fstep"><span class="fnum">01</span><div><h4>Browser → Flask <code style="font-family:'JetBrains Mono',monospace;font-size:.75rem">localhost:5000</code></h4><p>Requisição HTTP/SSE. Cada conversa tem um <code>chat_id</code> único — histórico e tema (paz/ira) são isolados.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">02</span><div><h4>ChromaDB — busca semântica</h4><p>A pergunta vira embedding (all-MiniLM-L6-v2, 100% offline) e retorna as 4 memórias mais relevantes por similaridade coseno.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">03</span><div><h4>Contexto enriquecido → Ollama</h4><p>Memórias relevantes + regras do usuário + histórico da conversa são combinados no system prompt antes de ir ao modelo.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">04</span><div><h4>Streaming SSE → Browser</h4><p>Tokens fluem em tempo real. Cancelamento via threading.Event — sem esperar resposta completa.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">05</span><div><h4>Destilação — ChromaDB aprende</h4><p>Par pergunta/resposta é salvo de volta. A cada sessão o agente fica mais contextualizado, sem fine-tuning.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="w">
     <p class="sec-ey">Código-Fonte</p>
     <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
-    <p style="font-size:.83rem;color:var(--tm);margin-bottom:1.1rem;">Clique em qualquer arquivo para ver o código. Arquivos marcados com <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);">sanitizado</span> tiveram dados pessoais removidos. Arquivos <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:var(--bdim);color:var(--blue);border:1px solid rgba(0,122,204,.3);">template</span> são exemplos para você preencher com seus dados.</p>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1.1rem;">
+      <p style="font-size:.83rem;color:var(--tm);margin:0;">Clique em qualquer arquivo para ver o código. Arquivos marcados com <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);">sanitizado</span> tiveram dados pessoais removidos. Arquivos <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:var(--bdim);color:var(--blue);border:1px solid rgba(0,122,204,.3);">template</span> são exemplos para você preencher com seus dados.</p>
+      <button onclick="dlProject('figurante')" style="font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.42rem 1rem;border-radius:7px;border:1px solid rgba(0,122,204,.4);background:var(--bdim);color:var(--blue);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.4rem;transition:all .2s;" onmouseover="this.style.background='rgba(0,122,204,.18)'" onmouseout="this.style.background='var(--bdim)'"><i class="fas fa-download"></i> Baixar Projeto Completo</button>
+    </div>
     <div class="tree">
       <div class="tl dir"><i class="fas fa-folder-open ti"></i>figurante/</div>
       <div class="ti2">
@@ -240,21 +225,39 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
+    <p class="sec-ey">Arquitetura</p>
+    <h2 class="sec-h">Como <em>funciona</em></h2>
+    <div class="flow">
+      <div class="fstep"><span class="fnum">01</span><div><h4>Browser → Flask <code style="font-family:'JetBrains Mono',monospace;font-size:.75rem">localhost:5000</code></h4><p>Requisição HTTP/SSE. Cada conversa tem um <code>chat_id</code> único — histórico e tema (paz/ira) são isolados.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">02</span><div><h4>ChromaDB — busca semântica</h4><p>A pergunta vira embedding (all-MiniLM-L6-v2, 100% offline) e retorna as 4 memórias mais relevantes por similaridade coseno.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">03</span><div><h4>Contexto enriquecido → Ollama</h4><p>Memórias relevantes + regras do usuário + histórico da conversa são combinados no system prompt antes de ir ao modelo.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">04</span><div><h4>Streaming SSE → Browser</h4><p>Tokens fluem em tempo real. Cancelamento via threading.Event — sem esperar resposta completa.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">05</span><div><h4>Destilação — ChromaDB aprende</h4><p>Par pergunta/resposta é salvo de volta. A cada sessão o agente fica mais contextualizado, sem fine-tuning.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
     <p class="sec-ey">Instalação</p>
     <h2 class="sec-h"><em>Como usar</em></h2>
     <div class="isteps">
-      <div class="is"><div class="is-n">1</div><div><h4>Instale o Ollama</h4><p>Baixe em <a href="https://ollama.com" target="_blank">ollama.com</a> e depois baixe os modelos:</p><div class="cmd" onclick="copyCmd(this)">ollama pull sam860/dolphin3-qwen2.5:1.5b</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">ollama pull sam860/dolphin3-qwen2.5:3b</div></div></div>
-      <div class="is"><div class="is-n">2</div><div><h4>Instale as dependências</h4><div class="cmd" onclick="copyCmd(this)">pip install flask chromadb sentence-transformers ollama</div></div></div>
-      <div class="is"><div class="is-n">3</div><div><h4>Configure seu perfil</h4><p>Copie <code>perfil.example.json</code> → <code>data/perfil.json</code> e preencha com seus dados reais.</p></div></div>
-      <div class="is"><div class="is-n">4</div><div><h4>Inicie o Figurante</h4><div class="cmd" onclick="copyCmd(this)">python app.py</div><p style="margin-top:.35rem;">Acesse <code>http://localhost:5000</code> no navegador.</p></div></div>
-      <div class="is"><div class="is-n">5</div><div><h4>Para o Coding Agent (opcional)</h4><p>Configure a chave da Alibaba Cloud para usar o modelo 480B na nuvem:</p><div class="cmd" onclick="copyCmd(this)">set QWEN_API_KEY=sua_chave_aqui && python app.py</div></div></div>
+      <div class="is"><div class="is-n">1</div><div><h4>Obtenha os arquivos</h4><p><strong>Opção A — Git:</strong></p><div class="cmd" onclick="copyCmd(this)">git clone https://github.com/wenderson-werneck/figurante</div><p style="margin-top:.5rem;"><strong>Opção B — Download:</strong> use o botão <em>⬇ Baixar Projeto Completo</em> na seção Código-Fonte acima.</p></div></div>
+      <div class="is"><div class="is-n">2</div><div><h4>Instale o Ollama</h4><p>Baixe em <a href="https://ollama.com" target="_blank">ollama.com</a> e depois baixe os modelos:</p><div class="cmd" onclick="copyCmd(this)">ollama pull sam860/dolphin3-qwen2.5:1.5b</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">ollama pull sam860/dolphin3-qwen2.5:3b</div></div></div>
+      <div class="is"><div class="is-n">3</div><div><h4>Instale as dependências</h4><div class="cmd" onclick="copyCmd(this)">pip install flask chromadb sentence-transformers ollama</div></div></div>
+      <div class="is"><div class="is-n">4</div><div><h4>Configure seu perfil</h4><p>Copie <code>perfil.example.json</code> → <code>data/perfil.json</code> e preencha com seus dados reais.</p></div></div>
+      <div class="is"><div class="is-n">5</div><div><h4>Inicie o Figurante</h4><div class="cmd" onclick="copyCmd(this)">python app.py</div><p style="margin-top:.35rem;">Acesse <code>http://localhost:5000</code> no navegador.</p></div></div>
     </div>
   </div>
 </section>
 <footer>
   <div class="w">
     <div class="ft">
-      <span class="ft-copy">© 2025 Wenderson Soares Werneck</span>
+      <span class="ft-copy">© 2026 Wenderson Soares Werneck</span>
       <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar ao portfólio</a>
     </div>
   </div>
@@ -1197,6 +1200,16 @@ TB.addEventListener('click',()=>{
   TB.querySelector('i').className=dark?'fas fa-moon':'fas fa-sun';
   localStorage.setItem('ww_theme',dark?'light':'dark');
 });
+
+// DOWNLOAD PROJECT
+function dlProject(name){
+  const zip = Object.entries(FILES).map(([fname, content]) =>
+    fname + ':\n' + '='.repeat(60) + '\n' + content + '\n\n'
+  ).join('');
+  const blob = new Blob([zip], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = (name||'projeto') + '_arquivos.txt'; a.click();
+}
 
 // SYNTAX HIGHLIGHT
 function highlight(code, fname){

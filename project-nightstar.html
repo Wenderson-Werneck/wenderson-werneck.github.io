@@ -193,26 +193,12 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
-    <p class="sec-ey">Arquitetura</p>
-    <h2 class="sec-h">3 Camadas de <em>Inteligência</em></h2>
-    <div class="flow">
-      <div class="fstep"><span class="fnum">01</span><div><h4>Scanner — extrai campos do DOM</h4><p>BeautifulSoup + heurísticas extraem labels, inputs, selects, radios, checkboxes de toda a página — incluindo iframes. Identifica plataforma (Gupy, LinkedIn…) e ativa adapter específico.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">02</span><div><h4>Camada 1 — Mapa Direto (0ms)</h4><p>Dicionário com 40+ termos comuns em PT/EN ("nome", "email", "linkedin", "cargo"…) resolve instantaneamente ~60% dos campos sem chamar IA.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">03</span><div><h4>Camada 2 — Figurante mapeia (RAG)</h4><p>Campo desconhecido vai para o Figurante com a lista de chaves do perfil. Retorna a chave correspondente + confiança (alta/média/baixa). Confiança baixa tenta modelo mais forte.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">04</span><div><h4>Camada 3 — IA gera valor</h4><p>Se não há correspondência no perfil, o Figurante gera o valor com base no contexto do campo. Resultados pendentes ficam para revisão humana.</p></div></div>
-      <div class="farrow">↓</div>
-      <div class="fstep"><span class="fnum">05</span><div><h4>Semi-Auto — revisão antes de enviar</h4><p>Preenche tudo, tira screenshot, pausa e exibe "Confirmar Envio" para o usuário revisar no browser antes de qualquer submissão.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<section class="sec">
-  <div class="w">
     <p class="sec-ey">Código-Fonte</p>
     <h2 class="sec-h">Estrutura de <em>Arquivos</em></h2>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1.1rem;">
+      <p style="font-size:.83rem;color:var(--tm);margin:0;">Clique em qualquer arquivo para ver o código. Arquivos <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:rgba(63,185,80,.1);color:#3FB950;border:1px solid rgba(63,185,80,.2);">sanitizado</span> tiveram dados pessoais removidos. Arquivos <span style="font-size:.62rem;padding:.07rem .32rem;border-radius:3px;background:var(--bdim);color:var(--blue);border:1px solid rgba(0,122,204,.3);">template</span> são exemplos.</p>
+      <button onclick="dlProject('nightstar')" style="font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.42rem 1rem;border-radius:7px;border:1px solid rgba(0,122,204,.4);background:var(--bdim);color:var(--blue);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:.4rem;transition:all .2s;" onmouseover="this.style.background='rgba(0,122,204,.18)'" onmouseout="this.style.background='var(--bdim)'"><i class="fas fa-download"></i> Baixar Projeto Completo</button>
+    </div>
     <div class="tree">
       <div class="tl dir"><i class="fas fa-folder-open ti"></i>NightStar/</div>
       <div class="ti2">
@@ -246,21 +232,39 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
 
 <section class="sec">
   <div class="w">
+    <p class="sec-ey">Arquitetura</p>
+    <h2 class="sec-h">3 Camadas de <em>Inteligência</em></h2>
+    <div class="flow">
+      <div class="fstep"><span class="fnum">01</span><div><h4>Scanner — extrai campos do DOM</h4><p>BeautifulSoup + heurísticas extraem labels, inputs, selects, radios, checkboxes de toda a página — incluindo iframes. Identifica plataforma (Gupy, LinkedIn…) e ativa adapter específico.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">02</span><div><h4>Camada 1 — Mapa Direto (0ms)</h4><p>Dicionário com 40+ termos comuns em PT/EN ("nome", "email", "linkedin", "cargo"…) resolve instantaneamente ~60% dos campos sem chamar IA.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">03</span><div><h4>Camada 2 — Figurante mapeia (RAG)</h4><p>Campo desconhecido vai para o Figurante com a lista de chaves do perfil. Retorna a chave correspondente + confiança (alta/média/baixa). Confiança baixa tenta modelo mais forte.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">04</span><div><h4>Camada 3 — IA gera valor</h4><p>Se não há correspondência no perfil, o Figurante gera o valor com base no contexto do campo. Resultados pendentes ficam para revisão humana.</p></div></div>
+      <div class="farrow">↓</div>
+      <div class="fstep"><span class="fnum">05</span><div><h4>Semi-Auto — revisão antes de enviar</h4><p>Preenche tudo, tira screenshot, pausa e exibe "Confirmar Envio" para o usuário revisar no browser antes de qualquer submissão.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="w">
     <p class="sec-ey">Instalação</p>
     <h2 class="sec-h"><em>Como usar</em></h2>
     <div class="isteps">
-      <div class="is"><div class="is-n">1</div><div><h4>Pré-requisito: Figurante rodando</h4><p>O NightStar usa o Figurante como cérebro. Certifique-se de que o <code>app.py</code> do Figurante está rodando na porta 5000.</p></div></div>
-      <div class="is"><div class="is-n">2</div><div><h4>Instale dependências</h4><div class="cmd" onclick="copyCmd(this)">pip install playwright beautifulsoup4 ollama colorlog</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">playwright install chromium</div></div></div>
-      <div class="is"><div class="is-n">3</div><div><h4>Configure seu perfil</h4><p>Copie <code>perfil.example.json</code> → <code>data/perfil.json</code> com seus dados. Configure <code>documentos.curriculo_path</code> para upload automático do PDF.</p></div></div>
-      <div class="is"><div class="is-n">4</div><div><h4>Execute via Figurante (recomendado)</h4><p>No chat do Figurante, use o comando:</p><div class="cmd" onclick="copyCmd(this)">/signup https://url-da-vaga.com</div></div></div>
-      <div class="is"><div class="is-n">5</div><div><h4>Ou execute standalone</h4><div class="cmd" onclick="copyCmd(this)">python main.py https://url-da-vaga.com</div></div></div>
+      <div class="is"><div class="is-n">1</div><div><h4>Obtenha os arquivos</h4><p><strong>Opção A — Git:</strong></p><div class="cmd" onclick="copyCmd(this)">git clone https://github.com/wenderson-werneck/nightstar</div><p style="margin-top:.5rem;"><strong>Opção B — Download:</strong> use o botão <em>⬇ Baixar Projeto Completo</em> na seção Código-Fonte acima.</p></div></div>
+      <div class="is"><div class="is-n">2</div><div><h4>Pré-requisito: Figurante rodando</h4><p>O NightStar usa o Figurante como cérebro. Certifique-se de que o <code>app.py</code> do Figurante está rodando na porta 5000.</p></div></div>
+      <div class="is"><div class="is-n">3</div><div><h4>Instale dependências</h4><div class="cmd" onclick="copyCmd(this)">pip install playwright beautifulsoup4 ollama colorlog</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">playwright install chromium</div></div></div>
+      <div class="is"><div class="is-n">4</div><div><h4>Configure seu perfil</h4><p>Copie <code>perfil.example.json</code> → <code>data/perfil.json</code> com seus dados. Configure <code>documentos.curriculo_path</code> para upload automático do PDF.</p></div></div>
+      <div class="is"><div class="is-n">5</div><div><h4>Execute via Figurante (recomendado)</h4><p>No chat do Figurante, use o comando:</p><div class="cmd" onclick="copyCmd(this)">/signup https://url-da-vaga.com</div></div></div>
     </div>
   </div>
 </section>
 <footer>
   <div class="w">
     <div class="ft">
-      <span class="ft-copy">© 2025 Wenderson Soares Werneck</span>
+      <span class="ft-copy">© 2026 Wenderson Soares Werneck</span>
       <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> Voltar ao portfólio</a>
     </div>
   </div>
@@ -2039,6 +2043,16 @@ TB.addEventListener('click',()=>{
   TB.querySelector('i').className=dark?'fas fa-moon':'fas fa-sun';
   localStorage.setItem('ww_theme',dark?'light':'dark');
 });
+
+// DOWNLOAD PROJECT
+function dlProject(name){
+  const zip = Object.entries(FILES).map(([fname, content]) =>
+    fname + ':\n' + '='.repeat(60) + '\n' + content + '\n\n'
+  ).join('');
+  const blob = new Blob([zip], {type:'text/plain'});
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = (name||'projeto') + '_arquivos.txt'; a.click();
+}
 
 // SYNTAX HIGHLIGHT
 function highlight(code, fname){
