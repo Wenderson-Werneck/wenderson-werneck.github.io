@@ -102,7 +102,7 @@
         .fbtn{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.38rem .85rem;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .2s;}
         .fbtn:hover,.fbtn.active{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
         .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.4rem;}
-        .pcard{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s;cursor:pointer;text-decoration:none;color:inherit;}
+        .pcard{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s;}
         .pcard:hover{transform:translateY(-5px);border-color:var(--blue);box-shadow:0 10px 30px var(--blue-glow);}
         .pcard.hidden{display:none;}
 
@@ -122,15 +122,7 @@
         .ppills{display:flex;flex-wrap:wrap;gap:.28rem;padding:.4rem 1.15rem .75rem;}
         .pill{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.17rem .44rem;border-radius:4px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);}
 
-        /* CARD METRICS */
-        .pmetrics{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-        .pmetric{padding:.6rem .5rem;text-align:center;position:relative;}
-        .pmetric+.pmetric::before{content:'';position:absolute;left:0;top:20%;height:60%;width:1px;background:var(--border);}
-        .pm-val{font-family:'JetBrains Mono',monospace;font-size:.95rem;font-weight:700;color:var(--blue);line-height:1;display:block;}
-        .pm-lbl{font-size:.58rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-top:.18rem;display:block;line-height:1.3;}
-        [data-theme="dark"] .pm-val{color:#1F9CF0;}
-
-        /* 4 doc buttons */
+        /* 3 doc buttons instead of 4 */
         .pfoot{border-top:1px solid var(--border);padding:.75rem 1.15rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem;}
         .db{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:.38rem .2rem;border-radius:6px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.25rem;transition:all .2s;cursor:pointer;border:1px solid;}
         .db-r{color:var(--blue);border-color:var(--blue-dark);background:var(--blue-dim);}
@@ -228,7 +220,7 @@
             .hamburger{display:block;}
             .hero{padding:3rem 0 2.5rem;min-height:auto;}
             .hero-stats{gap:1.2rem;}
-            .pfoot{grid-template-columns:1fr 1fr 1fr;}
+            .pfoot{grid-template-columns:1fr 1fr;}
             .clayout{grid-template-columns:1fr;}
             .frow{grid-template-columns:1fr;}
             .ft-inner{flex-direction:column;text-align:center;}
@@ -238,8 +230,7 @@
             .hero-name{font-size:2.1rem;}
             .hero-stats{flex-wrap:wrap;gap:.9rem;}
         }
-    .card-link{text-decoration:none;color:inherit;display:block;}.card-link .pcard{height:100%;}
-</style>
+    </style>
 </head>
 <body>
 
@@ -325,115 +316,75 @@
         </div>
         <div class="pgrid reveal">
 
-            <a href="project-figurante.html" class="card-link">
-<div class="pcard" data-tags="ia automacao">
+            <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-figurante.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#1a0d2e,#2d1b4e,#1a0a3a);">
-                    <!-- <img src="img/figurante.png" alt="Figurante"> -->
                     <div class="pimg-ph"><span>🎭</span><small>Figurante</small></div>
                     <span class="pbadge ba">● ativo</span>
                 </div>
-                <div class="pbody"><h3>Figurante</h3><p>Agente de IA local com memória semântica persistente. 100% offline, dois modos de operação (1.5B / 3B), streaming com cancelamento real, upload de arquivos e regras editáveis pelo chat.</p></div>
-                <div class="pmetrics">
-                    <div class="pmetric"><span class="pm-val">100%</span><span class="pm-lbl">Offline<br>zero nuvem</span></div>
-                    <div class="pmetric"><span class="pm-val">2</span><span class="pm-lbl">Modelos<br>LLM locais</span></div>
-                    <div class="pmetric"><span class="pm-val">∞</span><span class="pm-lbl">Memória<br>persistente</span></div>
-                </div>
+                <div class="pbody"><h3>Figurante</h3><p>Agente de IA local com memória vetorial persistente. 100% offline, sem nuvem. Memória semântica via ChromaDB, dois modos de operação, identidade configurável.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Ollama</span><span class="pill">ChromaDB</span><span class="pill">SSE</span></div>
                 <div class="pfoot">
-                    <button onclick_fix="1" class="db db-r" onclick="openDoc(event.stopPropagation();'figurante','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button onclick_fix="1" class="db db-a" onclick="openDoc(event.stopPropagation();'figurante','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button onclick_fix="1" class="db db-i" onclick="openDoc(event.stopPropagation();'figurante','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('figurante','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('figurante','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('figurante','install')"><i class="fas fa-terminal"></i> Install</button>
                 </div>
             </div>
-</a>
 
-            <a href="project-nightstar.html" class="card-link">
-<div class="pcard" data-tags="ia automacao">
+            <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-nightstar.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#040d1a,#071828,#0a1f35);">
-                    <!-- <img src="img/nightstar.png" alt="NightStar"> -->
                     <div class="pimg-ph"><span>⭐</span><small>NightStar</small></div>
                     <span class="pbadge ba">● ativo</span>
                 </div>
-                <div class="pbody"><h3>NightStar</h3><p>Bot RPA de automação de candidaturas com 3 camadas de mapeamento: direto (40+ termos, 0ms), RAG vetorial (~50ms) e fallback IA. Preenche formulários multi-etapa com validação em tempo real.</p></div>
-                <div class="pmetrics">
-                    <div class="pmetric"><span class="pm-val">~3s</span><span class="pm-lbl">Varredura<br>era ~40s</span></div>
-                    <div class="pmetric"><span class="pm-val">70%+</span><span class="pm-lbl">Campos<br>automáticos</span></div>
-                    <div class="pmetric"><span class="pm-val">300ms</span><span class="pm-lbl">Cancelamento<br>em tempo real</span></div>
-                </div>
+                <div class="pbody"><h3>NightStar</h3><p>Bot RPA de automação de candidaturas. Varre formulários, mapeia campos com RAG vetorial e preenche automaticamente via Playwright. Suporte a Gupy e LinkedIn.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Playwright</span><span class="pill">ChromaDB</span><span class="pill">RAG</span><span class="pill">BeautifulSoup</span></div>
                 <div class="pfoot">
-                    <button onclick_fix="1" class="db db-r" onclick="openDoc(event.stopPropagation();'nightstar','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button onclick_fix="1" class="db db-a" onclick="openDoc(event.stopPropagation();'nightstar','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button onclick_fix="1" class="db db-i" onclick="openDoc(event.stopPropagation();'nightstar','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('nightstar','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('nightstar','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('nightstar','install')"><i class="fas fa-terminal"></i> Install</button>
                 </div>
             </div>
-</a>
 
-            <a href="project-nexus.html" class="card-link">
-<div class="pcard" data-tags="ia dados automacao">
+            <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-nexus.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#0d1f0d,#132613,#0a1a0a);">
-                    <!-- <img src="img/nexus.png" alt="Nexus AI"> -->
                     <div class="pimg-ph"><span>🤖</span><small>Nexus AI</small></div>
                     <span class="pbadge ba">● ativo</span>
                 </div>
-                <div class="pbody"><h3>Nexus AI</h3><p>Agente de busca e ranqueamento de vagas. Gemini expande um cargo em 15 títulos + 30 skills, busca via Adzuna em 20+ países e ranqueia por similaridade semântica com o CV. Fallback offline automático.</p></div>
-                <div class="pmetrics">
-                    <div class="pmetric"><span class="pm-val">1000+</span><span class="pm-lbl">Vagas por<br>busca</span></div>
-                    <div class="pmetric"><span class="pm-val">20+</span><span class="pm-lbl">Países<br>cobertos</span></div>
-                    <div class="pmetric"><span class="pm-val">15x</span><span class="pm-lbl">Expansão<br>de cargos</span></div>
-                </div>
+                <div class="pbody"><h3>Nexus AI</h3><p>Agente de busca e ranqueamento de vagas. O Gemini expande cargos em 15 variações, busca em 20+ países via Adzuna e ranqueia por similaridade semântica com o CV.</p></div>
                 <div class="ppills"><span class="pill">Streamlit</span><span class="pill">Gemini API</span><span class="pill">Adzuna API</span><span class="pill">SentenceTransformers</span></div>
                 <div class="pfoot">
-                    <button onclick_fix="1" class="db db-r" onclick="openDoc(event.stopPropagation();'nexus','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button onclick_fix="1" class="db db-a" onclick="openDoc(event.stopPropagation();'nexus','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button onclick_fix="1" class="db db-i" onclick="openDoc(event.stopPropagation();'nexus','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('nexus','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('nexus','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('nexus','install')"><i class="fas fa-terminal"></i> Install</button>
                 </div>
             </div>
-</a>
 
-            <a href="project-aprovamais.html" class="card-link">
-<div class="pcard" data-tags="ml dados">
+            <div class="pcard" data-tags="ml dados" onclick="window.location.href='project-aprovamais.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#1f1004,#2a1a08,#1a0f04);">
-                    <!-- <img src="img/aprovamais.png" alt="AprovaMais"> -->
                     <div class="pimg-ph"><span>📊</span><small>AprovaMais</small></div>
                     <span class="pbadge bs">◆ estudo</span>
                 </div>
-                <div class="pbody"><h3>Risco de Crédito — AprovaMais</h3><p>Pipeline completo de Data Science em 6 etapas: limpeza, EDA, encoding, modelagem e otimização. Decisão ética documentada: remoção da coluna gênero por perpetuar viés histórico.</p></div>
-                <div class="pmetrics">
-                    <div class="pmetric"><span class="pm-val">200k</span><span class="pm-lbl">Registros<br>processados</span></div>
-                    <div class="pmetric"><span class="pm-val">4</span><span class="pm-lbl">Modelos<br>comparados</span></div>
-                    <div class="pmetric"><span class="pm-val">6</span><span class="pm-lbl">Etapas<br>do pipeline</span></div>
-                </div>
+                <div class="pbody"><h3>Risco de Crédito — AprovaMais</h3><p>Pipeline completo de Data Science em 6 etapas sobre 200.000 registros. Comparação de 4 modelos, SMOTE e otimização via GridSearchCV.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Scikit-learn</span><span class="pill">XGBoost</span><span class="pill">SMOTE</span><span class="pill">Pandas</span></div>
                 <div class="pfoot">
-                    <button onclick_fix="1" class="db db-r" onclick="openDoc(event.stopPropagation();'aprovamais','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button onclick_fix="1" class="db db-a" onclick="openDoc(event.stopPropagation();'aprovamais','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button onclick_fix="1" class="db db-i" onclick="openDoc(event.stopPropagation();'aprovamais','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('aprovamais','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('aprovamais','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('aprovamais','install')"><i class="fas fa-terminal"></i> Install</button>
                 </div>
             </div>
-</a>
 
-            <a href="project-figurante-code.html" class="card-link">
-<div class="pcard" data-tags="ia dados">
+            <div class="pcard" data-tags="ia dados" onclick="window.location.href='project-figurante-code.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#001826,#002035,#001520);">
-                    <!-- <img src="img/figurante-code.png" alt="Figurante Code"> -->
                     <div class="pimg-ph"><span>💻</span><small>Figurante Code</small></div>
                     <span class="pbadge ba">● ativo</span>
                 </div>
-                <div class="pbody"><h3>Figurante Code</h3><p>Agente de programação com roteamento inteligente e destilação progressiva: respostas do Alibaba 480B são salvas no ChromaDB para que o modelo local (3B) responda perguntas similares sem chamar a nuvem.</p></div>
-                <div class="pmetrics">
-                    <div class="pmetric"><span class="pm-val">480B</span><span class="pm-lbl">Parâmetros<br>modelo nuvem</span></div>
-                    <div class="pmetric"><span class="pm-val">3</span><span class="pm-lbl">Níveis de<br>roteamento</span></div>
-                    <div class="pmetric"><span class="pm-val">0</span><span class="pm-lbl">API calls<br>p/ cache hit</span></div>
-                </div>
+                <div class="pbody"><h3>Figurante Code</h3><p>Agente de programação com roteamento inteligente: Alibaba 480B → OpenRouter → Ollama local. Cada resposta destila conhecimento para o modelo local via ChromaDB.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Alibaba 480B</span><span class="pill">ChromaDB</span><span class="pill">Ollama</span></div>
                 <div class="pfoot">
-                    <button onclick_fix="1" class="db db-r" onclick="openDoc(event.stopPropagation();'figurante-code','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button onclick_fix="1" class="db db-a" onclick="openDoc(event.stopPropagation();'figurante-code','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button onclick_fix="1" class="db db-i" onclick="openDoc(event.stopPropagation();'figurante-code','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('figurante-code','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('figurante-code','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('figurante-code','install')"><i class="fas fa-terminal"></i> Install</button>
                 </div>
             </div>
-</a>
 
         </div>
     </div>
@@ -465,7 +416,7 @@
         <div class="clayout reveal">
             <div class="clinks">
                 <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-whatsapp"></i></span><div><div class="ci-lbl">WhatsApp</div><div class="ci-val">+55 (27) 99618-5461</div></div></a>
-                <a href="/cdn-cgi/l/email-protection#7205171c161700011d1c0517001c17111932151f131b1e5c111d1f" class="citem"><span class="ci-ico"><i class="fas fa-envelope"></i></span><div><div class="ci-lbl">Email</div><div class="ci-val"><span class="__cf_email__" data-cfemail="2552404b414057564a4b5240574b40464e654248444c490b464a48">[email&#160;protected]</span></div></div></a>
+                <a href="mailto:wendersonwerneck@gmail.com" class="citem"><span class="ci-ico"><i class="fas fa-envelope"></i></span><div><div class="ci-lbl">Email</div><div class="ci-val">wendersonwerneck@gmail.com</div></div></a>
                 <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-linkedin"></i></span><div><div class="ci-lbl">LinkedIn</div><div class="ci-val">in/wendersonwerneck</div></div></a>
                 <a href="https://github.com/wenderson-werneck" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-github"></i></span><div><div class="ci-lbl">GitHub</div><div class="ci-val">wenderson-werneck</div></div></a>
             </div>
@@ -492,13 +443,12 @@
             <div class="ft-links">
                 <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="/cdn-cgi/l/email-protection#3344565d575641405c5d4456415d56505873545e525a5f1d505c5e"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:wendersonwerneck@gmail.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
 </footer>
 
-<!-- DOC MODAL -->
 <div class="modal-ov" id="docModal">
     <div class="modal-box">
         <div class="modal-hd">
@@ -509,25 +459,13 @@
     </div>
 </div>
 
-<!-- EmailJS — instrução no comentário abaixo -->
-<!--
-  PARA ATIVAR O FORMULÁRIO (5 minutos):
-  1. Acesse emailjs.com → criar conta gratuita (200 envios/mês)
-  2. Email Services → conectar Gmail
-  3. Email Templates → novo template com variáveis: {{from_name}}, {{from_email}}, {{message}}
-  4. Substitua os 3 valores em MAJÚSCULAS abaixo:
-     YOUR_PUBLIC_KEY  → Account > API Keys > Public Key
-     YOUR_SERVICE_ID  → Email Services > clique no serviço > Service ID
-     YOUR_TEMPLATE_ID → Email Templates > clique no template > Template ID
--->
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){ emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' }); })();
 
 // ── THEME ─────────────────────────────────────
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeBtn');
-// Primeira visita = light; retorno = lembrado
 const saved = localStorage.getItem('ww_theme');
 if (saved === 'dark') {
     html.setAttribute('data-theme','dark');
@@ -921,4 +859,11 @@ function openDoc(proj, type){
     document.body.style.overflow='hidden';
 }
 function closeDoc(){
-    document.getElementById('docModal'
+    document.getElementById('docModal').classList.remove('open');
+    document.body.style.overflow='';
+}
+document.getElementById('docModal').addEventListener('click', e=>{ if(e.target===document.getElementById('docModal')) closeDoc(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeDoc(); });
+</script>
+</body>
+</html>
