@@ -203,19 +203,18 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
       <div class="tl dir"><i class="fas fa-folder-open ti"></i>figurante/</div>
       <div class="ti2">
         <div class="tl cl" onclick="openFile('app.py')"><i class="fas fa-file-code fi"></i>app.py <span class="gs">sanitizado</span></div>
+        <div class="tl cl" onclick="openFile('regras_figurante.md')"><i class="fas fa-file-alt fi"></i>regras_figurante.md</div>
+        <div class="tl cl" onclick="openFile('banco_de_conversas.json')"><i class="fas fa-file-code fi"></i>banco_de_conversas.json <span class="gs">sanitizado</span></div>
         <div class="tl cl" onclick="openFile('requirements.txt')"><i class="fas fa-file-alt fi"></i>requirements.txt</div>
-        <div class="tl" style="color:var(--td);font-size:.72rem;margin-top:.15rem;"><i class="fas fa-eye-slash fi"></i>regras_figurante.md <span style="color:var(--td);"># editável pelo usuário — não versionado</span></div>
-        <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>banco_de_conversas.json <span style="color:var(--td);"># runtime — não versionado</span></div>
-        <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>memoria_profunda/ <span style="color:var(--td);"># ChromaDB — não versionado</span></div>
+        <div class="tl" style="color:var(--td);font-size:.72rem;margin-top:.15rem;"><i class="fas fa-folder-open fi"></i>memoria_profunda/ <span style="color:var(--td);"># ChromaDB — gerado automaticamente</span></div>
         <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>data/</div>
         <div class="ti2">
-          <div class="tl cl" onclick="openFile('perfil.example.json')"><i class="fas fa-file-code fi"></i>perfil.example.json <span class="ge">template</span></div>
-          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>perfil.json <span style="color:var(--td);"># seus dados reais — não versionado</span></div>
+          <div class="tl cl" onclick="openFile('perfil.json')"><i class="fas fa-file-code fi"></i>perfil.json <span class="gs">sanitizado</span></div>
         </div>
         <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>NightStar/ <span style="font-weight:400;font-size:.7rem;color:var(--td);"># subprojeto</span></div>
         <div class="ti2">
           <div class="tl cl" onclick="openFile('config.py')"><i class="fas fa-file-code fi"></i>config.py</div>
-          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>nightstar_profile/ <span style="color:var(--td);"># cookies do browser — não versionado</span></div>
+          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-folder-open fi"></i>nightstar_profile/ <span style="color:var(--td);"># cookies do browser — gerado automaticamente</span></div>
         </div>
         <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>templates/ + static/ <span style="font-weight:400;font-size:.7rem;color:var(--td);"># interface web</span></div>
       </div>
@@ -249,7 +248,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
       <div class="is"><div class="is-n">1</div><div><h4>Obtenha os arquivos</h4><p><strong>Opção A — Git:</strong></p><div class="cmd" onclick="copyCmd(this)">git clone https://github.com/wenderson-werneck/figurante</div><p style="margin-top:.5rem;"><strong>Opção B — Download:</strong> use o botão <em>⬇ Baixar Projeto Completo</em> na seção Código-Fonte acima.</p></div></div>
       <div class="is"><div class="is-n">2</div><div><h4>Instale o Ollama</h4><p>Baixe em <a href="https://ollama.com" target="_blank">ollama.com</a> e depois baixe os modelos:</p><div class="cmd" onclick="copyCmd(this)">ollama pull sam860/dolphin3-qwen2.5:1.5b</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">ollama pull sam860/dolphin3-qwen2.5:3b</div></div></div>
       <div class="is"><div class="is-n">3</div><div><h4>Instale as dependências</h4><div class="cmd" onclick="copyCmd(this)">pip install flask chromadb sentence-transformers ollama</div></div></div>
-      <div class="is"><div class="is-n">4</div><div><h4>Configure seu perfil</h4><p>Copie <code>perfil.example.json</code> → <code>data/perfil.json</code> e preencha com seus dados reais.</p></div></div>
+      <div class="is"><div class="is-n">4</div><div><h4>Configure seu perfil</h4><p>Copie Edite <code>data/perfil.json</code> com seus dados reais.</p></div></div>
       <div class="is"><div class="is-n">5</div><div><h4>Inicie o Figurante</h4><div class="cmd" onclick="copyCmd(this)">python app.py</div><p style="margin-top:.35rem;">Acesse <code>http://localhost:5000</code> no navegador.</p></div></div>
     </div>
   </div>
@@ -1129,7 +1128,66 @@ beautifulsoup4>=4.12.0      # Limpeza e parsing de HTML
 ollama>=0.2.0               # Lib oficial do Ollama (igual ao seu app.py do Figurante)
 colorlog>=6.8.0             # Logs coloridos no console do VS Code
 `,
-  "perfil.example.json": `{
+
+  "regras_figurante.md": `# regras_figurante.md — Instruções de comportamento do Figurante
+# Edite este arquivo para personalizar como o agente responde.
+# Você também pode editar diretamente pelo chat com o comando /rules
+
+## Identidade
+- Seu nome é Figurante.
+- Você é um assistente pessoal local, offline e discreto.
+- Não revele detalhes técnicos da sua implementação a menos que perguntado.
+
+## Tom e Estilo
+- Responda de forma direta e objetiva.
+- Use português do Brasil por padrão.
+- Evite respostas longas desnecessárias.
+- Prefira listas quando houver múltiplos itens.
+
+## Memória
+- Você tem acesso à sua memória vetorial. Use-a para contextualizar respostas.
+- Quando encontrar memória relevante, mencione naturalmente — não de forma robótica.
+
+## Limitações
+- Você roda 100% offline. Não tente acessar a internet.
+- Se não souber algo, diga claramente em vez de inventar.
+
+## Comportamentos especiais
+- /rules  → mostra este arquivo para edição inline
+- /brain  → ativa modo de aprendizado intensivo
+- /memory → mostra estatísticas da memória vetorial
+`,
+  "banco_de_conversas.json": `{
+  "chat_abc123": {
+    "tema": "paz",
+    "historico": [
+      {
+        "role": "user",
+        "content": "Olá, pode me ajudar com Python?"
+      },
+      {
+        "role": "assistant",
+        "content": "Claro! O que você precisa com Python?"
+      }
+    ],
+    "criado_em": "2026-01-15T10:30:00"
+  },
+  "chat_def456": {
+    "tema": "ira",
+    "historico": [
+      {
+        "role": "user",
+        "content": "Explique como funciona o ChromaDB."
+      },
+      {
+        "role": "assistant",
+        "content": "O ChromaDB é um banco de dados vetorial..."
+      }
+    ],
+    "criado_em": "2026-01-16T14:22:00"
+  }
+}`,
+  "perfil.json": `{
   "identificacao": {
     "nome_completo": "Seu Nome Completo",
     "email": "seu@email.com",

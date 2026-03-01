@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="favicon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="img-figurante-ai.webp" type="image/webp">
     <style>
         :root {
             --blue:#007ACC; --blue-bright:#0087DD; --blue-dark:#005A9E;
@@ -318,7 +319,7 @@
 
             <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-figurante.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#1a0d2e,#2d1b4e,#1a0a3a);">
-                    <img src="img-figurante-ai.png" alt="Figurante">
+                    <picture><source srcset="img-figurante-ai.webp" type="image/webp"><img src="img-figurante-ai.png" alt="Figurante" loading="eager" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
                 </div>
                 <div class="pbody"><h3>Figurante</h3><p>Agente de IA local com memória vetorial persistente. 100% offline, sem nuvem. Memória semântica via ChromaDB, dois modos de operação, identidade configurável.</p></div>
@@ -332,7 +333,7 @@
 
             <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-nightstar.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#040d1a,#071828,#0a1f35);">
-                    <img src="img-nightstar.png" alt="NightStar">
+                    <picture><source srcset="img-nightstar.webp" type="image/webp"><img src="img-nightstar.png" alt="NightStar" loading="lazy" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
                 </div>
                 <div class="pbody"><h3>NightStar</h3><p>Bot RPA de automação de candidaturas. Varre formulários, mapeia campos com RAG vetorial e preenche automaticamente via Playwright. Suporte a Gupy e LinkedIn.</p></div>
@@ -346,7 +347,7 @@
 
             <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-nexus.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#0d1f0d,#132613,#0a1a0a);">
-                    <img src="img-nexus.png" alt="Nexus AI">
+                    <picture><source srcset="img-nexus.webp" type="image/webp"><img src="img-nexus.png" alt="Nexus AI" loading="lazy" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
                 </div>
                 <div class="pbody"><h3>Nexus AI</h3><p>Agente de busca e ranqueamento de vagas. O Gemini expande cargos em 15 variações, busca em 20+ países via Adzuna e ranqueia por similaridade semântica com o CV.</p></div>
@@ -360,7 +361,7 @@
 
             <div class="pcard" data-tags="ml dados" onclick="window.location.href='project-aprovamais.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#1f1004,#2a1a08,#1a0f04);">
-                    <img src="img-aprovamais.png" alt="AprovaMais">
+                    <picture><source srcset="img-aprovamais.webp" type="image/webp"><img src="img-aprovamais.png" alt="AprovaMais" loading="lazy" decoding="async"></picture>
                     <span class="pbadge bs">◆ estudo</span>
                 </div>
                 <div class="pbody"><h3>Risco de Crédito — AprovaMais</h3><p>Pipeline completo de Data Science em 6 etapas sobre 200.000 registros. Comparação de 4 modelos, SMOTE e otimização via GridSearchCV.</p></div>
@@ -374,7 +375,7 @@
 
             <div class="pcard" data-tags="ia dados" onclick="window.location.href='project-figurante-code.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#001826,#002035,#001520);">
-                    <img src="img-figurante.png" alt="Figurante Code">
+                    <picture><source srcset="img-figurante.webp" type="image/webp"><img src="img-figurante.png" alt="Figurante Code" loading="lazy" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
                 </div>
                 <div class="pbody"><h3>Figurante Code</h3><p>Agente de programação com roteamento inteligente: Alibaba 480B → OpenRouter → Ollama local. Cada resposta destila conhecimento para o modelo local via ChromaDB.</p></div>

@@ -214,10 +214,10 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
         </div>
         <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>data/</div>
         <div class="ti2">
-          <div class="tl cl" onclick="openFile('perfil.example.json')"><i class="fas fa-file-code fi"></i>perfil.example.json <span class="ge">template</span></div>
-          <div class="tl cl" onclick="openFile('mapeamentos.example.json')"><i class="fas fa-file-code fi"></i>mapeamentos.example.json <span class="ge">template</span></div>
-          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>perfil.json <span style="color:var(--td);"># dados reais — não versionado</span></div>
-          <div class="tl" style="color:var(--td);font-size:.72rem;"><i class="fas fa-eye-slash fi"></i>mapeamentos.json <span style="color:var(--td);"># histórico real — não versionado</span></div>
+          <div class="tl cl" onclick="openFile('perfil.json')"><i class="fas fa-file-code fi"></i>perfil.json <span class="gs">sanitizado</span></div>
+          <div class="tl cl" onclick="openFile('mapeamentos.json')"><i class="fas fa-file-code fi"></i>mapeamentos.json <span class="gs">sanitizado</span></div>
+          
+          
         </div>
         <div class="tl dir" style="margin-top:.3rem;"><i class="fas fa-folder-open ti"></i>logs/</div>
         <div class="ti2">
@@ -256,7 +256,7 @@ footer{border-top:1px solid var(--border);padding:1.5rem 0;}
       <div class="is"><div class="is-n">1</div><div><h4>Obtenha os arquivos</h4><p><strong>Opção A — Git:</strong></p><div class="cmd" onclick="copyCmd(this)">git clone https://github.com/wenderson-werneck/nightstar</div><p style="margin-top:.5rem;"><strong>Opção B — Download:</strong> use o botão <em>⬇ Baixar Projeto Completo</em> na seção Código-Fonte acima.</p></div></div>
       <div class="is"><div class="is-n">2</div><div><h4>Pré-requisito: Figurante rodando</h4><p>O NightStar usa o Figurante como cérebro. Certifique-se de que o <code>app.py</code> do Figurante está rodando na porta 5000.</p></div></div>
       <div class="is"><div class="is-n">3</div><div><h4>Instale dependências</h4><div class="cmd" onclick="copyCmd(this)">pip install playwright beautifulsoup4 ollama colorlog</div><div class="cmd" style="margin-top:.3rem;" onclick="copyCmd(this)">playwright install chromium</div></div></div>
-      <div class="is"><div class="is-n">4</div><div><h4>Configure seu perfil</h4><p>Copie <code>perfil.example.json</code> → <code>data/perfil.json</code> com seus dados. Configure <code>documentos.curriculo_path</code> para upload automático do PDF.</p></div></div>
+      <div class="is"><div class="is-n">4</div><div><h4>Configure seu perfil</h4><p>Edite <code>data/perfil.json</code> com seus dados. Configure <code>documentos.curriculo_path</code> para upload automático do PDF.</p></div></div>
       <div class="is"><div class="is-n">5</div><div><h4>Execute via Figurante (recomendado)</h4><p>No chat do Figurante, use o comando:</p><div class="cmd" onclick="copyCmd(this)">/signup https://url-da-vaga.com</div></div></div>
     </div>
   </div>
@@ -1953,7 +1953,7 @@ beautifulsoup4>=4.12.0      # Limpeza e parsing de HTML
 ollama>=0.2.0               # Lib oficial do Ollama (igual ao seu app.py do Figurante)
 colorlog>=6.8.0             # Logs coloridos no console do VS Code
 `,
-  "perfil.example.json": `{
+  "perfil.json": `{
   "identificacao": {
     "nome_completo": "Seu Nome Completo",
     "email": "seu@email.com",
@@ -2011,7 +2011,7 @@ colorlog>=6.8.0             # Logs coloridos no console do VS Code
     "curriculo_path": "C:/Users/Seu_Usuario/Documents/curriculo.pdf"
   }
 }`,
-  "mapeamentos.example.json": `{
+  "mapeamentos.json": `{
   "plataformas": {
     "exemplo.gupy.io": {
       "url": "https://exemplo.gupy.io/jobs/123/apply",
