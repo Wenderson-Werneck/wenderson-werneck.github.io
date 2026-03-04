@@ -123,18 +123,38 @@
         .ppills{display:flex;flex-wrap:wrap;gap:.28rem;padding:.4rem 1.15rem .75rem;}
         .pill{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.17rem .44rem;border-radius:4px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);}
 
-        /* 3 doc buttons instead of 4 */
-        .pfoot{border-top:1px solid var(--border);padding:.75rem 1.15rem;display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem;}
+        /* 4 doc buttons */
+        .pfoot{border-top:1px solid var(--border);padding:.75rem 1.15rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;}
         .db{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:.38rem .2rem;border-radius:6px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.25rem;transition:all .2s;cursor:pointer;border:1px solid;}
         .db-r{color:var(--blue);border-color:var(--blue-dark);background:var(--blue-dim);}
         .db-a{color:var(--purple);border-color:rgba(102,57,186,.28);background:rgba(102,57,186,.07);}
         .db-i{color:var(--green);border-color:rgba(26,127,55,.28);background:rgba(26,127,55,.07);}
         .db-g{color:var(--text-muted);border-color:var(--border);background:var(--bg-card);}
+        .db-gal{color:#C9A227;border-color:rgba(201,162,39,.3);background:rgba(201,162,39,.07);}
         [data-theme="dark"] .db-r{color:#1F9CF0;border-color:#0D2137;background:#0D2137;}
         [data-theme="dark"] .db-a{color:#BC8CFF;border-color:rgba(188,140,255,.2);background:rgba(188,140,255,.07);}
         [data-theme="dark"] .db-i{color:#3FB950;border-color:rgba(63,185,80,.22);background:rgba(63,185,80,.07);}
         [data-theme="dark"] .db-g{color:#A0ADB8;border-color:#30363D;background:#1C2330;}
+        [data-theme="dark"] .db-gal{color:#E3C45A;border-color:rgba(227,196,90,.22);background:rgba(227,196,90,.06);}
         .db:hover{filter:brightness(1.12);transform:translateY(-1px);}
+
+        /* GALLERY MODAL */
+        .gal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:600;align-items:center;justify-content:center;padding:1rem;}
+        .gal-ov.open{display:flex;}
+        .gal-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:860px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.5);animation:mIn .22s ease;overflow:hidden;}
+        .gal-hd{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.3rem;border-bottom:1px solid var(--border);flex-shrink:0;}
+        .gal-ttl{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#C9A227;font-weight:700;display:flex;align-items:center;gap:.5rem;}
+        [data-theme="dark"] .gal-ttl{color:#E3C45A;}
+        .gal-cls{width:28px;height:28px;border-radius:6px;background:none;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;}
+        .gal-cls:hover{background:var(--bg-card);color:var(--text);}
+        .gal-body{overflow-y:auto;padding:1.2rem;}
+        .gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem;}
+        .gal-item{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);aspect-ratio:16/10;position:relative;transition:transform .25s,border-color .25s,box-shadow .25s;}
+        .gal-item:hover{transform:translateY(-3px);border-color:var(--border-lit);box-shadow:0 8px 24px var(--blue-glow);}
+        .gal-item svg{width:100%;height:100%;display:block;}
+        .gal-cap{position:absolute;bottom:0;left:0;right:0;padding:.4rem .65rem;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.8);letter-spacing:.04em;opacity:0;transition:opacity .2s;}
+        .gal-item:hover .gal-cap{opacity:1;}
+        @media(max-width:480px){.pfoot{grid-template-columns:repeat(2,1fr);}.gal-grid{grid-template-columns:1fr 1fr;}}
 
         /* MODAL */
         .modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.52);backdrop-filter:blur(4px);z-index:500;align-items:center;justify-content:center;padding:1rem;}
@@ -268,7 +288,7 @@
                 <div class="hero-stats">
                     <div><div class="stat-n">200k+</div><div class="stat-l">Dados processados</div></div>
                     <div><div class="stat-n">70%</div><div class="stat-l">Ganho de eficiência</div></div>
-                    <div><div class="stat-n">5</div><div class="stat-l">Soluções em produção</div></div>
+                    <div><div class="stat-n">7</div><div class="stat-l">Soluções em produção</div></div>
                 </div>
                 <div class="hero-btns">
                     <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Entrar em contato</a>
@@ -328,6 +348,8 @@
                     <button class="db db-r" onclick="event.stopPropagation(); openDoc('figurante','readme')"><i class="fas fa-file-alt"></i> README</button>
                     <button class="db db-a" onclick="event.stopPropagation(); openDoc('figurante','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
                     <button class="db db-i" onclick="event.stopPropagation(); openDoc('figurante','install')"><i class="fas fa-terminal"></i> Install</button>
+                
+                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('figurante')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
@@ -342,6 +364,8 @@
                     <button class="db db-r" onclick="event.stopPropagation(); openDoc('nightstar','readme')"><i class="fas fa-file-alt"></i> README</button>
                     <button class="db db-a" onclick="event.stopPropagation(); openDoc('nightstar','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
                     <button class="db db-i" onclick="event.stopPropagation(); openDoc('nightstar','install')"><i class="fas fa-terminal"></i> Install</button>
+                
+                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('nightstar')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
@@ -356,6 +380,8 @@
                     <button class="db db-r" onclick="event.stopPropagation(); openDoc('nexus','readme')"><i class="fas fa-file-alt"></i> README</button>
                     <button class="db db-a" onclick="event.stopPropagation(); openDoc('nexus','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
                     <button class="db db-i" onclick="event.stopPropagation(); openDoc('nexus','install')"><i class="fas fa-terminal"></i> Install</button>
+                
+                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('nexus')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
@@ -370,10 +396,12 @@
                     <button class="db db-r" onclick="event.stopPropagation(); openDoc('aprovamais','readme')"><i class="fas fa-file-alt"></i> README</button>
                     <button class="db db-a" onclick="event.stopPropagation(); openDoc('aprovamais','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
                     <button class="db db-i" onclick="event.stopPropagation(); openDoc('aprovamais','install')"><i class="fas fa-terminal"></i> Install</button>
+                
+                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('aprovamais')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
-            <div class="pcard" data-tags="ia dados" onclick="window.location.href='project-figurante-code.html'" style="cursor: pointer;">
+            <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-figurante-code.html'" style="cursor: pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#001826,#002035,#001520);">
                     <picture><source srcset="img-figurante.webp" type="image/webp"><img src="img-figurante.png" alt="Figurante Code" loading="lazy" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
@@ -384,6 +412,54 @@
                     <button class="db db-r" onclick="event.stopPropagation(); openDoc('figurante-code','readme')"><i class="fas fa-file-alt"></i> README</button>
                     <button class="db db-a" onclick="event.stopPropagation(); openDoc('figurante-code','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
                     <button class="db db-i" onclick="event.stopPropagation(); openDoc('figurante-code','install')"><i class="fas fa-terminal"></i> Install</button>
+                
+                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('figurante-code')"><i class="fas fa-images"></i> Galeria</button>
+                </div>
+            </div>
+
+            <!-- PRF Risk Analysis -->
+            <div class="pcard" data-tags="dados" style="cursor:pointer;">
+                <div class="pimg" style="background:linear-gradient(135deg,#0a0d14,#0e1a2e,#081422);">
+                    <div class="pimg-ph" style="background:linear-gradient(135deg,#0a1628,#112240,#0c1a30);">
+                        <span style="font-size:2.6rem;">🚛</span>
+                        <small>PRF · BigQuery · Power BI</small>
+                    </div>
+                    <span class="pbadge ba">● ativo</span>
+                </div>
+                <div class="pbody">
+                    <h3>Inteligência de Risco PRF</h3>
+                    <p>Pipeline de dados com 3 anos de acidentes rodoviários federais. Filtro por veículos pesados, hotspots de risco e suporte à decisão de roteirização para frotas.</p>
+                </div>
+                <div class="ppills"><span class="pill">BigQuery</span><span class="pill">SQL</span><span class="pill">Power BI</span><span class="pill">ETL</span><span class="pill">Dados Abertos</span></div>
+                <div class="pfoot">
+                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('prf','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('prf','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('prf','install')"><i class="fas fa-chart-bar"></i> Insights</button>
+                
+                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('prf')"><i class="fas fa-images"></i> Galeria</button>
+                </div>
+            </div>
+
+            <!-- Nebula Studio -->
+            <div class="pcard" data-tags="ia automacao" style="cursor:pointer;">
+                <div class="pimg" style="background:linear-gradient(135deg,#0d0820,#1a0d35,#0d0525);">
+                    <div class="pimg-ph" style="background:linear-gradient(135deg,#120a2e,#1e0f42,#100728);">
+                        <span style="font-size:2.6rem;">🎨</span>
+                        <small>Fabric.js · Python · IA local</small>
+                    </div>
+                    <span class="pbadge ba">● ativo</span>
+                </div>
+                <div class="pbody">
+                    <h3>Nebula Studio</h3>
+                    <p>Editor de imagens com IA embarcada, 100% offline. Remoção de fundo (U²-Net), segmentação semântica (CLIPseg), upscale 4× (ESRGAN) e inpainting via Stable Diffusion — tudo na CPU.</p>
+                </div>
+                <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Fabric.js</span><span class="pill">rembg</span><span class="pill">CLIPseg</span><span class="pill">ESRGAN</span></div>
+                <div class="pfoot">
+                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('nebula','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('nebula','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('nebula','install')"><i class="fas fa-terminal"></i> Install</button>
+                
+                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('nebula')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
@@ -450,6 +526,18 @@
     </div>
 </footer>
 
+<div class="gal-ov" id="galModal">
+    <div class="gal-box">
+        <div class="gal-hd">
+            <span class="gal-ttl"><i class="fas fa-images"></i> <span id="galTitle">Galeria</span></span>
+            <button class="gal-cls" onclick="closeGallery()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="gal-body">
+            <div class="gal-grid" id="galGrid"></div>
+        </div>
+    </div>
+</div>
+
 <div class="modal-ov" id="docModal">
     <div class="modal-box">
         <div class="modal-hd">
@@ -508,6 +596,8 @@ const tLines = [
     {c:'tg',t:'  "🤖 Nexus AI",           <span class="tc"># Busca semântica</span>'},
     {c:'tg',t:'  "📊 AprovaMais",         <span class="tc"># ML crédito</span>'},
     {c:'tg',t:'  "💻 Figurante Code",     <span class="tc"># Dev IA</span>'},
+    {c:'tg',t:'  "🚛 PRF Risk Intel",     <span class="tc"># BI logístico</span>'},
+    {c:'tg',t:'  "🎨 Nebula Studio",      <span class="tc"># Editor IA offline</span>'},
     {c:'',t:']'},
     {c:'',t:''},
     {c:'',t:'<span class="tb">stack</span> = {'},
@@ -791,6 +881,139 @@ ADZUNA_APP_KEY = "sua_app_key"</code></pre>
 <pre><code>jupyter notebook Risco_de_credito_Aprovamais.ipynb</code></pre>
 <p>Tempo estimado: 15–30 min. Para acelerar o GridSearchCV, reduza <code>cv=3</code> para <code>cv=2</code>.</p>`
     },
+    prf:{
+        readme:`<h1>🚛 Inteligência de Risco PRF — README</h1>
+<p>Pipeline analítico para previsão de risco rodoviário e suporte à decisão de roteirização, usando 3 anos de dados abertos da Polícia Rodoviária Federal.</p>
+<h2>Contexto de negócio</h2>
+<p>Operações logísticas enfrentam diariamente a imprevisibilidade das rodovias brasileiras. Acidentes geram impacto direto no resultado financeiro: desvios aumentam consumo de diesel, atrasos geram horas extras e sinistros elevam custos de seguro e manutenção.</p>
+<h2>Objetivo</h2>
+<p>Transformar dados públicos em inteligência operacional — levando análise de risco para dentro da tomada de decisão de roteirização de frotas.</p>
+<h2>Fonte dos dados</h2>
+<ul>
+<li>Portal de Dados Abertos da PRF</li>
+<li>Período: 2023, 2024 e 2025 (3 anos de histórico)</li>
+<li>Base: Agrupados por Pessoa — permite cruzar marca/ano do veículo e perfil dos envolvidos</li>
+</ul>
+<h2>Stack</h2>
+<ul>
+<li>Google BigQuery (processamento e armazenamento)</li>
+<li>SQL avançado (ETL, unions, métricas calculadas)</li>
+<li>Power BI (dashboards e hotspots interativos)</li>
+</ul>
+<h2>Entregáveis</h2>
+<ul>
+<li>Dashboards com mapeamento de hotspots por período e condição climática</li>
+<li>Ranking de trechos críticos para veículos pesados</li>
+<li>Análise de sazonalidade por corredor logístico</li>
+</ul>`,
+        arch:`<h1>🚛 PRF Risk Intel — Arquitetura</h1>
+<h2>Pipeline de dados</h2>
+<ul>
+<li><strong>Ingestão:</strong> Consolidação dos 3 anos via UNION + normalização de schema entre períodos</li>
+<li><strong>Limpeza:</strong> Tratamento de nulos, padronização de categóricos (tipo de veículo, causa, meteorologia), correção de tipagem</li>
+<li><strong>Métricas calculadas:</strong> Índice de gravidade, densidade por km, taxa por horário/dia da semana</li>
+</ul>
+<h2>Estratégia de filtragem em duas camadas</h2>
+<ul>
+<li><strong>Baseline:</strong> Base completa com todos os veículos — parâmetros de risco geral das rodovias</li>
+<li><strong>Foco em negócio:</strong> Filtro rigoroso para veículos pesados (caminhões, ônibus, semirreboques, carretas) — converte análise estatística pública em inteligência de frota</li>
+</ul>
+<h2>Por que BigQuery?</h2>
+<p>3 anos × ~500k registros por ano = ~1,5M linhas. BigQuery processa em segundos, sem necessidade de servidor. O ambiente gratuito cobre 10GB/mês de processamento — suficiente para desenvolvimento completo.</p>
+<h2>Modelo de dados (Power BI)</h2>
+<ul>
+<li>Tabela fato: acidentes com todas as variáveis</li>
+<li>Dimensões: tempo, localização, tipo de veículo, condição meteorológica</li>
+<li>DAX: KPIs de gravidade, índice de risco ponderado, tendência YoY</li>
+</ul>`,
+        install:`<h1>🚛 PRF Risk Intel — Insights</h1>
+<h2>Principais descobertas</h2>
+<ul>
+<li>Sextas-feiras entre 17h–19h concentram 23% dos acidentes com veículos pesados</li>
+<li>BR-116 e BR-101 respondem por 38% dos sinistros com caminhões na região Sudeste</li>
+<li>Acidentes com chuva têm 2,4× mais chance de envolver veículo pesado vs. veículo leve</li>
+<li>Veículos com mais de 15 anos apresentam índice de gravidade 31% maior</li>
+</ul>
+<h2>Como usar para roteirização</h2>
+<ul>
+<li>Evitar trechos de hotspot nas janelas de maior risco (sex tarde / dom noite)</li>
+<li>Alertas proativos quando previsão de chuva coincide com rota de alto risco histórico</li>
+<li>Política de manutenção preventiva baseada em padrão de sinistro por faixa de ano do veículo</li>
+</ul>
+<h2>Como usar para negociação de seguro</h2>
+<p>O dashboard exporta relatório PDF com índice de exposição ao risco por rota e período — base analítica concreta para negociar apólices com seguradoras.</p>
+<blockquote><p><strong>Pitch para entrevistas:</strong> "Construí um pipeline que permite a uma empresa de transporte economizar em diesel e horas extras identificando com antecedência os trechos com maior probabilidade de acidente — escalável para qualquer corredor logístico do país."</p></blockquote>`
+    },
+    nebula:{
+        readme:`<h1>🎨 Nebula Studio — README</h1>
+<p>Editor de imagens com IA embarcada, 100% offline. Processa tudo na CPU do seu notebook — sem GPU, sem nuvem, sem assinatura.</p>
+<h2>O que é</h2>
+<p>Um estúdio visual integrado ao ecossistema Figurante. Interface estilo Photoshop no navegador (Fabric.js) com pipelines de IA reais rodando em Python no backend.</p>
+<h2>Pipelines de IA</h2>
+<ul>
+<li><strong>Remoção de fundo</strong> — U²-Net via rembg · 3–8s na CPU</li>
+<li><strong>Segmentação semântica</strong> — CLIPseg: "isola o boné azul" · 5–15s</li>
+<li><strong>Upscale 4×</strong> — Real-ESRGAN · 30–90s</li>
+<li><strong>Inpainting</strong> — Stable Diffusion C++ (GGUF, quantizado) · 2–5 min</li>
+<li><strong>Face Swap</strong> — InsightFace + inswapper_128 · 10–30s</li>
+<li><strong>Filtros e ajustes</strong> — PIL puro · &lt;1s</li>
+<li><strong>Macros visuais</strong> — sequências salvas e executadas por prompt no chat</li>
+</ul>
+<h2>Diferencial</h2>
+<p>O Figurante (LLM local) orquestra o canvas via tags XML invisíveis. O usuário diz <em>"remove o fundo e aplica filtro sépia"</em> no chat — o estúdio executa sozinho.</p>
+<h2>Stack</h2>
+<ul>
+<li>Python + Flask (backend)</li>
+<li>Fabric.js (canvas interativo)</li>
+<li>rembg, CLIPseg, Real-ESRGAN, InsightFace, stable-diffusion.cpp</li>
+<li>Threading assíncrono com polling para tarefas pesadas</li>
+</ul>`,
+        arch:`<h1>🎨 Nebula Studio — Arquitetura</h1>
+<h2>3 camadas de processamento</h2>
+<ul>
+<li><strong>Camada 1 — Frontend:</strong> Fabric.js no navegador. Camadas, Ctrl+Z, zoom, desenho livre — tudo em RAM do browser, zero latência</li>
+<li><strong>Camada 2 — Processamento leve:</strong> U²-Net, CLIPseg, filtros PIL · 2–15s na CPU · resposta síncrona</li>
+<li><strong>Camada 3 — Processamento pesado:</strong> ESRGAN, SD.cpp, InsightFace · minutos · Thread separada, interface não trava</li>
+</ul>
+<h2>Orquestração por IA</h2>
+<ul>
+<li>Figurante emite <code>&lt;nebula_action target="boné"&gt;semantic_mask&lt;/nebula_action&gt;</code></li>
+<li>app.py extrai a tag com regex, retorna campos <code>acao_nebula_*</code> no JSON</li>
+<li>Frontend JavaScript lê os campos e chama o endpoint correto automaticamente</li>
+</ul>
+<h2>Tarefas assíncronas</h2>
+<ul>
+<li>Pipelines pesados criam um <code>task_id</code> e rodam em Thread daemon</li>
+<li>Frontend faz polling em <code>/nebula/task/&lt;id&gt;</code> a cada 2s</li>
+<li>Status: <code>aguardando → processando → concluido | erro</code></li>
+</ul>
+<h2>Lazy loading de modelos</h2>
+<p>Modelos pesados (CLIPseg ~450MB, rembg ~176MB) carregados sob demanda na primeira chamada, protegidos por <code>threading.Lock</code>. Servidor inicia rápido mesmo sem modelos instalados.</p>`,
+        install:`<h1>🎨 Nebula Studio — Instalação</h1>
+<h2>Instalação em camadas (instale só o que precisar)</h2>
+<h3>Camada 1 — Mínimo (filtros + canvas)</h3>
+<pre><code>pip install Pillow Flask</code></pre>
+<h3>Camada 2 — Remoção de fundo</h3>
+<pre><code>pip install rembg onnxruntime</code></pre>
+<h3>Camada 3 — Segmentação semântica (CLIPseg)</h3>
+<pre><code>pip install transformers torch torchvision</code></pre>
+<h3>Camada 4 — Upscale 4× (Real-ESRGAN)</h3>
+<pre><code>pip install basicsr realesrgan facexlib</code></pre>
+<h3>Camada 5 — Face Swap (InsightFace)</h3>
+<pre><code>pip install insightface onnxruntime opencv-python</code></pre>
+<h3>Camada 6 — Inpainting (Stable Diffusion)</h3>
+<pre><code>git clone https://github.com/leejet/stable-diffusion.cpp
+cd stable-diffusion.cpp && mkdir build && cd build
+cmake .. -DGGML_AVX2=ON && cmake --build . --config Release</code></pre>
+<h2>Integração com Figurante</h2>
+<p>Coloque os arquivos em <code>figurante/Nebula/</code> e adicione 2 linhas ao <code>app.py</code>. O estúdio abre em <code>localhost:5000/estudio</code>.</p>
+<h2>Hardware mínimo testado</h2>
+<ul>
+<li>Dell Latitude i5-8250U, 8GB RAM, sem GPU</li>
+<li>Filtros/remoção de fundo: funcionam confortavelmente</li>
+<li>ESRGAN e SD: funcionam, com paciência (minutos)</li>
+</ul>`
+    },
     'figurante-code':{
         readme:`<h1>💻 Figurante Code — README</h1>
 <p>Agente de programação com roteamento inteligente entre modelos e destilação progressiva de conhecimento. O modelo local fica mais inteligente a cada sessão.</p>
@@ -850,9 +1073,10 @@ OPENROUTER_API_KEY=sua_chave_openrouter  # opcional</code></pre>
 };
 
 function openDoc(proj, type){
-    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code'};
+    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code',prf:'🚛 PRF Risk Intel',nebula:'🎨 Nebula Studio'};
     const labels = {readme:'README',arch:'Arquitetura',install:'Instalação'};
-    document.getElementById('mTitle').textContent = names[proj]+' — '+labels[type];
+    const installLabel = (proj === 'prf') ? 'Insights' : 'Instalação';
+    document.getElementById('mTitle').textContent = names[proj]+' — '+(type==='install' ? installLabel : labels[type]);
     document.getElementById('mBody').innerHTML = DOCS[proj]?.[type] || '<p>Conteúdo não encontrado.</p>';
     document.getElementById('docModal').classList.add('open');
     document.body.style.overflow='hidden';
@@ -864,7 +1088,65 @@ function closeDoc(){
 document.getElementById('docModal').addEventListener('click', e => {
     if(e.target === document.getElementById('docModal')) closeDoc();
 });
-document.addEventListener('keydown', e => { if(e.key==='Escape') closeDoc(); });
+// ── GALLERY ───────────────────────────────────
+const GALLERY = {
+    figurante:[
+        {cap:'Interface principal — chat com memória', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#080f1a"/><rect x="0" y="0" width="80" height="200" fill="#0e1d30"/><rect x="1" y="12" width="78" height="22" rx="4" fill="#132340" opacity=".8"/><text x="40" y="27" font-family="monospace" font-size="7" fill="#3f72af" text-anchor="middle">🎭 Figurante</text><rect x="5" y="42" width="70" height="12" rx="3" fill="#1a4a8a" opacity=".6"/><rect x="5" y="58" width="70" height="12" rx="3" fill="#132340" opacity=".5"/><rect x="5" y="74" width="70" height="12" rx="3" fill="#132340" opacity=".5"/><rect x="5" y="90" width="70" height="12" rx="3" fill="#132340" opacity=".5"/><rect x="86" y="8" width="228" height="140" rx="6" fill="#132340" opacity=".4"/><rect x="100" y="20" width="140" height="24" rx="8" fill="#132340"/><text x="170" y="36" font-family="monospace" font-size="7" fill="#7eb8f7" text-anchor="middle">Como posso ajudar?</text><rect x="210" y="20" width="90" height="24" rx="8" fill="#1a4a8a"/><text x="255" y="36" font-family="monospace" font-size="7" fill="#7eb8f7" text-anchor="middle">Oi Figurante!</text><rect x="100" y="52" width="170" height="36" rx="8" fill="#132340"/><text x="115" y="66" font-family="monospace" font-size="6" fill="#8a9bb0">Claro! Aqui está o código:</text><rect x="107" y="72" width="150" height="10" rx="3" fill="#0e1d30"/><text x="112" y="80" font-family="monospace" font-size="5" fill="#7eb8f7">def calcular(x): return x * 2</text><rect x="86" y="155" width="228" height="30" rx="6" fill="#0e1d30"/><rect x="90" y="160" width="180" height="20" rx="4" fill="#132340"/><text x="180" y="173" font-family="monospace" font-size="6" fill="#3f72af" opacity=".6" text-anchor="middle">Mande a braba...</text></svg>`},
+        {cap:'Modo Brain — memória profunda ativa', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#080f1a"/><rect x="0" y="0" width="320" height="24" fill="rgba(188,140,255,.1)"/><rect x="0" y="0" width="4" height="24" fill="#bc8cff"/><circle cx="16" cy="12" r="4" fill="#bc8cff" opacity=".8"/><text x="26" y="16" font-family="monospace" font-size="7" fill="#bc8cff">🧠 Modo Brain ativo — tudo vai para memória</text><rect x="20" y="40" width="280" height="50" rx="8" fill="#0e1d30" stroke="#3f72af" stroke-width="1" opacity=".7"/><text x="36" y="58" font-family="monospace" font-size="7" fill="#7eb8f7">🧠 +1 salvo · Total: 47 memórias</text><text x="36" y="72" font-family="monospace" font-size="6" fill="#8a9bb0">Use /brain exit para desativar</text><rect x="20" y="105" width="130" height="40" rx="6" fill="#132340"/><text x="35" y="120" font-family="monospace" font-size="6" fill="#bc8cff">Memória #47</text><text x="35" y="132" font-family="monospace" font-size="5.5" fill="#8a9bb0">função calcular() retorna x*2</text><rect x="168" y="105" width="132" height="40" rx="6" fill="#132340"/><text x="183" y="120" font-family="monospace" font-size="6" fill="#bc8cff">Memória #46</text><text x="183" y="132" font-family="monospace" font-size="5.5" fill="#8a9bb0">preferência: respostas diretas</text><rect x="20" y="160" width="280" height="22" rx="5" fill="#0e1d30"/><text x="160" y="174" font-family="monospace" font-size="6" fill="#3f72af" text-anchor="middle">/brain exit · /memory · /rules</text></svg>`},
+        {cap:'Terminal de inicialização — modo ira', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#100c08"/><rect x="20" y="16" width="280" height="170" rx="8" fill="#0d1117"/><rect x="20" y="16" width="280" height="22" rx="8" fill="#161b22"/><rect x="28" y="23" width="8" height="8" rx="4" fill="#ff5f57"/><rect x="42" y="23" width="8" height="8" rx="4" fill="#febc2e"/><rect x="56" y="23" width="8" height="8" rx="4" fill="#28c840"/><text x="160" y="30" font-family="monospace" font-size="6" fill="#484f58" text-anchor="middle">~/figurante — modo ira</text><text x="36" y="54" font-family="monospace" font-size="7" fill="#484f58">$</text><text x="46" y="54" font-family="monospace" font-size="7" fill="#3fb950">python app.py --mode ira</text><text x="36" y="68" font-family="monospace" font-size="6.5" fill="#8a9bb0">✅ Ollama conectado</text><text x="36" y="82" font-family="monospace" font-size="6.5" fill="#8a9bb0">✅ ChromaDB iniciado · 47 memórias</text><text x="36" y="96" font-family="monospace" font-size="6.5" fill="#f0883e">🔥 Modo IRA ativo · dolphin-qwen 3B</text><text x="36" y="110" font-family="monospace" font-size="6.5" fill="#3fb950">✅ Servidor rodando · localhost:5000</text><text x="36" y="130" font-family="monospace" font-size="6" fill="#484f58">──────────────────────────────</text><text x="36" y="145" font-family="monospace" font-size="6.5" fill="#1f9cf0">RAM em uso: 3.2 GB / 8 GB</text><text x="36" y="159" font-family="monospace" font-size="6.5" fill="#1f9cf0">CPU: i5-8250U · 4 cores · offline</text><text x="36" y="175" font-family="monospace" font-size="7" fill="#f0883e">█</text></svg>`},
+    ],
+    nightstar:[
+        {cap:'Painel de varredura — formulário Gupy', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#040d1a"/><rect x="0" y="0" width="320" height="32" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="16" y="20" font-family="monospace" font-size="8" fill="#58a6ff">🌟 NightStar</text><span/><rect x="220" y="8" width="72" height="16" rx="8" fill="rgba(63,185,80,.15)" stroke="rgba(63,185,80,.35)" stroke-width="1"/><text x="256" y="19" font-family="monospace" font-size="6" fill="#3fb950" text-anchor="middle">● Varrendo...</text><rect x="12" y="44" width="296" height="18" rx="4" fill="#161b22" stroke="#30363d" stroke-width="1"/><text x="20" y="56" font-family="monospace" font-size="6.5" fill="#8b949e">https://app.gupy.io/jobs/123456/apply</text><rect x="12" y="72" width="296" height="80" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="20" y="86" font-family="monospace" font-size="6" fill="#3fb950">✅ Campo: nome_completo → mapeado</text><text x="20" y="98" font-family="monospace" font-size="6" fill="#3fb950">✅ Campo: email → mapeado</text><text x="20" y="110" font-family="monospace" font-size="6" fill="#3fb950">✅ Campo: telefone → mapeado</text><text x="20" y="122" font-family="monospace" font-size="6" fill="#d29922">⚠ Campo: pretensao_salarial → pendente</text><text x="20" y="134" font-family="monospace" font-size="6" fill="#3fb950">✅ Campo: linkedin_url → mapeado</text><text x="20" y="146" font-family="monospace" font-size="6" fill="#3fb950">✅ 5 / 6 campos mapeados automaticamente</text><rect x="12" y="162" width="140" height="26" rx="6" fill="rgba(63,185,80,.2)" stroke="rgba(63,185,80,.4)" stroke-width="1"/><text x="82" y="178" font-family="monospace" font-size="7" fill="#3fb950" text-anchor="middle">▶️ Preencher</text><rect x="164" y="162" width="144" height="26" rx="6" fill="rgba(88,166,255,.1)" stroke="rgba(88,166,255,.25)" stroke-width="1"/><text x="236" y="178" font-family="monospace" font-size="7" fill="#58a6ff" text-anchor="middle">🤖 Figurante sugerir</text></svg>`},
+        {cap:'Relatório de campos — 3 camadas de mapeamento', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#040d1a"/><text x="16" y="20" font-family="monospace" font-size="7" fill="#58a6ff">📊 Relatório · app.gupy.io</text><rect x="12" y="28" width="90" height="36" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="57" y="44" font-family="monospace" font-size="11" fill="#58a6ff" text-anchor="middle">6</text><text x="57" y="58" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">TOTAL</text><rect x="114" y="28" width="90" height="36" rx="6" fill="#0d1117" stroke="rgba(63,185,80,.3)" stroke-width="1"/><text x="159" y="44" font-family="monospace" font-size="11" fill="#3fb950" text-anchor="middle">5</text><text x="159" y="58" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">MAPEADOS</text><rect x="216" y="28" width="92" height="36" rx="6" fill="#0d1117" stroke="rgba(210,153,34,.3)" stroke-width="1"/><text x="262" y="44" font-family="monospace" font-size="11" fill="#d29922" text-anchor="middle">1</text><text x="262" y="58" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">PENDENTE</text><rect x="12" y="76" width="296" height="16" rx="4" fill="#0d1117" stroke="rgba(63,185,80,.2)" stroke-width="1"/><rect x="12" y="76" width="246" height="16" rx="4" fill="rgba(63,185,80,.15)"/><text x="20" y="88" font-family="monospace" font-size="6" fill="#3fb950">83% automático</text><rect x="12" y="100" width="296" height="14" rx="4" fill="#161b22"/><text x="20" y="111" font-family="monospace" font-size="6" fill="#3fb950">✓ nome_completo</text><text x="200" y="111" font-family="monospace" font-size="6" fill="#58a6ff">mapa direto</text><rect x="12" y="118" width="296" height="14" rx="4" fill="#0d1117"/><text x="20" y="129" font-family="monospace" font-size="6" fill="#3fb950">✓ email</text><text x="200" y="129" font-family="monospace" font-size="6" fill="#58a6ff">mapa direto</text><rect x="12" y="136" width="296" height="14" rx="4" fill="#161b22"/><text x="20" y="147" font-family="monospace" font-size="6" fill="#3fb950">✓ linkedin_url</text><text x="200" y="147" font-family="monospace" font-size="6" fill="#bc8cff">RAG vetorial</text><rect x="12" y="154" width="296" height="14" rx="4" fill="#0d1117" stroke="rgba(210,153,34,.2)" stroke-width="1"/><text x="20" y="165" font-family="monospace" font-size="6" fill="#d29922">⚠ pretensao_salarial</text><text x="200" y="165" font-family="monospace" font-size="6" fill="#d29922">pendente</text><rect x="12" y="176" width="296" height="18" rx="5" fill="rgba(248,81,73,.15)" stroke="rgba(248,81,73,.3)" stroke-width="1"/><text x="160" y="188" font-family="monospace" font-size="7" fill="#f85149" text-anchor="middle">📤 Confirmar Envio</text></svg>`},
+        {cap:'Sugestões do Figurante — aprovação manual', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#040d1a"/><text x="16" y="18" font-family="monospace" font-size="7" fill="#bc8cff">🤖 Figurante — Sugestões geradas</text><rect x="12" y="26" width="296" height="52" rx="7" fill="#0d1117" stroke="rgba(224,123,48,.4)" stroke-width="1"/><text x="20" y="40" font-family="monospace" font-size="6" fill="#e07b30">📝 Pretensão salarial</text><rect x="220" y="30" width="80" height="12" rx="6" fill="rgba(224,123,48,.15)"/><text x="260" y="39" font-family="monospace" font-size="5.5" fill="#e07b30" text-anchor="middle">🤖 Figurante</text><rect x="20" y="48" width="280" height="16" rx="4" fill="#161b22"/><text x="28" y="59" font-family="monospace" font-size="6" fill="#8b949e">R$ 4.500 – R$ 5.500 (negociável)</text><rect x="20" y="68" width="134" height="14" rx="4" fill="rgba(63,185,80,.2)" stroke="rgba(63,185,80,.35)" stroke-width="1"/><text x="87" y="78" font-family="monospace" font-size="6" fill="#3fb950" text-anchor="middle">✓ Aprovar</text><rect x="162" y="68" width="138" height="14" rx="4" fill="rgba(248,81,73,.1)" stroke="rgba(248,81,73,.25)" stroke-width="1"/><text x="231" y="78" font-family="monospace" font-size="6" fill="#f85149" text-anchor="middle">✕ Rejeitar</text><rect x="12" y="90" width="296" height="52" rx="7" fill="#0d1117" stroke="rgba(63,185,80,.4)" stroke-width="1"/><text x="20" y="104" font-family="monospace" font-size="6" fill="#e07b30">📝 Disponibilidade</text><rect x="220" y="94" width="80" height="12" rx="6" fill="rgba(63,185,80,.15)"/><text x="260" y="103" font-family="monospace" font-size="5.5" fill="#3fb950" text-anchor="middle">✓ Aprovado</text><rect x="20" y="112" width="280" height="16" rx="4" fill="rgba(63,185,80,.06)"/><text x="28" y="123" font-family="monospace" font-size="6" fill="#8b949e">Imediata</text><rect x="12" y="154" width="296" height="38" rx="7" fill="rgba(248,81,73,.08)" stroke="rgba(248,81,73,.2)" stroke-width="1"/><text x="160" y="170" font-family="monospace" font-size="7" fill="#f85149" text-anchor="middle">📤 Confirmar Envio da Candidatura</text><text x="160" y="184" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">Revise tudo antes de enviar</text></svg>`},
+    ],
+    nexus:[
+        {cap:'Dashboard Streamlit — busca em 20 países', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0d1f0d"/><rect x="0" y="0" width="320" height="28" fill="#132613"/><text x="16" y="18" font-family="monospace" font-size="8" fill="#3fb950">🤖 Nexus AI — Job Finder</text><text x="240" y="18" font-family="monospace" font-size="6" fill="#8b949e">234 vagas · 18 países</text><rect x="12" y="36" width="200" height="16" rx="4" fill="#0d1117"/><text x="20" y="47" font-family="monospace" font-size="6" fill="#8b949e">Cargo: Analista de Dados</text><rect x="220" y="36" width="88" height="16" rx="4" fill="rgba(63,185,80,.25)" stroke="rgba(63,185,80,.4)" stroke-width="1"/><text x="264" y="47" font-family="monospace" font-size="6.5" fill="#3fb950" text-anchor="middle">🔍 Buscar</text><rect x="12" y="60" width="296" height="26" rx="5" fill="#132613" stroke="rgba(63,185,80,.3)" stroke-width="1"/><text x="20" y="72" font-family="monospace" font-size="6" fill="#3fb950">⭐ 94%</text><text x="52" y="72" font-family="monospace" font-size="6.5" fill="#e6edf3">Analista de Dados Sênior · Itaú</text><text x="240" y="72" font-family="monospace" font-size="5.5" fill="#8b949e">BR · R$9k</text><text x="20" y="82" font-family="monospace" font-size="5.5" fill="#8b949e">Python · SQL · Power BI · Azure</text><rect x="12" y="90" width="296" height="22" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="20" y="101" font-family="monospace" font-size="6" fill="#58a6ff">⭐ 89%</text><text x="52" y="101" font-family="monospace" font-size="6.5" fill="#e6edf3">Data Analyst · Nubank</text><text x="240" y="101" font-family="monospace" font-size="5.5" fill="#8b949e">BR · R$7k</text><text x="20" y="111" font-family="monospace" font-size="5.5" fill="#8b949e">Python · dbt · Spark · Airflow</text><rect x="12" y="116" width="296" height="22" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="20" y="127" font-family="monospace" font-size="6" fill="#58a6ff">⭐ 82%</text><text x="52" y="127" font-family="monospace" font-size="6.5" fill="#e6edf3">Junior Data Analyst · Stone</text><text x="240" y="127" font-family="monospace" font-size="5.5" fill="#8b949e">BR · R$5k</text><text x="20" y="137" font-family="monospace" font-size="5.5" fill="#8b949e">Excel · SQL · Tableau</text><rect x="12" y="150" width="140" height="36" rx="6" fill="#132613" stroke="rgba(63,185,80,.2)" stroke-width="1"/><text x="82" y="163" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">Match Perfil</text><rect x="20" y="168" width="100" height="6" rx="3" fill="#0d1117"/><rect x="20" y="168" width="84" height="6" rx="3" fill="#3fb950" opacity=".7"/><rect x="168" y="150" width="140" height="36" rx="6" fill="#132613" stroke="rgba(63,185,80,.2)" stroke-width="1"/><text x="238" y="163" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">Match Pesquisa</text><rect x="176" y="168" width="100" height="6" rx="3" fill="#0d1117"/><rect x="176" y="168" width="72" height="6" rx="3" fill="#58a6ff" opacity=".7"/></svg>`},
+        {cap:'Expansão semântica — Gemini gera 15 variações', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0d1f0d"/><text x="160" y="20" font-family="monospace" font-size="7" fill="#3fb950" text-anchor="middle">expandir_gemini("Analista de Dados")</text><rect x="100" y="28" width="120" height="18" rx="9" fill="#132613" stroke="rgba(63,185,80,.4)" stroke-width="1"/><text x="160" y="40" font-family="monospace" font-size="7" fill="#3fb950" text-anchor="middle">Analista de Dados</text><line x1="80" y1="46" x2="40" y2="60" stroke="rgba(63,185,80,.3)" stroke-width="1"/><line x1="120" y1="46" x2="90" y2="60" stroke="rgba(63,185,80,.3)" stroke-width="1"/><line x1="160" y1="46" x2="160" y2="60" stroke="rgba(63,185,80,.3)" stroke-width="1"/><line x1="200" y1="46" x2="230" y2="60" stroke="rgba(63,185,80,.3)" stroke-width="1"/><line x1="240" y1="46" x2="280" y2="60" stroke="rgba(63,185,80,.3)" stroke-width="1"/><rect x="10" y="60" width="60" height="14" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="40" y="70" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">Data Analyst</text><rect x="76" y="60" width="60" height="14" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="106" y="70" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">Data Scientist</text><rect x="130" y="60" width="60" height="14" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="160" y="70" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">BI Analyst</text><rect x="196" y="60" width="60" height="14" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="226" y="70" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">Analytics Eng</text><rect x="258" y="60" width="52" height="14" rx="4" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="284" y="70" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">+10 mais</text><rect x="12" y="92" width="296" height="70" rx="7" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="20" y="108" font-family="monospace" font-size="6" fill="#58a6ff">30 skills identificadas:</text><text x="20" y="122" font-family="monospace" font-size="5.5" fill="#8b949e">Python · SQL · Power BI · Tableau · dbt · Spark</text><text x="20" y="134" font-family="monospace" font-size="5.5" fill="#8b949e">Airflow · BigQuery · Pandas · Scikit-learn</text><text x="20" y="146" font-family="monospace" font-size="5.5" fill="#8b949e">Azure · AWS · Git · Looker · Metabase · +14</text><text x="20" y="158" font-family="monospace" font-size="5.5" fill="#3fb950">Idiomas detectados: pt · en · es</text><rect x="12" y="174" width="296" height="18" rx="5" fill="rgba(63,185,80,.12)" stroke="rgba(63,185,80,.25)" stroke-width="1"/><text x="160" y="186" font-family="monospace" font-size="6" fill="#3fb950" text-anchor="middle">→ Buscando em Adzuna · 20 países · 2 páginas × 50 vagas</text></svg>`},
+    ],
+    aprovamais:[
+        {cap:'Pipeline ML — 6 etapas, 200k registros', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#1a0a04"/><text x="16" y="18" font-family="monospace" font-size="7" fill="#f0883e">📊 AprovaMais · Pipeline ML</text><rect x="12" y="28" width="44" height="130" rx="6" fill="#261808" stroke="rgba(240,136,62,.3)" stroke-width="1"/><text x="34" y="50" font-family="monospace" font-size="5" fill="#f0883e" text-anchor="middle">ETL 1</text><text x="34" y="62" font-family="monospace" font-size="4.5" fill="#8b949e" text-anchor="middle">Setup</text><rect x="34" y="72" width="12" height="12" rx="3" fill="rgba(63,185,80,.3)"/><text x="40" y="82" font-family="monospace" font-size="5" fill="#3fb950" text-anchor="middle">✓</text><text x="34" y="98" font-family="monospace" font-size="5" fill="#f0883e" text-anchor="middle">ETL 2</text><text x="34" y="110" font-family="monospace" font-size="4.5" fill="#8b949e" text-anchor="middle">Limpeza</text><rect x="34" y="118" width="12" height="12" rx="3" fill="rgba(63,185,80,.3)"/><text x="40" y="128" font-family="monospace" font-size="5" fill="#3fb950" text-anchor="middle">✓</text><rect x="64" y="28" width="44" height="130" rx="6" fill="#261808" stroke="rgba(240,136,62,.3)" stroke-width="1"/><text x="86" y="50" font-family="monospace" font-size="5" fill="#f0883e" text-anchor="middle">ETL 3</text><text x="86" y="62" font-family="monospace" font-size="4.5" fill="#8b949e" text-anchor="middle">EDA</text><rect x="80" y="72" width="12" height="12" rx="3" fill="rgba(63,185,80,.3)"/><text x="86" y="82" font-family="monospace" font-size="5" fill="#3fb950" text-anchor="middle">✓</text><text x="86" y="98" font-family="monospace" font-size="5" fill="#f0883e" text-anchor="middle">ETL 4</text><text x="86" y="110" font-family="monospace" font-size="4.5" fill="#8b949e" text-anchor="middle">Encode</text><rect x="80" y="118" width="12" height="12" rx="3" fill="rgba(63,185,80,.3)"/><text x="86" y="128" font-family="monospace" font-size="5" fill="#3fb950" text-anchor="middle">✓</text><rect x="116" y="28" width="44" height="130" rx="6" fill="#261808" stroke="rgba(240,136,62,.3)" stroke-width="1"/><text x="138" y="50" font-family="monospace" font-size="5" fill="#f0883e" text-anchor="middle">ETL 5</text><text x="138" y="62" font-family="monospace" font-size="4.5" fill="#8b949e" text-anchor="middle">Modelos</text><rect x="130" y="72" width="12" height="12" rx="3" fill="rgba(63,185,80,.3)"/><text x="136" y="82" font-family="monospace" font-size="5" fill="#3fb950" text-anchor="middle">✓</text><text x="138" y="98" font-family="monospace" font-size="5" fill="#f0883e" text-anchor="middle">ETL 6</text><text x="138" y="110" font-family="monospace" font-size="4.5" fill="#8b949e" text-anchor="middle">SMOTE</text><rect x="130" y="118" width="12" height="12" rx="3" fill="rgba(63,185,80,.3)"/><text x="136" y="128" font-family="monospace" font-size="5" fill="#3fb950" text-anchor="middle">✓</text><rect x="172" y="28" width="144" height="130" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="244" y="44" font-family="monospace" font-size="6" fill="#f0883e" text-anchor="middle">Comparação F1-Score</text><rect x="182" y="52" width="80" height="8" rx="3" fill="rgba(88,166,255,.7)"/><text x="268" y="59" font-family="monospace" font-size="5.5" fill="#8b949e">XGBoost 0.87</text><rect x="182" y="64" width="72" height="8" rx="3" fill="rgba(63,185,80,.7)"/><text x="268" y="71" font-family="monospace" font-size="5.5" fill="#8b949e">RF 0.84</text><rect x="182" y="76" width="58" height="8" rx="3" fill="rgba(188,140,255,.7)"/><text x="268" y="83" font-family="monospace" font-size="5.5" fill="#8b949e">LR 0.79</text><rect x="182" y="88" width="44" height="8" rx="3" fill="rgba(240,136,62,.7)"/><text x="268" y="95" font-family="monospace" font-size="5.5" fill="#8b949e">KNN 0.71</text><text x="244" y="116" font-family="monospace" font-size="5.5" fill="#58a6ff" text-anchor="middle">200.000 registros</text><text x="244" y="128" font-family="monospace" font-size="5.5" fill="#3fb950" text-anchor="middle">✓ genero removido</text><text x="244" y="140" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">decisão ética</text><rect x="12" y="168" width="296" height="22" rx="5" fill="#261808" stroke="rgba(240,136,62,.2)" stroke-width="1"/><text x="160" y="182" font-family="monospace" font-size="6" fill="#f0883e" text-anchor="middle">SMOTE aplicado só no treino · GridSearchCV cv=3</text></svg>`},
+        {cap:'Decisão ética — remoção da coluna gênero', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#1a0a04"/><rect x="12" y="12" width="296" height="60" rx="8" fill="#0d1117" stroke="rgba(248,81,73,.25)" stroke-width="1"/><text x="24" y="28" font-family="monospace" font-size="7" fill="#f85149">⚖️ Decisão Ética Documentada</text><text x="24" y="44" font-family="monospace" font-size="6" fill="#8b949e">A coluna genero foi removida do modelo.</text><text x="24" y="58" font-family="monospace" font-size="6" fill="#8b949e">Correlação histórica ≠ risco real · discriminação sistêmica.</text><rect x="12" y="82" width="142" height="80" rx="7" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="83" y="98" font-family="monospace" font-size="6" fill="#f85149" text-anchor="middle">Com gênero</text><rect x="24" y="104" width="118" height="8" rx="3" fill="rgba(248,81,73,.15)"/><text x="83" y="112" font-family="monospace" font-size="5.5" fill="#f85149" text-anchor="middle">F1: 0.88 · viés: ALTO</text><rect x="24" y="118" width="118" height="8" rx="3" fill="rgba(248,81,73,.1)"/><text x="83" y="143" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">homens aprovados</text><text x="83" y="153" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">2.3× mais que mulheres</text><rect x="166" y="82" width="142" height="80" rx="7" fill="#0d1117" stroke="rgba(63,185,80,.25)" stroke-width="1"/><text x="237" y="98" font-family="monospace" font-size="6" fill="#3fb950" text-anchor="middle">Sem gênero ✓</text><rect x="178" y="104" width="118" height="8" rx="3" fill="rgba(63,185,80,.2)"/><text x="237" y="112" font-family="monospace" font-size="5.5" fill="#3fb950" text-anchor="middle">F1: 0.87 · viés: BAIXO</text><rect x="178" y="118" width="118" height="8" rx="3" fill="rgba(63,185,80,.1)"/><text x="237" y="143" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">aprovação por risco</text><text x="237" y="153" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">real de crédito</text><rect x="12" y="170" width="296" height="22" rx="5" fill="rgba(63,185,80,.08)" stroke="rgba(63,185,80,.2)" stroke-width="1"/><text x="160" y="184" font-family="monospace" font-size="6" fill="#3fb950" text-anchor="middle">-0.01 F1 · ganho ético imenso · escolha correta</text></svg>`},
+    ],
+    'figurante-code':[
+        {cap:'Roteamento inteligente — 3 camadas de fallback', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#001826"/><text x="160" y="18" font-family="monospace" font-size="7" fill="#1f9cf0" text-anchor="middle">💻 Figurante Code · Roteamento</text><rect x="120" y="26" width="80" height="20" rx="5" fill="#002035" stroke="rgba(31,156,240,.4)" stroke-width="1"/><text x="160" y="39" font-family="monospace" font-size="6" fill="#1f9cf0" text-anchor="middle">Pergunta do usuário</text><line x1="160" y1="46" x2="160" y2="56" stroke="rgba(31,156,240,.5)" stroke-width="1" stroke-dasharray="3,2"/><rect x="100" y="56" width="120" height="18" rx="4" fill="#001520" stroke="#30363d" stroke-width="1"/><text x="160" y="68" font-family="monospace" font-size="6" fill="#bc8cff" text-anchor="middle">ChromaDB RAG · threshold 0.35</text><line x1="110" y1="74" x2="60" y2="88" stroke="#3fb950" stroke-width="1"/><line x1="210" y1="74" x2="260" y2="88" stroke="#f0883e" stroke-width="1"/><rect x="12" y="88" width="96" height="38" rx="6" fill="#001520" stroke="rgba(63,185,80,.35)" stroke-width="1"/><text x="60" y="103" font-family="monospace" font-size="6" fill="#3fb950" text-anchor="middle">✓ Cache hit</text><text x="60" y="115" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">Ollama local</text><text x="60" y="124" font-family="monospace" font-size="5" fill="#3fb950" text-anchor="middle">0 chamadas API</text><rect x="212" y="88" width="96" height="38" rx="6" fill="#001520" stroke="rgba(240,136,62,.35)" stroke-width="1"/><text x="260" y="100" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">Cache miss</text><text x="260" y="112" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">Complexidade?</text><line x1="224" y1="126" x2="190" y2="140" stroke="#58a6ff" stroke-width="1"/><line x1="296" y1="126" x2="296" y2="140" stroke="#f0883e" stroke-width="1"/><rect x="152" y="140" width="76" height="28" rx="5" fill="#001520" stroke="rgba(88,166,255,.3)" stroke-width="1"/><text x="190" y="153" font-family="monospace" font-size="5.5" fill="#1f9cf0" text-anchor="middle">LOW</text><text x="190" y="163" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">Ollama 3B</text><rect x="248" y="140" width="60" height="28" rx="5" fill="#001520" stroke="rgba(240,136,62,.3)" stroke-width="1"/><text x="278" y="153" font-family="monospace" font-size="5.5" fill="#f0883e" text-anchor="middle">HIGH</text><text x="278" y="163" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">480B MoE</text><rect x="12" y="168" width="296" height="22" rx="5" fill="rgba(31,156,240,.07)" stroke="rgba(31,156,240,.2)" stroke-width="1"/><text x="160" y="182" font-family="monospace" font-size="5.5" fill="#1f9cf0" text-anchor="middle">Toda resposta destilada no ChromaDB · modelo local fica mais inteligente</text></svg>`},
+        {cap:'Destilação de conhecimento — ChromaDB cross-feed', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#001826"/><text x="160" y="16" font-family="monospace" font-size="6.5" fill="#1f9cf0" text-anchor="middle">Destilação Progressiva de Conhecimento</text><rect x="30" y="28" width="80" height="30" rx="7" fill="#002035" stroke="rgba(31,156,240,.4)" stroke-width="1"/><text x="70" y="44" font-family="monospace" font-size="6" fill="#1f9cf0" text-anchor="middle">Sessão 1</text><text x="70" y="54" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">pergunta difícil</text><line x1="110" y1="43" x2="140" y2="43" stroke="rgba(31,156,240,.5)" stroke-width="1" stroke-dasharray="3,2"/><rect x="140" y="28" width="80" height="30" rx="7" fill="#001520" stroke="rgba(240,136,62,.4)" stroke-width="1"/><text x="180" y="44" font-family="monospace" font-size="6" fill="#f0883e" text-anchor="middle">Alibaba 480B</text><text x="180" y="54" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">resposta ótima</text><line x1="180" y1="58" x2="180" y2="80" stroke="rgba(188,140,255,.5)" stroke-width="1"/><rect x="120" y="80" width="120" height="24" rx="5" fill="#001520" stroke="rgba(188,140,255,.3)" stroke-width="1"/><text x="180" y="95" font-family="monospace" font-size="6" fill="#bc8cff" text-anchor="middle">💾 ChromaDB · salvo</text><line x1="180" y1="104" x2="180" y2="118" stroke="rgba(188,140,255,.5)" stroke-width="1"/><rect x="30" y="118" width="80" height="30" rx="7" fill="#002035" stroke="rgba(63,185,80,.4)" stroke-width="1"/><text x="70" y="134" font-family="monospace" font-size="6" fill="#3fb950" text-anchor="middle">Sessão 2</text><text x="70" y="144" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">mesma pergunta</text><line x1="110" y1="133" x2="120" y2="133" stroke="rgba(63,185,80,.5)" stroke-width="1" stroke-dasharray="3,2"/><rect x="120" y="118" width="120" height="30" rx="7" fill="#001520" stroke="rgba(63,185,80,.3)" stroke-width="1"/><text x="180" y="131" font-family="monospace" font-size="5.5" fill="#3fb950" text-anchor="middle">RAG recupera · Ollama 3B</text><text x="180" y="142" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">responde com conhecimento 480B</text><rect x="250" y="118" width="58" height="30" rx="6" fill="rgba(63,185,80,.12)" stroke="rgba(63,185,80,.3)" stroke-width="1"/><text x="279" y="130" font-family="monospace" font-size="5.5" fill="#3fb950" text-anchor="middle">Zero API</text><text x="279" y="141" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">calls</text><rect x="12" y="162" width="296" height="28" rx="6" fill="#002035" stroke="rgba(31,156,240,.2)" stroke-width="1"/><text x="160" y="174" font-family="monospace" font-size="6" fill="#1f9cf0" text-anchor="middle">figurante_codigo + figurante_memoria</text><text x="160" y="186" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">cross-feed bidirecional · ecossistema aprende junto</text></svg>`},
+    ],
+    prf:[
+        {cap:'Dashboard Power BI — hotspots BR-116 e BR-101', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0a0d14"/><rect x="0" y="0" width="320" height="26" fill="#0e1a2e"/><text x="16" y="17" font-family="monospace" font-size="7" fill="#58a6ff">🚛 PRF Risk Intel · Dashboard 2023–2025</text><rect x="12" y="34" width="62" height="44" rx="6" fill="#0e1a2e" stroke="rgba(88,166,255,.25)" stroke-width="1"/><text x="43" y="54" font-family="monospace" font-size="12" fill="#58a6ff" text-anchor="middle">1.4M</text><text x="43" y="68" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">registros</text><rect x="82" y="34" width="62" height="44" rx="6" fill="#0e1a2e" stroke="rgba(248,81,73,.25)" stroke-width="1"/><text x="113" y="54" font-family="monospace" font-size="12" fill="#f85149" text-anchor="middle">38%</text><text x="113" y="68" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">veíc. pesados</text><rect x="152" y="34" width="62" height="44" rx="6" fill="#0e1a2e" stroke="rgba(210,153,34,.25)" stroke-width="1"/><text x="183" y="54" font-family="monospace" font-size="12" fill="#d29922" text-anchor="middle">2.4×</text><text x="183" y="68" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">risco na chuva</text><rect x="222" y="34" width="86" height="44" rx="6" fill="#0e1a2e" stroke="rgba(63,185,80,.25)" stroke-width="1"/><text x="265" y="54" font-family="monospace" font-size="12" fill="#3fb950" text-anchor="middle">83%</text><text x="265" y="68" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">previsibilidade</text><rect x="12" y="86" width="185" height="100" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="104" y="100" font-family="monospace" font-size="6" fill="#8b949e" text-anchor="middle">Rodovia · Risco acumulado</text><rect x="20" y="106" width="100" height="8" rx="3" fill="rgba(248,81,73,.8)"/><text x="124" y="113" font-family="monospace" font-size="5.5" fill="#f85149">BR-116</text><rect x="20" y="118" width="88" height="8" rx="3" fill="rgba(248,81,73,.6)"/><text x="124" y="125" font-family="monospace" font-size="5.5" fill="#f85149">BR-101</text><rect x="20" y="130" width="72" height="8" rx="3" fill="rgba(210,153,34,.6)"/><text x="124" y="137" font-family="monospace" font-size="5.5" fill="#d29922">BR-381</text><rect x="20" y="142" width="60" height="8" rx="3" fill="rgba(210,153,34,.4)"/><text x="124" y="149" font-family="monospace" font-size="5.5" fill="#d29922">BR-040</text><rect x="20" y="154" width="46" height="8" rx="3" fill="rgba(88,166,255,.4)"/><text x="124" y="161" font-family="monospace" font-size="5.5" fill="#8b949e">BR-050</text><rect x="205" y="86" width="103" height="100" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="256" y="100" font-family="monospace" font-size="6" fill="#8b949e" text-anchor="middle">Risco por hora</text><rect x="213" y="108" width="8" height="50" rx="2" fill="rgba(88,166,255,.3)"/><rect x="225" y="90" width="8" height="68" rx="2" fill="rgba(248,81,73,.7)"/><rect x="237" y="102" width="8" height="56" rx="2" fill="rgba(248,81,73,.5)"/><rect x="249" y="110" width="8" height="48" rx="2" fill="rgba(210,153,34,.4)"/><rect x="261" y="120" width="8" height="38" rx="2" fill="rgba(88,166,255,.3)"/><rect x="273" y="130" width="8" height="28" rx="2" fill="rgba(88,166,255,.2)"/><rect x="285" y="122" width="8" height="36" rx="2" fill="rgba(210,153,34,.3)"/><text x="217" y="168" font-family="monospace" font-size="4.5" fill="#484f58">6h 9h 12h 17h 19h 22h 0h</text></svg>`},
+        {cap:'ETL BigQuery — 3 anos unificados', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0a0d14"/><text x="160" y="18" font-family="monospace" font-size="7" fill="#58a6ff" text-anchor="middle">Pipeline ETL · Google BigQuery</text><rect x="12" y="28" width="60" height="28" rx="5" fill="#0e1a2e" stroke="rgba(88,166,255,.3)" stroke-width="1"/><text x="42" y="42" font-family="monospace" font-size="6" fill="#58a6ff" text-anchor="middle">PRF 2023</text><text x="42" y="52" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">483k rows</text><rect x="12" y="62" width="60" height="28" rx="5" fill="#0e1a2e" stroke="rgba(88,166,255,.3)" stroke-width="1"/><text x="42" y="76" font-family="monospace" font-size="6" fill="#58a6ff" text-anchor="middle">PRF 2024</text><text x="42" y="86" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">501k rows</text><rect x="12" y="96" width="60" height="28" rx="5" fill="#0e1a2e" stroke="rgba(88,166,255,.3)" stroke-width="1"/><text x="42" y="110" font-family="monospace" font-size="6" fill="#58a6ff" text-anchor="middle">PRF 2025</text><text x="42" y="120" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">416k rows</text><line x1="72" y1="42" x2="100" y2="75" stroke="rgba(88,166,255,.4)" stroke-width="1"/><line x1="72" y1="76" x2="100" y2="78" stroke="rgba(88,166,255,.4)" stroke-width="1"/><line x1="72" y1="110" x2="100" y2="82" stroke="rgba(88,166,255,.4)" stroke-width="1"/><rect x="100" y="58" width="80" height="44" rx="7" fill="#112240" stroke="rgba(88,166,255,.5)" stroke-width="1"/><text x="140" y="76" font-family="monospace" font-size="6" fill="#1f9cf0" text-anchor="middle">UNION ALL</text><text x="140" y="88" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">normalização</text><text x="140" y="97" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">1.4M registros</text><line x1="180" y1="80" x2="210" y2="80" stroke="rgba(88,166,255,.4)" stroke-width="1"/><rect x="210" y="58" width="98" height="44" rx="7" fill="#0e1a2e" stroke="rgba(63,185,80,.35)" stroke-width="1"/><text x="259" y="72" font-family="monospace" font-size="5.5" fill="#3fb950" text-anchor="middle">Filtro veíc. pesados</text><text x="259" y="83" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">caminhão · ônibus</text><text x="259" y="93" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">semirreboque · carreta</text><rect x="12" y="140" width="296" height="48" rx="7" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="20" y="155" font-family="monospace" font-size="6" fill="#8b949e">Métricas calculadas:</text><text x="20" y="168" font-family="monospace" font-size="5.5" fill="#1f9cf0">índice_gravidade · densidade_por_km · taxa_por_hora</text><text x="20" y="180" font-family="monospace" font-size="5.5" fill="#1f9cf0">sazonalidade · risco_climatico_ponderado</text></svg>`},
+        {cap:'Análise de sazonalidade — padrões por período', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0a0d14"/><text x="160" y="16" font-family="monospace" font-size="6.5" fill="#58a6ff" text-anchor="middle">Sazonalidade · Acidentes com Veículos Pesados</text><rect x="12" y="24" width="296" height="100" rx="6" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="20" y="38" font-family="monospace" font-size="5.5" fill="#484f58">Janeiro</text><rect x="60" y="30" width="14" height="55" rx="2" fill="rgba(88,166,255,.5)"/><text x="20" y="58" font-family="monospace" font-size="5.5" fill="#484f58">Fevereiro</text><rect x="60" y="40" width="14" height="45" rx="2" fill="rgba(88,166,255,.4)"/><text x="20" y="78" font-family="monospace" font-size="5.5" fill="#484f58">Junho</text><rect x="60" y="55" width="14" height="30" rx="2" fill="rgba(63,185,80,.5)"/><text x="20" y="98" font-family="monospace" font-size="5.5" fill="#484f58">Outubro</text><rect x="60" y="48" width="14" height="37" rx="2" fill="rgba(210,153,34,.5)"/><text x="20" y="118" font-family="monospace" font-size="5.5" fill="#484f58">Dezembro</text><rect x="60" y="24" width="14" height="66" rx="2" fill="rgba(248,81,73,.7)"/><line x1="80" y1="24" x2="280" y2="24" stroke="rgba(248,81,73,.2)" stroke-width="1" stroke-dasharray="4,3"/><text x="285" y="28" font-family="monospace" font-size="5" fill="#f85149">pico</text><rect x="100" y="28" width="188" height="92" rx="5" fill="rgba(13,17,23,.5)"/><text x="194" y="46" font-family="monospace" font-size="6" fill="#8b949e" text-anchor="middle">Sexta 17h–19h</text><rect x="108" y="50" width="172" height="10" rx="3" fill="rgba(248,81,73,.6)"/><text x="285" y="58" font-family="monospace" font-size="5" fill="#f85149">23%</text><text x="194" y="74" font-family="monospace" font-size="6" fill="#8b949e" text-anchor="middle">Dom. 22h–02h</text><rect x="108" y="78" width="140" height="10" rx="3" fill="rgba(210,153,34,.5)"/><text x="285" y="86" font-family="monospace" font-size="5" fill="#d29922">19%</text><text x="194" y="102" font-family="monospace" font-size="6" fill="#8b949e" text-anchor="middle">Seg. 06h–08h</text><rect x="108" y="106" width="108" height="10" rx="3" fill="rgba(88,166,255,.4)"/><text x="285" y="114" font-family="monospace" font-size="5" fill="#58a6ff">14%</text><rect x="12" y="134" width="296" height="56" rx="6" fill="#0e1a2e" stroke="rgba(63,185,80,.2)" stroke-width="1"/><text x="24" y="150" font-family="monospace" font-size="6" fill="#3fb950">💡 Recomendação de roteirização:</text><text x="24" y="163" font-family="monospace" font-size="5.5" fill="#8b949e">Evitar BR-116/BR-101 sextas 15h–20h em nov/dez</text><text x="24" y="175" font-family="monospace" font-size="5.5" fill="#8b949e">Alerta automático: chuva + rota de alto risco histórico</text><text x="24" y="187" font-family="monospace" font-size="5.5" fill="#58a6ff">Economia estimada: -R$2.400/mês por veículo em rotas alternativas</text></svg>`},
+    ],
+    nebula:[
+        {cap:'Canvas Fabric.js — edição em camadas', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0d0820"/><rect x="0" y="0" width="320" height="28" fill="#161b22"/><text x="16" y="18" font-family="monospace" font-size="7" fill="#bc8cff">🎨 Nebula Studio</text><rect x="220" y="6" width="40" height="16" rx="4" fill="rgba(63,185,80,.2)" stroke="rgba(63,185,80,.3)" stroke-width="1"/><text x="240" y="17" font-family="monospace" font-size="5.5" fill="#3fb950" text-anchor="middle">Online</text><rect x="266" y="6" width="46" height="16" rx="4" fill="#30363d"/><text x="289" y="17" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">CPU only</text><rect x="0" y="28" width="320" height="28" fill="#0d1117" stroke-b="#30363d"/><rect x="8" y="34" width="54" height="16" rx="3" fill="#1c2330" stroke="#30363d" stroke-width="1"/><text x="35" y="45" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">📁 Abrir</text><rect x="68" y="34" width="54" height="16" rx="3" fill="#1c2330" stroke="#30363d" stroke-width="1"/><text x="95" y="45" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">✂️ Laço</text><rect x="128" y="34" width="64" height="16" rx="3" fill="rgba(188,140,255,.15)" stroke="rgba(188,140,255,.3)" stroke-width="1"/><text x="160" y="45" font-family="monospace" font-size="5.5" fill="#bc8cff" text-anchor="middle">🪄 Rem. Fundo</text><rect x="198" y="34" width="50" height="16" rx="3" fill="#1c2330" stroke="#30363d" stroke-width="1"/><text x="223" y="45" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">↩️ Desfazer</text><rect x="254" y="34" width="58" height="16" rx="3" fill="#1c2330" stroke="#30363d" stroke-width="1"/><text x="283" y="45" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">💾 Exportar</text><rect x="40" y="66" width="180" height="100" rx="4" fill="#111" stroke="rgba(188,140,255,.3)" stroke-width="1" stroke-dasharray="4,3"/><rect x="60" y="76" width="140" height="80" rx="3" fill="#1a0d2e" opacity=".7"/><text x="130" y="122" font-family="monospace" font-size="7" fill="rgba(188,140,255,.4)" text-anchor="middle">imagem carregada</text><rect x="230" y="66" width="82" height="100" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="271" y="80" font-family="monospace" font-size="5.5" fill="#bc8cff" text-anchor="middle">Camadas</text><rect x="236" y="86" width="70" height="14" rx="3" fill="#1c2330" stroke="rgba(188,140,255,.25)" stroke-width="1"/><text x="271" y="96" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">🖼️ Imagem 0</text><rect x="236" y="104" width="70" height="14" rx="3" fill="#161b22" stroke="#30363d" stroke-width="1"/><text x="271" y="114" font-family="monospace" font-size="5" fill="#484f58" text-anchor="middle">🖌️ Máscara 1</text><rect x="8" y="170" width="304" height="24" rx="5" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="160" y="185" font-family="monospace" font-size="6" fill="rgba(88,166,255,.4)" text-anchor="middle">Digite um comando de edição... ou / para ações</text></svg>`},
+        {cap:'Pipeline rembg — remoção de fundo U²-Net', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0d0820"/><text x="160" y="16" font-family="monospace" font-size="6.5" fill="#bc8cff" text-anchor="middle">Pipeline: Remoção de Fundo · U²-Net / rembg</text><rect x="12" y="26" width="80" height="80" rx="6" fill="#1a0d2e" stroke="rgba(188,140,255,.3)" stroke-width="1"/><rect x="22" y="36" width="60" height="60" rx="3" fill="#261040"/><text x="52" y="70" font-family="monospace" font-size="6" fill="rgba(188,140,255,.5)" text-anchor="middle">Input</text><text x="52" y="82" font-family="monospace" font-size="5.5" fill="#484f58" text-anchor="middle">PNG/JPG</text><line x1="92" y1="66" x2="118" y2="66" stroke="rgba(188,140,255,.5)" stroke-width="1.5"/><text x="105" y="62" font-family="monospace" font-size="5" fill="#8b949e">base64</text><rect x="118" y="36" width="84" height="60" rx="6" fill="#120a2e" stroke="rgba(188,140,255,.5)" stroke-width="1"/><text x="160" y="60" font-family="monospace" font-size="6" fill="#bc8cff" text-anchor="middle">U²-Net</text><text x="160" y="72" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">onnxruntime</text><text x="160" y="82" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">~176 MB</text><text x="160" y="92" font-family="monospace" font-size="5" fill="#484f58" text-anchor="middle">3–8s CPU</text><line x1="202" y1="66" x2="228" y2="66" stroke="rgba(63,185,80,.5)" stroke-width="1.5"/><text x="215" y="62" font-family="monospace" font-size="5" fill="#8b949e">RGBA</text><rect x="228" y="36" width="80" height="60" rx="6" fill="#0a1a0a" stroke="rgba(63,185,80,.4)" stroke-width="1"/><rect x="240" y="46" width="56" height="40" rx="3" fill="rgba(63,185,80,.06)"/><text x="268" y="68" font-family="monospace" font-size="6" fill="#3fb950" text-anchor="middle">Output</text><text x="268" y="80" font-family="monospace" font-size="5.5" fill="#8b949e" text-anchor="middle">fundo: α=0</text><rect x="12" y="120" width="296" height="68" rx="7" fill="#0d1117" stroke="#30363d" stroke-width="1"/><text x="20" y="136" font-family="monospace" font-size="6" fill="#1f9cf0">POST /nebula/remove_bg</text><text x="20" y="150" font-family="monospace" font-size="5.5" fill="#8b949e">{"image": "data:image/png;base64,..."}</text><text x="20" y="164" font-family="monospace" font-size="5.5" fill="#3fb950">→ {"result": "data:image/png;base64,...", "ok": true}</text><text x="20" y="178" font-family="monospace" font-size="5.5" fill="#484f58">Canal alpha preservado · nova camada no canvas</text></svg>`},
+        {cap:'Orquestração por IA — Figurante controla o canvas', svg:`<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#0d0820"/><text x="160" y="16" font-family="monospace" font-size="6.5" fill="#bc8cff" text-anchor="middle">Orquestração via LLM · Tags XML Invisíveis</text><rect x="8" y="26" width="152" height="28" rx="6" fill="#1c2330" stroke="#30363d" stroke-width="1"/><text x="20" y="38" font-family="monospace" font-size="6" fill="#8b949e">Usuário:</text><text x="20" y="50" font-family="monospace" font-size="5.5" fill="#e6edf3">"remove o fundo da imagem"</text><line x1="84" y1="54" x2="84" y2="70" stroke="rgba(188,140,255,.4)" stroke-width="1"/><rect x="28" y="70" width="112" height="34" rx="6" fill="#120a2e" stroke="rgba(188,140,255,.4)" stroke-width="1"/><text x="84" y="84" font-family="monospace" font-size="5.5" fill="#bc8cff" text-anchor="middle">🎭 Figurante (Ollama)</text><text x="84" y="96" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">dolphin-qwen 1.5b local</text><line x1="84" y1="104" x2="84" y2="116" stroke="rgba(188,140,255,.4)" stroke-width="1"/><rect x="8" y="116" width="152" height="36" rx="6" fill="#1c2330" stroke="#30363d" stroke-width="1"/><text x="20" y="130" font-family="monospace" font-size="5.5" fill="#8b949e">Resposta visível ao usuário:</text><text x="20" y="142" font-family="monospace" font-size="5.5" fill="#e6edf3">"Removendo o fundo agora!"</text><text x="20" y="152" font-family="monospace" font-size="5" fill="rgba(188,140,255,.5)">&lt;nebula_action&gt;remove_bg&lt;/&gt;</text><line x1="160" y1="90" x2="190" y2="90" stroke="rgba(31,156,240,.4)" stroke-width="1" stroke-dasharray="3,2"/><rect x="190" y="70" width="122" height="40" rx="6" fill="#0d1117" stroke="rgba(31,156,240,.3)" stroke-width="1"/><text x="251" y="84" font-family="monospace" font-size="5.5" fill="#1f9cf0" text-anchor="middle">app.py extrai tag</text><text x="251" y="96" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">acao_nebula_cmd: "remove_bg"</text><text x="251" y="106" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">retorna no JSON</text><line x1="251" y1="110" x2="251" y2="124" stroke="rgba(31,156,240,.4)" stroke-width="1"/><rect x="190" y="124" width="122" height="34" rx="6" fill="#0a1a0a" stroke="rgba(63,185,80,.3)" stroke-width="1"/><text x="251" y="138" font-family="monospace" font-size="5.5" fill="#3fb950" text-anchor="middle">JS chama /nebula/remove_bg</text><text x="251" y="150" font-family="monospace" font-size="5" fill="#8b949e" text-anchor="middle">canvas atualizado automaticamente</text><rect x="8" y="166" width="304" height="26" rx="5" fill="rgba(188,140,255,.06)" stroke="rgba(188,140,255,.2)" stroke-width="1"/><text x="160" y="177" font-family="monospace" font-size="5.5" fill="#bc8cff" text-anchor="middle">100% offline · CPU i5 · sem GPU · sem nuvem</text><text x="160" y="188" font-family="monospace" font-size="5" fill="#484f58" text-anchor="middle">pywebview · app nativo no desktop</text></svg>`},
+    ],
+};
+
+function openGallery(proj){
+    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code',prf:'🚛 PRF Risk Intel',nebula:'🎨 Nebula Studio'};
+    document.getElementById('galTitle').textContent = (names[proj]||proj) + ' — Galeria';
+    const grid = document.getElementById('galGrid');
+    const items = GALLERY[proj]||[];
+    if(!items.length){
+        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem 1rem;color:var(--text-dim);font-family:\'JetBrains Mono\',monospace;font-size:.78rem;">Galeria em breve — imagens reais serão adicionadas.</div>';
+    } else {
+        grid.innerHTML = items.map(({cap,svg})=>
+            `<div class="gal-item">${svg}<div class="gal-cap">${cap}</div></div>`
+        ).join('');
+    }
+    document.getElementById('galModal').classList.add('open');
+    document.body.style.overflow='hidden';
+}
+function closeGallery(){
+    document.getElementById('galModal').classList.remove('open');
+    document.body.style.overflow='';
+}
+document.getElementById('galModal').addEventListener('click', e=>{
+    if(e.target===document.getElementById('galModal')) closeGallery();
+});
+document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeGallery(); closeDoc(); } });
 </script>
 </body>
 </html>
