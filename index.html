@@ -122,6 +122,8 @@
         .pbody p{font-size:.83rem;color:var(--text-muted);line-height:1.65;}
         .ppills{display:flex;flex-wrap:wrap;gap:.28rem;padding:.4rem 1.15rem .75rem;}
         .pill{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.17rem .44rem;border-radius:4px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);}
+        /* pill destacada — Power BI e Snowflake */
+        .pill.hi{background:var(--blue-dim);color:var(--blue);border-color:var(--blue-dark);font-weight:700;}
 
         /* 4 doc buttons */
         .pfoot{border-top:1px solid var(--border);padding:.75rem 1.15rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;}
@@ -151,7 +153,7 @@
         .gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem;}
         .gal-item{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);aspect-ratio:16/10;position:relative;transition:transform .25s,border-color .25s,box-shadow .25s;}
         .gal-item:hover{transform:translateY(-3px);border-color:var(--border-lit);box-shadow:0 8px 24px var(--blue-glow);}
-        .gal-item svg{width:100%;height:100%;display:block;}
+        .gal-item img{width:100%;height:100%;object-fit:cover;display:block;}
         .gal-cap{position:absolute;bottom:0;left:0;right:0;padding:.4rem .65rem;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.8);letter-spacing:.04em;opacity:0;transition:opacity .2s;}
         .gal-item:hover .gal-cap{opacity:1;}
         @media(max-width:480px){.pfoot{grid-template-columns:repeat(2,1fr);}.gal-grid{grid-template-columns:1fr 1fr;}}
@@ -288,7 +290,7 @@
                 <div class="hero-stats">
                     <div><div class="stat-n">200k+</div><div class="stat-l">Dados processados</div></div>
                     <div><div class="stat-n">70%</div><div class="stat-l">Ganho de eficiência</div></div>
-                    <div><div class="stat-n">7</div><div class="stat-l">Soluções em produção</div></div>
+                    <div><div class="stat-n">8</div><div class="stat-l">Soluções em produção</div></div>
                 </div>
                 <div class="hero-btns">
                     <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Entrar em contato</a>
@@ -316,8 +318,10 @@
         <div class="skills-grid reveal">
             <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-robot"></i></div><h3>Automação & RPA</h3></div><div class="stags"><span class="stag hi">Playwright</span><span class="stag hi">Selenium</span><span class="stag hi">n8n</span><span class="stag">BeautifulSoup</span><span class="stag">Python</span><span class="stag">Web Scraping</span></div></div>
             <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-brain"></i></div><h3>IA & ML</h3></div><div class="stags"><span class="stag hi">Ollama (LLMs local)</span><span class="stag hi">ChromaDB (RAG)</span><span class="stag">Scikit-learn</span><span class="stag">XGBoost</span><span class="stag">Embeddings</span><span class="stag">Gemini API</span></div></div>
-            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-database"></i></div><h3>Dados & Engenharia</h3></div><div class="stags"><span class="stag hi">Python (Pandas, Polars)</span><span class="stag hi">SQL (PostgreSQL, BigQuery)</span><span class="stag">ETL / ELT</span><span class="stag">Modelagem</span><span class="stag">DuckDB</span></div></div>
-            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-chart-bar"></i></div><h3>BI & Visualização</h3></div><div class="stags"><span class="stag hi">Power BI (DAX)</span><span class="stag">Streamlit</span><span class="stag">Tableau</span><span class="stag">Excel Avançado</span><span class="stag">Matplotlib</span></div></div>
+            <!-- ✦ Dados & Engenharia: Snowflake e GCP adicionados como hi -->
+            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-database"></i></div><h3>Dados & Engenharia</h3></div><div class="stags"><span class="stag hi">Python (Pandas, Polars)</span><span class="stag hi">SQL (PostgreSQL, BigQuery)</span><span class="stag hi">Snowflake</span><span class="stag hi">GCP</span><span class="stag">ETL / ELT</span><span class="stag">Modelagem</span><span class="stag">DuckDB</span></div></div>
+            <!-- ✦ BI & Visualização: Power BI em destaque .hi -->
+            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-chart-bar"></i></div><h3>BI & Visualização</h3></div><div class="stags"><span class="stag hi">Power BI (DAX)</span><span class="stag hi">Tableau</span><span class="stag">Streamlit</span><span class="stag">Excel Avançado</span><span class="stag">Matplotlib</span></div></div>
             <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-server"></i></div><h3>Infra & Dev</h3></div><div class="stags"><span class="stag hi">Git & GitHub</span><span class="stag">Flask</span><span class="stag">Oracle Cloud</span><span class="stag">AWS</span><span class="stag">Google Colab</span></div></div>
         </div>
     </div>
@@ -337,7 +341,8 @@
         </div>
         <div class="pgrid reveal">
 
-            <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-figurante.html'" style="cursor: pointer;">
+            <!-- Figurante -->
+            <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-figurante.html'" style="cursor:pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#1a0d2e,#2d1b4e,#1a0a3a);">
                     <picture><source srcset="img-figurante-ai.webp" type="image/webp"><img src="img-figurante-ai.png" alt="Figurante" loading="eager" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
@@ -345,15 +350,15 @@
                 <div class="pbody"><h3>Figurante</h3><p>Agente de IA local com memória vetorial persistente. 100% offline, sem nuvem. Memória semântica via ChromaDB, dois modos de operação, identidade configurável.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Ollama</span><span class="pill">ChromaDB</span><span class="pill">SSE</span></div>
                 <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('figurante','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('figurante','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('figurante','install')"><i class="fas fa-terminal"></i> Install</button>
-                
-                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('figurante')"><i class="fas fa-images"></i> Galeria</button>
+                    <button class="db db-r" onclick="event.stopPropagation();openDoc('figurante','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation();openDoc('figurante','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation();openDoc('figurante','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('figurante')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
-            <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-nightstar.html'" style="cursor: pointer;">
+            <!-- NightStar -->
+            <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-nightstar.html'" style="cursor:pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#040d1a,#071828,#0a1f35);">
                     <picture><source srcset="img-nightstar.webp" type="image/webp"><img src="img-nightstar.png" alt="NightStar" loading="lazy" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
@@ -361,15 +366,15 @@
                 <div class="pbody"><h3>NightStar</h3><p>Bot RPA de automação de candidaturas. Varre formulários, mapeia campos com RAG vetorial e preenche automaticamente via Playwright. Suporte a Gupy e LinkedIn.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Playwright</span><span class="pill">ChromaDB</span><span class="pill">RAG</span><span class="pill">BeautifulSoup</span></div>
                 <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('nightstar','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('nightstar','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('nightstar','install')"><i class="fas fa-terminal"></i> Install</button>
-                
-                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('nightstar')"><i class="fas fa-images"></i> Galeria</button>
+                    <button class="db db-r" onclick="event.stopPropagation();openDoc('nightstar','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation();openDoc('nightstar','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation();openDoc('nightstar','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('nightstar')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
-            <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-nexus.html'" style="cursor: pointer;">
+            <!-- Nexus AI -->
+            <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-nexus.html'" style="cursor:pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#0d1f0d,#132613,#0a1a0a);">
                     <picture><source srcset="img-nexus.webp" type="image/webp"><img src="img-nexus.png" alt="Nexus AI" loading="lazy" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
@@ -377,15 +382,15 @@
                 <div class="pbody"><h3>Nexus AI</h3><p>Agente de busca e ranqueamento de vagas. O Gemini expande cargos em 15 variações, busca em 20+ países via Adzuna e ranqueia por similaridade semântica com o CV.</p></div>
                 <div class="ppills"><span class="pill">Streamlit</span><span class="pill">Gemini API</span><span class="pill">Adzuna API</span><span class="pill">SentenceTransformers</span></div>
                 <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('nexus','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('nexus','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('nexus','install')"><i class="fas fa-terminal"></i> Install</button>
-                
-                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('nexus')"><i class="fas fa-images"></i> Galeria</button>
+                    <button class="db db-r" onclick="event.stopPropagation();openDoc('nexus','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation();openDoc('nexus','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation();openDoc('nexus','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('nexus')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
-            <div class="pcard" data-tags="ml dados" onclick="window.location.href='project-aprovamais.html'" style="cursor: pointer;">
+            <!-- AprovaMais -->
+            <div class="pcard" data-tags="ml dados" onclick="window.location.href='project-aprovamais.html'" style="cursor:pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#1f1004,#2a1a08,#1a0f04);">
                     <picture><source srcset="img-aprovamais.webp" type="image/webp"><img src="img-aprovamais.png" alt="AprovaMais" loading="lazy" decoding="async"></picture>
                     <span class="pbadge bs">◆ estudo</span>
@@ -393,15 +398,15 @@
                 <div class="pbody"><h3>Risco de Crédito — AprovaMais</h3><p>Pipeline completo de Data Science em 6 etapas sobre 200.000 registros. Comparação de 4 modelos, SMOTE e otimização via GridSearchCV.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Scikit-learn</span><span class="pill">XGBoost</span><span class="pill">SMOTE</span><span class="pill">Pandas</span></div>
                 <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('aprovamais','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('aprovamais','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('aprovamais','install')"><i class="fas fa-terminal"></i> Install</button>
-                
-                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('aprovamais')"><i class="fas fa-images"></i> Galeria</button>
+                    <button class="db db-r" onclick="event.stopPropagation();openDoc('aprovamais','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation();openDoc('aprovamais','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation();openDoc('aprovamais','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('aprovamais')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
-            <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-figurante-code.html'" style="cursor: pointer;">
+            <!-- Figurante Code -->
+            <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-figurante-code.html'" style="cursor:pointer;">
                 <div class="pimg" style="background:linear-gradient(135deg,#001826,#002035,#001520);">
                     <picture><source srcset="img-figurante.webp" type="image/webp"><img src="img-figurante.png" alt="Figurante Code" loading="lazy" decoding="async"></picture>
                     <span class="pbadge ba">● ativo</span>
@@ -409,11 +414,10 @@
                 <div class="pbody"><h3>Figurante Code</h3><p>Agente de programação com roteamento inteligente: Alibaba 480B → OpenRouter → Ollama local. Cada resposta destila conhecimento para o modelo local via ChromaDB.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Alibaba 480B</span><span class="pill">ChromaDB</span><span class="pill">Ollama</span></div>
                 <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('figurante-code','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('figurante-code','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('figurante-code','install')"><i class="fas fa-terminal"></i> Install</button>
-                
-                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('figurante-code')"><i class="fas fa-images"></i> Galeria</button>
+                    <button class="db db-r" onclick="event.stopPropagation();openDoc('figurante-code','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation();openDoc('figurante-code','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation();openDoc('figurante-code','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('figurante-code')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
@@ -426,17 +430,13 @@
                     </div>
                     <span class="pbadge ba">● ativo</span>
                 </div>
-                <div class="pbody">
-                    <h3>Inteligência de Risco PRF</h3>
-                    <p>Pipeline de dados com 3 anos de acidentes rodoviários federais. Filtro por veículos pesados, hotspots de risco e suporte à decisão de roteirização para frotas.</p>
-                </div>
-                <div class="ppills"><span class="pill">BigQuery</span><span class="pill">SQL</span><span class="pill">Power BI</span><span class="pill">ETL</span><span class="pill">Dados Abertos</span></div>
+                <div class="pbody"><h3>Inteligência de Risco PRF</h3><p>Pipeline de dados com 3 anos de acidentes rodoviários federais. Filtro por veículos pesados, hotspots de risco e suporte à decisão de roteirização para frotas.</p></div>
+                <div class="ppills"><span class="pill">BigQuery</span><span class="pill">SQL</span><span class="pill hi">Power BI</span><span class="pill">ETL</span><span class="pill">Dados Abertos</span></div>
                 <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('prf','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('prf','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('prf','install')"><i class="fas fa-chart-bar"></i> Insights</button>
-                
-                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('prf')"><i class="fas fa-images"></i> Galeria</button>
+                    <button class="db db-r" onclick="event.stopPropagation();openDoc('prf','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation();openDoc('prf','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation();openDoc('prf','install')"><i class="fas fa-chart-bar"></i> Insights</button>
+                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('prf')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
@@ -449,17 +449,39 @@
                     </div>
                     <span class="pbadge ba">● ativo</span>
                 </div>
-                <div class="pbody">
-                    <h3>Nebula Studio</h3>
-                    <p>Editor de imagens com IA embarcada, 100% offline. Remoção de fundo (U²-Net), segmentação semântica (CLIPseg), upscale 4× (ESRGAN) e inpainting via Stable Diffusion — tudo na CPU.</p>
-                </div>
+                <div class="pbody"><h3>Nebula Studio</h3><p>Editor de imagens com IA embarcada, 100% offline. Remoção de fundo (U²-Net), segmentação semântica (CLIPseg), upscale 4× (ESRGAN) e inpainting via Stable Diffusion — tudo na CPU.</p></div>
                 <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Fabric.js</span><span class="pill">rembg</span><span class="pill">CLIPseg</span><span class="pill">ESRGAN</span></div>
                 <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation(); openDoc('nebula','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation(); openDoc('nebula','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation(); openDoc('nebula','install')"><i class="fas fa-terminal"></i> Install</button>
-                
-                    <button class="db db-gal" onclick="event.stopPropagation(); openGallery('nebula')"><i class="fas fa-images"></i> Galeria</button>
+                    <button class="db db-r" onclick="event.stopPropagation();openDoc('nebula','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation();openDoc('nebula','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation();openDoc('nebula','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('nebula')"><i class="fas fa-images"></i> Galeria</button>
+                </div>
+            </div>
+
+            <!-- ✦ NOVO — Pipeline Financeiro Snowflake -->
+            <div class="pcard" data-tags="dados" style="cursor:pointer;">
+                <div class="pimg">
+                    <img src="img-snowflake-medallion.png" alt="Pipeline Financeiro Snowflake" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
+                    <span class="pbadge ba">● ativo</span>
+                </div>
+                <div class="pbody">
+                    <h3>Pipeline Financeiro — Snowflake Medallion</h3>
+                    <p>Pipeline de dados em tempo quase real com arquitetura Medallion (Bronze→Prata→Ouro) para detecção de fraude em transações bancárias. Streams CDC, Tasks em DAG, score de risco 0-100 e Dynamic Data Masking (LGPD).</p>
+                </div>
+                <div class="ppills">
+                    <span class="pill hi">Snowflake</span>
+                    <span class="pill hi">Power BI</span>
+                    <span class="pill">Python</span>
+                    <span class="pill">SQL</span>
+                    <span class="pill">Delta Lake</span>
+                    <span class="pill">ETL</span>
+                </div>
+                <div class="pfoot">
+                    <button class="db db-r" onclick="event.stopPropagation();openDoc('snowflake','readme')"><i class="fas fa-file-alt"></i> README</button>
+                    <button class="db db-a" onclick="event.stopPropagation();openDoc('snowflake','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
+                    <button class="db db-i" onclick="event.stopPropagation();openDoc('snowflake','install')"><i class="fas fa-terminal"></i> Install</button>
+                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('snowflake')"><i class="fas fa-images"></i> Galeria</button>
                 </div>
             </div>
 
@@ -493,7 +515,7 @@
         <div class="clayout reveal">
             <div class="clinks">
                 <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-whatsapp"></i></span><div><div class="ci-lbl">WhatsApp</div><div class="ci-val">+55 (27) 99618-5461</div></div></a>
-                <a href="/cdn-cgi/l/email-protection#2156444f454453524e4f5644534f44424a61464c40484d0f424e4c" class="citem"><span class="ci-ico"><i class="fas fa-envelope"></i></span><div><div class="ci-lbl">Email</div><div class="ci-val"><span class="__cf_email__" data-cfemail="265143484243545549485143544843454d66414b474f4a0845494b">[email&#160;protected]</span></div></div></a>
+                <a href="mailto:wenderson@email.com" class="citem"><span class="ci-ico"><i class="fas fa-envelope"></i></span><div><div class="ci-lbl">Email</div><div class="ci-val">wenderson@email.com</div></div></a>
                 <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-linkedin"></i></span><div><div class="ci-lbl">LinkedIn</div><div class="ci-val">in/wendersonwerneck</div></div></a>
                 <a href="https://github.com/wenderson-werneck" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-github"></i></span><div><div class="ci-lbl">GitHub</div><div class="ci-val">wenderson-werneck</div></div></a>
             </div>
@@ -520,12 +542,13 @@
             <div class="ft-links">
                 <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
                 <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="/cdn-cgi/l/email-protection#8cfbe9e2e8e9feffe3e2fbe9fee2e9efe7ccebe1ede5e0a2efe3e1"><i class="fas fa-envelope"></i></a>
+                <a href="mailto:wenderson@email.com"><i class="fas fa-envelope"></i></a>
             </div>
         </div>
     </div>
 </footer>
 
+<!-- GALLERY MODAL -->
 <div class="gal-ov" id="galModal">
     <div class="gal-box">
         <div class="gal-hd">
@@ -538,6 +561,7 @@
     </div>
 </div>
 
+<!-- DOC MODAL -->
 <div class="modal-ov" id="docModal">
     <div class="modal-box">
         <div class="modal-hd">
@@ -548,7 +572,7 @@
     </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
 (function(){ emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' }); })();
 
@@ -573,7 +597,7 @@ document.getElementById('hamburger').addEventListener('click', () => nav.classLi
 nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
 
 // ── TYPEWRITER ────────────────────────────────
-const roles = ['Analista de Dados','Desenvolvedor RPA','Engenheiro de IA Local','Data Scientist Jr.','Automação com Python'];
+const roles = ['Engenheiro de Dados','Analista de Dados','Desenvolvedor RPA','Engenheiro de IA Local','Data Scientist Jr.','Automação com Python'];
 let ri=0, ci=0, del=false;
 const tw = document.getElementById('tw');
 function type(){
@@ -598,12 +622,13 @@ const tLines = [
     {c:'tg',t:'  "💻 Figurante Code",     <span class="tc"># Dev IA</span>'},
     {c:'tg',t:'  "🚛 PRF Risk Intel",     <span class="tc"># BI logístico</span>'},
     {c:'tg',t:'  "🎨 Nebula Studio",      <span class="tc"># Editor IA offline</span>'},
+    {c:'tg',t:'  "❄️  Snowflake Medallion", <span class="tc"># Dados financeiros</span>'},
     {c:'',t:']'},
     {c:'',t:''},
     {c:'',t:'<span class="tb">stack</span> = {'},
     {c:'',t:'  <span class="tg">"ai"</span>:   <span class="to">["Ollama","ChromaDB","RAG"]</span>,'},
     {c:'',t:'  <span class="tg">"rpa"</span>:  <span class="to">["Playwright","n8n"]</span>,'},
-    {c:'',t:'  <span class="tg">"data"</span>: <span class="to">["Python","SQL","Power BI"]</span>,'},
+    {c:'',t:'  <span class="tg">"data"</span>: <span class="to">["Snowflake","BigQuery","Power BI"]</span>,'},
     {c:'',t:'}'},
     {c:'',t:''},
     {c:'tg',t:'✓ Todos os sistemas operacionais.'},
@@ -657,426 +682,134 @@ document.getElementById('contactForm').addEventListener('submit', async function
     } finally { btn.disabled=false; btn.innerHTML=orig; }
 });
 
-// ── DOC MODAL ─────────────────────────────────
+// ── DOCS ──────────────────────────────────────
 const DOCS = {
     figurante:{
-        readme:`<h1>🎭 Figurante — README</h1>
-<p>Agente de IA pessoal, offline e com memória semântica persistente. Roda 100% no seu hardware — sem assinatura, sem nuvem.</p>
-<h2>O que é</h2>
-<p>Construído sobre <strong>Ollama</strong> (LLMs locais) e <strong>ChromaDB</strong> (memória vetorial). Todo o tráfego é <code>localhost</code> — nenhum dado sai da máquina.</p>
-<h2>Funcionalidades</h2>
-<ul>
-<li>Memória semântica persistente entre sessões via ChromaDB</li>
-<li>Dois modos: <code>paz</code> (1.5B, rápido) e <code>ira</code> (3B, preciso) — trocáveis em runtime</li>
-<li>Upload de arquivos: PDF, TXT, CSV, código — injetados no contexto</li>
-<li>Streaming com cancelamento real via <code>threading.Event</code></li>
-<li>Sistema de regras (<code>regras_figurante.md</code>) editável pelo próprio chat</li>
-<li>Múltiplas sessões simultâneas com histórico isolado</li>
-<li>Integração direta com NightStar</li>
-</ul>
-<h2>Stack</h2>
-<ul>
-<li>Python 3.11 + Flask</li>
-<li>Ollama (<code>sam860/dolphin3-qwen2.5:1.5b</code> / <code>3b</code>)</li>
-<li>ChromaDB + SentenceTransformers (ONNX, offline)</li>
-<li>SSE (streaming)</li>
-</ul>`,
-        arch:`<h1>🎭 Figurante — Arquitetura</h1>
-<h2>Fluxo de dados</h2>
-<ul>
-<li>Browser → Flask <code>localhost:5000</code> via HTTP / SSE</li>
-<li>Flask consulta ChromaDB: recupera os 5 documentos mais similares (coseno &lt; 0.7)</li>
-<li>Contexto enriquecido com "MEMÓRIA RELEVANTE" → enviado ao Ollama</li>
-<li>Resposta retorna em streaming via SSE</li>
-<li>Par pergunta/resposta salvo no ChromaDB para uso futuro</li>
-</ul>
-<h2>Coleções ChromaDB</h2>
-<ul>
-<li><code>figurante_memoria</code> — memória geral de conversas</li>
-<li><code>figurante_codigo</code> — memória técnica (compartilhada com Figurante Code)</li>
-</ul>
-<h2>Embeddings</h2>
-<p>Modelo <code>all-MiniLM-L6-v2</code> via ONNX — 100% offline após o primeiro download. Queries com distância coseno, threshold 0.70.</p>
-<h2>Modelos Ollama</h2>
-<ul>
-<li>Modo paz: <code>sam860/dolphin3-qwen2.5:1.5b</code></li>
-<li>Modo ira: <code>sam860/dolphin3-qwen2.5:3b</code></li>
-</ul>`,
-        install:`<h1>🎭 Figurante — Instalação</h1>
-<h2>Opção 1: via Git</h2>
-<pre><code>git clone https://github.com/wenderson-werneck/figurante
-cd figurante
-pip install -r requirements.txt</code></pre>
-<h2>Opção 2: Download direto</h2>
-<p>Acesse a <a href="project-figurante.html">página do projeto</a>, navegue até a seção <strong>Código-Fonte / Estrutura de Arquivos</strong> e baixe os arquivos individualmente clicando neles, ou use o botão <strong>⬇ Baixar Projeto Completo</strong>.</p>
-<h2>Pós-instalação</h2>
-<pre><code>ollama pull sam860/dolphin3-qwen2.5:1.5b
-ollama pull sam860/dolphin3-qwen2.5:3b
-
-python app.py</code></pre>
-<p>Acesse <code>http://localhost:5000</code>.</p>
-<h2>Hardware</h2>
-<ul>
-<li>Modo paz: 8GB RAM (testado em Dell Latitude 5290, i5-8250U, sem GPU)</li>
-<li>Modo ira: 16GB RAM recomendado</li>
-</ul>`
+        readme:`<h1>🎭 Figurante — README</h1><p>Agente de IA pessoal, offline e com memória semântica persistente. Roda 100% no seu hardware — sem assinatura, sem nuvem.</p><h2>O que é</h2><p>Construído sobre <strong>Ollama</strong> (LLMs locais) e <strong>ChromaDB</strong> (memória vetorial). Todo o tráfego é <code>localhost</code> — nenhum dado sai da máquina.</p><h2>Funcionalidades</h2><ul><li>Memória semântica persistente entre sessões via ChromaDB</li><li>Dois modos: <code>paz</code> (1.5B, rápido) e <code>ira</code> (3B, preciso) — trocáveis em runtime</li><li>Upload de arquivos: PDF, TXT, CSV, código — injetados no contexto</li><li>Streaming com cancelamento real via <code>threading.Event</code></li><li>Sistema de regras editável pelo próprio chat</li><li>Múltiplas sessões simultâneas com histórico isolado</li></ul><h2>Stack</h2><ul><li>Python 3.11 + Flask</li><li>Ollama (<code>sam860/dolphin3-qwen2.5:1.5b</code> / <code>3b</code>)</li><li>ChromaDB + SentenceTransformers (ONNX, offline)</li></ul>`,
+        arch:`<h1>🎭 Figurante — Arquitetura</h1><h2>Fluxo de dados</h2><ul><li>Browser → Flask <code>localhost:5000</code> via HTTP / SSE</li><li>Flask consulta ChromaDB: recupera os 5 documentos mais similares</li><li>Contexto enriquecido com "MEMÓRIA RELEVANTE" → enviado ao Ollama</li><li>Resposta retorna em streaming via SSE</li><li>Par pergunta/resposta salvo no ChromaDB para uso futuro</li></ul><h2>Embeddings</h2><p>Modelo <code>all-MiniLM-L6-v2</code> via ONNX — 100% offline após o primeiro download.</p>`,
+        install:`<h1>🎭 Figurante — Instalação</h1><pre><code>git clone https://github.com/wenderson-werneck/figurante\ncd figurante\npip install -r requirements.txt\nollama pull sam860/dolphin3-qwen2.5:1.5b\npython app.py</code></pre><p>Acesse <code>http://localhost:5000</code>.</p>`
     },
     nightstar:{
-        readme:`<h1>⭐ NightStar — README</h1>
-<p>Bot RPA que automatiza candidaturas a vagas. Varre formulários, mapeia campos ao perfil via RAG e preenche tudo — parando antes do envio para revisão.</p>
-<h2>Impacto</h2>
-<ul>
-<li>Tempo de varredura: ~3s (era ~40s)</li>
-<li>70%+ de campos preenchidos automaticamente</li>
-<li>Cancelamento em menos de 300ms</li>
-</ul>
-<h2>Plataformas</h2>
-<ul>
-<li>Gupy (upload de CV, autocomplete de cidade/estado)</li>
-<li>LinkedIn Easy Apply</li>
-<li>Formulários genéricos (heurísticas por label/aria/name/id)</li>
-</ul>
-<h2>Stack</h2>
-<ul>
-<li>Python + Playwright</li>
-<li>ChromaDB (RAG vetorial)</li>
-<li>BeautifulSoup (parsing HTML)</li>
-<li>Flask (integração com Figurante)</li>
-</ul>`,
-        arch:`<h1>⭐ NightStar — Arquitetura</h1>
-<h2>As 3 camadas de mapeamento</h2>
-<ul>
-<li><strong>Camada 1 — Mapa Direto:</strong> dicionário com 40+ termos → 0ms. Nunca chama IA para o que é determinístico.</li>
-<li><strong>Camada 2 — RAG Vetorial:</strong> ChromaDB com <code>perfil.json</code> → ~50ms (threshold 0.60)</li>
-<li><strong>Camada 3 — IA Fallback:</strong> Ollama via Figurante, apenas com autorização explícita do usuário</li>
-</ul>
-<h2>Perfil persistente do Chrome</h2>
-<p>Usa <code>launch_persistent_context</code> com diretório local <code>nightstar_profile/</code>. Login feito uma vez — cookies preservados entre sessões.</p>
-<h2>Fluxo completo</h2>
-<ul>
-<li>Usuário cola URL no Figurante: <code>/nightstar URL</code></li>
-<li>Chrome abre com perfil salvo (login já feito)</li>
-<li>NightStar varre e classifica cada campo do formulário</li>
-<li>Relatório: verde (mapeado) / amarelo (pendente)</li>
-<li>Playwright preenche tudo em tempo real — para antes do envio</li>
-</ul>`,
-        install:`<h1>⭐ NightStar — Instalação</h1>
-<h2>Opção 1: via Git</h2>
-<pre><code>git clone https://github.com/wenderson-werneck/nightstar
-cd nightstar
-pip install playwright chromadb beautifulsoup4
-playwright install chromium</code></pre>
-<h2>Opção 2: Download direto</h2>
-<p>Acesse a <a href="project-nightstar.html">página do projeto</a>, navegue até a seção <strong>Código-Fonte / Estrutura de Arquivos</strong> e baixe os arquivos individualmente ou use o botão <strong>⬇ Baixar Projeto Completo</strong>.</p>
-<h2>perfil.json</h2>
-<pre><code>{
-  "nome": "João da Silva",
-  "email": "joao@email.com",
-  "telefone": "+55 11 99999-0000",
-  "cidade": "São Paulo, Brasil",
-  "linkedin": "linkedin.com/in/joaodasilva",
-  "github": "github.com/joaodasilva"
-}</code></pre>
-<p>O NightStar usa este arquivo como base vetorial para mapear todos os campos dos formulários via RAG.</p>`
+        readme:`<h1>⭐ NightStar — README</h1><p>Bot RPA que automatiza candidaturas a vagas. Varre formulários, mapeia campos ao perfil via RAG e preenche tudo — parando antes do envio para revisão.</p><h2>Impacto</h2><ul><li>Tempo de varredura: ~3s (era ~40s)</li><li>70%+ de campos preenchidos automaticamente</li></ul><h2>Plataformas</h2><ul><li>Gupy, LinkedIn Easy Apply, formulários genéricos</li></ul>`,
+        arch:`<h1>⭐ NightStar — Arquitetura</h1><h2>3 camadas de mapeamento</h2><ul><li><strong>Camada 1 — Mapa Direto:</strong> dicionário com 40+ termos → 0ms</li><li><strong>Camada 2 — RAG Vetorial:</strong> ChromaDB com perfil.json → ~50ms</li><li><strong>Camada 3 — IA Fallback:</strong> Ollama via Figurante, com autorização explícita</li></ul>`,
+        install:`<h1>⭐ NightStar — Instalação</h1><pre><code>git clone https://github.com/wenderson-werneck/nightstar\ncd nightstar\npip install playwright chromadb beautifulsoup4\nplaywright install chromium</code></pre>`
     },
     nexus:{
-        readme:`<h1>🤖 Nexus AI — README</h1>
-<p>Agente inteligente de busca e ranqueamento de vagas. Plataformas ordenam por data — o Nexus ordena por compatibilidade real com o seu perfil.</p>
-<h2>Como funciona</h2>
-<ul>
-<li>Gemini 1.5 Flash expande um cargo em 15 variações de título + 30 skills</li>
-<li>Adzuna API busca em 20+ países (2 páginas × 50 vagas por título)</li>
-<li>SentenceTransformers calcula similaridade semântica entre CV e cada vaga</li>
-<li>Score em dois eixos configuráveis via sliders — sem refazer a busca</li>
-</ul>
-<h2>Fallback offline</h2>
-<p>Se o Gemini falhar, o <code>PROFILE_DB</code> embutido assume automaticamente com títulos e skills em pt/en/es por área (dados, ML, dev). O agente nunca para por falta de API.</p>
-<h2>Stack</h2>
-<ul>
-<li>Streamlit (UI + dashboard)</li>
-<li>Gemini 1.5 Flash API</li>
-<li>Adzuna Jobs API</li>
-<li>SentenceTransformers (<code>all-MiniLM-L6-v2</code>)</li>
-<li>pyngrok (deploy público via Colab)</li>
-</ul>`,
-        arch:`<h1>🤖 Nexus AI — Arquitetura</h1>
-<h2>Pipeline completo</h2>
-<ul>
-<li><strong>expandir_gemini():</strong> prompt estruturado → Gemini → JSON com 15 títulos + 30 skills + idioma detectado pelo país</li>
-<li><strong>fetch_adzuna():</strong> para cada título: 2 páginas × 50 vagas, deduplicação por ID, limpeza de HTML, normalização de campos</li>
-<li><strong>processar_ranking():</strong> embeddings coseno + pesos configuráveis + penalização de integridade</li>
-</ul>
-<h2>Score em dois eixos</h2>
-<ul>
-<li><strong>Match_Profile:</strong> similaridade coseno entre embedding do CV e descrição da vaga</li>
-<li><strong>Match_Pesquisa:</strong> presença dos títulos no título da vaga + proporção de skills na descrição</li>
-<li><strong>Penalização Integridade:</strong> -50 pts se empresa ausente ou link suspeito</li>
-<li><strong>Match_Final:</strong> média ponderada dos dois eixos (sliders em tempo real)</li>
-</ul>
-<h2>Gerenciamento de estado (Streamlit)</h2>
-<ul>
-<li>Etapa 1: gerar estrutura (Gemini ou fallback)</li>
-<li>Etapa 2: executar busca (Adzuna)</li>
-<li>Etapa 3: aplicar ranking e exibir tabela</li>
-</ul>`,
-        install:`<h1>🤖 Nexus AI — Instalação</h1>
-<h2>Opção 1: via Git</h2>
-<pre><code>git clone https://github.com/wenderson-werneck/nexus-ai
-cd nexus-ai
-pip install streamlit sentence-transformers requests pyngrok google-generativeai</code></pre>
-<h2>Opção 2: Download direto</h2>
-<p>Acesse a <a href="project-nexus.html">página do projeto</a>, navegue até a seção <strong>Código-Fonte / Estrutura de Arquivos</strong> e baixe os arquivos individualmente ou use o botão <strong>⬇ Baixar Projeto Completo</strong>.</p>
-<h2>Configuração</h2>
-<pre><code>GEMINI_KEY     = "sua_chave_gemini"   # opcional
-ADZUNA_APP_ID  = "seu_app_id"
-ADZUNA_APP_KEY = "sua_app_key"</code></pre>
-<h2>Execução</h2>
-<ul>
-<li>Abra o notebook no Colab</li>
-<li>Execute as 5 células em ordem (~2 min total)</li>
-<li>Célula 5 gera URL pública via ngrok</li>
-<li>Acesse o link e use o dashboard Streamlit</li>
-</ul>
-<blockquote><p><strong>⚠️ Segurança:</strong> nunca faça commit do notebook com as chaves preenchidas.</p></blockquote>`
+        readme:`<h1>🤖 Nexus AI — README</h1><p>Agente inteligente de busca e ranqueamento de vagas. Plataformas ordenam por data — o Nexus ordena por compatibilidade real com o seu perfil.</p><h2>Stack</h2><ul><li>Streamlit + Gemini 1.5 Flash API + Adzuna API + SentenceTransformers</li></ul>`,
+        arch:`<h1>🤖 Nexus AI — Arquitetura</h1><h2>Pipeline</h2><ul><li>Gemini expande cargo → 15 títulos + 30 skills</li><li>Adzuna busca em 20+ países (2 páginas × 50 vagas por título)</li><li>SentenceTransformers calcula similaridade semântica CV vs vaga</li><li>Score em dois eixos configuráveis via sliders</li></ul>`,
+        install:`<h1>🤖 Nexus AI — Instalação</h1><pre><code>git clone https://github.com/wenderson-werneck/nexus-ai\ncd nexus-ai\npip install streamlit sentence-transformers requests pyngrok google-generativeai</code></pre>`
     },
     aprovamais:{
-        readme:`<h1>📊 AprovaMais — README</h1>
-<p>Pipeline completo de Data Science em 6 etapas para prever inadimplência em uma fintech fictícia com 200.000 registros.</p>
-<h2>O problema</h2>
-<p>A fintech <strong>AprovaMais</strong> sofre com inadimplência alta porque o processo de aprovação de crédito é subjetivo. Objetivo: modelo preditivo confiável o suficiente para apoiar decisão automatizada.</p>
-<h2>Pipeline</h2>
-<ul>
-<li><strong>Etapa 1:</strong> Definição do problema e setup</li>
-<li><strong>Etapa 2:</strong> Limpeza (nulos MAR → mediana, correção de tipos)</li>
-<li><strong>Etapa 3:</strong> EDA (desbalanceamento, correlações)</li>
-<li><strong>Etapa 4:</strong> Pré-processamento (encoding, scaling, remoção de gênero)</li>
-<li><strong>Etapa 5:</strong> Modelagem inicial (LR, RF, XGBoost, KNN)</li>
-<li><strong>Etapa 6:</strong> Otimização (SMOTE + GridSearchCV)</li>
-</ul>
-<h2>Decisão ética documentada</h2>
-<p>A coluna <code>genero</code> foi removida. Correlação histórica com inadimplência reflete discriminação sistêmica, não risco real de crédito.</p>`,
-        arch:`<h1>📊 AprovaMais — Arquitetura</h1>
-<h2>Etapa 2 — Investigação de nulos</h2>
-<p>~8% de nulos em <code>renda_mensal</code> e <code>tempo_emprego_anos</code>. Testes indicaram distribuição aleatória (MAR, não MNAR) → imputação pela mediana (robusta a outliers em dados assimétricos).</p>
-<h2>Por que mediana e não média?</h2>
-<p>Renda tem distribuição assimétrica com outliers altos. A média seria puxada para cima; a mediana representa melhor o valor central real.</p>
-<h2>Etapa 5 — Por que F1-Score e não Acurácia?</h2>
-<p>Com 70% de baixo risco, um modelo que classifica tudo como baixo risco acerta 70% — sem aprender nada. F1-Score weighted captura o equilíbrio entre precisão e recall em todas as classes.</p>
-<h2>Etapa 6 — Estratégias de balanceamento</h2>
-<ul>
-<li><code>class_weight='balanced'</code> — ajusta pesos internamente</li>
-<li>SMOTE aplicado <strong>apenas no treino</strong> (teste mantém distribuição real de produção)</li>
-<li>GridSearchCV <code>cv=3</code> — trade-off: tempo vs. confiabilidade com 140k amostras</li>
-</ul>`,
-        install:`<h1>📊 AprovaMais — Instalação</h1>
-<h2>Opção 1: Google Colab (recomendado)</h2>
-<p>Todas as dependências já estão disponíveis no ambiente Colab. Basta abrir o notebook.</p>
-<h2>Opção 2: Download direto</h2>
-<p>Acesse a <a href="project-aprovamais.html">página do projeto</a>, navegue até a seção <strong>Código-Fonte / Estrutura de Arquivos</strong> e baixe o notebook e dataset, ou use o botão <strong>⬇ Baixar Projeto Completo</strong>.</p>
-<h2>Opção 3: Local</h2>
-<pre><code>pip install pandas numpy scikit-learn xgboost imbalanced-learn matplotlib seaborn jupyter</code></pre>
-<h2>Dataset</h2>
-<p>O arquivo <code>credit_risk_dataset.csv</code> foi gerado com assistência do Gemini para simular uma base realista com desafios propositais: nulos, desbalanceamento de classes, tipos incorretos e outliers.</p>
-<h2>Execução</h2>
-<pre><code>jupyter notebook Risco_de_credito_Aprovamais.ipynb</code></pre>
-<p>Tempo estimado: 15–30 min. Para acelerar o GridSearchCV, reduza <code>cv=3</code> para <code>cv=2</code>.</p>`
+        readme:`<h1>📊 AprovaMais — README</h1><p>Pipeline completo de Data Science em 6 etapas para prever inadimplência em uma fintech fictícia com 200.000 registros.</p><h2>Decisão ética documentada</h2><p>A coluna <code>genero</code> foi removida. Correlação histórica com inadimplência reflete discriminação sistêmica, não risco real de crédito.</p>`,
+        arch:`<h1>📊 AprovaMais — Arquitetura</h1><h2>Por que F1-Score e não Acurácia?</h2><p>Com 70% de baixo risco, um modelo que classifica tudo como baixo risco acerta 70% — sem aprender nada. F1-Score weighted captura o equilíbrio entre precisão e recall.</p>`,
+        install:`<h1>📊 AprovaMais — Instalação</h1><pre><code>pip install pandas numpy scikit-learn xgboost imbalanced-learn matplotlib seaborn jupyter\njupyter notebook Risco_de_credito_Aprovamais.ipynb</code></pre>`
     },
     prf:{
-        readme:`<h1>🚛 Inteligência de Risco PRF — README</h1>
-<p>Pipeline analítico para previsão de risco rodoviário e suporte à decisão de roteirização, usando 3 anos de dados abertos da Polícia Rodoviária Federal.</p>
-<h2>Contexto de negócio</h2>
-<p>Operações logísticas enfrentam diariamente a imprevisibilidade das rodovias brasileiras. Acidentes geram impacto direto no resultado financeiro: desvios aumentam consumo de diesel, atrasos geram horas extras e sinistros elevam custos de seguro e manutenção.</p>
-<h2>Objetivo</h2>
-<p>Transformar dados públicos em inteligência operacional — levando análise de risco para dentro da tomada de decisão de roteirização de frotas.</p>
-<h2>Fonte dos dados</h2>
-<ul>
-<li>Portal de Dados Abertos da PRF</li>
-<li>Período: 2023, 2024 e 2025 (3 anos de histórico)</li>
-<li>Base: Agrupados por Pessoa — permite cruzar marca/ano do veículo e perfil dos envolvidos</li>
-</ul>
-<h2>Stack</h2>
-<ul>
-<li>Google BigQuery (processamento e armazenamento)</li>
-<li>SQL avançado (ETL, unions, métricas calculadas)</li>
-<li>Power BI (dashboards e hotspots interativos)</li>
-</ul>
-<h2>Entregáveis</h2>
-<ul>
-<li>Dashboards com mapeamento de hotspots por período e condição climática</li>
-<li>Ranking de trechos críticos para veículos pesados</li>
-<li>Análise de sazonalidade por corredor logístico</li>
-</ul>`,
-        arch:`<h1>🚛 PRF Risk Intel — Arquitetura</h1>
-<h2>Pipeline de dados</h2>
-<ul>
-<li><strong>Ingestão:</strong> Consolidação dos 3 anos via UNION + normalização de schema entre períodos</li>
-<li><strong>Limpeza:</strong> Tratamento de nulos, padronização de categóricos (tipo de veículo, causa, meteorologia), correção de tipagem</li>
-<li><strong>Métricas calculadas:</strong> Índice de gravidade, densidade por km, taxa por horário/dia da semana</li>
-</ul>
-<h2>Estratégia de filtragem em duas camadas</h2>
-<ul>
-<li><strong>Baseline:</strong> Base completa com todos os veículos — parâmetros de risco geral das rodovias</li>
-<li><strong>Foco em negócio:</strong> Filtro rigoroso para veículos pesados (caminhões, ônibus, semirreboques, carretas) — converte análise estatística pública em inteligência de frota</li>
-</ul>
-<h2>Por que BigQuery?</h2>
-<p>3 anos × ~500k registros por ano = ~1,5M linhas. BigQuery processa em segundos, sem necessidade de servidor. O ambiente gratuito cobre 10GB/mês de processamento — suficiente para desenvolvimento completo.</p>
-<h2>Modelo de dados (Power BI)</h2>
-<ul>
-<li>Tabela fato: acidentes com todas as variáveis</li>
-<li>Dimensões: tempo, localização, tipo de veículo, condição meteorológica</li>
-<li>DAX: KPIs de gravidade, índice de risco ponderado, tendência YoY</li>
-</ul>`,
-        install:`<h1>🚛 PRF Risk Intel — Insights</h1>
-<h2>Principais descobertas</h2>
-<ul>
-<li>Sextas-feiras entre 17h–19h concentram 23% dos acidentes com veículos pesados</li>
-<li>BR-116 e BR-101 respondem por 38% dos sinistros com caminhões na região Sudeste</li>
-<li>Acidentes com chuva têm 2,4× mais chance de envolver veículo pesado vs. veículo leve</li>
-<li>Veículos com mais de 15 anos apresentam índice de gravidade 31% maior</li>
-</ul>
-<h2>Como usar para roteirização</h2>
-<ul>
-<li>Evitar trechos de hotspot nas janelas de maior risco (sex tarde / dom noite)</li>
-<li>Alertas proativos quando previsão de chuva coincide com rota de alto risco histórico</li>
-<li>Política de manutenção preventiva baseada em padrão de sinistro por faixa de ano do veículo</li>
-</ul>
-<h2>Como usar para negociação de seguro</h2>
-<p>O dashboard exporta relatório PDF com índice de exposição ao risco por rota e período — base analítica concreta para negociar apólices com seguradoras.</p>
-<blockquote><p><strong>Pitch para entrevistas:</strong> "Construí um pipeline que permite a uma empresa de transporte economizar em diesel e horas extras identificando com antecedência os trechos com maior probabilidade de acidente — escalável para qualquer corredor logístico do país."</p></blockquote>`
+        readme:`<h1>🚛 Inteligência de Risco PRF — README</h1><p>Pipeline analítico com 3 anos de dados abertos da PRF para suporte à decisão de roteirização de frotas.</p><h2>Stack</h2><ul><li>Google BigQuery · SQL avançado · Power BI</li></ul>`,
+        arch:`<h1>🚛 PRF Risk Intel — Arquitetura</h1><h2>Por que BigQuery?</h2><p>3 anos × ~500k registros = ~1,5M linhas. BigQuery processa em segundos, sem servidor. O ambiente gratuito cobre 10GB/mês — suficiente para o projeto completo.</p>`,
+        install:`<h1>🚛 PRF Risk Intel — Insights</h1><ul><li>Sextas-feiras 17h–19h concentram 23% dos acidentes com veículos pesados</li><li>BR-116 e BR-101 respondem por 38% dos sinistros na região Sudeste</li><li>Acidentes com chuva têm 2,4× mais chance de envolver veículo pesado</li><li>Veículos acima de 15 anos têm índice de gravidade 31% maior</li></ul>`
     },
     nebula:{
-        readme:`<h1>🎨 Nebula Studio — README</h1>
-<p>Editor de imagens com IA embarcada, 100% offline. Processa tudo na CPU do seu notebook — sem GPU, sem nuvem, sem assinatura.</p>
-<h2>O que é</h2>
-<p>Um estúdio visual integrado ao ecossistema Figurante. Interface estilo Photoshop no navegador (Fabric.js) com pipelines de IA reais rodando em Python no backend.</p>
-<h2>Pipelines de IA</h2>
-<ul>
-<li><strong>Remoção de fundo</strong> — U²-Net via rembg · 3–8s na CPU</li>
-<li><strong>Segmentação semântica</strong> — CLIPseg: "isola o boné azul" · 5–15s</li>
-<li><strong>Upscale 4×</strong> — Real-ESRGAN · 30–90s</li>
-<li><strong>Inpainting</strong> — Stable Diffusion C++ (GGUF, quantizado) · 2–5 min</li>
-<li><strong>Face Swap</strong> — InsightFace + inswapper_128 · 10–30s</li>
-<li><strong>Filtros e ajustes</strong> — PIL puro · &lt;1s</li>
-<li><strong>Macros visuais</strong> — sequências salvas e executadas por prompt no chat</li>
-</ul>
-<h2>Diferencial</h2>
-<p>O Figurante (LLM local) orquestra o canvas via tags XML invisíveis. O usuário diz <em>"remove o fundo e aplica filtro sépia"</em> no chat — o estúdio executa sozinho.</p>
-<h2>Stack</h2>
-<ul>
-<li>Python + Flask (backend)</li>
-<li>Fabric.js (canvas interativo)</li>
-<li>rembg, CLIPseg, Real-ESRGAN, InsightFace, stable-diffusion.cpp</li>
-<li>Threading assíncrono com polling para tarefas pesadas</li>
-</ul>`,
-        arch:`<h1>🎨 Nebula Studio — Arquitetura</h1>
-<h2>3 camadas de processamento</h2>
-<ul>
-<li><strong>Camada 1 — Frontend:</strong> Fabric.js no navegador. Camadas, Ctrl+Z, zoom, desenho livre — tudo em RAM do browser, zero latência</li>
-<li><strong>Camada 2 — Processamento leve:</strong> U²-Net, CLIPseg, filtros PIL · 2–15s na CPU · resposta síncrona</li>
-<li><strong>Camada 3 — Processamento pesado:</strong> ESRGAN, SD.cpp, InsightFace · minutos · Thread separada, interface não trava</li>
-</ul>
-<h2>Orquestração por IA</h2>
-<ul>
-<li>Figurante emite <code>&lt;nebula_action target="boné"&gt;semantic_mask&lt;/nebula_action&gt;</code></li>
-<li>app.py extrai a tag com regex, retorna campos <code>acao_nebula_*</code> no JSON</li>
-<li>Frontend JavaScript lê os campos e chama o endpoint correto automaticamente</li>
-</ul>
-<h2>Tarefas assíncronas</h2>
-<ul>
-<li>Pipelines pesados criam um <code>task_id</code> e rodam em Thread daemon</li>
-<li>Frontend faz polling em <code>/nebula/task/&lt;id&gt;</code> a cada 2s</li>
-<li>Status: <code>aguardando → processando → concluido | erro</code></li>
-</ul>
-<h2>Lazy loading de modelos</h2>
-<p>Modelos pesados (CLIPseg ~450MB, rembg ~176MB) carregados sob demanda na primeira chamada, protegidos por <code>threading.Lock</code>. Servidor inicia rápido mesmo sem modelos instalados.</p>`,
-        install:`<h1>🎨 Nebula Studio — Instalação</h1>
-<h2>Instalação em camadas (instale só o que precisar)</h2>
-<h3>Camada 1 — Mínimo (filtros + canvas)</h3>
-<pre><code>pip install Pillow Flask</code></pre>
-<h3>Camada 2 — Remoção de fundo</h3>
-<pre><code>pip install rembg onnxruntime</code></pre>
-<h3>Camada 3 — Segmentação semântica (CLIPseg)</h3>
-<pre><code>pip install transformers torch torchvision</code></pre>
-<h3>Camada 4 — Upscale 4× (Real-ESRGAN)</h3>
-<pre><code>pip install basicsr realesrgan facexlib</code></pre>
-<h3>Camada 5 — Face Swap (InsightFace)</h3>
-<pre><code>pip install insightface onnxruntime opencv-python</code></pre>
-<h3>Camada 6 — Inpainting (Stable Diffusion)</h3>
-<pre><code>git clone https://github.com/leejet/stable-diffusion.cpp
-cd stable-diffusion.cpp && mkdir build && cd build
-cmake .. -DGGML_AVX2=ON && cmake --build . --config Release</code></pre>
-<h2>Integração com Figurante</h2>
-<p>Coloque os arquivos em <code>figurante/Nebula/</code> e adicione 2 linhas ao <code>app.py</code>. O estúdio abre em <code>localhost:5000/estudio</code>.</p>
-<h2>Hardware mínimo testado</h2>
-<ul>
-<li>Dell Latitude i5-8250U, 8GB RAM, sem GPU</li>
-<li>Filtros/remoção de fundo: funcionam confortavelmente</li>
-<li>ESRGAN e SD: funcionam, com paciência (minutos)</li>
-</ul>`
+        readme:`<h1>🎨 Nebula Studio — README</h1><p>Editor de imagens com IA embarcada, 100% offline. Processa tudo na CPU — sem GPU, sem nuvem.</p><h2>Pipelines de IA</h2><ul><li>Remoção de fundo — U²-Net via rembg</li><li>Segmentação semântica — CLIPseg</li><li>Upscale 4× — Real-ESRGAN</li><li>Inpainting — Stable Diffusion C++ (GGUF)</li><li>Face Swap — InsightFace</li></ul>`,
+        arch:`<h1>🎨 Nebula Studio — Arquitetura</h1><h2>3 camadas</h2><ul><li><strong>Frontend:</strong> Fabric.js — camadas, Ctrl+Z, zoom</li><li><strong>Processamento leve:</strong> U²-Net, CLIPseg, filtros PIL · 2–15s</li><li><strong>Processamento pesado:</strong> ESRGAN, SD.cpp · minutos · Thread separada</li></ul>`,
+        install:`<h1>🎨 Nebula Studio — Instalação em camadas</h1><pre><code># Mínimo\npip install Pillow Flask\n# Remoção de fundo\npip install rembg onnxruntime\n# Segmentação\npip install transformers torch torchvision</code></pre>`
     },
     'figurante-code':{
-        readme:`<h1>💻 Figurante Code — README</h1>
-<p>Agente de programação com roteamento inteligente entre modelos e destilação progressiva de conhecimento. O modelo local fica mais inteligente a cada sessão.</p>
-<h2>A ideia central</h2>
-<p><strong>Sessão 1:</strong> pergunta difícil → roteada para Alibaba 480B → resposta salva no ChromaDB.<br><strong>Sessão 2:</strong> pergunta similar → RAG recupera a resposta anterior → modelo local de 3B responde com conhecimento destilado do 480B. Zero chamadas à nuvem.</p>
-<h2>Roteamento</h2>
+        readme:`<h1>💻 Figurante Code — README</h1><p>Agente de programação com roteamento inteligente e destilação progressiva de conhecimento.</p><h2>A ideia central</h2><p>Sessão 1: pergunta difícil → Alibaba 480B → resposta salva no ChromaDB.<br>Sessão 2: pergunta similar → RAG recupera → modelo local responde com conhecimento destilado do 480B. Zero chamadas à nuvem.</p>`,
+        arch:`<h1>💻 Figurante Code — Arquitetura</h1><h2>Roteamento</h2><ul><li>Complexidade LOW: RAG → Ollama local</li><li>Complexidade MEDIUM/HIGH: RAG → Alibaba 480B → OpenRouter → Ollama</li></ul><h2>Cross-feed bidirecional</h2><p>Toda resposta salva em <code>figurante_codigo</code> e <code>figurante_memoria</code> — o ecossistema aprende com cada interação.</p>`,
+        install:`<h1>💻 Figurante Code — Instalação</h1><pre><code>git clone https://github.com/wenderson-werneck/figurante-code\ncd figurante-code\npip install -r requirements.txt\npython app.py  # porta 5001</code></pre>`
+    },
+
+    // ✦ NOVO — Pipeline Financeiro Snowflake
+    snowflake:{
+        readme:`<h1>❄️ Pipeline Financeiro — Snowflake Medallion</h1>
+<p>Pipeline de dados em tempo quase real para monitoramento de transações financeiras e detecção de fraude, construído sobre arquitetura Medallion (Bronze → Prata → Ouro) no Snowflake.</p>
+<h2>O que foi construído</h2>
 <ul>
-<li>Complexidade LOW: RAG check → Ollama local (<code>qwen2.5-coder:3b</code>)</li>
-<li>Complexidade MEDIUM/HIGH: RAG check → Alibaba 480B → OpenRouter → Ollama (fallbacks)</li>
+<li>Ingestão via Internal Stage com <code>COPY INTO</code> e rastreabilidade por <code>METADATA$FILENAME</code></li>
+<li>CDC incremental com <strong>Snowflake Streams</strong> — processa apenas registros novos</li>
+<li>Orquestração com <strong>Tasks em DAG</strong> — Bronze → Prata → Ouro a cada 5 minutos</li>
+<li>Score de risco 0–100 calculado em SQL com fatores ponderados (valor, horário, canal, status)</li>
+<li><strong>Dynamic Data Masking</strong> para CPF/CNPJ — conformidade com LGPD sem duplicar tabelas</li>
+<li>Dashboard estratégico no <strong>Power BI</strong> via ODBC com 6 tabelas da camada Ouro</li>
+</ul>
+<h2>KPIs entregues</h2>
+<ul>
+<li>Transações na última hora e volume financeiro em R$</li>
+<li>Alertas Alto/Crítico em tempo real (últimos 30 min)</li>
+<li>Taxa de risco por banco de origem</li>
+<li>Distribuição de classificação de risco (Baixo / Médio / Alto / Crítico)</li>
+<li>Mapa geográfico de concentração de alertas por estado</li>
 </ul>
 <h2>Stack</h2>
 <ul>
-<li>Python + Flask (porta 5001)</li>
-<li>Alibaba DashScope (<code>qwen3-coder-plus</code>, 480B MoE)</li>
-<li>OpenRouter (fallback de API)</li>
-<li>Ollama local (fallback final)</li>
-<li>ChromaDB (destilação + RAG)</li>
+<li>Snowflake (Streams, Tasks, Stored Procedures, Dynamic Data Masking)</li>
+<li>Python (Faker, Pandas, snowflake-connector-python)</li>
+<li>SQL (Snowflake SQL)</li>
+<li>Power BI (ODBC, DAX, DirectQuery)</li>
 </ul>`,
-        arch:`<h1>💻 Figurante Code — Arquitetura</h1>
-<h2>Classificação de complexidade</h2>
+        arch:`<h1>❄️ Snowflake Medallion — Arquitetura</h1>
+<h2>Fluxo completo</h2>
 <ul>
-<li><code>KEYWORDS_HIGH</code>: arquitetura, concorrência, otimização, segurança, algoritmo…</li>
-<li><code>len(pergunta) > 500</code> → força HIGH independente de keywords</li>
+<li><strong>Python Faker</strong> gera CSVs de transações PF e PJ</li>
+<li><strong>Internal Stage</strong> recebe os arquivos via PUT (landing zone)</li>
+<li><strong>Bronze:</strong> COPY INTO com metadados de rastreabilidade (_src_file, _ingestao_ts)</li>
+<li><strong>Streams</strong> capturam apenas INSERT novos das tabelas Bronze</li>
+<li><strong>Task raiz</strong> (5 min): executa se SYSTEM$STREAM_HAS_DATA → chama SP Bronze→Prata</li>
+<li><strong>Prata:</strong> MERGE com dedup, faixa_valor e score_risco calculado em SQL</li>
+<li><strong>Task filha</strong>: executa após a raiz → chama SP Prata→Ouro</li>
+<li><strong>Ouro:</strong> views + tabelas agregadas com Dynamic Data Masking</li>
+<li><strong>Power BI</strong> conecta via ODBC → schema ouro</li>
 </ul>
-<h2>RAG antes de qualquer API</h2>
-<p>Antes de rotear, consulta ChromaDB com threshold 0.35. Se resposta similar já existe, usa ela diretamente — economiza cota e latência.</p>
-<h2>Cross-feed bidirecional com Figurante</h2>
-<p>Toda resposta é salva em <strong>duas coleções</strong>:</p>
+<h2>Camadas Medallion</h2>
 <ul>
-<li><code>figurante_codigo</code> — memória técnica primária</li>
-<li><code>figurante_memoria</code> — memória geral (compartilhada com Figurante porta 5000)</li>
+<li><strong>Bronze:</strong> dados brutos + metadados · Time Travel 7 dias</li>
+<li><strong>Prata:</strong> dedup + faixa_valor + score 0-100 + classificacao_risco · Time Travel 30 dias</li>
+<li><strong>Ouro:</strong> 3 views + 3 tabelas agregadas + Dynamic Data Masking (LGPD)</li>
 </ul>
-<p>O ecossistema completo aprende com cada interação.</p>
-<h2>Por que qwen3-coder-plus?</h2>
-<p>480B parâmetros totais, ~30B ativos por token (MoE). Supera GPT-4o em benchmarks de código. Alibaba oferece cota gratuita de 1–2M tokens nos primeiros 90 dias.</p>`,
-        install:`<h1>💻 Figurante Code — Instalação</h1>
-<h2>Opção 1: via Git</h2>
-<pre><code>git clone https://github.com/wenderson-werneck/figurante-code
-cd figurante-code
-pip install -r requirements.txt</code></pre>
-<h2>Opção 2: Download direto</h2>
-<p>Acesse a <a href="project-figurante-code.html">página do projeto</a>, navegue até a seção <strong>Código-Fonte / Estrutura de Arquivos</strong> e baixe os arquivos individualmente ou use o botão <strong>⬇ Baixar Projeto Completo</strong>.</p>
+<h2>Regras do score de risco</h2>
+<ul>
+<li>Valor > R$50k → +40 pts | Valor > R$10k → +20 pts</li>
+<li>Horário suspeito (22h–6h) → +25 pts</li>
+<li>Status SUSPEITA → +30 pts | Status NEGADA → +15 pts</li>
+<li>Caixa eletrônico noturno → +10 pts</li>
+<li>Teto: LEAST(soma, 100)</li>
+</ul>`,
+        install:`<h1>❄️ Snowflake Medallion — Instalação</h1>
 <h2>Pré-requisitos</h2>
 <ul>
-<li>Figurante instalado e rodando (<code>localhost:5000</code>)</li>
-<li>Chave Alibaba DashScope — grátis com cota inicial em <a href="https://dashscope.aliyuncs.com" target="_blank">dashscope.aliyuncs.com</a></li>
-<li>Opcional: chave OpenRouter para fallback</li>
+<li>Conta Snowflake (trial gratuito em snowflake.com)</li>
+<li>Python 3.9+ com pip</li>
+<li>Power BI Desktop com Snowflake ODBC Driver</li>
 </ul>
-<h2>Configuração</h2>
-<pre><code># .env
-DASHSCOPE_API_KEY=sua_chave_alibaba
-OPENROUTER_API_KEY=sua_chave_openrouter  # opcional</code></pre>
-<h2>Execução</h2>
-<pre><code>python app.py  # porta 5001</code></pre>
-<p>Acesse <code>http://localhost:5001</code>. O mesmo ChromaDB é compartilhado com o Figurante — nenhuma configuração adicional necessária.</p>`
+<h2>Opção A — Automática (recomendada)</h2>
+<pre><code>pip install snowflake-connector-python faker pandas
+# edite as credenciais em setup.py
+python setup.py</code></pre>
+<p>O script gera os dados, cria toda a estrutura no Snowflake e ativa as Tasks.</p>
+<h2>Opção B — Manual no Snowsight</h2>
+<pre><code>1. Execute sql/01_setup_ambiente.sql
+2. Gere os CSVs: python python/gerar_dados.py
+3. Faça PUT dos CSVs para o Stage
+4. Execute sql/02_bronze.sql
+5. Execute sql/03_prata.sql
+6. Execute sql/04_ouro.sql
+7. Execute sql/05_tasks.sql</code></pre>
+<h2>Conexão Power BI</h2>
+<ul>
+<li>Obter Dados → Snowflake</li>
+<li>Servidor: seu_account.snowflakecomputing.com</li>
+<li>Warehouse: pipeline_wh | Database: financeiro_db | Schema: ouro</li>
+<li>Autenticação: aba <strong>Database</strong> (usuário + senha)</li>
+</ul>`
     }
 };
 
 function openDoc(proj, type){
-    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code',prf:'🚛 PRF Risk Intel',nebula:'🎨 Nebula Studio'};
+    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code',prf:'🚛 PRF Risk Intel',nebula:'🎨 Nebula Studio',snowflake:'❄️ Snowflake Medallion'};
     const labels = {readme:'README',arch:'Arquitetura',install:'Instalação'};
     const installLabel = (proj === 'prf') ? 'Insights' : 'Instalação';
-    document.getElementById('mTitle').textContent = names[proj]+' — '+(type==='install' ? installLabel : labels[type]);
+    document.getElementById('mTitle').textContent = (names[proj]||proj)+' — '+(type==='install' ? installLabel : labels[type]);
     document.getElementById('mBody').innerHTML = DOCS[proj]?.[type] || '<p>Conteúdo não encontrado.</p>';
     document.getElementById('docModal').classList.add('open');
     document.body.style.overflow='hidden';
@@ -1088,53 +821,36 @@ function closeDoc(){
 document.getElementById('docModal').addEventListener('click', e => {
     if(e.target === document.getElementById('docModal')) closeDoc();
 });
-// ── GALLERY ───────────────────────────────────
-// Convenção de nomes: gallery/PROJETO-N.ext  (N = 1, 2, 3...)
-// Exemplos:
-//   gallery/figurante-1.png
-//   gallery/figurante-2.jpg
-//   gallery/nightstar-1.png
-//   gallery/prf-1.webp
-// Legendas: edite o array cap[] abaixo para cada projeto
-// Para adicionar fotos: jogue o arquivo na pasta gallery/ com o nome certo
 
+// ── GALLERY ───────────────────────────────────
 const GALLERY_CAPS = {
-    figurante:       ['Interface principal — chat com memória', 'Modo Brain — memória profunda ativa', 'Terminal de inicialização — modo ira'],
-    nightstar:       ['Painel de varredura — formulário Gupy', 'Relatório de campos — 3 camadas de mapeamento', 'Sugestões do Figurante — aprovação manual'],
-    nexus:           ['Dashboard Streamlit — busca em 20 países', 'Expansão semântica — Gemini gera 15 variações'],
-    aprovamais:      ['Pipeline ML — 6 etapas, 200k registros', 'Decisão ética — remoção da coluna gênero'],
-    'figurante-code':['Roteamento inteligente — 3 camadas de fallback', 'Destilação de conhecimento — ChromaDB cross-feed'],
-    prf:             ['Dashboard Power BI — hotspots BR-116 e BR-101', 'ETL BigQuery — 3 anos unificados', 'Análise de sazonalidade — padrões por período'],
-    nebula:          ['Canvas Fabric.js — edição em camadas', 'Pipeline rembg — remoção de fundo U²-Net', 'Orquestração por IA — Figurante controla o canvas'],
+    figurante:       ['Interface principal — chat com memória','Modo Brain — memória profunda ativa','Terminal de inicialização — modo ira'],
+    nightstar:       ['Painel de varredura — formulário Gupy','Relatório de campos — 3 camadas de mapeamento','Sugestões do Figurante — aprovação manual'],
+    nexus:           ['Dashboard Streamlit — busca em 20 países','Expansão semântica — Gemini gera 15 variações'],
+    aprovamais:      ['Pipeline ML — 6 etapas, 200k registros','Decisão ética — remoção da coluna gênero'],
+    'figurante-code':['Roteamento inteligente — 3 camadas de fallback','Destilação de conhecimento — ChromaDB cross-feed'],
+    prf:             ['Dashboard Power BI — hotspots BR-116 e BR-101','ETL BigQuery — 3 anos unificados','Análise de sazonalidade — padrões por período'],
+    nebula:          ['Canvas Fabric.js — edição em camadas','Pipeline rembg — remoção de fundo U²-Net','Orquestração por IA — Figurante controla o canvas'],
+    snowflake:       ['Arquitetura Medallion — Bronze, Prata, Ouro','Dashboard Power BI — alertas em tempo real','Score de risco — distribuição por classificação'],
 };
 
-// Extensões aceitas — o código tenta na ordem até encontrar
 const GALLERY_EXT = ['webp','png','jpg','jpeg','gif'];
 
-function buildGalleryItems(proj) {
-    const caps = GALLERY_CAPS[proj] || [];
-    return caps.map((cap, i) => ({ cap, idx: i + 1 }));
-}
-
 function openGallery(proj){
-    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code',prf:'🚛 PRF Risk Intel',nebula:'🎨 Nebula Studio'};
+    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code',prf:'🚛 PRF Risk Intel',nebula:'🎨 Nebula Studio',snowflake:'❄️ Snowflake Medallion'};
     document.getElementById('galTitle').textContent = (names[proj]||proj) + ' — Galeria';
     const grid = document.getElementById('galGrid');
-    const items = buildGalleryItems(proj);
+    const caps = GALLERY_CAPS[proj] || [];
 
-    if(!items.length){
+    if(!caps.length){
         grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-dim);font-family:\'JetBrains Mono\',monospace;font-size:.78rem;">Galeria em breve.</div>';
     } else {
-        grid.innerHTML = items.map(({cap, idx}) => {
-            // Tenta webp primeiro, fallback para placeholder SVG embutido
-            const basePath = `gallery/${proj}-${idx}`;
+        grid.innerHTML = caps.map((cap, i) => {
+            const basePath = `gallery/${proj}-${i+1}`;
             return `<div class="gal-item">
-                <img
-                    src="${basePath}.webp"
-                    alt="${cap}"
-                    loading="lazy"
-                    onerror="tryNextExt(this,'${basePath}',1)"
-                    style="width:100%;height:100%;object-fit:cover;display:block;">
+                <img src="${basePath}.webp" alt="${cap}" loading="lazy"
+                     onerror="tryNextExt(this,'${basePath}',1)"
+                     style="width:100%;height:100%;object-fit:cover;display:block;">
                 <div class="gal-cap">${cap}</div>
             </div>`;
         }).join('');
@@ -1143,21 +859,23 @@ function openGallery(proj){
     document.body.style.overflow='hidden';
 }
 
-// Tenta extensões em cascata: webp → png → jpg → jpeg → gif → placeholder
-function tryNextExt(img, base, step) {
-    if (step < GALLERY_EXT.length) {
-        img.onerror = () => tryNextExt(img, base, step + 1);
+function tryNextExt(img, base, step){
+    if(step < GALLERY_EXT.length){
+        img.onerror = () => tryNextExt(img, base, step+1);
         img.src = `${base}.${GALLERY_EXT[step]}`;
     } else {
-        // Nenhuma extensão funcionou — mostra placeholder com nome do arquivo esperado
         const fileName = base.split('/').pop();
-        img.onerror = null;
-        img.style.display = 'none';
+        img.onerror = null; img.style.display='none';
         const ph = document.createElement('div');
-        ph.style.cssText = 'width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;background:var(--bg-surface);';
-        ph.innerHTML = `<span style="font-size:1.6rem;opacity:.4;">📷</span><span style="font-family:\'JetBrains Mono\',monospace;font-size:.6rem;color:var(--text-dim);opacity:.7;">${fileName}.*</span>`;
+        ph.style.cssText='width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;background:var(--bg-surface);';
+        ph.innerHTML=`<span style="font-size:1.6rem;opacity:.4;">📷</span><span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text-dim);opacity:.7;">${fileName}.*</span>`;
         img.parentNode.insertBefore(ph, img);
     }
+}
+
+function closeGallery(){
+    document.getElementById('galModal').classList.remove('open');
+    document.body.style.overflow='';
 }
 
 document.getElementById('galModal').addEventListener('click', e=>{
