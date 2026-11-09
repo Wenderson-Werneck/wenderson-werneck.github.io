@@ -291,11 +291,11 @@
                 <div class="hero-stats">
                     <div><div class="stat-n">200k+</div><div class="stat-l">Registros modelados</div></div>
                     <div><div class="stat-n">&lt;8.4%</div><div class="stat-l">WAPE em previsão ML</div></div>
-                    <div><div class="stat-n">9+</div><div class="stat-l">Sistemas em produção</div></div>
+                    <div><div class="stat-n">12+</div><div class="stat-l">Sistemas em produção</div></div>
                 </div>
                 <div class="hero-btns">
                     <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Entrar em contato</a>
-                    <a href="#projects" class="btn btn-ghost"><i class="fas fa-code"></i> Ver projetos</a>
+                    <a href="https://github.com/Wenderson-Werneck?tab=repositories" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub (12 Repos)</a>
                     <a href="international.html" class="btn btn-ghost"><i class="fas fa-globe"></i> English profile</a>
                 </div>
             </div>
@@ -511,6 +511,153 @@
                     <button class="db db-a" onclick="event.stopPropagation();openDoc('mlops','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
                     <button class="db db-i" onclick="event.stopPropagation();openDoc('mlops','install')"><i class="fas fa-terminal"></i> Código</button>
                     <button class="db db-gal" onclick="event.stopPropagation();openGallery('mlops')"><i class="fas fa-images"></i> Galeria</button>
+                </div>
+            </div>
+
+            <!-- ✦ NOVO — OpenComex Data Lakehouse -->
+            <div class="pcard" data-tags="dados" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/opencomex-lakehouse-intelligence','_blank')">
+                <div class="pimg" style="background:linear-gradient(135deg,#0a1b2a,#11304a,#081726);">
+                    <div class="pimg-ph" style="background:linear-gradient(135deg,#0d2238,#14395b,#0a1d30);">
+                        <span style="font-size:2.6rem;">🌐</span>
+                        <small>Medallion · DuckDB · Comex Stat</small>
+                    </div>
+                    <span class="pbadge ba">● ativo</span>
+                </div>
+                <div class="pbody">
+                    <h3>OpenComex — Data Lakehouse de Comércio Exterior</h3>
+                    <p>Arquitetura Medallion (Bronze/Silver/Gold) agregando feeds internacionais (MDIC, UN Comtrade, Eurostat, AIS). Normalização colunar, balança comercial bilateral e cálculo de congestionamento portuário.</p>
+                </div>
+                <div class="ppills">
+                    <span class="pill hi">DuckDB</span>
+                    <span class="pill hi">Pandas</span>
+                    <span class="pill">Pydantic v2</span>
+                    <span class="pill">Medallion</span>
+                    <span class="pill">Parquet</span>
+                </div>
+                <div class="pfoot">
+                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/opencomex-lakehouse-intelligence" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
+                </div>
+            </div>
+
+            <!-- ✦ NOVO — Monitor Cambial & Histerese PTAX -->
+            <div class="pcard" data-tags="dados automacao" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/fx-volatility-monitor-engine','_blank')">
+                <div class="pimg" style="background:linear-gradient(135deg,#1f1a07,#332b0c,#171305);">
+                    <div class="pimg-ph" style="background:linear-gradient(135deg,#26200a,#3d330e,#1c1706);">
+                        <span style="font-size:2.6rem;">💱</span>
+                        <small>TypeScript · Histerese · PTAX</small>
+                    </div>
+                    <span class="pbadge ba">● produção</span>
+                </div>
+                <div class="pbody">
+                    <h3>FX Volatility Monitor &amp; Consensus Engine</h3>
+                    <p>Monitoramento em tempo real de câmbio intradiário e médias móveis estatutárias PTAX (S0, S-1, M0). Histerese anti-flapping (±R$ 0,01), cooldown de 1h e consenso multi-provedores.</p>
+                </div>
+                <div class="ppills">
+                    <span class="pill hi">TypeScript</span>
+                    <span class="pill">Node.js</span>
+                    <span class="pill">Histerese</span>
+                    <span class="pill">Banco Central</span>
+                    <span class="pill">node:test</span>
+                </div>
+                <div class="pfoot">
+                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/fx-volatility-monitor-engine" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
+                </div>
+            </div>
+
+            <!-- ✦ NOVO — Reconciliação Portuária Serverless -->
+            <div class="pcard" data-tags="dados automacao" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/portscale-reconcile-serverless','_blank')">
+                <div class="pimg" style="background:linear-gradient(135deg,#0a1a1f,#0f2a33,#08151a);">
+                    <div class="pimg-ph" style="background:linear-gradient(135deg,#0d2229,#13343f,#0a1a21);">
+                        <span style="font-size:2.6rem;">⚖️</span>
+                        <small>Workers · D1 SQL · Edge</small>
+                    </div>
+                    <span class="pbadge ba">● produção</span>
+                </div>
+                <div class="pbody">
+                    <h3>Reconciliação Portuária &amp; Ledger Serverless</h3>
+                    <p>Microsserviço de borda em Cloudflare Workers e D1 Edge SQL. Reconciliação de tíquetes de balança com tolerância de ±0.5% contra NFs do ERP e ledger imutável event-sourced.</p>
+                </div>
+                <div class="ppills">
+                    <span class="pill hi">Cloudflare Workers</span>
+                    <span class="pill hi">D1 Edge SQL</span>
+                    <span class="pill">TypeScript</span>
+                    <span class="pill">Event Sourcing</span>
+                </div>
+                <div class="pfoot">
+                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/portscale-reconcile-serverless" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
+                </div>
+            </div>
+
+            <!-- ✦ NOVO — B2B Lead Scoring -->
+            <div class="pcard" data-tags="ml dados" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/b2b-lead-scoring-intelligence','_blank')">
+                <div class="pimg" style="background:linear-gradient(135deg,#1f0a15,#331123,#170710);">
+                    <div class="pimg-ph" style="background:linear-gradient(135deg,#260d1b,#3d152b,#1c0914);">
+                        <span style="font-size:2.6rem;">🎯</span>
+                        <small>ICP Scoring · Cross-Selling</small>
+                    </div>
+                    <span class="pbadge ba">● ativo</span>
+                </div>
+                <div class="pbody">
+                    <h3>Score de Leads B2B &amp; Matriz de Cross-Selling</h3>
+                    <p>Algoritmo de pontuação de fit comercial e ICP (0–100) em 7 dimensões, faturamento em escala logarítmica, tiering (A/B/C/D) e matriz de afinidade de produtos metalúrgicos.</p>
+                </div>
+                <div class="ppills">
+                    <span class="pill hi">Python</span>
+                    <span class="pill">Pandas</span>
+                    <span class="pill">Pydantic v2</span>
+                    <span class="pill">Market Basket</span>
+                    <span class="pill">pytest</span>
+                </div>
+                <div class="pfoot">
+                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/b2b-lead-scoring-intelligence" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
+                </div>
+            </div>
+
+            <!-- ✦ NOVO — Watchdog de Borda -->
+            <div class="pcard" data-tags="automacao" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/edge-ops-watchdog-daemon','_blank')">
+                <div class="pimg" style="background:linear-gradient(135deg,#121b0a,#1e2e11,#0e1507);">
+                    <div class="pimg-ph" style="background:linear-gradient(135deg,#17230c,#233613,#101a09);">
+                        <span style="font-size:2.6rem;">🛡️</span>
+                        <small>Watchdog · Circuit Breaker · HA</small>
+                    </div>
+                    <span class="pbadge ba">● produção</span>
+                </div>
+                <div class="pbody">
+                    <h3>Edge Ops Watchdog &amp; Process Supervisor</h3>
+                    <p>Supervisor de alta disponibilidade 24/7 com auto-cura para bancos e APIs locais. Circuit-breaker com backoff exponencial contra reboot loops e sondagem de portas TCP/HTTP.</p>
+                </div>
+                <div class="ppills">
+                    <span class="pill hi">Python</span>
+                    <span class="pill">psutil</span>
+                    <span class="pill">Circuit Breaker</span>
+                    <span class="pill">Alta Disponibilidade</span>
+                </div>
+                <div class="pfoot">
+                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/edge-ops-watchdog-daemon" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
+                </div>
+            </div>
+
+            <!-- ✦ NOVO — Enterprise Inbox Radar -->
+            <div class="pcard" data-tags="ia automacao" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/enterprise-inbox-radar','_blank')">
+                <div class="pimg" style="background:linear-gradient(135deg,#150a1f,#241033,#100717);">
+                    <div class="pimg-ph" style="background:linear-gradient(135deg,#1b0d26,#2c143d,#14091c);">
+                        <span style="font-size:2.6rem;">📬</span>
+                        <small>MAPI · Regex POs · SLAs</small>
+                    </div>
+                    <span class="pbadge ba">● produção</span>
+                </div>
+                <div class="pbody">
+                    <h3>Enterprise Inbox Radar &amp; SLA Follow-Up</h3>
+                    <p>Motor de triagem corporativa de e-mails, clusterização por hash de assunto, extração determinística de Pedidos de Compra (PO)/NFs e classificação por estágios de SLA.</p>
+                </div>
+                <div class="ppills">
+                    <span class="pill hi">Python</span>
+                    <span class="pill">Regex Engine</span>
+                    <span class="pill">Pydantic v2</span>
+                    <span class="pill">SLA Triage</span>
+                </div>
+                <div class="pfoot">
+                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/enterprise-inbox-radar" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
                 </div>
             </div>
 
