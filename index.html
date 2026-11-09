@@ -1,1073 +1,485 @@
-<!DOCTYPE html>
-<html lang="pt-BR" data-theme="light">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wenderson Werneck — Dados & IA</title>
-    <link rel="icon" type="image/png" href="favicon.ico">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="preload" as="image" href="img-figurante-ai.webp" type="image/webp">
-    <style>
-        :root {
-            --blue:#007ACC; --blue-bright:#0087DD; --blue-dark:#005A9E;
-            --green:#1A7F37; --orange:#BC4C00; --purple:#6639BA; --red:#CF222E;
-        }
-        [data-theme="light"] {
-            --bg:#FFFFFF; --bg-surface:#F6F8FA; --bg-card:#FFFFFF;
-            --border:#D0D7DE; --border-lit:#007ACC66;
-            --text:#1F2328; --text-muted:#57606A; --text-dim:#8C959F;
-            --blue-dim:#EAF3FB; --blue-glow:rgba(0,122,204,0.12);
-        }
-        [data-theme="dark"] {
-            --bg:#0D1117; --bg-surface:#161B22; --bg-card:#1C2330;
-            --border:#30363D; --border-lit:#007ACC55;
-            --text:#E6EDF3; --text-muted:#A0ADB8; --text-dim:#6E7882;
-            --blue-dim:#0D2137; --blue-glow:rgba(0,122,204,0.2);
-        }
-
-        *{margin:0;padding:0;box-sizing:border-box;}
-        body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;transition:background .25s,color .25s;}
-        .container{width:90%;max-width:1140px;margin:0 auto;padding:0 20px;}
-
-        /* HEADER */
-        header{padding:.85rem 0;background:var(--bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;transition:background .25s,border-color .25s;}
-        [data-theme="dark"] header{background:rgba(13,17,23,.92);backdrop-filter:blur(16px);}
-        .hdr{display:flex;align-items:center;gap:1.5rem;}
-        .logo{font-family:'JetBrains Mono',monospace;font-size:1.05rem;font-weight:700;color:var(--blue);text-decoration:none;}
-        .logo span{color:var(--text-muted);}
-        nav{flex:1;}
-        nav ul{display:flex;list-style:none;gap:1.8rem;}
-        nav a{color:var(--text-muted);text-decoration:none;font-size:.85rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:color .2s;}
-        nav a:hover{color:var(--blue);}
-        .hdr-right{display:flex;gap:.45rem;align-items:center;margin-left:auto;}
-        .icon-btn{width:33px;height:33px;border-radius:7px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;font-size:.82rem;text-decoration:none;transition:all .2s;flex-shrink:0;}
-        .icon-btn:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-glow);}
-        .hamburger{display:none;background:none;border:none;color:var(--text);font-size:1.1rem;cursor:pointer;padding:.3rem;}
-
-        /* HERO */
-        .hero{padding:5rem 0 4rem;min-height:88vh;display:flex;align-items:center;}
-        .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;}
-        .eyebrow{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:1.1rem;}
-        .eyebrow::before{content:'// ';color:var(--text-dim);}
-        .hero-name{font-size:clamp(2.4rem,4vw,3.4rem);font-weight:800;line-height:1.05;letter-spacing:-.03em;margin-bottom:.55rem;}
-        .hero-name .accent{color:var(--blue);}
-        .hero-role{font-family:'JetBrains Mono',monospace;font-size:.92rem;color:var(--text-muted);margin-bottom:1.3rem;min-height:1.5rem;}
-        .cursor{display:inline-block;width:2px;height:1em;background:var(--blue);vertical-align:middle;margin-left:1px;animation:blink 1s step-end infinite;}
-        @keyframes blink{50%{opacity:0;}}
-        .hero-desc{font-size:.97rem;color:var(--text-muted);line-height:1.8;margin-bottom:1.9rem;max-width:480px;}
-        .hero-stats{display:flex;gap:2rem;margin-bottom:2rem;padding:1rem 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-        .stat-n{font-size:1.5rem;font-weight:800;color:var(--blue);line-height:1;}
-        .stat-l{font-size:.68rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.05em;margin-top:.22rem;}
-        .hero-btns{display:flex;gap:.75rem;flex-wrap:wrap;}
-        .btn{padding:.62rem 1.25rem;border-radius:8px;font-weight:700;font-size:.85rem;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;transition:all .2s;cursor:pointer;border:none;font-family:'Syne',sans-serif;}
-        .btn-primary{background:var(--blue);color:#fff;}
-        .btn-primary:hover{background:var(--blue-bright);transform:translateY(-2px);box-shadow:0 6px 18px var(--blue-glow);}
-        .btn-ghost{background:transparent;color:var(--text-muted);border:1px solid var(--border);}
-        .btn-ghost:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px);}
-
-        /* TERMINAL */
-        .terminal{background:#0D1117;border:1px solid #30363D;border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,.28);}
-        [data-theme="light"] .terminal{box-shadow:0 8px 28px rgba(0,0,0,.11);}
-        .term-bar{display:flex;align-items:center;gap:.4rem;padding:.65rem 1rem;background:rgba(0,0,0,.3);border-bottom:1px solid #30363D;}
-        .dot{width:11px;height:11px;border-radius:50%;}
-        .d-r{background:#FF5F57;}.d-y{background:#FEBC2E;}.d-g{background:#28C840;}
-        .term-title{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:#484F58;margin:0 auto;}
-        .term-body{padding:1rem 1.25rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.85;min-height:290px;}
-        .tl{display:block;opacity:0;transform:translateY(3px);transition:opacity .3s,transform .3s;color:#A0ADB8;}
-        .tl.show{opacity:1;transform:none;}
-        .tc{color:#484F58;}.tb{color:#1F9CF0;}.tg{color:#3FB950;}.to{color:#F0883E;}.tp{color:#BC8CFF;}
-
-        /* SECTIONS */
-        section{padding:4.5rem 0;}
-        .sec-label{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--blue);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.55rem;}
-        .sec-label::before{content:'// ';color:var(--text-dim);}
-        .sec-title{font-size:1.9rem;font-weight:800;letter-spacing:-.03em;margin-bottom:2.6rem;}
-        .sec-title span{color:var(--blue);}
-        .divider{border:none;border-top:1px solid var(--border);margin:0;}
-
-        /* SKILLS */
-        .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.1rem;}
-        .sg{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;transition:border-color .2s,transform .2s;}
-        .sg:hover{border-color:var(--blue);transform:translateY(-3px);}
-        .sg-hd{display:flex;align-items:center;gap:.65rem;margin-bottom:.9rem;}
-        .sg-ico{width:32px;height:32px;border-radius:7px;background:var(--blue-dim);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.82rem;}
-        .sg h3{font-size:.875rem;font-weight:700;}
-        .stags{display:flex;flex-wrap:wrap;gap:.35rem;}
-        .stag{font-family:'JetBrains Mono',monospace;font-size:.67rem;padding:.22rem .55rem;border-radius:5px;background:var(--bg-card);border:1px solid var(--border);color:var(--text-muted);transition:all .2s;}
-        .stag:hover{border-color:var(--blue);color:var(--blue);}
-        .stag.hi{border-color:var(--blue-dark);color:var(--blue);background:var(--blue-dim);}
-
-        /* PROJECTS */
-        .pf-row{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:2rem;}
-        .fbtn{font-family:'JetBrains Mono',monospace;font-size:.7rem;padding:.38rem .85rem;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--text-muted);cursor:pointer;transition:all .2s;}
-        .fbtn:hover,.fbtn.active{border-color:var(--blue);color:var(--blue);background:var(--blue-dim);}
-        .pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:1.4rem;}
-        .pcard{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;transition:transform .3s,border-color .3s,box-shadow .3s;}
-        .pcard:hover{transform:translateY(-5px);border-color:var(--blue);box-shadow:0 10px 30px var(--blue-glow);}
-        .pcard.hidden{display:none;}
-
-        /* card image */
-        .pimg{width:100%;height:170px;overflow:hidden;position:relative;flex-shrink:0;}
-        .pimg img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s;}
-        .pcard:hover .pimg img{transform:scale(1.06);}
-        .pimg-ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;}
-        .pimg-ph span{font-size:2.5rem;}
-        .pimg-ph small{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.4);letter-spacing:.1em;text-transform:uppercase;}
-        .pbadge{position:absolute;top:.55rem;right:.55rem;font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.15rem .48rem;border-radius:20px;border:1px solid;backdrop-filter:blur(6px);background:rgba(13,17,23,.7);}
-        .ba{color:#3FB950;border-color:#3FB950;}.bs{color:#F0883E;border-color:#F0883E;}
-
-        .pbody{padding:.95rem 1.15rem .45rem;flex:1;}
-        .pbody h3{font-size:.97rem;font-weight:700;margin-bottom:.38rem;}
-        .pbody p{font-size:.83rem;color:var(--text-muted);line-height:1.65;}
-        .ppills{display:flex;flex-wrap:wrap;gap:.28rem;padding:.4rem 1.15rem .75rem;}
-        .pill{font-family:'JetBrains Mono',monospace;font-size:.63rem;padding:.17rem .44rem;border-radius:4px;background:var(--bg-card);color:var(--text-muted);border:1px solid var(--border);}
-        /* pill destacada — Power BI e Snowflake */
-        .pill.hi{background:var(--blue-dim);color:var(--blue);border-color:var(--blue-dark);font-weight:700;}
-
-        /* 4 doc buttons */
-        .pfoot{border-top:1px solid var(--border);padding:.75rem 1.15rem;display:grid;grid-template-columns:repeat(4,1fr);gap:.3rem;}
-        .db{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;padding:.38rem .2rem;border-radius:6px;text-decoration:none;display:flex;align-items:center;justify-content:center;gap:.25rem;transition:all .2s;cursor:pointer;border:1px solid;}
-        .db-r{color:var(--blue);border-color:var(--blue-dark);background:var(--blue-dim);}
-        .db-a{color:var(--purple);border-color:rgba(102,57,186,.28);background:rgba(102,57,186,.07);}
-        .db-i{color:var(--green);border-color:rgba(26,127,55,.28);background:rgba(26,127,55,.07);}
-        .db-g{color:var(--text-muted);border-color:var(--border);background:var(--bg-card);}
-        .db-gal{color:#C9A227;border-color:rgba(201,162,39,.3);background:rgba(201,162,39,.07);}
-        [data-theme="dark"] .db-r{color:#1F9CF0;border-color:#0D2137;background:#0D2137;}
-        [data-theme="dark"] .db-a{color:#BC8CFF;border-color:rgba(188,140,255,.2);background:rgba(188,140,255,.07);}
-        [data-theme="dark"] .db-i{color:#3FB950;border-color:rgba(63,185,80,.22);background:rgba(63,185,80,.07);}
-        [data-theme="dark"] .db-g{color:#A0ADB8;border-color:#30363D;background:#1C2330;}
-        [data-theme="dark"] .db-gal{color:#E3C45A;border-color:rgba(227,196,90,.22);background:rgba(227,196,90,.06);}
-        .db:hover{filter:brightness(1.12);transform:translateY(-1px);}
-
-        /* GALLERY MODAL */
-        .gal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:600;align-items:center;justify-content:center;padding:1rem;}
-        .gal-ov.open{display:flex;}
-        .gal-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:16px;width:100%;max-width:860px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.5);animation:mIn .22s ease;overflow:hidden;}
-        .gal-hd{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.3rem;border-bottom:1px solid var(--border);flex-shrink:0;}
-        .gal-ttl{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:#C9A227;font-weight:700;display:flex;align-items:center;gap:.5rem;}
-        [data-theme="dark"] .gal-ttl{color:#E3C45A;}
-        .gal-cls{width:28px;height:28px;border-radius:6px;background:none;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;}
-        .gal-cls:hover{background:var(--bg-card);color:var(--text);}
-        .gal-body{overflow-y:auto;padding:1.2rem;}
-        .gal-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.85rem;}
-        .gal-item{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:var(--bg-card);aspect-ratio:16/10;position:relative;transition:transform .25s,border-color .25s,box-shadow .25s;}
-        .gal-item:hover{transform:translateY(-3px);border-color:var(--border-lit);box-shadow:0 8px 24px var(--blue-glow);}
-        .gal-item img{width:100%;height:100%;object-fit:cover;display:block;}
-        .gal-cap{position:absolute;bottom:0;left:0;right:0;padding:.4rem .65rem;background:linear-gradient(to top,rgba(0,0,0,.75),transparent);font-family:'JetBrains Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.8);letter-spacing:.04em;opacity:0;transition:opacity .2s;}
-        .gal-item:hover .gal-cap{opacity:1;}
-        @media(max-width:480px){.pfoot{grid-template-columns:repeat(2,1fr);}.gal-grid{grid-template-columns:1fr 1fr;}}
-
-        /* MODAL */
-        .modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.52);backdrop-filter:blur(4px);z-index:500;align-items:center;justify-content:center;padding:1rem;}
-        .modal-ov.open{display:flex;}
-        .modal-box{background:var(--bg-surface);border:1px solid var(--border);border-radius:14px;width:100%;max-width:740px;max-height:87vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.3);animation:mIn .22s ease;}
-        @keyframes mIn{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
-        .modal-hd{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.3rem;border-bottom:1px solid var(--border);flex-shrink:0;}
-        .modal-ttl{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--blue);font-weight:700;}
-        .modal-cls{width:28px;height:28px;border-radius:6px;background:none;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.9rem;transition:all .2s;}
-        .modal-cls:hover{background:var(--bg-card);color:var(--text);}
-        .modal-bd{overflow-y:auto;padding:1.4rem 1.7rem;flex:1;font-size:.855rem;line-height:1.8;color:var(--text-muted);}
-        .modal-bd h1{font-size:1.35rem;font-weight:800;color:var(--text);margin-bottom:.55rem;padding-bottom:.45rem;border-bottom:1px solid var(--border);}
-        .modal-bd h2{font-size:1rem;font-weight:700;color:var(--text);margin:1.3rem 0 .45rem;display:flex;align-items:center;gap:.45rem;}
-        .modal-bd h2::before{content:'';display:inline-block;width:3px;height:1em;background:var(--blue);border-radius:2px;}
-        .modal-bd h3{font-size:.875rem;font-weight:700;color:var(--text-muted);margin:.9rem 0 .35rem;}
-        .modal-bd p{margin-bottom:.75rem;}
-        .modal-bd ul{list-style:none;display:flex;flex-direction:column;gap:.28rem;margin-bottom:.85rem;}
-        .modal-bd ul li{padding-left:1.1rem;position:relative;}
-        .modal-bd ul li::before{content:'→';position:absolute;left:0;color:var(--blue);font-family:'JetBrains Mono',monospace;font-size:.78rem;}
-        .modal-bd code{font-family:'JetBrains Mono',monospace;font-size:.76rem;background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:.08rem .32rem;color:var(--blue);}
-        .modal-bd pre{background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:.9rem 1.1rem;overflow-x:auto;margin-bottom:.9rem;}
-        .modal-bd pre code{background:none;border:none;padding:0;font-size:.74rem;color:var(--text-muted);}
-        .modal-bd strong{color:var(--text);font-weight:700;}
-        .modal-bd hr{border:none;border-top:1px solid var(--border);margin:1.1rem 0;}
-        .modal-bd blockquote{border-left:3px solid var(--blue);background:var(--blue-dim);padding:.65rem 1rem;border-radius:0 6px 6px 0;margin-bottom:.85rem;}
-        .modal-bd blockquote p{margin:0;}
-        .modal-bd a{color:var(--blue);}
-
-        /* EDUCATION */
-        .edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.9rem;}
-        .edu-card{background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;display:flex;gap:.85rem;align-items:flex-start;transition:border-color .2s,transform .2s;}
-        .edu-card:hover{border-color:var(--blue);transform:translateY(-2px);}
-        .edu-ico{width:32px;height:32px;flex-shrink:0;border-radius:7px;background:var(--blue-dim);color:var(--blue);display:flex;align-items:center;justify-content:center;font-size:.82rem;}
-        .edu-content h3{font-size:.85rem;font-weight:700;line-height:1.3;margin-bottom:.28rem;}
-        .edu-meta{font-size:.72rem;color:var(--text-muted);display:flex;gap:.4rem;align-items:center;flex-wrap:wrap;}
-        .ebadge{font-family:'JetBrains Mono',monospace;font-size:.6rem;padding:.1rem .38rem;border-radius:4px;}
-        .b-on{background:var(--blue-dim);color:var(--blue);border:1px solid var(--blue-dark);}
-        .b-ok{background:rgba(26,127,55,.1);color:var(--green);border:1px solid rgba(26,127,55,.22);}
-        [data-theme="dark"] .b-ok{background:rgba(63,185,80,.1);color:#3FB950;border-color:rgba(63,185,80,.22);}
-
-        /* CONTACT */
-        .clayout{display:grid;grid-template-columns:1fr 1.2fr;gap:2.4rem;}
-        .clinks{display:flex;flex-direction:column;gap:.65rem;}
-        .citem{display:flex;align-items:center;gap:.85rem;padding:.85rem 1.05rem;background:var(--bg-surface);border:1px solid var(--border);border-radius:10px;color:var(--text);text-decoration:none;transition:all .2s;}
-        .citem:hover{border-color:var(--blue);transform:translateX(3px);}
-        .ci-ico{color:var(--blue);font-size:.95rem;width:17px;text-align:center;}
-        .ci-lbl{font-size:.65rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.07em;font-family:'JetBrains Mono',monospace;}
-        .ci-val{font-size:.85rem;font-weight:600;}
-        .cform{background:var(--bg-surface);border:1px solid var(--border);border-radius:12px;padding:1.6rem;}
-        .ftitle{font-size:.95rem;font-weight:700;margin-bottom:1.2rem;}
-        .fg{margin-bottom:.9rem;}
-        .fg label{display:block;font-size:.68rem;font-weight:600;color:var(--text-muted);margin-bottom:.32rem;text-transform:uppercase;letter-spacing:.06em;font-family:'JetBrains Mono',monospace;}
-        .fg input,.fg textarea{width:100%;padding:.6rem .8rem;background:var(--bg-card);border:1px solid var(--border);border-radius:7px;color:var(--text);font-family:'Syne',sans-serif;font-size:.855rem;transition:border-color .2s,box-shadow .2s;}
-        .fg input:focus,.fg textarea:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px var(--blue-glow);}
-        .fg textarea{min-height:95px;resize:vertical;}
-        .frow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
-        #fstatus{font-size:.8rem;margin-top:.65rem;padding:.5rem .85rem;border-radius:7px;display:none;}
-        #fstatus.ok{background:rgba(26,127,55,.1);color:var(--green);border:1px solid rgba(26,127,55,.22);display:block;}
-        #fstatus.err{background:rgba(207,34,46,.1);color:var(--red);border:1px solid rgba(207,34,46,.22);display:block;}
-        [data-theme="dark"] #fstatus.ok{background:rgba(63,185,80,.12);color:#3FB950;}
-        [data-theme="dark"] #fstatus.err{background:rgba(248,81,73,.12);color:#F85149;}
-
-        /* FOOTER */
-        footer{border-top:1px solid var(--border);padding:1.7rem 0;}
-        .ft-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.8rem;}
-        .ft-copy{font-family:'JetBrains Mono',monospace;font-size:.75rem;color:var(--text-dim);}
-        .ft-links{display:flex;gap:.9rem;}
-        .ft-links a{color:var(--text-dim);font-size:.95rem;transition:color .2s;text-decoration:none;}
-        .ft-links a:hover{color:var(--blue);}
-
-        /* REVEAL */
-        .reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease;}
-        .reveal.visible{opacity:1;transform:none;}
-
-        /* RESPONSIVE */
-        @media(max-width:860px){
-            .hero-grid{grid-template-columns:1fr;}
-            .hero-right{display:none;}
-            nav{display:none;}
-            nav.open{display:block;position:fixed;top:55px;left:0;right:0;background:var(--bg-surface);border-bottom:1px solid var(--border);padding:1rem 1.5rem;z-index:199;}
-            nav.open ul{flex-direction:column;gap:0;}
-            nav.open a{display:block;padding:.7rem 0;border-bottom:1px solid var(--border);}
-            nav.open li:last-child a{border-bottom:none;}
-            .hamburger{display:block;}
-            .hero{padding:3rem 0 2.5rem;min-height:auto;}
-            .hero-stats{gap:1.2rem;}
-            .pfoot{grid-template-columns:1fr 1fr;}
-            .clayout{grid-template-columns:1fr;}
-            .frow{grid-template-columns:1fr;}
-            .ft-inner{flex-direction:column;text-align:center;}
-        }
-        @media(max-width:480px){
-            .pgrid{grid-template-columns:1fr;}
-            .hero-name{font-size:2.1rem;}
-            .hero-stats{flex-wrap:wrap;gap:.9rem;}
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Wenderson Werneck — Analytics Engineer & Machine Learning Engineer | Cloud Data Warehousing, MLOps, Python, Snowflake, SQL. Relocating to Tallinn, Estonia.">
+  <title>Wenderson Werneck — Analytics & Machine Learning Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink: #0e1e16;
+      --muted: #4e5f54;
+      --paper: #f8faf7;
+      --line: #d8e2da;
+      --green: #145a32;
+      --lime: #b4e824;
+      --card: #ffffff;
+      --blue: #0f4c6e;
+      --accent-estonia: #0072ce;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1120px;margin:auto;padding:0 24px}
+    header{position:sticky;top:0;background:#f8faf7ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100}
+    .nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .brand{font-weight:800;text-decoration:none;color:var(--ink);letter-spacing:-.04em;font-size:18px}
+    .brand span{color:var(--green)}
+    .navlinks{display:flex;gap:20px;align-items:center}
+    .navlinks a{color:var(--muted);font-size:14px;text-decoration:none;font-weight:600;transition:color .15s}
+    .navlinks a:hover{color:var(--green)}
+    .nav-lang{font:600 12px 'DM Mono',monospace;padding:4px 9px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none;background:#fff;transition:all .15s}
+    .nav-lang:hover{border-color:var(--green);color:var(--green)}
+    
+    .hero{padding:84px 0 68px;background:radial-gradient(circle at 85% 10%,#d8f5b8 0,transparent 36%)}
+    .eyebrow-badge{display:inline-flex;align-items:center;gap:8px;font:600 12px 'DM Mono',monospace;letter-spacing:.08em;color:var(--green);text-transform:uppercase;background:#eaf6ec;border:1px solid #c2e5cb;padding:5px 12px;border-radius:20px;margin-bottom:16px}
+    .hero h1{max-width:920px;margin:0 0 20px;font-size:clamp(36px,5.2vw,64px);line-height:1.08;letter-spacing:-.05em;font-weight:800}
+    .hero h1 em{font-style:normal;color:var(--green)}
+    .lead{max-width:780px;color:var(--muted);font-size:19px;margin:0 0 28px;line-height:1.6}
+    
+    .hero-meta{display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-bottom:32px;padding:16px 20px;background:#fff;border:1px solid var(--line);border-radius:10px}
+    .meta-item{display:flex;flex-direction:column}
+    .meta-val{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+    .meta-lbl{font:500 11px 'DM Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .button{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border:1px solid var(--ink);border-radius:8px;color:var(--ink);font-weight:700;text-decoration:none;transition:all .15s;font-size:14px}
+    .button.primary{border-color:var(--green);background:var(--green);color:#fff}
+    .button.primary:hover{background:#0e4023;transform:translateY(-1px)}
+    .button:hover{transform:translateY(-1px);background:#f0f5f1}
+    
+    main{padding:68px 0}
+    .section{margin-bottom:80px}
+    .sec-eyebrow{font:600 12px 'DM Mono',monospace;letter-spacing:.12em;color:var(--green);text-transform:uppercase;margin-bottom:8px}
+    .section h2{font-size:30px;letter-spacing:-.04em;margin:0 0 12px}
+    .intro{color:var(--muted);max-width:760px;margin:0 0 28px;font-size:16px}
+    
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px}
+    .card h3{margin:0 0 8px;font-size:18px;letter-spacing:-.02em}
+    .card p,.card li{font-size:14px;color:var(--muted);line-height:1.6}
+    .card ul{padding-left:18px;margin:14px 0 0}
+    .tag{font:600 11px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.07em;color:var(--green);margin-bottom:6px}
+    
+    .case{display:grid;grid-template-columns:160px 1fr;gap:28px;padding:30px 0;border-top:1px solid var(--line)}
+    .case:last-child{border-bottom:1px solid var(--line)}
+    .case-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:8px}
+    .case h3{margin:0;font-size:21px;letter-spacing:-.03em}
+    .case p{margin:0;color:var(--muted);line-height:1.6}
+    .case ul{color:var(--muted);font-size:14px;padding-left:18px;margin:12px 0 0;line-height:1.65}
+    .case ul li{margin-bottom:4px}
+    
+    .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+    .pill{font:500 11px 'DM Mono',monospace;padding:3px 8px;border-radius:5px;background:#edf8ef;color:var(--green);border:1px solid #c8e5d0}
+    
+    .btn-repo{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink);font:600 12px 'DM Mono',monospace;text-decoration:none;transition:all .15s}
+    .btn-repo:hover{border-color:var(--green);color:var(--green);background:#edf8ef;transform:translateY(-1px)}
+    
+    .estonia-box{background:#f0f6fa;border:1px solid #c9e0f2;border-radius:12px;padding:28px;margin-top:32px}
+    .estonia-box h3{margin:0 0 8px;font-size:20px;letter-spacing:-.03em;color:#0a3b5c;display:flex;align-items:center;gap:10px}
+    .estonia-box p{color:#2a506d;margin:0 0 16px;font-size:15px}
+    .estonia-badges{display:flex;gap:10px;flex-wrap:wrap}
+    .e-badge{font:600 11px 'DM Mono',monospace;padding:4px 10px;border-radius:6px;background:#fff;border:1px solid #a8cee9;color:#0f4c6e}
+    
+    .principles{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
+    .principle{border-left:3px solid var(--lime);padding:6px 0 6px 16px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:14px 16px}
+    .principle b{display:block;margin-bottom:4px}
+    .principle span{font-size:14px;color:var(--muted)}
+    
+    .contact{background:var(--ink);color:#fff;padding:72px 0}
+    .contact h2{font-size:34px;letter-spacing:-.04em;margin:0 0 12px}
+    .contact p{color:#c7d6cb;max-width:660px;margin:0 0 24px}
+    .contact-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+    .contact a{color:var(--lime);font-weight:700;text-decoration:none}
+    .contact a:hover{text-decoration:underline}
+    
+    @media(max-width:760px){
+      .navlinks{display:none}
+      .hero{padding:64px 0 46px}
+      .grid{grid-template-columns:1fr}
+      .case{grid-template-columns:1fr;gap:10px}
+      .principles{grid-template-columns:1fr}
+      .hero-meta{flex-direction:column;align-items:flex-start;gap:12px}
+    }
+  </style>
 </head>
 <body>
-
-<header>
-    <div class="container">
-        <div class="hdr">
-            <a href="#" class="logo">WW<span>.dev</span></a>
-            <nav id="mainNav">
-                <ul>
-                    <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projetos</a></li>
-                    <li><a href="international.html">International</a></li>
-                    <li><a href="#education">Formação</a></li>
-                    <li><a href="#contact">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="hdr-right">
-                <a class="icon-btn" href="https://linkedin.com/in/wendersonwerneck" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a class="icon-btn" href="https://github.com/wenderson-werneck" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                <button class="icon-btn" id="themeBtn" title="Alternar tema"><i class="fas fa-moon"></i></button>
-                <button class="hamburger" id="hamburger"><i class="fas fa-bars"></i></button>
-            </div>
-        </div>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="index.html">Wenderson Werneck<span>.dev</span></a>
+      <nav class="navlinks">
+        <a href="#work">Selected work</a>
+        <a href="#stack">Tech stack</a>
+        <a href="#estonia">Estonia & Relocation</a>
+        <a href="#practice">Engineering practice</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-lang" href="pt.html">PT-BR</a>
+      </nav>
     </div>
-</header>
+  </header>
 
-<section class="hero">
-    <div class="container">
-        <div class="hero-grid">
-            <div>
-                <p class="eyebrow">Engenharia de Dados · Machine Learning · IA Aplicada</p>
-                <h1 class="hero-name">Wenderson<br><span class="accent">Werneck</span></h1>
-                <p class="hero-role"><span id="tw"></span><span class="cursor"></span></p>
-                <p class="hero-desc">Projetando e entregando pipelines de dados em nuvem (Snowflake, BigQuery, PostgreSQL, DuckDB), modelos preditivos em produção (LightGBM, XGBoost, MLflow) e sistemas de automação com IA/RAG.</p>
-                <div class="hero-stats">
-                    <div><div class="stat-n">200k+</div><div class="stat-l">Registros modelados</div></div>
-                    <div><div class="stat-n">&lt;8.4%</div><div class="stat-l">WAPE em previsão ML</div></div>
-                    <div><div class="stat-n">12+</div><div class="stat-l">Sistemas em produção</div></div>
-                </div>
-                <div class="hero-btns">
-                    <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" target="_blank" class="btn btn-primary"><i class="fab fa-whatsapp"></i> Entrar em contato</a>
-                    <a href="https://github.com/Wenderson-Werneck?tab=repositories" target="_blank" class="btn btn-ghost"><i class="fab fa-github"></i> GitHub (12 Repos)</a>
-                    <a href="international.html" class="btn btn-ghost"><i class="fas fa-globe"></i> English profile</a>
-                </div>
-            </div>
-            <div class="hero-right">
-                <div class="terminal">
-                    <div class="term-bar">
-                        <span class="dot d-r"></span><span class="dot d-y"></span><span class="dot d-g"></span>
-                        <span class="term-title">~/portfolio/projetos.py</span>
-                    </div>
-                    <div class="term-body" id="termBody"></div>
-                </div>
-            </div>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow-badge">
+        <span>🇪🇪</span> Targeting Tallinn, Estonia · EU Tech Relocation Ready
+      </div>
+      <h1>Analytics engineering, cloud warehousing, and <em>applied machine learning</em> in production.</h1>
+      <p class="lead">I design, build, and maintain production data pipelines (Snowflake, BigQuery, DuckDB, PostgreSQL), statistical forecasting & MLOps engines (Holt-Winters, IsolationForest, LightGBM, MLflow), and deterministic AI/LLM systems across international logistics, finance, and industrial operations.</p>
+      
+      <div class="hero-meta">
+        <div class="meta-item">
+          <div class="meta-val">12 Public Repos</div>
+          <div class="meta-lbl">Open-Source Code & Test Suites</div>
         </div>
+        <div class="meta-item">
+          <div class="meta-val">&lt; 5.11% WAPE</div>
+          <div class="meta-lbl">Holdout Demand Forecast Error</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-val">Snowflake Certified</div>
+          <div class="meta-lbl">Data Engineer Professional</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-val">Dec 2027 / Jan 2028</div>
+          <div class="meta-lbl">Estonia Relocation Window</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <a class="button primary" href="#work">Explore code & case studies (11)</a>
+        <a class="button" href="https://github.com/Wenderson-Werneck?tab=repositories" target="_blank" rel="noreferrer">GitHub profile ↗</a>
+        <a class="button" href="https://www.linkedin.com/in/wendersonwerneck" target="_blank" rel="noreferrer">LinkedIn profile ↗</a>
+        <a class="button" href="pt.html">Versão em Português (PT-BR)</a>
+      </div>
     </div>
-</section>
+  </section>
 
-<hr class="divider">
+  <main class="wrap">
+    <section class="section">
+      <div class="sec-eyebrow">Profile & Capabilities</div>
+      <h2>End-to-end data lifecycle & production engineering.</h2>
+      <p class="intro">Working across modern analytics engineering, applied machine learning, and resilient backend automation. Transitioning complex, messy operational data into clean analytical models, validated predictive pipelines, and high-uptime decision-support services.</p>
+      
+      <div class="grid">
+        <article class="card">
+          <div class="tag">Cloud Data Engineering</div>
+          <h3>Warehousing & Medallion ELT</h3>
+          <p>Medallion architectures (Bronze/Silver/Gold), incremental Change Data Capture (CDC) via Snowflake Streams & Tasks, Google BigQuery, PostgreSQL, DuckDB, and idempotent document-to-record reconciliation.</p>
+        </article>
+        <article class="card">
+          <div class="tag">Machine Learning & MLOps</div>
+          <h3>Forecasting & Risk Models</h3>
+          <p>Time-series demand forecasting, isolation-forest anomaly detection, and credit risk classification using pure NumPy, SciPy, LightGBM, and scikit-learn—with chronological validation and MLflow tracking.</p>
+        </article>
+        <article class="card">
+          <div class="tag">Applied AI & Edge Systems</div>
+          <h3>RAG Agents & Microservices</h3>
+          <p>Hybrid retrieval RAG (BM25 + Dense Cosine + RRF), deterministic tool-calling with Pydantic v2, Cloudflare Workers & D1 Edge SQL, and 24/7 high-availability process supervision daemons.</p>
+        </article>
+      </div>
+    </section>
 
-<section id="skills">
-    <div class="container">
-        <div class="reveal"><p class="sec-label">Competências</p><h2 class="sec-title">Habilidades <span>Técnicas</span></h2></div>
-        <div class="skills-grid reveal">
-            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-database"></i></div><h3>Dados & Cloud</h3></div><div class="stags"><span class="stag hi">Snowflake</span><span class="stag hi">SQL (PostgreSQL, BigQuery)</span><span class="stag hi">Python (Pandas, Polars)</span><span class="stag hi">GCP</span><span class="stag">DuckDB</span><span class="stag">ETL / ELT</span><span class="stag">Medallion</span></div></div>
-            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-brain"></i></div><h3>Machine Learning & MLOps</h3></div><div class="stags"><span class="stag hi">LightGBM</span><span class="stag hi">XGBoost</span><span class="stag hi">Scikit-learn</span><span class="stag hi">MLflow</span><span class="stag">SHAP</span><span class="stag">TimeSeriesSplit</span><span class="stag">SMOTE</span></div></div>
-            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-microchip"></i></div><h3>IA Aplicada & RAG</h3></div><div class="stags"><span class="stag hi">ChromaDB (RAG)</span><span class="stag hi">Ollama (LLMs local)</span><span class="stag hi">Gemini Function Calling</span><span class="stag">SentenceTransformers</span><span class="stag">Faster-Whisper</span></div></div>
-            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-chart-bar"></i></div><h3>BI & Visualização</h3></div><div class="stags"><span class="stag hi">Power BI (DAX)</span><span class="stag hi">Streamlit</span><span class="stag">Tableau</span><span class="stag">Excel Avançado</span><span class="stag">Chart.js</span></div></div>
-            <div class="sg"><div class="sg-hd"><div class="sg-ico"><i class="fas fa-server"></i></div><h3>Backend, Edge & RPA</h3></div><div class="stags"><span class="stag hi">FastAPI</span><span class="stag hi">Playwright</span><span class="stag hi">Cloudflare Workers & D1</span><span class="stag">TypeScript / React</span><span class="stag">Git & CI/CD</span></div></div>
+    <!-- ESTONIA SECTION -->
+    <section class="section" id="estonia">
+      <div class="sec-eyebrow">Relocation & Work Authorization</div>
+      <h2>Estonian Tech Ecosystem Focus.</h2>
+      <p class="intro">Estonia is the global benchmark for digital governance and high-efficiency tech unicorns. I am actively preparing my long-term international career and relocation to Tallinn.</p>
+      
+      <div class="estonia-box">
+        <h3>🇪🇪 Tere tulemast! / Relocation Readiness Briefing</h3>
+        <p>I am targeting on-site or hybrid <strong>Analytics Engineer</strong>, <strong>Data Engineer</strong>, and <strong>Applied ML Engineer</strong> roles in Tallinn / Tartu, Estonia. Fully equipped to deliver immediate engineering impact with verified open-source code and zero ramp-up time on modern data stacks.</p>
+        <div class="estonia-badges">
+          <span class="e-badge">Target Relocation: Dec 2027 / Jan 2028 (or accelerated)</span>
+          <span class="e-badge">Visa Track: Estonian Tech Visa / EU Blue Card Eligible</span>
+          <span class="e-badge">Academic: B.Sc. Data Science & AI (UniDomBosco)</span>
+          <span class="e-badge">English Proficiency: Professional Working Fluency</span>
+          <span class="e-badge">Target Ecosystem: Bolt, Wise, Swedbank, LHV, Veriff & High-Growth Startups</span>
         </div>
+      </div>
+    </section>
+
+    <!-- SELECTED APPLIED WORK -->
+    <section class="section" id="work">
+      <div class="sec-eyebrow">Applied Engineering Showcase</div>
+      <h2>Production systems & technical case studies.</h2>
+      <p class="intro">Every repository below is runnable, accompanied by an automated test suite, architecture diagrams, and mathematical formulations. All proprietary corporate records have been strictly anonymized with synthetic mock data.</p>
+
+      <!-- 1: Commodity MLOps Engine -->
+      <article class="case">
+        <div class="tag">MLOps · Forecasting</div>
+        <div>
+          <div class="case-head">
+            <h3>Industrial Demand & Freight Forecasting Engine</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/commodity-mlops-engine" target="_blank" rel="noreferrer">
+              <span>commodity-mlops-engine</span> ↗
+            </a>
+          </div>
+          <p>Statistical time-series demand forecasting and unsupervised spot freight rate anomaly detection engine built for 60–90 day maritime supply lead times.</p>
+          <ul>
+            <li>Engineered vectorized Damped Holt-Winters exponential smoothing model optimized via Nelder-Mead on holdout split (achieved 5.11% WAPE).</li>
+            <li>Implemented IsolationForest contamination modeling (87.5% precision) for spot freight anomaly detection.</li>
+            <li>Tracked experiment runs reproducibly with JSONL / MLflow audit logs and automated pytest suite passing 100%.</li>
+          </ul>
+          <div class="pills"><span class="pill">Python</span><span class="pill">NumPy</span><span class="pill">SciPy</span><span class="pill">scikit-learn</span><span class="pill">MLflow</span><span class="pill">pytest</span></div>
+        </div>
+      </article>
+
+      <!-- 2: OpenComex Lakehouse -->
+      <article class="case">
+        <div class="tag">Data Lakehouse · Comex</div>
+        <div>
+          <div class="case-head">
+            <h3>OpenComex — Global Trade & Multimodal Supply Chain Lakehouse</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/opencomex-lakehouse-intelligence" target="_blank" rel="noreferrer">
+              <span>opencomex-lakehouse-intelligence</span> ↗
+            </a>
+          </div>
+          <p>Medallion lakehouse architecture (Bronze, Silver, Gold) aggregating international trade feeds (MDIC Comex Stat, UN Comtrade, Eurostat, and AIS vessel lineups).</p>
+          <ul>
+            <li>Normalized raw trade events into strongly-typed tabular models with automated virtual unit-price calculations ($/kg).</li>
+            <li>Built analytical Gold data marts for bilateral balance of trade and maritime anchorage congestion indices.</li>
+            <li>Standardized against UN/LOCODE, ISO 3166-1 alpha-3, and DCSA container track & trace specifications.</li>
+          </ul>
+          <div class="pills"><span class="pill">Python</span><span class="pill">DuckDB</span><span class="pill">Pandas</span><span class="pill">Pydantic v2</span><span class="pill">Medallion</span><span class="pill">pytest</span></div>
+        </div>
+      </article>
+
+      <!-- 3: FX Volatility Monitor -->
+      <article class="case">
+        <div class="tag">FinTech · Real-Time</div>
+        <div>
+          <div class="case-head">
+            <h3>FX Volatility Monitor & Consensus Engine</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/fx-volatility-monitor-engine" target="_blank" rel="noreferrer">
+              <span>fx-volatility-monitor-engine</span> ↗
+            </a>
+          </div>
+          <p>Real-time foreign exchange monitoring, threshold evaluation, and statutory Central Bank PTAX rolling moving-average analytical engine.</p>
+          <ul>
+            <li>Designed anti-flapping hysteresis engine with configurable bands (±R$ 0.01) and cooldown timers to prevent alert fatigue.</li>
+            <li>Resolved multi-source consensus rates across heterogeneous providers (AwesomeAPI, Twelve Data, Central Bank PTAX).</li>
+            <li>Computed statutory rolling weekly averages (S0, S-1, Δ) and monthly averages with calendar-aware partial week processing.</li>
+          </ul>
+          <div class="pills"><span class="pill">TypeScript (ES2022)</span><span class="pill">Node.js</span><span class="pill">Hysteresis</span><span class="pill">Central Bank PTAX</span><span class="pill">node:test</span></div>
+        </div>
+      </article>
+
+      <!-- 4: Portscale Reconcile -->
+      <article class="case">
+        <div class="tag">Edge · Serverless</div>
+        <div>
+          <div class="case-head">
+            <h3>Serverless Port Scale Ticket Reconciliation & Inventory Ledger</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/portscale-reconcile-serverless" target="_blank" rel="noreferrer">
+              <span>portscale-reconcile-serverless</span> ↗
+            </a>
+          </div>
+          <p>Distributed serverless weighbridge reconciliation service running on Cloudflare Workers and D1 Edge SQL.</p>
+          <ul>
+            <li>Enforced dynamic weight discrepancy tolerance checks (±0.5%) matching port scale gross/tare tickets against ERP invoices.</li>
+            <li>Maintained an immutable, append-only event-sourced inventory ledger preserving full data provenance and audit trails.</li>
+            <li>Delivered sub-100ms global latency under Cloudflare Zero Trust authentication.</li>
+          </ul>
+          <div class="pills"><span class="pill">Cloudflare Workers</span><span class="pill">D1 Edge SQL</span><span class="pill">TypeScript</span><span class="pill">Event Sourcing</span><span class="pill">node:test</span></div>
+        </div>
+      </article>
+
+      <!-- 5: Enterprise Ops RAG Agent -->
+      <article class="case">
+        <div class="tag">Applied AI · RAG</div>
+        <div>
+          <div class="case-head">
+            <h3>Enterprise Operations RAG Agent & Deterministic Tool-Calling</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/enterprise-ops-rag-agent" target="_blank" rel="noreferrer">
+              <span>enterprise-ops-rag-agent</span> ↗
+            </a>
+          </div>
+          <p>Production operational assistant combining hybrid retrieval (lexical BM25 + dense cosine similarity + RRF) with deterministic function execution.</p>
+          <ul>
+            <li>Implemented strict Pydantic v2 tool definitions for real-time inventory queries and freight calculation.</li>
+            <li>Enforced post-generation factual grounding verification to prevent hallucinations on operational and logistical queries.</li>
+            <li>Packaged with automated test coverage validating tool execution accuracy and citation integrity.</li>
+          </ul>
+          <div class="pills"><span class="pill">Python</span><span class="pill">FastAPI</span><span class="pill">Pydantic v2</span><span class="pill">Hybrid RAG</span><span class="pill">RRF</span><span class="pill">pytest</span></div>
+        </div>
+      </article>
+
+      <!-- 6: Global Trade FX Simulator -->
+      <article class="case">
+        <div class="tag">Trade Finance · Risk</div>
+        <div>
+          <div class="case-head">
+            <h3>Global Trade Landed Cost & FX Risk Simulator</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/globaltrade-fx-risk-simulator" target="_blank" rel="noreferrer">
+              <span>globaltrade-fx-risk-simulator</span> ↗
+            </a>
+          </div>
+          <p>Multi-scenario import landed cost simulator and trade finance cashflow scheduler under PTAX exchange rate volatility.</p>
+          <ul>
+            <li>Decomposed total landed costs across commercial commodity value, maritime freight (bulk vs container TEU scaling), and port handling.</li>
+            <li>Constructed industrial 20/60/20 milestone disbursement schedules tied to contract execution and customs clearance.</li>
+            <li>Simulated exchange rate stress scenarios (Base, Best -4%, Stress +8%) to evaluate corporate cashflow variance.</li>
+          </ul>
+          <div class="pills"><span class="pill">TypeScript</span><span class="pill">Node.js</span><span class="pill">Trade Finance</span><span class="pill">PTAX Stress Testing</span><span class="pill">node:test</span></div>
+        </div>
+      </article>
+
+      <!-- 7: B2B Lead Scoring -->
+      <article class="case">
+        <div class="tag">Market Intelligence</div>
+        <div>
+          <div class="case-head">
+            <h3>B2B Industrial ICP Lead Scoring & Market Intelligence Engine</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/b2b-lead-scoring-intelligence" target="_blank" rel="noreferrer">
+              <span>b2b-lead-scoring-intelligence</span> ↗
+            </a>
+          </div>
+          <p>Multi-attribute Ideal Customer Profile (ICP) lead scoring, tier classification (Tiers A/B/C/D), and industrial cross-selling recommendation engine.</p>
+          <ul>
+            <li>Normalized an objective 0–100 score across 7 commercial and logistical dimensions (status, sales velocity, log revenue, HS code affinity, trade evidence, contacts, freight radius).</li>
+            <li>Applied log-scaling on annual enterprise revenue to eliminate skew from multinational conglomerates.</li>
+            <li>Integrated an industrial metallurgy market basket cross-selling matrix recommending complementary raw materials.</li>
+          </ul>
+          <div class="pills"><span class="pill">Python</span><span class="pill">Pandas</span><span class="pill">Pydantic v2</span><span class="pill">ICP Scoring</span><span class="pill">Market Basket</span><span class="pill">pytest</span></div>
+        </div>
+      </article>
+
+      <!-- 8: Edge Ops Watchdog Daemon -->
+      <article class="case">
+        <div class="tag">DevOps · Reliability</div>
+        <div>
+          <div class="case-head">
+            <h3>Edge Ops Watchdog Daemon & Process Supervisor</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/edge-ops-watchdog-daemon" target="_blank" rel="noreferrer">
+              <span>edge-ops-watchdog-daemon</span> ↗
+            </a>
+          </div>
+          <p>High-availability edge process supervisor, self-healing watchdog daemon, and circuit-breaker orchestrator for 24/7 mission-critical services.</p>
+          <ul>
+            <li>Constructed circuit-breaker state machine with exponential backoff to prevent cascading reboot loops during network degradation.</li>
+            <li>Probed microservice health via active TCP socket inspection and HTTP endpoint telemetry.</li>
+            <li>Secured atomic file-based process locking ensuring single-instance supervision with zero cloud downtime.</li>
+          </ul>
+          <div class="pills"><span class="pill">Python</span><span class="pill">psutil</span><span class="pill">Circuit Breaker</span><span class="pill">High Availability</span><span class="pill">pytest</span></div>
+        </div>
+      </article>
+
+      <!-- 9: Enterprise Inbox Radar -->
+      <article class="case">
+        <div class="tag">Enterprise Automation</div>
+        <div>
+          <div class="case-head">
+            <h3>Enterprise Inbox Radar & SLA Follow-Up Engine</h3>
+            <a class="btn-repo" href="https://github.com/Wenderson-Werneck/enterprise-inbox-radar" target="_blank" rel="noreferrer">
+              <span>enterprise-inbox-radar</span> ↗
+            </a>
+          </div>
+          <p>Automated corporate inbox triage, thread clustering, entity extraction, and SLA follow-up radar engine.</p>
+          <ul>
+            <li>Grouped email correspondence into normalized threads by stripping prefixes (Re:, Fwd:, RES:) and generating SHA-256 thread hashes.</li>
+            <li>Extracted SAP Purchase Orders (PO), fiscal invoices (NF), and metric tonnages using deterministic regex parsers.</li>
+            <li>Classified threads into action stages (REPLY_PENDING_CLIENT, FOLLOW_UP_OUTSTANDING_QUOTE, DISPATCH_OPERATIONAL_ACTION) with automated P1/P2 SLA priorities.</li>
+          </ul>
+          <div class="pills"><span class="pill">Python</span><span class="pill">Regex Engine</span><span class="pill">Pydantic v2</span><span class="pill">SLA Triage</span><span class="pill">pytest</span></div>
+        </div>
+      </article>
+
+      <!-- 10: Snowflake Medallion -->
+      <article class="case">
+        <div class="tag">Snowflake · ELT</div>
+        <div>
+          <div class="case-head">
+            <h3>Near-Real-Time Financial Fraud Pipeline — Snowflake Medallion</h3>
+          </div>
+          <p>Three-tier Medallion architecture (Bronze, Silver, Gold) in Snowflake for transaction monitoring and automated fraud risk scoring.</p>
+          <ul>
+            <li>Implemented incremental Change Data Capture (CDC) via Snowflake Streams and automated DAG scheduling every 5 minutes using Snowflake Tasks.</li>
+            <li>Engineered SQL-based risk scoring (0–100) combining transaction velocity, amount thresholds, nocturnal channels, and status anomalies.</li>
+            <li>Enforced PII/LGPD compliance with Dynamic Data Masking on tax IDs and connected Gold analytical views to Power BI via DirectQuery.</li>
+          </ul>
+          <div class="pills"><span class="pill">Snowflake</span><span class="pill">Streams & Tasks</span><span class="pill">Python</span><span class="pill">SQL</span><span class="pill">Dynamic Data Masking</span><span class="pill">Power BI</span></div>
+        </div>
+      </article>
+
+      <!-- 11: AprovaMais Supervised ML -->
+      <article class="case">
+        <div class="tag">Supervised ML</div>
+        <div>
+          <div class="case-head">
+            <h3>AprovaMais — Credit Default Risk Modeling (200k+ Records)</h3>
+          </div>
+          <p>Supervised classification pipeline on 200,000 financial records to predict credit default risk under severe class imbalance.</p>
+          <ul>
+            <li>Compared Logistic Regression, Random Forest, and XGBoost using SMOTE oversampling and GridSearchCV hyperparameter optimization.</li>
+            <li>Optimized for weighted F1-Score rather than raw accuracy to capture minority-class defaults and documented demographic bias removal.</li>
+          </ul>
+          <div class="pills"><span class="pill">Python</span><span class="pill">scikit-learn</span><span class="pill">XGBoost</span><span class="pill">SMOTE</span><span class="pill">GridSearchCV</span><span class="pill">Pandas</span></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- CORE STACK -->
+    <section class="section" id="stack">
+      <div class="sec-eyebrow">Technical Arsenal</div>
+      <h2>Technologies & validated competencies.</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Data Engineering & Cloud</h3>
+          <p>Snowflake (Streams, Tasks, Snowpipe, Snowpark, Dynamic Data Masking), Google BigQuery, GCP, PostgreSQL, DuckDB, SQLite, Cloudflare D1, ETL/ELT, Dimensional Modeling.</p>
+        </article>
+        <article class="card">
+          <h3>Machine Learning & AI</h3>
+          <p>Python (Pandas, Polars, NumPy, SciPy), LightGBM, XGBoost, scikit-learn, MLflow, SHAP, Time-Series Forecasting, RAG, ChromaDB, SentenceTransformers, Ollama, Gemini Tool-Calling.</p>
+        </article>
+        <article class="card">
+          <h3>Backend, Web & BI</h3>
+          <p>FastAPI, SQLAlchemy, pytest, Playwright, TypeScript, Node.js, React, Vite, Cloudflare Workers, Zero Trust, Docker, Git/GitHub Actions, Power BI (DAX, DirectQuery), Streamlit.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ENGINEERING PRACTICE -->
+    <section class="section" id="practice">
+      <div class="sec-eyebrow">Engineering Practice</div>
+      <h2>How I build dependable systems.</h2>
+      <div class="principles">
+        <div class="principle">
+          <b>Idempotent data flows</b>
+          <span>Repeated inputs and retries never duplicate records or corrupt verified analytical tables (enforced via SHA-256 hashing and MERGE semantics).</span>
+        </div>
+        <div class="principle">
+          <b>Strict temporal validation</b>
+          <span>Forecasting and risk models are evaluated chronologically with zero future data leakage, tracked reproducibly in MLflow.</span>
+        </div>
+        <div class="principle">
+          <b>Human review at uncertainty boundaries</b>
+          <span>Ambiguous documents or low-confidence extractions are explicitly flagged for operator review rather than silently guessing business facts.</span>
+        </div>
+        <div class="principle">
+          <b>Security & privacy by design</b>
+          <span>Dynamic Data Masking (PII/GDPR), role-based access control, and isolated environment credentials are built into the architecture from day one.</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="sec-eyebrow" style="color:var(--lime)">Let's Connect</div>
+      <h2>Open to Analytics Engineering & Applied ML roles in Estonia.</h2>
+      <p>Available for on-site/hybrid positions in Tallinn / Tartu, Estonia (relocation planned Dec 2027 / Jan 2028 or accelerated upon visa sponsorship), as well as international remote contracts (EUR/USD).</p>
+      <div class="contact-links">
+        <a href="mailto:cfpromlk@gmail.com">cfpromlk@gmail.com</a>
+        <span style="color:#688070"> · </span>
+        <a href="https://www.linkedin.com/in/wendersonwerneck" target="_blank" rel="noreferrer">linkedin.com/in/wendersonwerneck</a>
+        <span style="color:#688070"> · </span>
+        <a href="https://github.com/Wenderson-Werneck" target="_blank" rel="noreferrer">github.com/Wenderson-Werneck</a>
+        <span style="color:#688070"> · </span>
+        <a href="pt.html" style="color:#b4e824">Versão Português (PT-BR)</a>
+      </div>
     </div>
-</section>
-
-<hr class="divider">
-
-<section id="projects">
-    <div class="container">
-        <div class="reveal"><p class="sec-label">Portfólio</p><h2 class="sec-title">Projetos em <span>Destaque</span></h2></div>
-        <div class="pf-row reveal">
-            <button class="fbtn active" data-f="all">Todos</button>
-            <button class="fbtn" data-f="ia">IA</button>
-            <button class="fbtn" data-f="automacao">Automação</button>
-            <button class="fbtn" data-f="dados">Dados</button>
-            <button class="fbtn" data-f="ml">ML</button>
-        </div>
-        <div class="pgrid reveal">
-
-            <!-- Figurante -->
-            <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-figurante.html'" style="cursor:pointer;">
-                <div class="pimg" style="background:linear-gradient(135deg,#1a0d2e,#2d1b4e,#1a0a3a);">
-                    <picture><source srcset="img-figurante-ai.webp" type="image/webp"><img src="img-figurante-ai.png" alt="Figurante" loading="eager" decoding="async"></picture>
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody"><h3>Figurante</h3><p>Agente de IA local com memória vetorial persistente. 100% offline, sem nuvem. Memória semântica via ChromaDB, dois modos de operação, identidade configurável.</p></div>
-                <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Ollama</span><span class="pill">ChromaDB</span><span class="pill">SSE</span></div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('figurante','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('figurante','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('figurante','install')"><i class="fas fa-terminal"></i> Install</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('figurante')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- NightStar -->
-            <div class="pcard" data-tags="ia automacao" onclick="window.location.href='project-nightstar.html'" style="cursor:pointer;">
-                <div class="pimg" style="background:linear-gradient(135deg,#040d1a,#071828,#0a1f35);">
-                    <picture><source srcset="img-nightstar.webp" type="image/webp"><img src="img-nightstar.png" alt="NightStar" loading="lazy" decoding="async"></picture>
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody"><h3>NightStar</h3><p>Bot RPA de automação de candidaturas. Varre formulários, mapeia campos com RAG vetorial e preenche automaticamente via Playwright. Suporte a Gupy e LinkedIn.</p></div>
-                <div class="ppills"><span class="pill">Python</span><span class="pill">Playwright</span><span class="pill">ChromaDB</span><span class="pill">RAG</span><span class="pill">BeautifulSoup</span></div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('nightstar','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('nightstar','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('nightstar','install')"><i class="fas fa-terminal"></i> Install</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('nightstar')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- Nexus AI -->
-            <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-nexus.html'" style="cursor:pointer;">
-                <div class="pimg" style="background:linear-gradient(135deg,#0d1f0d,#132613,#0a1a0a);">
-                    <picture><source srcset="img-nexus.webp" type="image/webp"><img src="img-nexus.png" alt="Nexus AI" loading="lazy" decoding="async"></picture>
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody"><h3>Nexus AI</h3><p>Agente de busca e ranqueamento de vagas. O Gemini expande cargos em 15 variações, busca em 20+ países via Adzuna e ranqueia por similaridade semântica com o CV.</p></div>
-                <div class="ppills"><span class="pill">Streamlit</span><span class="pill">Gemini API</span><span class="pill">Adzuna API</span><span class="pill">SentenceTransformers</span></div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('nexus','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('nexus','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('nexus','install')"><i class="fas fa-terminal"></i> Install</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('nexus')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- AprovaMais -->
-            <div class="pcard" data-tags="ml dados" onclick="window.location.href='project-aprovamais.html'" style="cursor:pointer;">
-                <div class="pimg" style="background:linear-gradient(135deg,#1f1004,#2a1a08,#1a0f04);">
-                    <picture><source srcset="img-aprovamais.webp" type="image/webp"><img src="img-aprovamais.png" alt="AprovaMais" loading="lazy" decoding="async"></picture>
-                    <span class="pbadge bs">◆ estudo</span>
-                </div>
-                <div class="pbody"><h3>Risco de Crédito — AprovaMais</h3><p>Pipeline completo de Data Science em 6 etapas sobre 200.000 registros. Comparação de 4 modelos, SMOTE e otimização via GridSearchCV.</p></div>
-                <div class="ppills"><span class="pill">Python</span><span class="pill">Scikit-learn</span><span class="pill">XGBoost</span><span class="pill">SMOTE</span><span class="pill">Pandas</span></div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('aprovamais','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('aprovamais','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('aprovamais','install')"><i class="fas fa-terminal"></i> Install</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('aprovamais')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- Figurante Code -->
-            <div class="pcard" data-tags="ia dados automacao" onclick="window.location.href='project-figurante-code.html'" style="cursor:pointer;">
-                <div class="pimg" style="background:linear-gradient(135deg,#001826,#002035,#001520);">
-                    <picture><source srcset="img-figurante.webp" type="image/webp"><img src="img-figurante.png" alt="Figurante Code" loading="lazy" decoding="async"></picture>
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody"><h3>Figurante Code</h3><p>Agente de programação com roteamento inteligente: Alibaba 480B → OpenRouter → Ollama local. Cada resposta destila conhecimento para o modelo local via ChromaDB.</p></div>
-                <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Alibaba 480B</span><span class="pill">ChromaDB</span><span class="pill">Ollama</span></div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('figurante-code','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('figurante-code','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('figurante-code','install')"><i class="fas fa-terminal"></i> Install</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('figurante-code')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- PRF Risk Analysis -->
-            <div class="pcard" data-tags="dados" style="cursor:pointer;">
-                <div class="pimg" style="background:linear-gradient(135deg,#0a0d14,#0e1a2e,#081422);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#0a1628,#112240,#0c1a30);">
-                        <span style="font-size:2.6rem;">🚛</span>
-                        <small>PRF · BigQuery · Power BI</small>
-                    </div>
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody"><h3>Inteligência de Risco PRF</h3><p>Pipeline de dados com 3 anos de acidentes rodoviários federais. Filtro por veículos pesados, hotspots de risco e suporte à decisão de roteirização para frotas.</p></div>
-                <div class="ppills"><span class="pill">BigQuery</span><span class="pill">SQL</span><span class="pill hi">Power BI</span><span class="pill">ETL</span><span class="pill">Dados Abertos</span></div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('prf','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('prf','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('prf','install')"><i class="fas fa-chart-bar"></i> Insights</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('prf')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- Nebula Studio -->
-            <div class="pcard" data-tags="ia automacao" style="cursor:pointer;">
-                <div class="pimg" style="background:linear-gradient(135deg,#0d0820,#1a0d35,#0d0525);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#120a2e,#1e0f42,#100728);">
-                        <span style="font-size:2.6rem;">🎨</span>
-                        <small>Fabric.js · Python · IA local</small>
-                    </div>
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody"><h3>Nebula Studio</h3><p>Editor de imagens com IA embarcada, 100% offline. Remoção de fundo (U²-Net), segmentação semântica (CLIPseg), upscale 4× (ESRGAN) e inpainting via Stable Diffusion — tudo na CPU.</p></div>
-                <div class="ppills"><span class="pill">Python</span><span class="pill">Flask</span><span class="pill">Fabric.js</span><span class="pill">rembg</span><span class="pill">CLIPseg</span><span class="pill">ESRGAN</span></div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('nebula','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('nebula','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('nebula','install')"><i class="fas fa-terminal"></i> Install</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('nebula')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- ✦ NOVO — Pipeline Financeiro Snowflake -->
-            <div class="pcard" data-tags="dados" style="cursor:pointer;">
-                <div class="pimg">
-                    <img src="img-snowflake-medallion.png" alt="Pipeline Financeiro Snowflake" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;">
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody">
-                    <h3>Pipeline Financeiro — Snowflake Medallion</h3>
-                    <p>Pipeline de dados em tempo quase real com arquitetura Medallion (Bronze→Prata→Ouro) para detecção de fraude em transações bancárias. Streams CDC, Tasks em DAG, score de risco 0-100 e Dynamic Data Masking (LGPD).</p>
-                </div>
-                <div class="ppills">
-                    <span class="pill hi">Snowflake</span>
-                    <span class="pill hi">Power BI</span>
-                    <span class="pill">Python</span>
-                    <span class="pill">SQL</span>
-                    <span class="pill">Delta Lake</span>
-                    <span class="pill">ETL</span>
-                </div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('snowflake','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('snowflake','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('snowflake','install')"><i class="fas fa-terminal"></i> Install</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('snowflake')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- ✦ NOVO — Previsão de Demanda & MLOps -->
-            <div class="pcard" data-tags="ml dados" style="cursor:pointer;">
-                <div class="pimg" style="background:linear-gradient(135deg,#071a12,#0c291d,#06150e);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#071a12,#0f3324,#081c14);">
-                        <span style="font-size:2.6rem;">📈</span>
-                        <small>LightGBM · MLflow · SHAP · DuckDB</small>
-                    </div>
-                    <span class="pbadge ba">● produção</span>
-                </div>
-                <div class="pbody">
-                    <h3>Previsão de Demanda &amp; MLOps Industrial</h3>
-                    <p>Pipeline preditivo de séries temporais para previsão de demanda e precificação logística com lead times de 60–90 dias. Validação TimeSeriesSplit (WAPE &lt; 8,4%), tracking no MLflow e explicabilidade via SHAP.</p>
-                </div>
-                <div class="ppills">
-                    <span class="pill hi">LightGBM</span>
-                    <span class="pill hi">MLflow</span>
-                    <span class="pill">Scikit-learn</span>
-                    <span class="pill">SHAP</span>
-                    <span class="pill">DuckDB</span>
-                    <span class="pill">FastAPI</span>
-                </div>
-                <div class="pfoot">
-                    <button class="db db-r" onclick="event.stopPropagation();openDoc('mlops','readme')"><i class="fas fa-file-alt"></i> README</button>
-                    <button class="db db-a" onclick="event.stopPropagation();openDoc('mlops','arch')"><i class="fas fa-sitemap"></i> Arq.</button>
-                    <button class="db db-i" onclick="event.stopPropagation();openDoc('mlops','install')"><i class="fas fa-terminal"></i> Código</button>
-                    <button class="db db-gal" onclick="event.stopPropagation();openGallery('mlops')"><i class="fas fa-images"></i> Galeria</button>
-                </div>
-            </div>
-
-            <!-- ✦ NOVO — OpenComex Data Lakehouse -->
-            <div class="pcard" data-tags="dados" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/opencomex-lakehouse-intelligence','_blank')">
-                <div class="pimg" style="background:linear-gradient(135deg,#0a1b2a,#11304a,#081726);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#0d2238,#14395b,#0a1d30);">
-                        <span style="font-size:2.6rem;">🌐</span>
-                        <small>Medallion · DuckDB · Comex Stat</small>
-                    </div>
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody">
-                    <h3>OpenComex — Data Lakehouse de Comércio Exterior</h3>
-                    <p>Arquitetura Medallion (Bronze/Silver/Gold) agregando feeds internacionais (MDIC, UN Comtrade, Eurostat, AIS). Normalização colunar, balança comercial bilateral e cálculo de congestionamento portuário.</p>
-                </div>
-                <div class="ppills">
-                    <span class="pill hi">DuckDB</span>
-                    <span class="pill hi">Pandas</span>
-                    <span class="pill">Pydantic v2</span>
-                    <span class="pill">Medallion</span>
-                    <span class="pill">Parquet</span>
-                </div>
-                <div class="pfoot">
-                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/opencomex-lakehouse-intelligence" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
-                </div>
-            </div>
-
-            <!-- ✦ NOVO — Monitor Cambial & Histerese PTAX -->
-            <div class="pcard" data-tags="dados automacao" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/fx-volatility-monitor-engine','_blank')">
-                <div class="pimg" style="background:linear-gradient(135deg,#1f1a07,#332b0c,#171305);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#26200a,#3d330e,#1c1706);">
-                        <span style="font-size:2.6rem;">💱</span>
-                        <small>TypeScript · Histerese · PTAX</small>
-                    </div>
-                    <span class="pbadge ba">● produção</span>
-                </div>
-                <div class="pbody">
-                    <h3>FX Volatility Monitor &amp; Consensus Engine</h3>
-                    <p>Monitoramento em tempo real de câmbio intradiário e médias móveis estatutárias PTAX (S0, S-1, M0). Histerese anti-flapping (±R$ 0,01), cooldown de 1h e consenso multi-provedores.</p>
-                </div>
-                <div class="ppills">
-                    <span class="pill hi">TypeScript</span>
-                    <span class="pill">Node.js</span>
-                    <span class="pill">Histerese</span>
-                    <span class="pill">Banco Central</span>
-                    <span class="pill">node:test</span>
-                </div>
-                <div class="pfoot">
-                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/fx-volatility-monitor-engine" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
-                </div>
-            </div>
-
-            <!-- ✦ NOVO — Reconciliação Portuária Serverless -->
-            <div class="pcard" data-tags="dados automacao" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/portscale-reconcile-serverless','_blank')">
-                <div class="pimg" style="background:linear-gradient(135deg,#0a1a1f,#0f2a33,#08151a);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#0d2229,#13343f,#0a1a21);">
-                        <span style="font-size:2.6rem;">⚖️</span>
-                        <small>Workers · D1 SQL · Edge</small>
-                    </div>
-                    <span class="pbadge ba">● produção</span>
-                </div>
-                <div class="pbody">
-                    <h3>Reconciliação Portuária &amp; Ledger Serverless</h3>
-                    <p>Microsserviço de borda em Cloudflare Workers e D1 Edge SQL. Reconciliação de tíquetes de balança com tolerância de ±0.5% contra NFs do ERP e ledger imutável event-sourced.</p>
-                </div>
-                <div class="ppills">
-                    <span class="pill hi">Cloudflare Workers</span>
-                    <span class="pill hi">D1 Edge SQL</span>
-                    <span class="pill">TypeScript</span>
-                    <span class="pill">Event Sourcing</span>
-                </div>
-                <div class="pfoot">
-                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/portscale-reconcile-serverless" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
-                </div>
-            </div>
-
-            <!-- ✦ NOVO — B2B Lead Scoring -->
-            <div class="pcard" data-tags="ml dados" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/b2b-lead-scoring-intelligence','_blank')">
-                <div class="pimg" style="background:linear-gradient(135deg,#1f0a15,#331123,#170710);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#260d1b,#3d152b,#1c0914);">
-                        <span style="font-size:2.6rem;">🎯</span>
-                        <small>ICP Scoring · Cross-Selling</small>
-                    </div>
-                    <span class="pbadge ba">● ativo</span>
-                </div>
-                <div class="pbody">
-                    <h3>Score de Leads B2B &amp; Matriz de Cross-Selling</h3>
-                    <p>Algoritmo de pontuação de fit comercial e ICP (0–100) em 7 dimensões, faturamento em escala logarítmica, tiering (A/B/C/D) e matriz de afinidade de produtos metalúrgicos.</p>
-                </div>
-                <div class="ppills">
-                    <span class="pill hi">Python</span>
-                    <span class="pill">Pandas</span>
-                    <span class="pill">Pydantic v2</span>
-                    <span class="pill">Market Basket</span>
-                    <span class="pill">pytest</span>
-                </div>
-                <div class="pfoot">
-                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/b2b-lead-scoring-intelligence" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
-                </div>
-            </div>
-
-            <!-- ✦ NOVO — Watchdog de Borda -->
-            <div class="pcard" data-tags="automacao" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/edge-ops-watchdog-daemon','_blank')">
-                <div class="pimg" style="background:linear-gradient(135deg,#121b0a,#1e2e11,#0e1507);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#17230c,#233613,#101a09);">
-                        <span style="font-size:2.6rem;">🛡️</span>
-                        <small>Watchdog · Circuit Breaker · HA</small>
-                    </div>
-                    <span class="pbadge ba">● produção</span>
-                </div>
-                <div class="pbody">
-                    <h3>Edge Ops Watchdog &amp; Process Supervisor</h3>
-                    <p>Supervisor de alta disponibilidade 24/7 com auto-cura para bancos e APIs locais. Circuit-breaker com backoff exponencial contra reboot loops e sondagem de portas TCP/HTTP.</p>
-                </div>
-                <div class="ppills">
-                    <span class="pill hi">Python</span>
-                    <span class="pill">psutil</span>
-                    <span class="pill">Circuit Breaker</span>
-                    <span class="pill">Alta Disponibilidade</span>
-                </div>
-                <div class="pfoot">
-                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/edge-ops-watchdog-daemon" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
-                </div>
-            </div>
-
-            <!-- ✦ NOVO — Enterprise Inbox Radar -->
-            <div class="pcard" data-tags="ia automacao" style="cursor:pointer;" onclick="window.open('https://github.com/Wenderson-Werneck/enterprise-inbox-radar','_blank')">
-                <div class="pimg" style="background:linear-gradient(135deg,#150a1f,#241033,#100717);">
-                    <div class="pimg-ph" style="background:linear-gradient(135deg,#1b0d26,#2c143d,#14091c);">
-                        <span style="font-size:2.6rem;">📬</span>
-                        <small>MAPI · Regex POs · SLAs</small>
-                    </div>
-                    <span class="pbadge ba">● produção</span>
-                </div>
-                <div class="pbody">
-                    <h3>Enterprise Inbox Radar &amp; SLA Follow-Up</h3>
-                    <p>Motor de triagem corporativa de e-mails, clusterização por hash de assunto, extração determinística de Pedidos de Compra (PO)/NFs e classificação por estágios de SLA.</p>
-                </div>
-                <div class="ppills">
-                    <span class="pill hi">Python</span>
-                    <span class="pill">Regex Engine</span>
-                    <span class="pill">Pydantic v2</span>
-                    <span class="pill">SLA Triage</span>
-                </div>
-                <div class="pfoot">
-                    <a class="db db-r" href="https://github.com/Wenderson-Werneck/enterprise-inbox-radar" target="_blank" style="grid-column: span 4; text-align: center;"><i class="fab fa-github"></i> Ver Código no GitHub ↗</a>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<section id="education">
-    <div class="container">
-        <div class="reveal"><p class="sec-label">Trajetória</p><h2 class="sec-title">Formação & <span>Certificações</span></h2></div>
-        <div class="edu-grid reveal">
-            <div class="edu-card"><div class="edu-ico"><i class="fas fa-snowflake"></i></div><div class="edu-content"><h3>Snowflake Data Engineer Professional Cert.</h3><div class="edu-meta"><span>Snowflake</span><span class="ebadge b-ok">Certificado</span></div></div></div>
-            <div class="edu-card"><div class="edu-ico"><i class="fas fa-graduation-cap"></i></div><div class="edu-content"><h3>Bacharelado em Ciência de Dados e IA</h3><div class="edu-meta"><span>UniDomBosco</span><span class="ebadge b-on">Em andamento</span></div></div></div>
-            <div class="edu-card"><div class="edu-ico"><i class="fas fa-graduation-cap"></i></div><div class="edu-content"><h3>Análise de Dados e Inteligência de Negócios</h3><div class="edu-meta"><span>UniGran</span><span class="ebadge b-ok">Concluído</span></div></div></div>
-            <div class="edu-card"><div class="edu-ico"><i class="fas fa-robot"></i></div><div class="edu-content"><h3>Machine Learning Specialization</h3><div class="edu-meta"><span>DeepLearning.AI / Stanford</span><span class="ebadge b-on">Em andamento</span></div></div></div>
-            <div class="edu-card"><div class="edu-ico"><i class="fab fa-google"></i></div><div class="edu-content"><h3>Google Cloud ML Engineer Professional Cert.</h3><div class="edu-meta"><span>Coursera / Google</span><span class="ebadge b-on">Em andamento</span></div></div></div>
-            <div class="edu-card"><div class="edu-ico"><i class="fab fa-google"></i></div><div class="edu-content"><h3>Google Data Analytics Professional Cert.</h3><div class="edu-meta"><span>Coursera / Google</span><span class="ebadge b-on">Em andamento</span></div></div></div>
-            <div class="edu-card"><div class="edu-ico"><i class="fas fa-chart-line"></i></div><div class="edu-content"><h3>McKinsey Forward Program</h3><div class="edu-meta"><span>McKinsey & Company</span><span class="ebadge b-ok">Concluído</span></div></div></div>
-            <div class="edu-card"><div class="edu-ico"><i class="fab fa-python"></i></div><div class="edu-content"><h3>Bootcamp Data Science com Python</h3><div class="edu-meta"><span>Santander / DIO</span><span class="ebadge b-ok">Concluído</span></div></div></div>
-            <div class="edu-card"><div class="edu-ico"><i class="fas fa-chart-bar"></i></div><div class="edu-content"><h3>Power BI Completo</h3><div class="edu-meta"><span>FM2S</span><span class="ebadge b-ok">Concluído</span></div></div></div>
-        </div>
-    </div>
-</section>
-
-<hr class="divider">
-
-<section id="contact">
-    <div class="container">
-        <div class="reveal"><p class="sec-label">Vamos conversar</p><h2 class="sec-title">Entre em <span>Contato</span></h2></div>
-        <div class="clayout reveal">
-            <div class="clinks">
-                <a href="https://wa.me/5527996185461?text=Olá%20Wenderson,%20vim%20através%20do%20seu%20portfólio" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-whatsapp"></i></span><div><div class="ci-lbl">WhatsApp</div><div class="ci-val">+55 (27) 99618-5461</div></div></a>
-                <a href="mailto:cfpromlk@gmail.com" class="citem"><span class="ci-ico"><i class="fas fa-envelope"></i></span><div><div class="ci-lbl">Email</div><div class="ci-val">cfpromlk@gmail.com</div></div></a>
-                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-linkedin"></i></span><div><div class="ci-lbl">LinkedIn</div><div class="ci-val">in/wendersonwerneck</div></div></a>
-                <a href="https://github.com/wenderson-werneck" target="_blank" class="citem"><span class="ci-ico"><i class="fab fa-github"></i></span><div><div class="ci-lbl">GitHub</div><div class="ci-val">wenderson-werneck</div></div></a>
-            </div>
-            <div class="cform">
-                <h3 class="ftitle">Envie uma mensagem</h3>
-                <form id="contactForm">
-                    <div class="frow">
-                        <div class="fg"><label>Nome</label><input type="text" id="fname" placeholder="Seu nome" required></div>
-                        <div class="fg"><label>Email</label><input type="email" id="femail" placeholder="seu@email.com" required></div>
-                    </div>
-                    <div class="fg"><label>Mensagem</label><textarea id="fmsg" placeholder="Sua mensagem..." required></textarea></div>
-                    <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;"><i class="fas fa-paper-plane"></i> Enviar mensagem</button>
-                    <div id="fstatus"></div>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <div class="ft-inner">
-            <span class="ft-copy">© 2026 Wenderson Soares Werneck</span>
-            <div class="ft-links">
-                <a href="https://linkedin.com/in/wendersonwerneck" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="https://github.com/wenderson-werneck" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="mailto:cfpromlk@gmail.com"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- GALLERY MODAL -->
-<div class="gal-ov" id="galModal">
-    <div class="gal-box">
-        <div class="gal-hd">
-            <span class="gal-ttl"><i class="fas fa-images"></i> <span id="galTitle">Galeria</span></span>
-            <button class="gal-cls" onclick="closeGallery()"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="gal-body">
-            <div class="gal-grid" id="galGrid"></div>
-        </div>
-    </div>
-</div>
-
-<!-- DOC MODAL -->
-<div class="modal-ov" id="docModal">
-    <div class="modal-box">
-        <div class="modal-hd">
-            <span class="modal-ttl" id="mTitle">README</span>
-            <button class="modal-cls" onclick="closeDoc()"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="modal-bd" id="mBody"></div>
-    </div>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-(function(){ emailjs.init({ publicKey: 'YOUR_PUBLIC_KEY' }); })();
-
-// ── THEME ─────────────────────────────────────
-const html = document.documentElement;
-const themeBtn = document.getElementById('themeBtn');
-const saved = localStorage.getItem('ww_theme');
-if (saved === 'dark') {
-    html.setAttribute('data-theme','dark');
-    themeBtn.querySelector('i').className = 'fas fa-sun';
-}
-themeBtn.addEventListener('click', () => {
-    const dark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', dark ? 'light' : 'dark');
-    themeBtn.querySelector('i').className = dark ? 'fas fa-moon' : 'fas fa-sun';
-    localStorage.setItem('ww_theme', dark ? 'light' : 'dark');
-});
-
-// ── MOBILE MENU ───────────────────────────────
-const nav = document.getElementById('mainNav');
-document.getElementById('hamburger').addEventListener('click', () => nav.classList.toggle('open'));
-nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
-
-// ── TYPEWRITER ────────────────────────────────
-const roles = ['Engenheiro de Dados & ML','Machine Learning Engineer','Snowflake & Cloud Data','Sistemas de IA Aplicada & RAG','Pipelines ETL & MLOps','Python · SQL · FastAPI'];
-let ri=0, ci=0, del=false;
-const tw = document.getElementById('tw');
-function type(){
-    const cur = roles[ri];
-    tw.textContent = del ? cur.slice(0,--ci) : cur.slice(0,++ci);
-    let ms = del ? 38 : 88;
-    if (!del && ci===cur.length){ del=true; ms=2100; }
-    else if (del && ci===0){ del=false; ri=(ri+1)%roles.length; ms=380; }
-    setTimeout(type, ms);
-}
-type();
-
-// ── TERMINAL ──────────────────────────────────
-const tLines = [
-    {c:'tc',t:'# ~/portfolio/projetos.py'},
-    {c:'',t:''},
-    {c:'',t:'<span class="tb">projetos</span> = ['},
-    {c:'tg',t:'  "🎭 Figurante",         <span class="tc"># IA local</span>'},
-    {c:'tg',t:'  "⭐ NightStar",          <span class="tc"># RPA</span>'},
-    {c:'tg',t:'  "🤖 Nexus AI",           <span class="tc"># Busca semântica</span>'},
-    {c:'tg',t:'  "📊 AprovaMais",         <span class="tc"># ML crédito</span>'},
-    {c:'tg',t:'  "💻 Figurante Code",     <span class="tc"># Dev IA</span>'},
-    {c:'tg',t:'  "🚛 PRF Risk Intel",     <span class="tc"># BI logístico</span>'},
-    {c:'tg',t:'  "🎨 Nebula Studio",      <span class="tc"># Editor IA offline</span>'},
-    {c:'tg',t:'  "❄️  Snowflake Medallion", <span class="tc"># Dados financeiros</span>'},
-    {c:'tg',t:'  "📈 Demand MLOps Suite",   <span class="tc"># LightGBM + MLflow</span>'},
-    {c:'',t:']'},
-    {c:'',t:''},
-    {c:'',t:'<span class="tb">stack</span> = {'},
-    {c:'',t:'  <span class="tg">"ai"</span>:   <span class="to">["Ollama","ChromaDB","RAG"]</span>,'},
-    {c:'',t:'  <span class="tg">"rpa"</span>:  <span class="to">["Playwright","n8n"]</span>,'},
-    {c:'',t:'  <span class="tg">"data"</span>: <span class="to">["Snowflake","BigQuery","Power BI"]</span>,'},
-    {c:'',t:'}'},
-    {c:'',t:''},
-    {c:'tg',t:'✓ Todos os sistemas operacionais.'},
-];
-const tb = document.getElementById('termBody');
-tLines.forEach(l => {
-    const s = document.createElement('span');
-    s.className = 'tl' + (l.c ? ' '+l.c : '');
-    s.innerHTML = l.t;
-    tb.appendChild(s);
-});
-let ti=0;
-function revTerm(){ const all=tb.querySelectorAll('.tl'); if(ti<all.length){ all[ti++].classList.add('show'); setTimeout(revTerm,110); } }
-setTimeout(revTerm, 500);
-
-// ── FILTERS ───────────────────────────────────
-document.querySelectorAll('.fbtn').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('.fbtn').forEach(b=>b.classList.remove('active'));
-        btn.classList.add('active');
-        const f = btn.dataset.f;
-        document.querySelectorAll('.pcard').forEach(c => {
-            c.classList.toggle('hidden', f!=='all' && !c.dataset.tags.includes(f));
-        });
-    });
-});
-
-// ── SCROLL REVEAL ─────────────────────────────
-const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
-}, {threshold:.08});
-document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-// ── FORM ──────────────────────────────────────
-document.getElementById('contactForm').addEventListener('submit', async function(e){
-    e.preventDefault();
-    const st = document.getElementById('fstatus');
-    const btn = this.querySelector('button[type=submit]');
-    const orig = btn.innerHTML;
-    st.className=''; st.style.display='none';
-    btn.disabled=true; btn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Enviando...';
-    try {
-        await emailjs.send('YOUR_SERVICE_ID','YOUR_TEMPLATE_ID',{
-            from_name:  document.getElementById('fname').value,
-            from_email: document.getElementById('femail').value,
-            message:    document.getElementById('fmsg').value,
-        });
-        st.textContent='✓ Mensagem enviada! Responderei em breve.'; st.className='ok'; this.reset();
-    } catch {
-        const subject = encodeURIComponent('Contato via Portfólio — ' + document.getElementById('fname').value);
-        const body = encodeURIComponent(document.getElementById('fmsg').value + '\n\nDe: ' + document.getElementById('fname').value + ' (' + document.getElementById('femail').value + ')');
-        window.location.href = `mailto:cfpromlk@gmail.com?subject=${subject}&body=${body}`;
-        st.textContent='✓ Abrindo seu cliente de email para envio direto a cfpromlk@gmail.com.'; st.className='ok'; this.reset();
-    } finally { btn.disabled=false; btn.innerHTML=orig; }
-});
-
-// ── DOCS ──────────────────────────────────────
-const DOCS = {
-    figurante:{
-        readme:`<h1>🎭 Figurante — README</h1><p>Agente de IA pessoal, offline e com memória semântica persistente. Roda 100% no seu hardware — sem assinatura, sem nuvem.</p><h2>O que é</h2><p>Construído sobre <strong>Ollama</strong> (LLMs locais) e <strong>ChromaDB</strong> (memória vetorial). Todo o tráfego é <code>localhost</code> — nenhum dado sai da máquina.</p><h2>Funcionalidades</h2><ul><li>Memória semântica persistente entre sessões via ChromaDB</li><li>Dois modos: <code>paz</code> (1.5B, rápido) e <code>ira</code> (3B, preciso) — trocáveis em runtime</li><li>Upload de arquivos: PDF, TXT, CSV, código — injetados no contexto</li><li>Streaming com cancelamento real via <code>threading.Event</code></li><li>Sistema de regras editável pelo próprio chat</li><li>Múltiplas sessões simultâneas com histórico isolado</li></ul><h2>Stack</h2><ul><li>Python 3.11 + Flask</li><li>Ollama (<code>sam860/dolphin3-qwen2.5:1.5b</code> / <code>3b</code>)</li><li>ChromaDB + SentenceTransformers (ONNX, offline)</li></ul>`,
-        arch:`<h1>🎭 Figurante — Arquitetura</h1><h2>Fluxo de dados</h2><ul><li>Browser → Flask <code>localhost:5000</code> via HTTP / SSE</li><li>Flask consulta ChromaDB: recupera os 5 documentos mais similares</li><li>Contexto enriquecido com "MEMÓRIA RELEVANTE" → enviado ao Ollama</li><li>Resposta retorna em streaming via SSE</li><li>Par pergunta/resposta salvo no ChromaDB para uso futuro</li></ul><h2>Embeddings</h2><p>Modelo <code>all-MiniLM-L6-v2</code> via ONNX — 100% offline após o primeiro download.</p>`,
-        install:`<h1>🎭 Figurante — Instalação</h1><pre><code>git clone https://github.com/wenderson-werneck/figurante\ncd figurante\npip install -r requirements.txt\nollama pull sam860/dolphin3-qwen2.5:1.5b\npython app.py</code></pre><p>Acesse <code>http://localhost:5000</code>.</p>`
-    },
-    nightstar:{
-        readme:`<h1>⭐ NightStar — README</h1><p>Bot RPA que automatiza candidaturas a vagas. Varre formulários, mapeia campos ao perfil via RAG e preenche tudo — parando antes do envio para revisão.</p><h2>Impacto</h2><ul><li>Tempo de varredura: ~3s (era ~40s)</li><li>70%+ de campos preenchidos automaticamente</li></ul><h2>Plataformas</h2><ul><li>Gupy, LinkedIn Easy Apply, formulários genéricos</li></ul>`,
-        arch:`<h1>⭐ NightStar — Arquitetura</h1><h2>3 camadas de mapeamento</h2><ul><li><strong>Camada 1 — Mapa Direto:</strong> dicionário com 40+ termos → 0ms</li><li><strong>Camada 2 — RAG Vetorial:</strong> ChromaDB com perfil.json → ~50ms</li><li><strong>Camada 3 — IA Fallback:</strong> Ollama via Figurante, com autorização explícita</li></ul>`,
-        install:`<h1>⭐ NightStar — Instalação</h1><pre><code>git clone https://github.com/wenderson-werneck/nightstar\ncd nightstar\npip install playwright chromadb beautifulsoup4\nplaywright install chromium</code></pre>`
-    },
-    nexus:{
-        readme:`<h1>🤖 Nexus AI — README</h1><p>Agente inteligente de busca e ranqueamento de vagas. Plataformas ordenam por data — o Nexus ordena por compatibilidade real com o seu perfil.</p><h2>Stack</h2><ul><li>Streamlit + Gemini 1.5 Flash API + Adzuna API + SentenceTransformers</li></ul>`,
-        arch:`<h1>🤖 Nexus AI — Arquitetura</h1><h2>Pipeline</h2><ul><li>Gemini expande cargo → 15 títulos + 30 skills</li><li>Adzuna busca em 20+ países (2 páginas × 50 vagas por título)</li><li>SentenceTransformers calcula similaridade semântica CV vs vaga</li><li>Score em dois eixos configuráveis via sliders</li></ul>`,
-        install:`<h1>🤖 Nexus AI — Instalação</h1><pre><code>git clone https://github.com/wenderson-werneck/nexus-ai\ncd nexus-ai\npip install streamlit sentence-transformers requests pyngrok google-generativeai</code></pre>`
-    },
-    aprovamais:{
-        readme:`<h1>📊 AprovaMais — README</h1><p>Pipeline completo de Data Science em 6 etapas para prever inadimplência em uma fintech fictícia com 200.000 registros.</p><h2>Decisão ética documentada</h2><p>A coluna <code>genero</code> foi removida. Correlação histórica com inadimplência reflete discriminação sistêmica, não risco real de crédito.</p>`,
-        arch:`<h1>📊 AprovaMais — Arquitetura</h1><h2>Por que F1-Score e não Acurácia?</h2><p>Com 70% de baixo risco, um modelo que classifica tudo como baixo risco acerta 70% — sem aprender nada. F1-Score weighted captura o equilíbrio entre precisão e recall.</p>`,
-        install:`<h1>📊 AprovaMais — Instalação</h1><pre><code>pip install pandas numpy scikit-learn xgboost imbalanced-learn matplotlib seaborn jupyter\njupyter notebook Risco_de_credito_Aprovamais.ipynb</code></pre>`
-    },
-    prf:{
-        readme:`<h1>🚛 Inteligência de Risco PRF — README</h1><p>Pipeline analítico com 3 anos de dados abertos da PRF para suporte à decisão de roteirização de frotas.</p><h2>Stack</h2><ul><li>Google BigQuery · SQL avançado · Power BI</li></ul>`,
-        arch:`<h1>🚛 PRF Risk Intel — Arquitetura</h1><h2>Por que BigQuery?</h2><p>3 anos × ~500k registros = ~1,5M linhas. BigQuery processa em segundos, sem servidor. O ambiente gratuito cobre 10GB/mês — suficiente para o projeto completo.</p>`,
-        install:`<h1>🚛 PRF Risk Intel — Insights</h1><ul><li>Sextas-feiras 17h–19h concentram 23% dos acidentes com veículos pesados</li><li>BR-116 e BR-101 respondem por 38% dos sinistros na região Sudeste</li><li>Acidentes com chuva têm 2,4× mais chance de envolver veículo pesado</li><li>Veículos acima de 15 anos têm índice de gravidade 31% maior</li></ul>`
-    },
-    nebula:{
-        readme:`<h1>🎨 Nebula Studio — README</h1><p>Editor de imagens com IA embarcada, 100% offline. Processa tudo na CPU — sem GPU, sem nuvem.</p><h2>Pipelines de IA</h2><ul><li>Remoção de fundo — U²-Net via rembg</li><li>Segmentação semântica — CLIPseg</li><li>Upscale 4× — Real-ESRGAN</li><li>Inpainting — Stable Diffusion C++ (GGUF)</li><li>Face Swap — InsightFace</li></ul>`,
-        arch:`<h1>🎨 Nebula Studio — Arquitetura</h1><h2>3 camadas</h2><ul><li><strong>Frontend:</strong> Fabric.js — camadas, Ctrl+Z, zoom</li><li><strong>Processamento leve:</strong> U²-Net, CLIPseg, filtros PIL · 2–15s</li><li><strong>Processamento pesado:</strong> ESRGAN, SD.cpp · minutos · Thread separada</li></ul>`,
-        install:`<h1>🎨 Nebula Studio — Instalação em camadas</h1><pre><code># Mínimo\npip install Pillow Flask\n# Remoção de fundo\npip install rembg onnxruntime\n# Segmentação\npip install transformers torch torchvision</code></pre>`
-    },
-    'figurante-code':{
-        readme:`<h1>💻 Figurante Code — README</h1><p>Agente de programação com roteamento inteligente e destilação progressiva de conhecimento.</p><h2>A ideia central</h2><p>Sessão 1: pergunta difícil → Alibaba 480B → resposta salva no ChromaDB.<br>Sessão 2: pergunta similar → RAG recupera → modelo local responde com conhecimento destilado do 480B. Zero chamadas à nuvem.</p>`,
-        arch:`<h1>💻 Figurante Code — Arquitetura</h1><h2>Roteamento</h2><ul><li>Complexidade LOW: RAG → Ollama local</li><li>Complexidade MEDIUM/HIGH: RAG → Alibaba 480B → OpenRouter → Ollama</li></ul><h2>Cross-feed bidirecional</h2><p>Toda resposta salva em <code>figurante_codigo</code> e <code>figurante_memoria</code> — o ecossistema aprende com cada interação.</p>`,
-        install:`<h1>💻 Figurante Code — Instalação</h1><pre><code>git clone https://github.com/wenderson-werneck/figurante-code\ncd figurante-code\npip install -r requirements.txt\npython app.py  # porta 5001</code></pre>`
-    },
-    mlops:{
-        readme:`<h1>📈 Previsão de Demanda & MLOps Industrial — README</h1><p>Pipeline de Machine Learning orientado à produção para previsão quinzenal de demanda de insumos industriais e estimativa de fretes com lead times marítimos de 60 a 90 dias.</p><h2>Destaques Técnicos</h2><ul><li>Feature Engineering temporal: janelas móveis, lags de consumo, volatilidade cambial e cotações internacionais</li><li>Modelagem com <strong>LightGBM</strong> e <strong>XGBoost</strong> validada via <code>TimeSeriesSplit</code> (zero data leakage)</li><li>Acurácia operacional com <strong>WAPE &lt; 8,4%</strong> e rastreamento completo no <strong>MLflow</strong></li><li>Explicabilidade de variáveis com <strong>SHAP Values</strong> e exposição via endpoint <strong>FastAPI</strong></li></ul>`,
-        arch:`<h1>📈 Previsão de Demanda & MLOps — Arquitetura</h1><h2>Fluxo do Pipeline</h2><ul><li><strong>Feature Store Analítica:</strong> agregação veloz em <strong>DuckDB</strong> e PostgreSQL</li><li><strong>Treinamento & Validação:</strong> <code>TimeSeriesSplit</code> respeitando a cronologia estrita dos pedidos</li><li><strong>Governança MLOps:</strong> registro de hiperparâmetros, métricas (RMSE, MAE, WAPE) e artefatos no <code>mlflow.db</code></li><li><strong>Inferência:</strong> API REST em <strong>FastAPI</strong> alimentando o painel de decisão de compras</li></ul>`,
-        install:`<h1>📈 MLOps — Treinamento & Tracking</h1><pre><code>import mlflow\nfrom lightgbm import LGBMRegressor\nfrom sklearn.model_selection import TimeSeriesSplit\n\nmlflow.set_tracking_uri("sqlite:///mlflow.db")\nmlflow.set_experiment("Demand_Forecasting_MLOps")\n\nwith mlflow.start_run(run_name="LGBM_Temporal_v3"):\n    model = LGBMRegressor(n_estimators=250, learning_rate=0.03, max_depth=6)\n    model.fit(X_train, y_train)\n    mlflow.sklearn.log_model(model, "model")</code></pre>`
-    },
-
-    // ✦ NOVO — Pipeline Financeiro Snowflake
-    snowflake:{
-        readme:`<h1>❄️ Pipeline Financeiro — Snowflake Medallion</h1>
-<p>Pipeline de dados em tempo quase real para monitoramento de transações financeiras e detecção de fraude, construído sobre arquitetura Medallion (Bronze → Prata → Ouro) no Snowflake.</p>
-<h2>O que foi construído</h2>
-<ul>
-<li>Ingestão via Internal Stage com <code>COPY INTO</code> e rastreabilidade por <code>METADATA$FILENAME</code></li>
-<li>CDC incremental com <strong>Snowflake Streams</strong> — processa apenas registros novos</li>
-<li>Orquestração com <strong>Tasks em DAG</strong> — Bronze → Prata → Ouro a cada 5 minutos</li>
-<li>Score de risco 0–100 calculado em SQL com fatores ponderados (valor, horário, canal, status)</li>
-<li><strong>Dynamic Data Masking</strong> para CPF/CNPJ — conformidade com LGPD sem duplicar tabelas</li>
-<li>Dashboard estratégico no <strong>Power BI</strong> via ODBC com 6 tabelas da camada Ouro</li>
-</ul>
-<h2>KPIs entregues</h2>
-<ul>
-<li>Transações na última hora e volume financeiro em R$</li>
-<li>Alertas Alto/Crítico em tempo real (últimos 30 min)</li>
-<li>Taxa de risco por banco de origem</li>
-<li>Distribuição de classificação de risco (Baixo / Médio / Alto / Crítico)</li>
-<li>Mapa geográfico de concentração de alertas por estado</li>
-</ul>
-<h2>Stack</h2>
-<ul>
-<li>Snowflake (Streams, Tasks, Stored Procedures, Dynamic Data Masking)</li>
-<li>Python (Faker, Pandas, snowflake-connector-python)</li>
-<li>SQL (Snowflake SQL)</li>
-<li>Power BI (ODBC, DAX, DirectQuery)</li>
-</ul>`,
-        arch:`<h1>❄️ Snowflake Medallion — Arquitetura</h1>
-<h2>Fluxo completo</h2>
-<ul>
-<li><strong>Python Faker</strong> gera CSVs de transações PF e PJ</li>
-<li><strong>Internal Stage</strong> recebe os arquivos via PUT (landing zone)</li>
-<li><strong>Bronze:</strong> COPY INTO com metadados de rastreabilidade (_src_file, _ingestao_ts)</li>
-<li><strong>Streams</strong> capturam apenas INSERT novos das tabelas Bronze</li>
-<li><strong>Task raiz</strong> (5 min): executa se SYSTEM$STREAM_HAS_DATA → chama SP Bronze→Prata</li>
-<li><strong>Prata:</strong> MERGE com dedup, faixa_valor e score_risco calculado em SQL</li>
-<li><strong>Task filha</strong>: executa após a raiz → chama SP Prata→Ouro</li>
-<li><strong>Ouro:</strong> views + tabelas agregadas com Dynamic Data Masking</li>
-<li><strong>Power BI</strong> conecta via ODBC → schema ouro</li>
-</ul>
-<h2>Camadas Medallion</h2>
-<ul>
-<li><strong>Bronze:</strong> dados brutos + metadados · Time Travel 7 dias</li>
-<li><strong>Prata:</strong> dedup + faixa_valor + score 0-100 + classificacao_risco · Time Travel 30 dias</li>
-<li><strong>Ouro:</strong> 3 views + 3 tabelas agregadas + Dynamic Data Masking (LGPD)</li>
-</ul>
-<h2>Regras do score de risco</h2>
-<ul>
-<li>Valor > R$50k → +40 pts | Valor > R$10k → +20 pts</li>
-<li>Horário suspeito (22h–6h) → +25 pts</li>
-<li>Status SUSPEITA → +30 pts | Status NEGADA → +15 pts</li>
-<li>Caixa eletrônico noturno → +10 pts</li>
-<li>Teto: LEAST(soma, 100)</li>
-</ul>`,
-        install:`<h1>❄️ Snowflake Medallion — Instalação</h1>
-<h2>Pré-requisitos</h2>
-<ul>
-<li>Conta Snowflake (trial gratuito em snowflake.com)</li>
-<li>Python 3.9+ com pip</li>
-<li>Power BI Desktop com Snowflake ODBC Driver</li>
-</ul>
-<h2>Opção A — Automática (recomendada)</h2>
-<pre><code>pip install snowflake-connector-python faker pandas
-# edite as credenciais em setup.py
-python setup.py</code></pre>
-<p>O script gera os dados, cria toda a estrutura no Snowflake e ativa as Tasks.</p>
-<h2>Opção B — Manual no Snowsight</h2>
-<pre><code>1. Execute sql/01_setup_ambiente.sql
-2. Gere os CSVs: python python/gerar_dados.py
-3. Faça PUT dos CSVs para o Stage
-4. Execute sql/02_bronze.sql
-5. Execute sql/03_prata.sql
-6. Execute sql/04_ouro.sql
-7. Execute sql/05_tasks.sql</code></pre>
-<h2>Conexão Power BI</h2>
-<ul>
-<li>Obter Dados → Snowflake</li>
-<li>Servidor: seu_account.snowflakecomputing.com</li>
-<li>Warehouse: pipeline_wh | Database: financeiro_db | Schema: ouro</li>
-<li>Autenticação: aba <strong>Database</strong> (usuário + senha)</li>
-</ul>`
-    }
-};
-
-function openDoc(proj, type){
-    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code',prf:'🚛 PRF Risk Intel',nebula:'🎨 Nebula Studio',snowflake:'❄️ Snowflake Medallion',mlops:'📈 Demanda & MLOps'};
-    const labels = {readme:'README',arch:'Arquitetura',install:'Instalação'};
-    const installLabel = (proj === 'prf') ? 'Insights' : 'Instalação';
-    document.getElementById('mTitle').textContent = (names[proj]||proj)+' — '+(type==='install' ? installLabel : labels[type]);
-    document.getElementById('mBody').innerHTML = DOCS[proj]?.[type] || '<p>Conteúdo não encontrado.</p>';
-    document.getElementById('docModal').classList.add('open');
-    document.body.style.overflow='hidden';
-}
-function closeDoc(){
-    document.getElementById('docModal').classList.remove('open');
-    document.body.style.overflow='';
-}
-document.getElementById('docModal').addEventListener('click', e => {
-    if(e.target === document.getElementById('docModal')) closeDoc();
-});
-
-// ── GALLERY ───────────────────────────────────
-const GALLERY_CAPS = {
-    figurante:       ['Interface principal — chat com memória','Modo Brain — memória profunda ativa','Terminal de inicialização — modo ira'],
-    nightstar:       ['Painel de varredura — formulário Gupy','Relatório de campos — 3 camadas de mapeamento','Sugestões do Figurante — aprovação manual'],
-    nexus:           ['Dashboard Streamlit — busca em 20 países','Expansão semântica — Gemini gera 15 variações'],
-    aprovamais:      ['Pipeline ML — 6 etapas, 200k registros','Decisão ética — remoção da coluna gênero'],
-    'figurante-code':['Roteamento inteligente — 3 camadas de fallback','Destilação de conhecimento — ChromaDB cross-feed'],
-    prf:             ['Dashboard Power BI — hotspots BR-116 e BR-101','ETL BigQuery — 3 anos unificados','Análise de sazonalidade — padrões por período'],
-    nebula:          ['Canvas Fabric.js — edição em camadas','Pipeline rembg — remoção de fundo U²-Net','Orquestração por IA — Figurante controla o canvas'],
-    snowflake:       ['Arquitetura Medallion — Bronze, Prata, Ouro','Dashboard Power BI — alertas em tempo real','Score de risco — distribuição por classificação'],
-};
-
-const GALLERY_EXT = ['webp','png','jpg','jpeg','gif'];
-
-function openGallery(proj){
-    const names = {figurante:'🎭 Figurante',nightstar:'⭐ NightStar',nexus:'🤖 Nexus AI',aprovamais:'📊 AprovaMais','figurante-code':'💻 Figurante Code',prf:'🚛 PRF Risk Intel',nebula:'🎨 Nebula Studio',snowflake:'❄️ Snowflake Medallion',mlops:'📈 Demanda & MLOps'};
-    document.getElementById('galTitle').textContent = (names[proj]||proj) + ' — Galeria';
-    const grid = document.getElementById('galGrid');
-    const caps = GALLERY_CAPS[proj] || [];
-
-    if(!caps.length){
-        grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-dim);font-family:\'JetBrains Mono\',monospace;font-size:.78rem;">Galeria em breve.</div>';
-    } else {
-        grid.innerHTML = caps.map((cap, i) => {
-            const basePath = `gallery/${proj}-${i+1}`;
-            return `<div class="gal-item">
-                <img src="${basePath}.webp" alt="${cap}" loading="lazy"
-                     onerror="tryNextExt(this,'${basePath}',1)"
-                     style="width:100%;height:100%;object-fit:cover;display:block;">
-                <div class="gal-cap">${cap}</div>
-            </div>`;
-        }).join('');
-    }
-    document.getElementById('galModal').classList.add('open');
-    document.body.style.overflow='hidden';
-}
-
-function tryNextExt(img, base, step){
-    if(step < GALLERY_EXT.length){
-        img.onerror = () => tryNextExt(img, base, step+1);
-        img.src = `${base}.${GALLERY_EXT[step]}`;
-    } else {
-        const fileName = base.split('/').pop();
-        img.onerror = null; img.style.display='none';
-        const ph = document.createElement('div');
-        ph.style.cssText='width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.4rem;background:var(--bg-surface);';
-        ph.innerHTML=`<span style="font-size:1.6rem;opacity:.4;">📷</span><span style="font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--text-dim);opacity:.7;">${fileName}.*</span>`;
-        img.parentNode.insertBefore(ph, img);
-    }
-}
-
-function closeGallery(){
-    document.getElementById('galModal').classList.remove('open');
-    document.body.style.overflow='';
-}
-
-document.getElementById('galModal').addEventListener('click', e=>{
-    if(e.target===document.getElementById('galModal')) closeGallery();
-});
-document.addEventListener('keydown', e=>{ if(e.key==='Escape'){ closeGallery(); closeDoc(); } });
-</script>
+  </section>
 </body>
 </html>

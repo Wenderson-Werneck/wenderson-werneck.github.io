@@ -3,128 +3,210 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Wenderson Werneck — Data & Machine Learning Engineer | Python, Snowflake, SQL, BigQuery, MLOps & Applied AI Systems.">
-  <title>Wenderson Werneck — Data & Machine Learning Engineer</title>
+  <meta name="description" content="Wenderson Werneck — Analytics Engineer & Machine Learning Engineer | Cloud Data Warehousing, MLOps, Python, Snowflake, SQL. Relocating to Tallinn, Estonia.">
+  <title>Wenderson Werneck — Analytics & Machine Learning Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--ink:#10231a;--muted:#526358;--paper:#f7faf6;--line:#d7e1d9;--green:#166534;--lime:#c8f135;--card:#fff;--blue:#125d7f}
+    :root{
+      --ink: #0e1e16;
+      --muted: #4e5f54;
+      --paper: #f8faf7;
+      --line: #d8e2da;
+      --green: #145a32;
+      --lime: #b4e824;
+      --card: #ffffff;
+      --blue: #0f4c6e;
+      --accent-estonia: #0072ce;
+    }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Manrope,system-ui,sans-serif}
-    .wrap{max-width:1100px;margin:auto;padding:0 24px}
-    header{position:sticky;top:0;background:#f7faf6ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:2}
+    body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+    .wrap{max-width:1120px;margin:auto;padding:0 24px}
+    header{position:sticky;top:0;background:#f8faf7ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);z-index:100}
     .nav{height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
-    .brand{font-weight:800;text-decoration:none;color:var(--ink);letter-spacing:-.04em}
+    .brand{font-weight:800;text-decoration:none;color:var(--ink);letter-spacing:-.04em;font-size:18px}
     .brand span{color:var(--green)}
-    .navlinks{display:flex;gap:18px;align-items:center}
-    .navlinks a{color:var(--muted);font-size:14px;text-decoration:none;font-weight:600}
+    .navlinks{display:flex;gap:20px;align-items:center}
+    .navlinks a{color:var(--muted);font-size:14px;text-decoration:none;font-weight:600;transition:color .15s}
     .navlinks a:hover{color:var(--green)}
-    .hero{padding:88px 0 68px;background:radial-gradient(circle at 85% 10%,#dcf5bf 0,transparent 34%)}
-    .eyebrow{font:500 12px 'DM Mono',monospace;letter-spacing:.12em;color:var(--green);text-transform:uppercase}
-    .hero h1{max-width:880px;margin:15px 0 20px;font-size:clamp(38px,5.6vw,68px);line-height:1.05;letter-spacing:-.05em}
+    .nav-lang{font:600 12px 'DM Mono',monospace;padding:4px 9px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none;background:#fff;transition:all .15s}
+    .nav-lang:hover{border-color:var(--green);color:var(--green)}
+    
+    .hero{padding:84px 0 68px;background:radial-gradient(circle at 85% 10%,#d8f5b8 0,transparent 36%)}
+    .eyebrow-badge{display:inline-flex;align-items:center;gap:8px;font:600 12px 'DM Mono',monospace;letter-spacing:.08em;color:var(--green);text-transform:uppercase;background:#eaf6ec;border:1px solid #c2e5cb;padding:5px 12px;border-radius:20px;margin-bottom:16px}
+    .hero h1{max-width:920px;margin:0 0 20px;font-size:clamp(36px,5.2vw,64px);line-height:1.08;letter-spacing:-.05em;font-weight:800}
     .hero h1 em{font-style:normal;color:var(--green)}
-    .lead{max-width:760px;color:var(--muted);font-size:19px}
-    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-    .button{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border:1px solid var(--ink);border-radius:7px;color:var(--ink);font-weight:700;text-decoration:none;transition:transform .15s}
+    .lead{max-width:780px;color:var(--muted);font-size:19px;margin:0 0 28px;line-height:1.6}
+    
+    .hero-meta{display:flex;gap:24px;flex-wrap:wrap;align-items:center;margin-bottom:32px;padding:16px 20px;background:#fff;border:1px solid var(--line);border-radius:10px}
+    .meta-item{display:flex;flex-direction:column}
+    .meta-val{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+    .meta-lbl{font:500 11px 'DM Mono',monospace;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+    
+    .actions{display:flex;gap:12px;flex-wrap:wrap}
+    .button{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border:1px solid var(--ink);border-radius:8px;color:var(--ink);font-weight:700;text-decoration:none;transition:all .15s;font-size:14px}
     .button.primary{border-color:var(--green);background:var(--green);color:#fff}
-    .button:hover{transform:translateY(-1px)}
+    .button.primary:hover{background:#0e4023;transform:translateY(-1px)}
+    .button:hover{transform:translateY(-1px);background:#f0f5f1}
+    
     main{padding:68px 0}
-    .section{margin-bottom:74px}
-    .section h2{font-size:28px;letter-spacing:-.04em;margin:0 0 12px}
-    .intro{color:var(--muted);max-width:760px}
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:25px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
-    .card h3{margin:0 0 8px;font-size:17px}
-    .card p,.card li{font-size:14px;color:var(--muted)}
+    .section{margin-bottom:80px}
+    .sec-eyebrow{font:600 12px 'DM Mono',monospace;letter-spacing:.12em;color:var(--green);text-transform:uppercase;margin-bottom:8px}
+    .section h2{font-size:30px;letter-spacing:-.04em;margin:0 0 12px}
+    .intro{color:var(--muted);max-width:760px;margin:0 0 28px;font-size:16px}
+    
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:26px}
+    .card h3{margin:0 0 8px;font-size:18px;letter-spacing:-.02em}
+    .card p,.card li{font-size:14px;color:var(--muted);line-height:1.6}
     .card ul{padding-left:18px;margin:14px 0 0}
-    .tag{font:500 11px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.07em;color:var(--green)}
-    .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-    .pill{font:500 11px 'DM Mono',monospace;padding:3px 8px;border-radius:5px;background:#edf8ef;color:var(--green);border:1px solid #c8e5d0}
-    .case{display:grid;grid-template-columns:155px 1fr;gap:28px;padding:28px 0;border-top:1px solid var(--line)}
+    .tag{font:600 11px 'DM Mono',monospace;text-transform:uppercase;letter-spacing:.07em;color:var(--green);margin-bottom:6px}
+    
+    .case{display:grid;grid-template-columns:160px 1fr;gap:28px;padding:30px 0;border-top:1px solid var(--line)}
     .case:last-child{border-bottom:1px solid var(--line)}
     .case-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:8px}
-    .case h3{margin:0;font-size:20px;letter-spacing:-.03em}
-    .case p{margin:0;color:var(--muted)}
-    .case ul{color:var(--muted);font-size:14px;padding-left:18px;margin:12px 0 0}
-    .btn-repo{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink);font:600 12px 'DM Mono',monospace;text-decoration:none;transition:all .15s}
+    .case h3{margin:0;font-size:21px;letter-spacing:-.03em}
+    .case p{margin:0;color:var(--muted);line-height:1.6}
+    .case ul{color:var(--muted);font-size:14px;padding-left:18px;margin:12px 0 0;line-height:1.65}
+    .case ul li{margin-bottom:4px}
+    
+    .pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+    .pill{font:500 11px 'DM Mono',monospace;padding:3px 8px;border-radius:5px;background:#edf8ef;color:var(--green);border:1px solid #c8e5d0}
+    
+    .btn-repo{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink);font:600 12px 'DM Mono',monospace;text-decoration:none;transition:all .15s}
     .btn-repo:hover{border-color:var(--green);color:var(--green);background:#edf8ef;transform:translateY(-1px)}
-    .principles{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:24px}
-    .principle{border-left:3px solid var(--lime);padding:4px 0 4px 15px}
-    .principle b{display:block}
+    
+    .estonia-box{background:#f0f6fa;border:1px solid #c9e0f2;border-radius:12px;padding:28px;margin-top:32px}
+    .estonia-box h3{margin:0 0 8px;font-size:20px;letter-spacing:-.03em;color:#0a3b5c;display:flex;align-items:center;gap:10px}
+    .estonia-box p{color:#2a506d;margin:0 0 16px;font-size:15px}
+    .estonia-badges{display:flex;gap:10px;flex-wrap:wrap}
+    .e-badge{font:600 11px 'DM Mono',monospace;padding:4px 10px;border-radius:6px;background:#fff;border:1px solid #a8cee9;color:#0f4c6e}
+    
+    .principles{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:24px}
+    .principle{border-left:3px solid var(--lime);padding:6px 0 6px 16px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:14px 16px}
+    .principle b{display:block;margin-bottom:4px}
     .principle span{font-size:14px;color:var(--muted)}
-    .notice{margin-top:28px;border-radius:10px;border:1px solid #c8e5d0;background:#edf8ef;padding:18px 20px;color:#31533a;font-size:14px}
-    .contact{background:var(--ink);color:#fff;padding:68px 0}
-    .contact h2{font-size:32px;letter-spacing:-.04em;margin:0 0 12px}
-    .contact p{color:#c7d6cb;max-width:640px}
+    
+    .contact{background:var(--ink);color:#fff;padding:72px 0}
+    .contact h2{font-size:34px;letter-spacing:-.04em;margin:0 0 12px}
+    .contact p{color:#c7d6cb;max-width:660px;margin:0 0 24px}
+    .contact-links{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
     .contact a{color:var(--lime);font-weight:700;text-decoration:none}
+    .contact a:hover{text-decoration:underline}
+    
     @media(max-width:760px){
       .navlinks{display:none}
-      .hero{padding:64px 0 50px}
+      .hero{padding:64px 0 46px}
       .grid{grid-template-columns:1fr}
       .case{grid-template-columns:1fr;gap:10px}
       .principles{grid-template-columns:1fr}
+      .hero-meta{flex-direction:column;align-items:flex-start;gap:12px}
     }
   </style>
 </head>
 <body>
   <header>
     <div class="wrap nav">
-      <a class="brand" href="index.html">WW<span>.dev</span></a>
+      <a class="brand" href="index.html">Wenderson Werneck<span>.dev</span></a>
       <nav class="navlinks">
         <a href="#work">Selected work</a>
         <a href="#stack">Tech stack</a>
+        <a href="#estonia">Estonia & Relocation</a>
         <a href="#practice">Engineering practice</a>
         <a href="#contact">Contact</a>
-        <a href="index.html">PT-BR</a>
+        <a class="nav-lang" href="pt.html">PT-BR</a>
       </nav>
     </div>
   </header>
 
   <section class="hero">
     <div class="wrap">
-      <div class="eyebrow">São Paulo, Brazil · Open to Global Remote (USD/EUR) & Relocation</div>
-      <h1>Data engineering, cloud warehousing, and <em>applied machine learning</em> in production.</h1>
-      <p class="lead">I design and ship end-to-end data pipelines (Snowflake, BigQuery, PostgreSQL, DuckDB), predictive MLOps workflows (LightGBM, scikit-learn, MLflow), and deterministic AI/LLM systems across logistics, financial, and operational domains.</p>
+      <div class="eyebrow-badge">
+        <span>🇪🇪</span> Targeting Tallinn, Estonia · EU Tech Relocation Ready
+      </div>
+      <h1>Analytics engineering, cloud warehousing, and <em>applied machine learning</em> in production.</h1>
+      <p class="lead">I design, build, and maintain production data pipelines (Snowflake, BigQuery, DuckDB, PostgreSQL), statistical forecasting & MLOps engines (Holt-Winters, IsolationForest, LightGBM, MLflow), and deterministic AI/LLM systems across international logistics, finance, and industrial operations.</p>
+      
+      <div class="hero-meta">
+        <div class="meta-item">
+          <div class="meta-val">12 Public Repos</div>
+          <div class="meta-lbl">Open-Source Code & Test Suites</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-val">&lt; 5.11% WAPE</div>
+          <div class="meta-lbl">Holdout Demand Forecast Error</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-val">Snowflake Certified</div>
+          <div class="meta-lbl">Data Engineer Professional</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-val">Dec 2027 / Jan 2028</div>
+          <div class="meta-lbl">Estonia Relocation Window</div>
+        </div>
+      </div>
+
       <div class="actions">
-        <a class="button primary" href="https://www.linkedin.com/in/wendersonwerneck" target="_blank" rel="noreferrer">LinkedIn profile</a>
-        <a class="button" href="https://github.com/Wenderson-Werneck?tab=repositories" target="_blank" rel="noreferrer">GitHub (12 Repos)</a>
-        <a class="button" href="#work">Selected case studies</a>
-        <a class="button" href="index.html">Português (PT-BR)</a>
+        <a class="button primary" href="#work">Explore code & case studies (11)</a>
+        <a class="button" href="https://github.com/Wenderson-Werneck?tab=repositories" target="_blank" rel="noreferrer">GitHub profile ↗</a>
+        <a class="button" href="https://www.linkedin.com/in/wendersonwerneck" target="_blank" rel="noreferrer">LinkedIn profile ↗</a>
+        <a class="button" href="pt.html">Versão em Português (PT-BR)</a>
       </div>
     </div>
   </section>
 
   <main class="wrap">
     <section class="section">
-      <div class="eyebrow">Profile</div>
-      <h2>End-to-end data lifecycle & production ML.</h2>
-      <p class="intro">Certified Snowflake Data Engineer working across data engineering, applied machine learning, and backend automation. I move from messy operational data sources to clean analytical models, validated predictive pipelines, and reliable decision-support APIs.</p>
+      <div class="sec-eyebrow">Profile & Capabilities</div>
+      <h2>End-to-end data lifecycle & production engineering.</h2>
+      <p class="intro">Working across modern analytics engineering, applied machine learning, and resilient backend automation. Transitioning complex, messy operational data into clean analytical models, validated predictive pipelines, and high-uptime decision-support services.</p>
+      
       <div class="grid">
         <article class="card">
           <div class="tag">Cloud Data Engineering</div>
-          <h3>Warehousing & ETL/ELT</h3>
-          <p>Medallion architectures (Bronze/Silver/Gold), incremental CDC with Snowflake Streams & Tasks, Google BigQuery, PostgreSQL, DuckDB, and idempotent document-to-record reconciliation.</p>
+          <h3>Warehousing & Medallion ELT</h3>
+          <p>Medallion architectures (Bronze/Silver/Gold), incremental Change Data Capture (CDC) via Snowflake Streams & Tasks, Google BigQuery, PostgreSQL, DuckDB, and idempotent document-to-record reconciliation.</p>
         </article>
         <article class="card">
           <div class="tag">Machine Learning & MLOps</div>
           <h3>Forecasting & Risk Models</h3>
-          <p>Time-series demand forecasting, credit risk classification, and predictive maintenance using LightGBM, XGBoost, and scikit-learn—with temporal validation, MLflow tracking, and SHAP explainability.</p>
+          <p>Time-series demand forecasting, isolation-forest anomaly detection, and credit risk classification using pure NumPy, SciPy, LightGBM, and scikit-learn—with chronological validation and MLflow tracking.</p>
         </article>
         <article class="card">
-          <div class="tag">Applied AI & Backend</div>
-          <h3>LLM Agents & Microservices</h3>
-          <p>Local and cloud RAG pipelines (ChromaDB, SentenceTransformers, Ollama), deterministic LLM tool-calling (Gemini API), asynchronous Python APIs (FastAPI), and Cloudflare Workers/D1.</p>
+          <div class="tag">Applied AI & Edge Systems</div>
+          <h3>RAG Agents & Microservices</h3>
+          <p>Hybrid retrieval RAG (BM25 + Dense Cosine + RRF), deterministic tool-calling with Pydantic v2, Cloudflare Workers & D1 Edge SQL, and 24/7 high-availability process supervision daemons.</p>
         </article>
       </div>
     </section>
 
-    <section class="section" id="work">
-      <div class="eyebrow">Selected applied work</div>
-      <h2>Production systems & technical case studies.</h2>
-      <p class="intro">Case studies highlight architectural decisions, data modeling, and evaluation methodology while adhering to strict data privacy and confidentiality standards.</p>
+    <!-- ESTONIA SECTION -->
+    <section class="section" id="estonia">
+      <div class="sec-eyebrow">Relocation & Work Authorization</div>
+      <h2>Estonian Tech Ecosystem Focus.</h2>
+      <p class="intro">Estonia is the global benchmark for digital governance and high-efficiency tech unicorns. I am actively preparing my long-term international career and relocation to Tallinn.</p>
+      
+      <div class="estonia-box">
+        <h3>🇪🇪 Tere tulemast! / Relocation Readiness Briefing</h3>
+        <p>I am targeting on-site or hybrid <strong>Analytics Engineer</strong>, <strong>Data Engineer</strong>, and <strong>Applied ML Engineer</strong> roles in Tallinn / Tartu, Estonia. Fully equipped to deliver immediate engineering impact with verified open-source code and zero ramp-up time on modern data stacks.</p>
+        <div class="estonia-badges">
+          <span class="e-badge">Target Relocation: Dec 2027 / Jan 2028 (or accelerated)</span>
+          <span class="e-badge">Visa Track: Estonian Tech Visa / EU Blue Card Eligible</span>
+          <span class="e-badge">Academic: B.Sc. Data Science & AI (UniDomBosco)</span>
+          <span class="e-badge">English Proficiency: Professional Working Fluency</span>
+          <span class="e-badge">Target Ecosystem: Bolt, Wise, Swedbank, LHV, Veriff & High-Growth Startups</span>
+        </div>
+      </div>
+    </section>
 
-      <!-- Case 1: Commodity MLOps -->
+    <!-- SELECTED APPLIED WORK -->
+    <section class="section" id="work">
+      <div class="sec-eyebrow">Applied Engineering Showcase</div>
+      <h2>Production systems & technical case studies.</h2>
+      <p class="intro">Every repository below is runnable, accompanied by an automated test suite, architecture diagrams, and mathematical formulations. All proprietary corporate records have been strictly anonymized with synthetic mock data.</p>
+
+      <!-- 1: Commodity MLOps Engine -->
       <article class="case">
         <div class="tag">MLOps · Forecasting</div>
         <div>
@@ -134,17 +216,17 @@
               <span>commodity-mlops-engine</span> ↗
             </a>
           </div>
-          <p>End-to-end machine learning pipeline forecasting industrial commodity demand and detecting freight price anomalies across 60–90 day maritime supply lead times.</p>
+          <p>Statistical time-series demand forecasting and unsupervised spot freight rate anomaly detection engine built for 60–90 day maritime supply lead times.</p>
           <ul>
-            <li>Engineered vectorized Damped Holt-Winters exponential smoothing optimized via Nelder-Mead (achieving holdout WAPE of 5.11%).</li>
-            <li>Implemented IsolationForest contamination modeling (87.5% precision) for spot freight rate anomaly detection.</li>
-            <li>Tracked experiment runs reproducibly with JSONL / MLflow audit logs and exposed automated test coverage.</li>
+            <li>Engineered vectorized Damped Holt-Winters exponential smoothing model optimized via Nelder-Mead on holdout split (achieved 5.11% WAPE).</li>
+            <li>Implemented IsolationForest contamination modeling (87.5% precision) for spot freight anomaly detection.</li>
+            <li>Tracked experiment runs reproducibly with JSONL / MLflow audit logs and automated pytest suite passing 100%.</li>
           </ul>
           <div class="pills"><span class="pill">Python</span><span class="pill">NumPy</span><span class="pill">SciPy</span><span class="pill">scikit-learn</span><span class="pill">MLflow</span><span class="pill">pytest</span></div>
         </div>
       </article>
 
-      <!-- Case 2: OpenComex Lakehouse -->
+      <!-- 2: OpenComex Lakehouse -->
       <article class="case">
         <div class="tag">Data Lakehouse · Comex</div>
         <div>
@@ -164,7 +246,7 @@
         </div>
       </article>
 
-      <!-- Case 3: FX Volatility Monitor -->
+      <!-- 3: FX Volatility Monitor -->
       <article class="case">
         <div class="tag">FinTech · Real-Time</div>
         <div>
@@ -184,7 +266,7 @@
         </div>
       </article>
 
-      <!-- Case 4: Portscale Reconcile -->
+      <!-- 4: Portscale Reconcile -->
       <article class="case">
         <div class="tag">Edge · Serverless</div>
         <div>
@@ -204,7 +286,7 @@
         </div>
       </article>
 
-      <!-- Case 5: Enterprise Ops RAG Agent -->
+      <!-- 5: Enterprise Ops RAG Agent -->
       <article class="case">
         <div class="tag">Applied AI · RAG</div>
         <div>
@@ -224,7 +306,7 @@
         </div>
       </article>
 
-      <!-- Case 6: Global Trade FX Simulator -->
+      <!-- 6: Global Trade FX Simulator -->
       <article class="case">
         <div class="tag">Trade Finance · Risk</div>
         <div>
@@ -244,7 +326,7 @@
         </div>
       </article>
 
-      <!-- Case 7: B2B Lead Scoring -->
+      <!-- 7: B2B Lead Scoring -->
       <article class="case">
         <div class="tag">Market Intelligence</div>
         <div>
@@ -264,7 +346,7 @@
         </div>
       </article>
 
-      <!-- Case 8: Edge Ops Watchdog Daemon -->
+      <!-- 8: Edge Ops Watchdog Daemon -->
       <article class="case">
         <div class="tag">DevOps · Reliability</div>
         <div>
@@ -284,7 +366,7 @@
         </div>
       </article>
 
-      <!-- Case 9: Enterprise Inbox Radar -->
+      <!-- 9: Enterprise Inbox Radar -->
       <article class="case">
         <div class="tag">Enterprise Automation</div>
         <div>
@@ -304,7 +386,7 @@
         </div>
       </article>
 
-      <!-- Case 10: Snowflake Medallion -->
+      <!-- 10: Snowflake Medallion -->
       <article class="case">
         <div class="tag">Snowflake · ELT</div>
         <div>
@@ -321,7 +403,7 @@
         </div>
       </article>
 
-      <!-- Case 11: AprovaMais Supervised ML -->
+      <!-- 11: AprovaMais Supervised ML -->
       <article class="case">
         <div class="tag">Supervised ML</div>
         <div>
@@ -338,9 +420,10 @@
       </article>
     </section>
 
+    <!-- CORE STACK -->
     <section class="section" id="stack">
-      <div class="eyebrow">Core stack</div>
-      <h2>Technologies & certifications.</h2>
+      <div class="sec-eyebrow">Technical Arsenal</div>
+      <h2>Technologies & validated competencies.</h2>
       <div class="grid">
         <article class="card">
           <h3>Data Engineering & Cloud</h3>
@@ -348,40 +431,54 @@
         </article>
         <article class="card">
           <h3>Machine Learning & AI</h3>
-          <p>Python (Pandas, Polars, NumPy), LightGBM, XGBoost, scikit-learn, MLflow, SHAP, Time-Series Forecasting, RAG, ChromaDB, SentenceTransformers, Ollama, Gemini Tool-Calling.</p>
+          <p>Python (Pandas, Polars, NumPy, SciPy), LightGBM, XGBoost, scikit-learn, MLflow, SHAP, Time-Series Forecasting, RAG, ChromaDB, SentenceTransformers, Ollama, Gemini Tool-Calling.</p>
         </article>
         <article class="card">
           <h3>Backend, Web & BI</h3>
           <p>FastAPI, SQLAlchemy, pytest, Playwright, TypeScript, Node.js, React, Vite, Cloudflare Workers, Zero Trust, Docker, Git/GitHub Actions, Power BI (DAX, DirectQuery), Streamlit.</p>
         </article>
       </div>
-      <div class="notice">
-        <strong>Certifications & Training:</strong> Snowflake Data Engineer Professional Certificate · Machine Learning Specialization (Stanford / DeepLearning.AI) · Google Cloud ML Engineer Training · Google Data Analytics Certificate · McKinsey Forward Program · B.Sc. in Data Science & AI (in progress).
-      </div>
     </section>
 
+    <!-- ENGINEERING PRACTICE -->
     <section class="section" id="practice">
-      <div class="eyebrow">Engineering practice</div>
+      <div class="sec-eyebrow">Engineering Practice</div>
       <h2>How I build dependable systems.</h2>
       <div class="principles">
-        <div class="principle"><b>Idempotent data flows</b><span>Repeated inputs and retries never duplicate records or corrupt verified analytical tables (enforced via SHA-256 hashing and MERGE semantics).</span></div>
-        <div class="principle"><b>Strict temporal validation</b><span>Forecasting and risk models are evaluated chronologically with zero future data leakage, tracked reproducibly in MLflow.</span></div>
-        <div class="principle"><b>Human review at uncertainty boundaries</b><span>Ambiguous documents or low-confidence extractions are explicitly flagged for operator review rather than silently guessing business facts.</span></div>
-        <div class="principle"><b>Security & privacy by design</b><span>Dynamic Data Masking (PII/LGPD), role-based access control, and isolated environment credentials are built into the architecture from day one.</span></div>
+        <div class="principle">
+          <b>Idempotent data flows</b>
+          <span>Repeated inputs and retries never duplicate records or corrupt verified analytical tables (enforced via SHA-256 hashing and MERGE semantics).</span>
+        </div>
+        <div class="principle">
+          <b>Strict temporal validation</b>
+          <span>Forecasting and risk models are evaluated chronologically with zero future data leakage, tracked reproducibly in MLflow.</span>
+        </div>
+        <div class="principle">
+          <b>Human review at uncertainty boundaries</b>
+          <span>Ambiguous documents or low-confidence extractions are explicitly flagged for operator review rather than silently guessing business facts.</span>
+        </div>
+        <div class="principle">
+          <b>Security & privacy by design</b>
+          <span>Dynamic Data Masking (PII/GDPR), role-based access control, and isolated environment credentials are built into the architecture from day one.</span>
+        </div>
       </div>
     </section>
   </main>
 
   <section class="contact" id="contact">
     <div class="wrap">
-      <div class="eyebrow" style="color:#c8f135">Let’s talk</div>
-      <h2>Open to Data Engineering, ML & Applied AI roles.</h2>
-      <p>Available for international remote roles (USD/EUR) and relocation opportunities where I can contribute across data pipelines, cloud warehousing, and production machine learning.</p>
-      <a href="mailto:cfpromlk@gmail.com">cfpromlk@gmail.com</a>
-      <span style="color:#78907f"> · </span>
-      <a href="https://www.linkedin.com/in/wendersonwerneck" target="_blank" rel="noreferrer">linkedin.com/in/wendersonwerneck</a>
-      <span style="color:#78907f"> · </span>
-      <a href="https://github.com/Wenderson-Werneck" target="_blank" rel="noreferrer">github.com/Wenderson-Werneck</a>
+      <div class="sec-eyebrow" style="color:var(--lime)">Let's Connect</div>
+      <h2>Open to Analytics Engineering & Applied ML roles in Estonia.</h2>
+      <p>Available for on-site/hybrid positions in Tallinn / Tartu, Estonia (relocation planned Dec 2027 / Jan 2028 or accelerated upon visa sponsorship), as well as international remote contracts (EUR/USD).</p>
+      <div class="contact-links">
+        <a href="mailto:cfpromlk@gmail.com">cfpromlk@gmail.com</a>
+        <span style="color:#688070"> · </span>
+        <a href="https://www.linkedin.com/in/wendersonwerneck" target="_blank" rel="noreferrer">linkedin.com/in/wendersonwerneck</a>
+        <span style="color:#688070"> · </span>
+        <a href="https://github.com/Wenderson-Werneck" target="_blank" rel="noreferrer">github.com/Wenderson-Werneck</a>
+        <span style="color:#688070"> · </span>
+        <a href="pt.html" style="color:#b4e824">Versão Português (PT-BR)</a>
+      </div>
     </div>
   </section>
 </body>
