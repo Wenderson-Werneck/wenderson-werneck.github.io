@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Wenderson Werneck — Analytics Engineer & Applied ML Engineer | Enterprise Software, Cloud Warehousing, Python, SQL, MLOps. Focused on Estonia relocation.">
+  <link rel="canonical" href="https://wenderson-werneck.github.io/">
+  <link rel="alternate" hreflang="en" href="https://wenderson-werneck.github.io/">
+  <link rel="alternate" hreflang="pt-BR" href="https://wenderson-werneck.github.io/pt.html">
   <title>Wenderson Werneck — Analytics & Applied ML Engineer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,6 +30,7 @@
     .brand{font-weight:800;text-decoration:none;color:var(--ink);letter-spacing:-.04em;font-size:18px}
     .brand span{color:var(--green)}
     .navlinks{display:flex;gap:20px;align-items:center}
+    .menu-toggle{display:none;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);padding:8px 12px;font:700 14px Manrope,system-ui,sans-serif;cursor:pointer}
     .navlinks a{color:var(--muted);font-size:14px;text-decoration:none;font-weight:600;transition:color .15s}
     .navlinks a:hover{color:var(--green)}
     .nav-lang{font:600 12px 'DM Mono',monospace;padding:4px 9px;border:1px solid var(--line);border-radius:6px;color:var(--ink);text-decoration:none;background:#fff;transition:all .15s}
@@ -95,7 +99,9 @@
     .contact a:hover{text-decoration:underline}
     
     @media(max-width:760px){
-      .navlinks{display:none}
+      .menu-toggle{display:block}
+      .navlinks{display:none;position:absolute;top:70px;left:0;right:0;background:var(--paper);border-bottom:1px solid var(--line);padding:16px 24px;flex-direction:column;align-items:stretch;gap:12px;box-shadow:0 12px 20px #0e1e1615}
+      .navlinks.open{display:flex}
       .hero{padding:64px 0 46px}
       .grid{grid-template-columns:1fr}
       .case{grid-template-columns:1fr;gap:10px}
@@ -108,7 +114,8 @@
   <header>
     <div class="wrap nav">
       <a class="brand" href="index.html">Wenderson Werneck<span>.dev</span></a>
-      <nav class="navlinks">
+      <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false">Menu</button>
+      <nav class="navlinks" id="site-nav" aria-label="Main navigation">
         <a href="#work">Selected work</a>
         <a href="#stack">Tech stack</a>
         <a href="#estonia">Estonia & Relocation</a>
@@ -122,32 +129,32 @@
   <section class="hero">
     <div class="wrap">
       <div class="eyebrow-badge">
-        <span>🇪🇪</span> Estonia Tech Relocation · Temporary Residence Permit (TRP) Track
+        <span>🇪🇪</span> Planning a future move to Estonia
       </div>
       <h1>Building end-to-end software & data systems for <em>complex enterprise operations</em>.</h1>
-      <p class="lead">I engineer mission-critical data pipelines, predictive models, and custom software systems that solve high-stakes operational, logistical, and financial bottlenecks. Collaborating directly with C-level executives (CEO, Directors) and cross-functional teams, I translate sensitive business requirements into resilient, high-uptime production systems that interface with major enterprise clients.</p>
+      <p class="lead">I turn complex commercial and logistics workflows into reliable data pipelines, analytical tools, and software. My work combines operational context with Python, SQL, and applied machine learning.</p>
       
       <div class="hero-meta">
         <div class="meta-item">
-          <div class="meta-val">12 Public Repos</div>
-          <div class="meta-lbl">Open-Source Code & Test Suites</div>
+          <div class="meta-val">Public code</div>
+          <div class="meta-lbl">Runnable reference projects</div>
         </div>
         <div class="meta-item">
-          <div class="meta-val">C-Level Interface</div>
-          <div class="meta-lbl">Direct CEO & Director Partnership</div>
+          <div class="meta-val">Executive context</div>
+          <div class="meta-lbl">Cross-functional decision support</div>
         </div>
         <div class="meta-item">
-          <div class="meta-val">High-Stakes Systems</div>
-          <div class="meta-lbl">Commodity, Treasury & Logistics</div>
+          <div class="meta-val">Industrial operations</div>
+          <div class="meta-lbl">Commercial, logistics & data</div>
         </div>
         <div class="meta-item">
           <div class="meta-val">Relocation Goal</div>
-          <div class="meta-lbl">Estonia · Long-Stay TRP Track</div>
+          <div class="meta-lbl">Future move to Estonia</div>
         </div>
       </div>
 
       <div class="actions">
-        <a class="button primary" href="#work">Explore code & case studies (11)</a>
+        <a class="button primary" href="#work">Explore projects & code</a>
         <a class="button" href="https://github.com/Wenderson-Werneck?tab=repositories" target="_blank" rel="noreferrer">GitHub profile ↗</a>
         <a class="button" href="https://www.linkedin.com/in/wendersonwerneck" target="_blank" rel="noreferrer">LinkedIn profile ↗</a>
         <a class="button" href="pt.html">Versão em Português (PT-BR)</a>
@@ -160,40 +167,40 @@
     <section class="section">
       <div class="sec-eyebrow">Profile & Capabilities</div>
       <h2>Full-cycle engineering under high operational accountability.</h2>
-      <p class="intro">Operating as an end-to-end builder: from deeply understanding complex commercial and logistical mechanics alongside executive leadership, to modeling data architectures, implementing robust backend engines, and maintaining production uptime.</p>
+      <p class="intro">I start with the operational process, then connect its data, applications, and decision points. My work spans analysis, data modeling, backend implementation, and support for the resulting tools.</p>
       
       <div class="grid">
         <article class="card">
           <div class="tag">Cross-Functional Leadership</div>
-          <h3>Direct Executive Collaboration</h3>
-          <p>Partnering directly with the CEO, Managing Directors, and department heads across commercial intelligence, treasury, logistics, and tax compliance—navigating sensitive business decisions that require confidentiality and precise execution.</p>
+          <h3>Cross-Functional Collaboration</h3>
+          <p>Working with commercial, logistics, finance, and leadership stakeholders to turn operational requirements into useful software and analysis.</p>
         </article>
         <article class="card">
           <div class="tag">Enterprise Operations</div>
-          <h3>High-Stakes Client Systems</h3>
-          <p>Architecting custom software and analytics that directly power transactions and daily operational workflows with Tier-1 industrial enterprises (multinational steel mills, foundries, and global raw material trading desks).</p>
+          <h3>Industrial Operations</h3>
+          <p>Building tools for market intelligence, freight, pricing, and document reconciliation in an industrial commodities environment.</p>
         </article>
         <article class="card">
           <div class="tag">Engineering Autonomy</div>
           <h3>Full-Cycle Implementation</h3>
-          <p>Owning the complete technical lifecycle: SQL/PostgreSQL modeling, automated Python & TypeScript microservices, statistical forecasting, Edge serverless deployments, and 24/7 self-healing supervisor daemons.</p>
+          <p>Combining SQL/PostgreSQL modeling, Python and TypeScript services, statistical models, and deployment and monitoring practices.</p>
         </article>
       </div>
     </section>
 
     <!-- ESTONIA SECTION -->
     <section class="section" id="estonia">
-      <div class="sec-eyebrow">Relocation & Work Authorization</div>
-      <h2>Estonian Tech Ecosystem Focus.</h2>
-      <p class="intro">Estonia is recognized worldwide for its world-class digital infrastructure and high-efficiency engineering mindset. I am actively preparing my international transition to contribute directly to tech companies based in Estonia.</p>
+      <div class="sec-eyebrow">Future relocation</div>
+      <h2>Planning a move to Estonia.</h2>
+      <p class="intro">I am interested in contributing to Estonia-based teams and am preparing for a future international move.</p>
       
       <div class="estonia-box">
-        <h3>🇪🇪 Relocation Readiness Briefing</h3>
-        <p>I am seeking on-site or hybrid <strong>Analytics Engineer</strong>, <strong>Data Engineer</strong>, or <strong>Software/ML Engineer</strong> opportunities in Estonia. I bring proven hands-on ability to build end-to-end software solutions for complex business problems with high autonomy, discretion, and technical rigor.</p>
+        <h3>🇪🇪 Estonia career focus</h3>
+        <p>I am interested in on-site or hybrid <strong>Analytics Engineer</strong>, <strong>Data Engineer</strong>, and <strong>Applied ML Engineer</strong> roles in Estonia. I bring hands-on experience with data pipelines, operational software, and analytical decision tools.</p>
         <div class="estonia-badges">
           <span class="e-badge">Destination: Estonia</span>
-          <span class="e-badge">Target Visa: Temporary Residence Permit for Employment (TRP) / D-Visa</span>
-          <span class="e-badge">Timeline: Planned for Dec 2027 / Jan 2028 (adaptable upon company sponsorship)</span>
+          <span class="e-badge">Relocation: planned for the future</span>
+          <span class="e-badge">Work authorization: to be arranged for a specific role</span>
           <span class="e-badge">Academic Track: B.Sc. in Data Science & AI (in progress, UniDomBosco)</span>
           <span class="e-badge">Working Language: Professional Working English</span>
         </div>
@@ -203,8 +210,8 @@
     <!-- SELECTED APPLIED WORK -->
     <section class="section" id="work">
       <div class="sec-eyebrow">Applied Engineering Showcase</div>
-      <h2>Production systems & technical case studies.</h2>
-      <p class="intro">Every repository below is runnable, accompanied by an automated test suite, architecture diagrams, and mathematical formulations. All proprietary corporate records have been strictly anonymized with synthetic mock data.</p>
+      <h2>Selected systems & open-source case studies.</h2>
+      <p class="intro">The linked repositories are runnable reference projects with synthetic data. The operational examples describe the problem and approach without publishing confidential company records.</p>
 
       <!-- 1: Commodity MLOps Engine -->
       <article class="case">
@@ -218,9 +225,9 @@
           </div>
           <p>Statistical time-series demand forecasting and unsupervised spot freight rate anomaly detection engine built for 60–90 day maritime supply lead times.</p>
           <ul>
-            <li>Engineered vectorized Damped Holt-Winters exponential smoothing model optimized via Nelder-Mead on holdout split (achieved 5.11% WAPE).</li>
+            <li>Evaluated a Damped Holt-Winters forecasting model on a holdout split; the repository's sample run reports 6.84% WAPE on synthetic data.</li>
             <li>Implemented IsolationForest contamination modeling (87.5% precision) for spot freight anomaly detection.</li>
-            <li>Tracked experiment runs reproducibly with JSONL / MLflow audit logs and automated pytest suite passing 100%.</li>
+            <li>Tracked experiment runs with JSONL / MLflow logs and included an automated pytest suite.</li>
           </ul>
           <div class="pills"><span class="pill">Python</span><span class="pill">NumPy</span><span class="pill">SciPy</span><span class="pill">scikit-learn</span><span class="pill">MLflow</span><span class="pill">pytest</span></div>
         </div>
@@ -280,7 +287,7 @@
           <ul>
             <li>Enforced dynamic weight discrepancy tolerance checks (±0.5%) matching port scale gross/tare tickets against ERP invoices.</li>
             <li>Maintained an immutable, append-only event-sourced inventory ledger preserving full data provenance and audit trails.</li>
-            <li>Delivered sub-100ms global latency under Cloudflare Zero Trust authentication.</li>
+            <li>Designed the service for deployment on Cloudflare Workers with D1 and access controls.</li>
           </ul>
           <div class="pills"><span class="pill">Cloudflare Workers</span><span class="pill">D1 Edge SQL</span><span class="pill">TypeScript</span><span class="pill">Event Sourcing</span><span class="pill">node:test</span></div>
         </div>
@@ -356,11 +363,11 @@
               <span>edge-ops-watchdog-daemon</span> ↗
             </a>
           </div>
-          <p>High-availability edge process supervisor, self-healing watchdog daemon, and circuit-breaker orchestrator for 24/7 mission-critical services.</p>
+          <p>Reference process supervisor with health checks, restart controls, and circuit-breaker behavior for long-running services.</p>
           <ul>
             <li>Constructed circuit-breaker state machine with exponential backoff to prevent cascading reboot loops during network degradation.</li>
             <li>Probed microservice health via active TCP socket inspection and HTTP endpoint telemetry.</li>
-            <li>Secured atomic file-based process locking ensuring single-instance supervision with zero cloud downtime.</li>
+            <li>Used atomic file-based process locking to prevent concurrent supervisor instances.</li>
           </ul>
           <div class="pills"><span class="pill">Python</span><span class="pill">psutil</span><span class="pill">Circuit Breaker</span><span class="pill">High Availability</span><span class="pill">pytest</span></div>
         </div>
@@ -423,7 +430,7 @@
     <!-- CORE STACK -->
     <section class="section" id="stack">
       <div class="sec-eyebrow">Technical Arsenal</div>
-      <h2>Technologies & validated competencies.</h2>
+      <h2>Technologies & practical experience.</h2>
       <div class="grid">
         <article class="card">
           <h3>Data Engineering & Warehousing</h3>
@@ -447,15 +454,15 @@
       <div class="principles">
         <div class="principle">
           <b>Executive alignment & sensitive domain integrity</b>
-          <span>Translating C-level priorities (CEO, Board of Directors) into software with high confidentiality, strict data governance, and verified business impact.</span>
+          <span>Translating stakeholder priorities into software requirements while protecting confidential operational data.</span>
         </div>
         <div class="principle">
           <b>Idempotent data flows</b>
-          <span>Repeated inputs and retries never duplicate records or corrupt verified analytical tables (enforced via SHA-256 hashing and MERGE semantics).</span>
+          <span>Designing repeatable ingestion flows with stable identifiers, deduplication, and safe retry behavior.</span>
         </div>
         <div class="principle">
           <b>Strict temporal validation</b>
-          <span>Forecasting and risk models are evaluated chronologically with zero future data leakage, tracked reproducibly in MLflow.</span>
+          <span>Evaluating forecasting and risk models on time-ordered splits and tracking experiments reproducibly.</span>
         </div>
         <div class="principle">
           <b>Human review at uncertainty boundaries</b>
@@ -473,7 +480,7 @@
     <div class="wrap">
       <div class="sec-eyebrow" style="color:var(--lime)">Let's Connect</div>
       <h2>Open to Analytics Engineering & Applied ML roles in Estonia.</h2>
-      <p>Available for on-site or hybrid positions in Estonia (planned for Dec 2027 / Jan 2028 or accelerated upon company sponsorship), as well as international remote contracts (EUR/USD).</p>
+      <p>Exploring future on-site or hybrid roles in Estonia and selected international remote projects. Relocation timing and work authorization would be arranged for the right opportunity.</p>
       <div class="contact-links">
         <a href="mailto:cfpromlk@gmail.com">cfpromlk@gmail.com</a>
         <span style="color:#688070"> · </span>
@@ -485,5 +492,17 @@
       </div>
     </div>
   </section>
+  <script>
+    const menuToggle = document.querySelector('.menu-toggle');
+    const siteNav = document.querySelector('#site-nav');
+    menuToggle.addEventListener('click', () => {
+      const open = siteNav.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(open));
+    });
+    siteNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      siteNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }));
+  </script>
 </body>
 </html>
